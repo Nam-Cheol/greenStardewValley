@@ -1,4 +1,4 @@
-package greenStardewValley;
+package ch01;
 
 public class exam {
 
