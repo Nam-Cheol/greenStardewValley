@@ -1,5 +1,23 @@
 package stardewValley;
 
-public class stardewValleyFrame {
+public class StardewValleyFrame {
 
+	public StardewValleyFrame() {
+		initData();
+		setInitLayout();
+		addEventListener();
+	}
+	
+	private void initData() {
+		
+	}
+	
+	private void setInitLayout() {
+		
+	}
+	
+	private void addEventListener() {
+		
+	}
+	
 }
