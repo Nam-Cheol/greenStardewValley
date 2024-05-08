@@ -24,7 +24,7 @@ public class StardewValleyFrameKNC extends JFrame {
 	}
 	
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/StardewValleyMapColorFrame1.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
