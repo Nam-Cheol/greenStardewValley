@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import stardewValley.component.WateringCan;
 import stardewValley.player.PlayerKnc;
 
 //TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
@@ -16,6 +17,7 @@ public class StardewValleyFrameKNC extends JFrame {
 	
 	private JLabel backgroundMap;
 	private PlayerKnc playerKnc;
+	private WateringCan wateringCan;
 
 	public StardewValleyFrameKNC() {
 		initData();
@@ -30,6 +32,7 @@ public class StardewValleyFrameKNC extends JFrame {
 		setSize(1930, 980);
 		
 		playerKnc = new PlayerKnc();
+		wateringCan = new WateringCan();
 	}
 	
 	private void setInitLayout() {
@@ -39,6 +42,8 @@ public class StardewValleyFrameKNC extends JFrame {
 		setVisible(true);
 		
 		add(playerKnc);
+		add(wateringCan);
+		
 	}
 	
 	private void addEventListener() {
