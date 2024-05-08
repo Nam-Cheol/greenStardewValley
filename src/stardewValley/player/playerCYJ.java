@@ -13,6 +13,7 @@ public class playerCYJ {
 	private boolean down;
 	
 	
+	
 	public playerCYJ() {
 		initData();
 		setInitLayout();
