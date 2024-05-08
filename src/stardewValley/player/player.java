@@ -9,11 +9,11 @@ public class player {
 	}
 
 	private void initData() {
-
+		// 브랜치 테스트 2 
 	}
 
 	private void setInitLayout() {
-
+		// 브랜치 테슽 
 	}
 
 }
