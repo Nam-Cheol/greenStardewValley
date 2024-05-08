@@ -1,4 +1,4 @@
-package stardewValley.service;
+package stardewValley.A_CYJ;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
-import stardewValley.player.Player;
 
 public class backgroundPlayerMapService implements Runnable {
 

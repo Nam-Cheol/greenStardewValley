@@ -1,11 +1,7 @@
-package stardewValley.player;
+package stardewValley.A_PTH;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
-import stardewValley.frame.StardewValleyFrame;
-import stardewValley.service.backgroundPlayerMapService;
-import stardewValley.vegetable.Parsnip;
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
 public class Player extends JLabel implements Moveable {
