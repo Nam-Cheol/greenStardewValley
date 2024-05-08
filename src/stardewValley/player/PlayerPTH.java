@@ -1,149 +1,343 @@
 package stardewValley.player;
 
+import java.io.File;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-//TODO 플레이어의 기능 추가, 포함관계여야 함
-public class PlayerPTH extends JLabel implements Moveable{
+import stardewValley.frame.StardewValleyFramePTH;
+import stardewValley.service.backgroundPlayerMapServicePTH;
 
-	// Player X Y
+//TODO 플레이어의 기능 추가, 포함관계여야 함
+public class PlayerPTH extends JLabel implements Moveable {
+
+	StardewValleyFramePTH mContext;
+
+	// TODO player 의 속성
+
+	// 플레이어의 이미지
+	private ImageIcon playerL, playerL1, playerL2;
+	private ImageIcon playerR, playerR1, playerR2;
+	private ImageIcon playerUp, playerUp1, playerUp2;
+	private ImageIcon playerDown, playerDown1, playerDown2;
+
+	// 플레이어의 좌표
 	private int x;
 	private int y;
 
-	// Player ImageIcon
-	private ImageIcon playerStandUp, playerWalkUp1, playerWalkUp2;
-	private ImageIcon playerStandDown, playerWalkDown1, playerWalkDown2;
-	private ImageIcon playerStandLeft, playerWalkLeft1, playerWalkLeft2;
-	private ImageIcon playerStandRight, playerWalkRight1, playerWalkRight2;
-
-	// Player Size
-	private final int PLAYERX = 100;
-	private final int PLAYERY = 120;
-
-	// Player Movement
+	// 움직임의 on/off
 	private boolean left;
 	private boolean right;
 	private boolean up;
 	private boolean down;
+	PlayerWay playerWay;
 
-	// Player RedColor Crash
+	// 벽에 충돌 상태
 	private boolean leftWallCrash;
 	private boolean rightWallCrash;
 	private boolean upWallCrash;
 	private boolean downWallCrash;
 
-	// Player Speed
-	private final int SPEED = 4;
+	// 플레이어 속도 상태
+	private final int SPEED = 20;
+	private final int JUMPSPEED = 4;
+
+	// TODO 생성자 및 데이터 구축
+	public PlayerPTH(StardewValleyFramePTH mContext) {
+		initData();
+		setInitLayout();
+		initThread();
+		this.mContext = mContext;
+		new Thread(new backgroundPlayerMapServicePTH(this)).start();
+	}
+
+	private void initData() {
+
+		x = 600;
+		y = 600;
+
+		playerL = new ImageIcon("img/PlayerStandLeft.png");
+		playerL1 = new ImageIcon("img/PlayerWalkLeft.png");
+		playerL2 = new ImageIcon("img/PlayerWalkLeft2.png");
+
+		playerR = new ImageIcon("img/PlayerStandRight.png");
+		playerR1 = new ImageIcon("img/PlayerWalkRight.png");
+		playerR2 = new ImageIcon("img/PlayerWalkRight2.png");
+
+		playerUp = new ImageIcon("img/PlayerStandUp.png");
+		playerUp1 = new ImageIcon("img/PlayerWalkUp.png");
+		playerUp2 = new ImageIcon("img/PlayerWalkUp2.png");
+
+		playerDown = new ImageIcon("img/PlayerStand.png");
+		playerDown1 = new ImageIcon("img/PlayerWalkDown.png");
+		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
+
+		left = false;
+		right = false;
+		up = false;
+		down = false;
+
+		leftWallCrash = false;
+		rightWallCrash = false;
+		upWallCrash = false;
+		downWallCrash = false;
+
+		playerWay = PlayerWay.DOWN;
+	}
+
+	private void setInitLayout() {
+		this.setIcon(playerDown);
+		this.setLocation(x, y);
+		this.setSize(100, 120);
+	}
+
+	private void initThread() {
+
+	}
+
+	// TODO 움직임 구현
+	@Override
+	public void left() {
+		playerWay = PlayerWay.LEFT;
+		left = true;
+		setIcon(playerL);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				int leftNum = 0;
+				while (left) {
+					setRight(false);
+					setUp(false);
+					setDown(false);
+					delay();
+					if (leftWallCrash) {
+						break;
+					} else {
+						left = true;
+					}
+
+					if (leftNum % 2 == 0) {
+						setIcon(playerL1);
+						leftNum++;
+						delay2();
+					} else {
+						setIcon(playerL2);
+						leftNum++;
+						delay2();
+					}
+
+					x -= SPEED;
+					setLocation(x, y);
+				}
+				left = false;
+			}
+		}).start();
+
+	}
+
+	@Override
+	public void right() {
+		playerWay = PlayerWay.RIGHT;
+		right = true;
+		setIcon(playerR);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				int rightNum = 0;
+				while (right) {
+					setLeft(false);
+					setUp(false);
+					setDown(false);
+					delay();
+					if (rightWallCrash) {
+						break;
+					} else {
+						right = true;
+					}
+
+					if (rightNum % 2 == 0) {
+						setIcon(playerR1);
+						rightNum++;
+						delay2();
+					} else {
+						setIcon(playerR2);
+						rightNum++;
+						delay2();
+					}
+					x += SPEED;
+					setLocation(x, y);
+				}
+				right = false;
+
+			}
+		}).start();
+	}
+
+	@Override
+	public void up() {
+		playerWay = PlayerWay.UP;
+		up = true;
+		setIcon(playerUp);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				int upNum = 0;
+				while (up) {
+					setLeft(false);
+					setRight(false);
+					setDown(false);
+					delay();
+					if (upWallCrash) {
+						break;
+					} else {
+						up = true;
+					}
+					if (upNum % 2 == 0) {
+						setIcon(playerUp1);
+						upNum++;
+						delay2();
+					} else {
+						setIcon(playerUp2);
+						upNum++;
+						delay2();
+					}
+					y -= SPEED;
+					setLocation(x, y);
+				}
+				up = false;
+			}
+		}).start();
+	}
+
+	@Override
+	public void down() {
+		playerWay = PlayerWay.DOWN;
+		down = true;
+		setIcon(playerDown);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				int downNum = 0;
+				while (down) {
+					setLeft(false);
+					setRight(false);
+					setUp(false);
+					delay();
+					if (downWallCrash) {
+						break;
+					} else {
+						down = true;
+					}
+					if (downNum % 2 == 0) {
+						setIcon(playerDown1);
+						downNum++;
+						delay2();
+					} else {
+						setIcon(playerDown2);
+						downNum++;
+						delay2();
+					}
+					y += SPEED;
+					setLocation(x, y);
+				}
+				down = false;
+			}
+		}).start();
+	}
+
+	// 걷는 모습 장면 전환 딜레이
+	public void delay() {
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void delay2() {
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
 	// getter, setter
 
-	// X Y
 	public int getX() {
 		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
 	}
 
 	public int getY() {
 		return y;
 	}
 
-	// Player Size
-
-	public int getPlayerX() {
-		return PLAYERX;
+	public void setY(int y) {
+		this.y = y;
 	}
 
-	public int getPlayerY() {
-		return PLAYERY;
-	}
-
-	// Player ImageIcon
-	public void setPlayerStandUp(ImageIcon playerStandUp) {
-		this.playerStandUp = playerStandUp;
-	}
-
-	public void setPlayerUpWalk1(ImageIcon playerWalkUp1) {
-		this.playerWalkUp1 = playerWalkUp1;
-	}
-
-	public void setPlayerUpWalk2(ImageIcon playerWalkUp2) {
-		this.playerWalkUp2 = playerWalkUp2;
-	}
-
-	public void setPlayerStandDown(ImageIcon playerStandDown) {
-		this.playerStandDown = playerStandDown;
-	}
-
-	public void setPlayerWalkDown1(ImageIcon playerWalkDown1) {
-		this.playerWalkDown1 = playerWalkDown1;
-	}
-
-	public void setPlayerWalkDown2(ImageIcon playerWalkDown2) {
-		this.playerWalkDown2 = playerWalkDown2;
-	}
-
-	public void setPlayerStandLeft(ImageIcon playerStandLeft) {
-		this.playerStandLeft = playerStandLeft;
-	}
-
-	public void setPlayerWalkLeft1(ImageIcon playerWalkLeft1) {
-		this.playerWalkLeft1 = playerWalkLeft1;
-	}
-
-	public void setPlayerWalkLeft2(ImageIcon playerWalkLeft2) {
-		this.playerWalkLeft2 = playerWalkLeft2;
-	}
-
-	public void setPlayerStandRight(ImageIcon playerStandRight) {
-		this.playerStandRight = playerStandRight;
-	}
-
-	public void setPlayerWalkRight1(ImageIcon playerWalkRight1) {
-		this.playerWalkRight1 = playerWalkRight1;
-	}
-
-	public void setPlayerWalkRight2(ImageIcon playerWalkRight2) {
-		this.playerWalkRight2 = playerWalkRight2;
-	}
-
-	// movement
 	public boolean isLeft() {
 		return left;
-	}
-
-	public boolean isRight() {
-		return right;
-	}
-
-	public boolean isUp() {
-		return up;
-	}
-
-	public boolean isDown() {
-		return down;
 	}
 
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
 
+	public boolean isRight() {
+		return right;
+	}
+
 	public void setRight(boolean right) {
 		this.right = right;
 	}
 
-	public void setup(boolean up) {
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
 		this.up = up;
+	}
+
+	public boolean isDown() {
+		return down;
 	}
 
 	public void setDown(boolean down) {
 		this.down = down;
 	}
 
+	public boolean isLeftWallCrash() {
+		return leftWallCrash;
+	}
+
 	public void setLeftWallCrash(boolean leftWallCrash) {
 		this.leftWallCrash = leftWallCrash;
 	}
 
+	public boolean isRightWallCrash() {
+		return rightWallCrash;
+	}
+
 	public void setRightWallCrash(boolean rightWallCrash) {
 		this.rightWallCrash = rightWallCrash;
+	}
+
+	public boolean isUpWallCrash() {
+		return upWallCrash;
 	}
 
 	public void setUpWallCrash(boolean upWallCrash) {
@@ -154,72 +348,28 @@ public class PlayerPTH extends JLabel implements Moveable{
 		this.downWallCrash = downWallCrash;
 	}
 
-	// SPEED
 	public int getSPEED() {
 		return SPEED;
 	}
 
-	public PlayerPTH() {
-		initData();
-		setInitLayout();
+	public int getJUMPSPEED() {
+		return JUMPSPEED;
 	}
 
-	private void initData() {
-		// Player Icon (12)
-		playerStandUp = new ImageIcon("img/PlayerStandDown.png");
-		playerStandDown = new ImageIcon("img/PlayerStand.png");
-		playerStandLeft = new ImageIcon("img/PlayerStandLeft.png");
-		playerStandRight = new ImageIcon("img/PlayerStandDown.png");
-		
-		playerWalkUp1 = new ImageIcon("img/PlayerWalkUp.png");
-		playerWalkUp2 = new ImageIcon("img/PlayerWalkUp2.png");
-		
-		playerWalkDown1 = new ImageIcon("img/PlayerWalkDown.png");
-		playerWalkDown2 = new ImageIcon("img/PlayerWalkDown2.png");
-		
-		playerWalkLeft1 = new ImageIcon("img/PlayerWalkLeft.png");
-		playerWalkLeft2 = new ImageIcon("img/PlayerWalkLeft2.png");
-		
-		playerWalkRight1 = new ImageIcon("img/PlayerWalkRight.png");
-		playerWalkRight2 = new ImageIcon("img/PlayerWalkRight2.png");
-		
-		// Player Location
-		x = 800;
-		y = 495;
-		
-		
-	}
-	
-
-	private void setInitLayout() {
-		this.setIcon(playerStandDown);
-		this.setLocation(x, y);
-		this.setSize(PLAYERX, PLAYERY);
-	
+	public ImageIcon getPlayerL() {
+		return playerL;
 	}
 
-	@Override
-	public void left() {
-		left = true;
-		
+	public ImageIcon getPlayerR() {
+		return playerR;
 	}
 
-	@Override
-	public void right() {
-		// TODO Auto-generated method stub
-		
+	public ImageIcon getPlayerUp() {
+		return playerUp;
 	}
 
-	@Override
-	public void up() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void down() {
-		// TODO Auto-generated method stub
-		
+	public ImageIcon getPlayerDown() {
+		return playerDown;
 	}
 
 }
