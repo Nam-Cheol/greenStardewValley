@@ -6,4 +6,10 @@ public interface vegetable {
 	void initData();
 
 	void setInitLayout();
+
+	void grow();
+
+	void harvest();
+
+	void sprinkling();
 }

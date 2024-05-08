@@ -15,4 +15,22 @@ public class vegetable2 implements vegetable {
 		
 	}
 
+	@Override
+	public void grow() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void harvest() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sprinkling() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
