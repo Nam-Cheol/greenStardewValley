@@ -16,4 +16,10 @@ public class playerKnc {
 		// 브랜치 테슽 
 	}
 
+	private void initThread() {
+		
+	}
+	
+	
+	
 }
