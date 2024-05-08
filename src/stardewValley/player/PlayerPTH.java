@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
-public class PlayerPTH extends JLabel {
+public class PlayerPTH extends JLabel implements Moveable{
 
 	// Player X Y
 	private int x;
@@ -165,6 +165,7 @@ public class PlayerPTH extends JLabel {
 	}
 
 	private void initData() {
+		// Player Icon (12)
 		playerStandUp = new ImageIcon("img/PlayerStandDown.png");
 		playerStandDown = new ImageIcon("img/PlayerStand.png");
 		playerStandLeft = new ImageIcon("img/PlayerStandLeft.png");
@@ -182,10 +183,43 @@ public class PlayerPTH extends JLabel {
 		playerWalkRight1 = new ImageIcon("img/PlayerWalkRight.png");
 		playerWalkRight2 = new ImageIcon("img/PlayerWalkRight2.png");
 		
+		// Player Location
+		x = 800;
+		y = 495;
+		
+		
 	}
+	
 
 	private void setInitLayout() {
-		// 브랜치 테슽
+		this.setIcon(playerStandDown);
+		this.setLocation(x, y);
+		this.setSize(PLAYERX, PLAYERY);
+	
+	}
+
+	@Override
+	public void left() {
+		left = true;
+		
+	}
+
+	@Override
+	public void right() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void up() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void down() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
