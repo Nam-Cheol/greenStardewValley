@@ -13,7 +13,7 @@ public class player {
 	}
 
 	private void setInitLayout() {
-
+		// 깃 확인용
 	}
 
 }
