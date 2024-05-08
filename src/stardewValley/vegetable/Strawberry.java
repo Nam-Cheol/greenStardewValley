@@ -3,7 +3,7 @@ package stardewValley.vegetable;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import stardewValley.player.PlayerOHJ;
+import stardewValley.player.Player;
 
 // TODO 각 야채의 특성 및 차이점 구현
 public class Strawberry extends JLabel implements vegetable {
@@ -11,7 +11,7 @@ public class Strawberry extends JLabel implements vegetable {
 	// 멤버 변수
 	private String name = "딸기";
 	// 플레이어
-	private PlayerOHJ player;
+	private Player player;
 	private int x;
 	private int y;
 	private int plantLocation = 130;
@@ -25,7 +25,7 @@ public class Strawberry extends JLabel implements vegetable {
 	private ImageIcon lastGrowing;
 
 	// 생성자
-	public Strawberry(PlayerOHJ player) {
+	public Strawberry(Player player) {
 		this.player = player;
 		initData();
 		setInitLayout();
@@ -101,11 +101,11 @@ public class Strawberry extends JLabel implements vegetable {
 		this.name = name;
 	}
 
-	public PlayerOHJ getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(PlayerOHJ player) {
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
 

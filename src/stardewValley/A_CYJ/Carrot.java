@@ -1,9 +1,7 @@
-package stardewValley.vegetable;
+package stardewValley.A_CYJ;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
-import stardewValley.player.Player;
 
 // TODO 각 야채의 특성 및 차이점 구현
 public class Carrot extends JLabel implements vegetable {

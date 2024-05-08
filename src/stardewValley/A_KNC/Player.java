@@ -1,34 +1,35 @@
-package stardewValley.player;
-
-import java.io.File;
+package stardewValley.A_KNC;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
-public class PlayerKnc extends JLabel implements Moveable {
+public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
 
+	Parsnip parsnip;
+	StardewValleyFrame mContext;
+
 	// 플레이어의 이미지
-	
+
 	// 플레이어 왼쪽 이미지
 	private ImageIcon playerL;
 	private ImageIcon playerL1;
 	private ImageIcon playerL2;
-	
+
 	// 플레이어 오른쪽 이미지
 	private ImageIcon playerR;
 	private ImageIcon playerR1;
 	private ImageIcon playerR2;
-	
+
 	// 플레이어 위 이미지
 	private ImageIcon playerUp;
 	private ImageIcon playerUp1;
 	private ImageIcon playerUp2;
-	
+
 	// 플레이어 아래 이미지
-	private ImageIcon playerDown;  // -> 디폴트
+	private ImageIcon playerDown; // -> 디폴트
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
 
@@ -53,10 +54,12 @@ public class PlayerKnc extends JLabel implements Moveable {
 	private final int SPEED = 20;
 
 	// TODO 생성자 및 데이터 구축
-	public PlayerKnc() {
+	public Player(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		initThread();
+		this.mContext = mContext;
+		new Thread(new backgroundPlayerMapService(this)).start();
 	}
 
 	private void initData() {
@@ -67,19 +70,18 @@ public class PlayerKnc extends JLabel implements Moveable {
 		playerL = new ImageIcon("img/PlayerStandLeft.png");
 		playerL1 = new ImageIcon("img/PlayerWalkLeft.png");
 		playerL2 = new ImageIcon("img/PlayerWalkLeft2.png");
-		
+
 		playerR = new ImageIcon("img/PlayerStandRight.png");
 		playerR1 = new ImageIcon("img/PlayerWalkRight.png");
 		playerR2 = new ImageIcon("img/PlayerWalkRight2.png");
-		
+
 		playerUp = new ImageIcon("img/PlayerStandUp.png");
 		playerUp1 = new ImageIcon("img/PlayerWalkUp.png");
 		playerUp2 = new ImageIcon("img/PlayerWalkUp2.png");
-		
+
 		playerDown = new ImageIcon("img/PlayerStand.png");
 		playerDown1 = new ImageIcon("img/PlayerWalkDown.png");
 		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
-		
 
 		left = false;
 		right = false;
@@ -93,7 +95,6 @@ public class PlayerKnc extends JLabel implements Moveable {
 
 		playerWay = PlayerWay.DOWN;
 	}
-	
 
 	private void setInitLayout() {
 		this.setIcon(playerDown);
@@ -122,8 +123,13 @@ public class PlayerKnc extends JLabel implements Moveable {
 					setUp(false);
 					setDown(false);
 					delay();
-					
-					if(leftNum%2 == 0) {
+					if (leftWallCrash) {
+						break;
+					} else {
+						left = true;
+					}
+
+					if (leftNum % 2 == 0) {
 						setIcon(playerL1);
 						leftNum++;
 						delay2();
@@ -132,11 +138,11 @@ public class PlayerKnc extends JLabel implements Moveable {
 						leftNum++;
 						delay2();
 					}
-					
+
 					x -= SPEED;
 					setLocation(x, y);
 				}
-
+				left = false;
 			}
 		}).start();
 
@@ -158,8 +164,13 @@ public class PlayerKnc extends JLabel implements Moveable {
 					setUp(false);
 					setDown(false);
 					delay();
-					
-					if(rightNum%2 == 0) {
+					if (rightWallCrash) {
+						break;
+					} else {
+						right = true;
+					}
+
+					if (rightNum % 2 == 0) {
 						setIcon(playerR1);
 						rightNum++;
 						delay2();
@@ -168,10 +179,10 @@ public class PlayerKnc extends JLabel implements Moveable {
 						rightNum++;
 						delay2();
 					}
-					
 					x += SPEED;
 					setLocation(x, y);
 				}
+				right = false;
 
 			}
 		}).start();
@@ -193,7 +204,12 @@ public class PlayerKnc extends JLabel implements Moveable {
 					setRight(false);
 					setDown(false);
 					delay();
-					if(upNum%2 == 0) {
+					if (upWallCrash) {
+						break;
+					} else {
+						up = true;
+					}
+					if (upNum % 2 == 0) {
 						setIcon(playerUp1);
 						upNum++;
 						delay2();
@@ -205,7 +221,7 @@ public class PlayerKnc extends JLabel implements Moveable {
 					y -= SPEED;
 					setLocation(x, y);
 				}
-
+				up = false;
 			}
 		}).start();
 	}
@@ -226,7 +242,12 @@ public class PlayerKnc extends JLabel implements Moveable {
 					setRight(false);
 					setUp(false);
 					delay();
-					if(downNum%2 == 0) {
+					if (downWallCrash) {
+						break;
+					} else {
+						down = true;
+					}
+					if (downNum % 2 == 0) {
 						setIcon(playerDown1);
 						downNum++;
 						delay2();
@@ -238,11 +259,11 @@ public class PlayerKnc extends JLabel implements Moveable {
 					y += SPEED;
 					setLocation(x, y);
 				}
-
+				down = false;
 			}
 		}).start();
 	}
-	
+
 	// 걷는 모습 장면 전환 딜레이
 	public void delay() {
 		try {
@@ -251,7 +272,7 @@ public class PlayerKnc extends JLabel implements Moveable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void delay2() {
 		try {
 			Thread.sleep(100);
@@ -334,6 +355,14 @@ public class PlayerKnc extends JLabel implements Moveable {
 		this.upWallCrash = upWallCrash;
 	}
 
+	public boolean isDownWallCrash() {
+		return downWallCrash;
+	}
+
+	public void setDownWallCrash(boolean downWallCrash) {
+		this.downWallCrash = downWallCrash;
+	}
+
 	public int getSPEED() {
 		return SPEED;
 	}
@@ -353,6 +382,9 @@ public class PlayerKnc extends JLabel implements Moveable {
 	public ImageIcon getPlayerDown() {
 		return playerDown;
 	}
-
 	
+	public Parsnip plantParsnip() {
+		return parsnip = new Parsnip(this);
+	}
+
 }

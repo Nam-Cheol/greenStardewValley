@@ -7,54 +7,55 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import stardewValley.player.PlayerPTH;
+import stardewValley.player.Player;
+import stardewValley.vegetable.Carrot;
+import stardewValley.vegetable.Parsnip;
+import stardewValley.vegetable.Strawberry;
 
 //TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
 // 배경 추가해야 됨.
 //추후 컴포넌트(야채)들도 추가해야 함.
-public class StardewValleyFramePTH extends JFrame{
+public class StardewValleyFrame extends JFrame {
 	
-	StardewValleyFramePTH mContext = this;
-	
-	private JLabel backgroundMap;
-	private PlayerPTH player;
+	StardewValleyFrame mContext = this;
 
-	public StardewValleyFramePTH() {
+	private JLabel backgroundMap;
+	private Player player;
+
+	public StardewValleyFrame() {
 		initData();
 		setInitLayout();
 		addEventListener();
 	}
-	
+
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/StardewValleyMapColorFrame1.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
-		
-		player = new PlayerPTH(mContext);
+
+		player = new Player(this);
 	}
-	
+
 	private void setInitLayout() {
 		setLayout(null);
-//		setResizable(false);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
+
 		add(player);
 	}
-	
+
 	private void addEventListener() {
 		addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
+
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
 					// 왼쪽으로 가능 상태 멈춤
@@ -77,41 +78,60 @@ public class StardewValleyFramePTH extends JFrame{
 				default:
 					break;
 				}
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
-					if(!player.isLeft()) {
+					if (!player.isLeft()) {
 						player.left();
 					}
 					break;
 				case KeyEvent.VK_RIGHT:
-					if(!player.isRight()) {
+					if (!player.isRight()) {
 						player.right();
 					}
 					break;
 				case KeyEvent.VK_UP:
-					if(!player.isUp()) {
+					if (!player.isUp()) {
 						player.up();
 					}
 					break;
 				case KeyEvent.VK_DOWN:
-					if(!player.isDown()) {
+					if (!player.isDown()) {
 						player.down();
 					}
 					break;
+				case KeyEvent.VK_NUMPAD1:
+//					Player.plantParsnip();
+					allStop();
+					add(new Parsnip(player));
+					break;
+				case KeyEvent.VK_NUMPAD2:
+					add(new Carrot(player));
+					allStop();
+					break;
+				case KeyEvent.VK_NUMPAD3:
+					add(new Strawberry(player));
+					allStop();
+					break;
 				default:
 					break;
-				}				
+				}
 			}
 		});
-		
 	}
+	
+	public void allStop() {
+		player.setLeft(false);
+		player.setRight(false);
+		player.setUp(false);
+		player.setDown(false);
+	}
+
 	public static void main(String[] args) {
-		new StardewValleyFramePTH();
-		
+		new StardewValleyFrame();
 	}
 }
-

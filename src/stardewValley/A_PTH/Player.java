@@ -1,25 +1,37 @@
-package stardewValley.player;
-
-import java.io.File;
+package stardewValley.A_PTH;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import stardewValley.frame.StardewValleyFramePTH;
-import stardewValley.service.backgroundPlayerMapServicePTH;
-
 //TODO 플레이어의 기능 추가, 포함관계여야 함
-public class PlayerPTH extends JLabel implements Moveable {
-
-	StardewValleyFramePTH mContext;
+public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
 
+	Parsnip parsnip;
+	StardewValleyFrame mContext;
+
 	// 플레이어의 이미지
-	private ImageIcon playerL, playerL1, playerL2;
-	private ImageIcon playerR, playerR1, playerR2;
-	private ImageIcon playerUp, playerUp1, playerUp2;
-	private ImageIcon playerDown, playerDown1, playerDown2;
+
+	// 플레이어 왼쪽 이미지
+	private ImageIcon playerL;
+	private ImageIcon playerL1;
+	private ImageIcon playerL2;
+
+	// 플레이어 오른쪽 이미지
+	private ImageIcon playerR;
+	private ImageIcon playerR1;
+	private ImageIcon playerR2;
+
+	// 플레이어 위 이미지
+	private ImageIcon playerUp;
+	private ImageIcon playerUp1;
+	private ImageIcon playerUp2;
+
+	// 플레이어 아래 이미지
+	private ImageIcon playerDown; // -> 디폴트
+	private ImageIcon playerDown1;
+	private ImageIcon playerDown2;
 
 	// 플레이어의 좌표
 	private int x;
@@ -40,15 +52,14 @@ public class PlayerPTH extends JLabel implements Moveable {
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
-	private final int JUMPSPEED = 4;
 
 	// TODO 생성자 및 데이터 구축
-	public PlayerPTH(StardewValleyFramePTH mContext) {
+	public Player(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		initThread();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapServicePTH(this)).start();
+		new Thread(new backgroundPlayerMapService(this)).start();
 	}
 
 	private void initData() {
@@ -344,16 +355,16 @@ public class PlayerPTH extends JLabel implements Moveable {
 		this.upWallCrash = upWallCrash;
 	}
 
+	public boolean isDownWallCrash() {
+		return downWallCrash;
+	}
+
 	public void setDownWallCrash(boolean downWallCrash) {
 		this.downWallCrash = downWallCrash;
 	}
 
 	public int getSPEED() {
 		return SPEED;
-	}
-
-	public int getJUMPSPEED() {
-		return JUMPSPEED;
 	}
 
 	public ImageIcon getPlayerL() {
@@ -370,6 +381,10 @@ public class PlayerPTH extends JLabel implements Moveable {
 
 	public ImageIcon getPlayerDown() {
 		return playerDown;
+	}
+	
+	public Parsnip plantParsnip() {
+		return parsnip = new Parsnip(this);
 	}
 
 }

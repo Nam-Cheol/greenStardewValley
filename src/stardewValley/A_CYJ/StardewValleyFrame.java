@@ -1,4 +1,4 @@
-package stardewValley.frame;
+package stardewValley.A_CYJ;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,101 +7,110 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import stardewValley.component.WateringCan;
-import stardewValley.player.PlayerKnc;
-
 //TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
 // 배경 추가해야 됨.
 //추후 컴포넌트(야채)들도 추가해야 함.
-public class StardewValleyFrameKNC extends JFrame {
+public class StardewValleyFrame extends JFrame {
 	
-	private JLabel backgroundMap;
-	private PlayerKnc playerKnc;
-	private WateringCan wateringCan;
+	StardewValleyFrame mContext = this;
 
-	public StardewValleyFrameKNC() {
+	private JLabel backgroundMap;
+	private Player player;
+
+	public StardewValleyFrame() {
 		initData();
 		setInitLayout();
 		addEventListener();
 	}
-	
+
 	private void initData() {
 		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
-		
-		playerKnc = new PlayerKnc();
-		wateringCan = new WateringCan();
+
+		player = new Player(this);
 	}
-	
+
 	private void setInitLayout() {
 		setLayout(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
-		add(playerKnc);
-		add(wateringCan);
-		
+
+		add(player);
 	}
-	
+
 	private void addEventListener() {
 		addKeyListener(new KeyListener() {
-			
+
 			@Override
-			public void keyTyped(KeyEvent e) {}
-			
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
 					// 왼쪽으로 가능 상태 멈춤
-					playerKnc.setLeft(false);
-					playerKnc.setIcon(playerKnc.getPlayerL());
+					player.setLeft(false);
+					player.setIcon(player.getPlayerL());
 					break;
 				case KeyEvent.VK_RIGHT:
 					// 오른쪽으로 가능 상태 멈춤
-					playerKnc.setRight(false);
-					playerKnc.setIcon(playerKnc.getPlayerR());
+					player.setRight(false);
+					player.setIcon(player.getPlayerR());
 					break;
 				case KeyEvent.VK_UP:
-					playerKnc.setUp(false);
-					playerKnc.setIcon(playerKnc.getPlayerUp());
+					player.setUp(false);
+					player.setIcon(player.getPlayerUp());
 					break;
 				case KeyEvent.VK_DOWN:
-					playerKnc.setDown(false);
-					playerKnc.setIcon(playerKnc.getPlayerDown());
+					player.setDown(false);
+					player.setIcon(player.getPlayerDown());
 					break;
 				default:
 					break;
 				}
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
-					if(!playerKnc.isLeft()) {
-						playerKnc.left();
+					if (!player.isLeft()) {
+						player.left();
 					}
 					break;
 				case KeyEvent.VK_RIGHT:
-					if(!playerKnc.isRight()) {
-						playerKnc.right();
+					if (!player.isRight()) {
+						player.right();
 					}
 					break;
 				case KeyEvent.VK_UP:
-					if(!playerKnc.isUp()) {
-						playerKnc.up();
+					if (!player.isUp()) {
+						player.up();
 					}
 					break;
 				case KeyEvent.VK_DOWN:
-					if(!playerKnc.isDown()) {
-						playerKnc.down();
+					if (!player.isDown()) {
+						player.down();
 					}
+					break;
+				case KeyEvent.VK_NUMPAD1:
+//					Player.plantParsnip();
+					allStop();
+					add(new Parsnip(player));
+					break;
+				case KeyEvent.VK_NUMPAD2:
+					add(new Carrot(player));
+					allStop();
+					break;
+				case KeyEvent.VK_NUMPAD3:
+					add(new Strawberry(player));
+					allStop();
 					break;
 				default:
 					break;
@@ -110,7 +119,14 @@ public class StardewValleyFrameKNC extends JFrame {
 		});
 	}
 	
+	public void allStop() {
+		player.setLeft(false);
+		player.setRight(false);
+		player.setUp(false);
+		player.setDown(false);
+	}
+
 	public static void main(String[] args) {
-		new StardewValleyFrameKNC();
+		new StardewValleyFrame();
 	}
 }

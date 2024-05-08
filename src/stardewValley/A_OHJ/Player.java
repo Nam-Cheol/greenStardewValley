@@ -1,31 +1,41 @@
-package stardewValley.player;
+package stardewValley.A_OHJ;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
-public class playerCYJ extends JLabel implements Moveable {
+public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
 
-	// 플레이어의 이미지  
-	private ImageIcon playerL, playerL1, playerL2;
-	private ImageIcon playerR, playerR1, playerR2;
-	private ImageIcon playerUp, playerUp1, playerUp2;
-	private ImageIcon playerDown, playerDown1, playerDown2;
+	Parsnip parsnip;
+	StardewValleyFrame mContext;
+
+	// 플레이어의 이미지
+
+	// 플레이어 왼쪽 이미지
+	private ImageIcon playerL;
+	private ImageIcon playerL1;
+	private ImageIcon playerL2;
+
+	// 플레이어 오른쪽 이미지
+	private ImageIcon playerR;
+	private ImageIcon playerR1;
+	private ImageIcon playerR2;
+
+	// 플레이어 위 이미지
+	private ImageIcon playerUp;
+	private ImageIcon playerUp1;
+	private ImageIcon playerUp2;
+
+	// 플레이어 아래 이미지
+	private ImageIcon playerDown; // -> 디폴트
+	private ImageIcon playerDown1;
+	private ImageIcon playerDown2;
 
 	// 플레이어의 좌표
 	private int x;
 	private int y;
-
-	// 플레이어 수확물
-	private int vege;
-
-	// 플레이어 씨앗
-	private int seed;
-
-	// 플레이어 물
-	private int water;
 
 	// 움직임의 on/off
 	private boolean left;
@@ -42,13 +52,14 @@ public class playerCYJ extends JLabel implements Moveable {
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
-	private final int JUMPSPEED = 4;
 
 	// TODO 생성자 및 데이터 구축
-	public playerCYJ() {
+	public Player(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		initThread();
+		this.mContext = mContext;
+		new Thread(new backgroundPlayerMapService(this)).start();
 	}
 
 	private void initData() {
@@ -76,11 +87,6 @@ public class playerCYJ extends JLabel implements Moveable {
 		right = false;
 		up = false;
 		down = false;
-		
-		water = 0;
-		vege = 0;
-		
-		
 
 		leftWallCrash = false;
 		rightWallCrash = false;
@@ -117,6 +123,11 @@ public class playerCYJ extends JLabel implements Moveable {
 					setUp(false);
 					setDown(false);
 					delay();
+					if (leftWallCrash) {
+						break;
+					} else {
+						left = true;
+					}
 
 					if (leftNum % 2 == 0) {
 						setIcon(playerL1);
@@ -131,7 +142,7 @@ public class playerCYJ extends JLabel implements Moveable {
 					x -= SPEED;
 					setLocation(x, y);
 				}
-
+				left = false;
 			}
 		}).start();
 
@@ -153,6 +164,11 @@ public class playerCYJ extends JLabel implements Moveable {
 					setUp(false);
 					setDown(false);
 					delay();
+					if (rightWallCrash) {
+						break;
+					} else {
+						right = true;
+					}
 
 					if (rightNum % 2 == 0) {
 						setIcon(playerR1);
@@ -163,10 +179,10 @@ public class playerCYJ extends JLabel implements Moveable {
 						rightNum++;
 						delay2();
 					}
-
 					x += SPEED;
 					setLocation(x, y);
 				}
+				right = false;
 
 			}
 		}).start();
@@ -188,6 +204,11 @@ public class playerCYJ extends JLabel implements Moveable {
 					setRight(false);
 					setDown(false);
 					delay();
+					if (upWallCrash) {
+						break;
+					} else {
+						up = true;
+					}
 					if (upNum % 2 == 0) {
 						setIcon(playerUp1);
 						upNum++;
@@ -200,7 +221,7 @@ public class playerCYJ extends JLabel implements Moveable {
 					y -= SPEED;
 					setLocation(x, y);
 				}
-
+				up = false;
 			}
 		}).start();
 	}
@@ -221,6 +242,11 @@ public class playerCYJ extends JLabel implements Moveable {
 					setRight(false);
 					setUp(false);
 					delay();
+					if (downWallCrash) {
+						break;
+					} else {
+						down = true;
+					}
 					if (downNum % 2 == 0) {
 						setIcon(playerDown1);
 						downNum++;
@@ -233,7 +259,7 @@ public class playerCYJ extends JLabel implements Moveable {
 					y += SPEED;
 					setLocation(x, y);
 				}
-
+				down = false;
 			}
 		}).start();
 	}
@@ -329,12 +355,16 @@ public class playerCYJ extends JLabel implements Moveable {
 		this.upWallCrash = upWallCrash;
 	}
 
-	public int getSPEED() {
-		return SPEED;
+	public boolean isDownWallCrash() {
+		return downWallCrash;
 	}
 
-	public int getJUMPSPEED() {
-		return JUMPSPEED;
+	public void setDownWallCrash(boolean downWallCrash) {
+		this.downWallCrash = downWallCrash;
+	}
+
+	public int getSPEED() {
+		return SPEED;
 	}
 
 	public ImageIcon getPlayerL() {
@@ -353,60 +383,8 @@ public class playerCYJ extends JLabel implements Moveable {
 		return playerDown;
 	}
 	
-	
-
-	public int getWater() {
-		return water;
-	}
-
-	public void setWater(int water) {
-		this.water = water;
-	}
-
-	// 씨앗 심기 Q
-	public void puttingSeed() {
-		// q를 누르고 green 영역에 player가 해당 범위에 간다면
-		// seed를 심고 glow가 시작된다.
-	}
-
-	// 작물 수확 W
-	public void harvesting() {
-		// 만약 seed의 grow grow가 완료된 작물에 한하여
-		// w를 눌러 vege 값이 늘어 난다. 
-	}
-	
-
-	// 물 뿌리기 E
-	public void sprinkleWater() {
-
-	}
-
-	// 작물 팔기 R
-	public void vegeSell() {
-		// 저장소에 있는 vege데이터를 가져와서 
-		// treadcenter의 vege pirce 값으로 치환한다.
-	}
-
-	// 물 채우기 A
-	public void putWater() {
-		
-		if (water == 4) {
-			System.out.println("물이 가득 찼습니다.");
-			return;
-		} else if (water <= 3) {
-			water = 4;
-		}
-	}
-	
-	// 창고 저장 S
-	public void saveVege() {
-		
-		if (vege == 0) {
-			System.out.println("수확물이 없습니다.");
-		} else if (vege > 0) {
-			//s키를 눌렀을 때 창고에 내가 가진 수확물을 뺸다.
-			//playerCYJ.vege 어? 
-		}
+	public Parsnip plantParsnip() {
+		return parsnip = new Parsnip(this);
 	}
 
 }
