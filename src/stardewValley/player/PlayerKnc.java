@@ -93,6 +93,7 @@ public class PlayerKnc extends JLabel implements Moveable {
 
 		playerWay = PlayerWay.DOWN;
 	}
+	
 
 	private void setInitLayout() {
 		this.setIcon(playerDown);
