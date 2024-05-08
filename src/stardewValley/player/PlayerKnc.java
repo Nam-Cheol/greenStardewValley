@@ -11,10 +11,26 @@ public class PlayerKnc extends JLabel implements Moveable {
 	// TODO player 의 속성
 
 	// 플레이어의 이미지
-	private ImageIcon playerL, playerL1, playerL2;
-	private ImageIcon playerR, playerR1, playerR2;
-	private ImageIcon playerUp, playerUp1, playerUp2;
-	private ImageIcon playerDown, playerDown1, playerDown2;
+	
+	// 플레이어 왼쪽 이미지
+	private ImageIcon playerL;
+	private ImageIcon playerL1;
+	private ImageIcon playerL2;
+	
+	// 플레이어 오른쪽 이미지
+	private ImageIcon playerR;
+	private ImageIcon playerR1;
+	private ImageIcon playerR2;
+	
+	// 플레이어 위 이미지
+	private ImageIcon playerUp;
+	private ImageIcon playerUp1;
+	private ImageIcon playerUp2;
+	
+	// 플레이어 아래 이미지
+	private ImageIcon playerDown;  // -> 디폴트
+	private ImageIcon playerDown1;
+	private ImageIcon playerDown2;
 
 	// 플레이어의 좌표
 	private int x;
@@ -35,7 +51,6 @@ public class PlayerKnc extends JLabel implements Moveable {
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
-	private final int JUMPSPEED = 4;
 
 	// TODO 생성자 및 데이터 구축
 	public PlayerKnc() {
@@ -320,10 +335,6 @@ public class PlayerKnc extends JLabel implements Moveable {
 
 	public int getSPEED() {
 		return SPEED;
-	}
-
-	public int getJUMPSPEED() {
-		return JUMPSPEED;
 	}
 
 	public ImageIcon getPlayerL() {
