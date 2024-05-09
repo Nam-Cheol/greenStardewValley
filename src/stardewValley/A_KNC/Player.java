@@ -57,13 +57,14 @@ public class Player extends JLabel implements Moveable {
 	
 	private boolean create;
 	
+	private int wallet;
+	
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
-		initThread();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this));
+		new Thread(new backgroundPlayerMapService(this)).start();
 	}
 
 	private void initData() {
@@ -98,16 +99,14 @@ public class Player extends JLabel implements Moveable {
 		downWallCrash = false;
 
 		playerWay = PlayerWay.DOWN;
+		
+		wallet = 0;
 	}
 
 	private void setInitLayout() {
 		this.setIcon(playerDown);
 		this.setLocation(x, y);
 		this.setSize(100, 120);
-
-	}
-
-	private void initThread() {
 
 	}
 

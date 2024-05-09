@@ -25,7 +25,7 @@ public class backgroundPlayerMapService implements Runnable {
 		this.player = player;
 
 		try {
-			image = ImageIO.read(new File("img/StardewValleyMapColorFrame1.png"));
+			image = ImageIO.read(new File("img/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,71 +42,84 @@ public class backgroundPlayerMapService implements Runnable {
 			Color leftColor = new Color(image.getRGB(player.getX() - 15, player.getY() + 50));
 			Color rightColor = new Color(image.getRGB(player.getX() + 115, player.getY() + 70));
 			
+			int up = upColor.getRGB();
+			int down = downColor.getRGB();
+			int left = leftColor.getRGB();
+			int right = rightColor.getRGB();
+			
 
 			// Player Wall Crash
 			
 			
 			// 1. BLOCK
-			if (upColor.getRGB() == BLOCK) {
-				player.setUpWallCrash(true);
-				player.setUp(false);
-
-			} else if (downColor.getRGB() == BLOCK) {
-				player.setDownWallCrash(true);
-				player.setDown(false);
-
-			} else if (leftColor.getRGB() == BLOCK) {
-				player.setLeftWallCrash(true);
-				player.setLeft(false);
-
-			} else if (rightColor.getRGB() == BLOCK) {
-				player.setRightWallCrash(true);
-				player.setRight(false);
-
+			if (up == BLOCK) {
+				stopUp();
+			} else if (down == BLOCK) {
+				stopDown();
+			} else if (left == BLOCK) {
+				stopLeft();
+			} else if (right == BLOCK) {
+				stopRight();
 				
-				// 2. WATER	
-			} else if (upColor.getRGB() == WATER) {
-				player.setUpWallCrash(true);
-				player.setUp(false);
 				
-			} else if (downColor.getRed() == WATER) {
-				player.setDownWallCrash(true);
-				player.setDown(false);
 				
-			} else if (leftColor.getRed() == WATER) {
-				player.setLeftWallCrash(true);
-				player.setLeft(false);
-				
-			} else if (rightColor.getRed() == WATER) {
-				player.setRightWallCrash(true);
-				player.setRight(false);
-				
+			// 2. WATER	
+			} else if (up == WATER) {
+				stopUp();
+			} else if (down == WATER) {
+				stopDown();
+			} else if (left == WATER) {
+				stopLeft();				
+			} else if (right == WATER) {
+				stopRight();				
 				
 			// 3. FARM
-			} else if (upColor.getRGB() == FARM) {
-				
-			} else if (downColor.getRGB() == FARM){
-				
-			} else if (leftColor.getRGB() == FARM) {
-				
-			} else if (rightColor.getRGB() == FARM) {
-				
+			} else if (up == FARM) {
+				stopUp();
+			} else if (down == FARM){
+				stopDown();
+			} else if (left == FARM) {
+				stopLeft();
+			} else if (right == FARM) {
+				stopRight();
 			} else {
-				player.setUpWallCrash(false);
-				player.setDownWallCrash(false);
-				player.setLeftWallCrash(false);
-				player.setRightWallCrash(false);
+				notWallCrash();
 			}
 
 			try {
-				Thread.sleep(100);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 		}
 
+	}
+	
+	public void stopUp() {
+		player.setUpWallCrash(true);
+		player.setUp(false);
+	}
+	
+	public void stopDown() {
+		player.setDownWallCrash(true);
+		player.setDown(false);
+	}
+	
+	public void stopLeft() {
+		player.setLeftWallCrash(true);
+		player.setLeft(false);
+	}
+	
+	public void stopRight() {
+		player.setRightWallCrash(true);
+		player.setRight(false);
+	}
+	
+	public void notWallCrash() {
+		player.setUpWallCrash(false);
+		player.setDownWallCrash(false);
+		player.setLeftWallCrash(false);
+		player.setRightWallCrash(false);
 	}
 
 }

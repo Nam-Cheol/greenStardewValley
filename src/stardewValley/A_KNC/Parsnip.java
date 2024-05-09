@@ -23,6 +23,8 @@ public class Parsnip extends JLabel implements IVegetable {
 
 	private boolean create;
 	
+	private int price;
+	
 	// 생성자
 	public Parsnip(Player player) {
 		this.player = player;
@@ -41,6 +43,7 @@ public class Parsnip extends JLabel implements IVegetable {
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
+		price = (int)(Math.random()*500) + 1000;
 	}
 
 	@Override
@@ -72,6 +75,7 @@ public class Parsnip extends JLabel implements IVegetable {
 						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
+						
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -111,6 +115,10 @@ public class Parsnip extends JLabel implements IVegetable {
 
 	public void setCreate(boolean create) {
 		this.create = create;
+	}
+
+	public int getPrice() {
+		return price;
 	}
 	
 	

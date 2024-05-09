@@ -18,7 +18,8 @@ public class StardewValleyFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
-	private Vegetable vegetable;
+	private Parsnip parsnip;
+	private Store store;
 
 	public StardewValleyFrame() {
 		initData();
@@ -27,13 +28,13 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/StardewValleyMapColorFrame1.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
-		player = new Player(this);
-		vegetable = null;
+		player = new Player(mContext);
+		store = new Store(mContext);
 	}
 
 	private void setInitLayout() {
@@ -43,6 +44,8 @@ public class StardewValleyFrame extends JFrame {
 		setVisible(true);
 
 		add(player);
+		add(store);
+		System.out.println(store.getX());
 	}
 
 	private void addEventListener() {
@@ -104,7 +107,9 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-					add(new Parsnip(player));
+					parsnip = new Parsnip(player);
+					add(parsnip);
+					System.out.println(parsnip.getPrice());
 					break;
 				case KeyEvent.VK_NUMPAD2:
 					add(new Carrot(player));
