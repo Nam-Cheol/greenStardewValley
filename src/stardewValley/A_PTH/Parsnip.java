@@ -20,6 +20,12 @@ public class Parsnip extends JLabel implements vegetable {
 	private ImageIcon growing3;
 	private ImageIcon growing4;
 	private ImageIcon lastGrowing;
+	
+	// 생성 가능 여부
+	private boolean leftCreate;
+	private boolean rightCreate;
+	private boolean upCreate;
+	private boolean downCreate;
 
 	// 생성자
 	public Parsnip(Player player) {
@@ -38,6 +44,7 @@ public class Parsnip extends JLabel implements vegetable {
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
+		
 	}
 
 	@Override
@@ -55,6 +62,13 @@ public class Parsnip extends JLabel implements vegetable {
 			
 			@Override
 			public void run() {
+				
+				setUpCreate(false);
+				setDownCreate(false);
+				setLeftCreate(false);
+				setRightCreate(false);
+				
+				
 				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
@@ -101,5 +115,38 @@ public class Parsnip extends JLabel implements vegetable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+	public boolean isLeftCreate() {
+		return leftCreate;
+	}
+
+	public void setLeftCreate(boolean leftCreate) {
+		this.leftCreate = leftCreate;
+	}
+
+	public boolean isRightCreate() {
+		return rightCreate;
+	}
+
+	public void setRightCreate(boolean rightCreate) {
+		this.rightCreate = rightCreate;
+	}
+
+	public boolean isUpCreate() {
+		return upCreate;
+	}
+
+	public void setUpCreate(boolean upCreate) {
+		this.upCreate = upCreate;
+	}
+
+	public boolean isDownCreate() {
+		return downCreate;
+	}
+
+	public void setDownCreate(boolean downCreate) {
+		this.downCreate = downCreate;
+	}
+	
 
 } // end of class
