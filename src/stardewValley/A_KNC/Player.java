@@ -11,6 +11,8 @@ public class Player extends JLabel implements Moveable {
 	// TODO player 의 속성
 
 	Parsnip parsnip;
+	Carrot carrot;
+	Strawberry berry;
 	StardewValleyFrame mContext;
 
 	// 플레이어의 이미지
@@ -36,6 +38,10 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown2;
 	
 	private ImageIcon playerWater;
+	
+	private Store store;
+	private Keeper keeper;
+	private Water water;
 
 	// 플레이어의 좌표
 	private int x;
@@ -62,11 +68,14 @@ public class Player extends JLabel implements Moveable {
 	private int wallet;
 	
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
+		this.store = store;
+		this.keeper = keeper;
+		this.water = water;
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this)).start();
+		new Thread(new backgroundPlayerMapService(this, store , keeper, water)).start();
 	}
 
 	private void initData() {
@@ -291,8 +300,16 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 	
-	public Parsnip createParsnip() {
+	public Vegetable createParsnip() {
 		return new Parsnip(this);
+	}
+	
+	public Vegetable createCarrot() {
+		return new Carrot(this);
+	}
+	
+	public Vegetable createBerry() {
+		return new Strawberry(this);
 	}
 
 	// getter, setter

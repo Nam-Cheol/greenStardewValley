@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Parsnip extends JLabel implements IVegetable {
+public class Parsnip extends Vegetable{
 
 	// 멤버 변수
 	private String name = "파스닙";
@@ -117,6 +117,7 @@ public class Parsnip extends JLabel implements IVegetable {
 		this.create = create;
 	}
 
+	@Override
 	public int getPrice() {
 		return price;
 	}

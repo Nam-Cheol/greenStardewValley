@@ -3,7 +3,7 @@ package stardewValley.A_KNC;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Store extends JLabel{
+public class Keeper extends JLabel{
 
 	StardewValleyFrame mContext;
 	
@@ -18,9 +18,9 @@ public class Store extends JLabel{
 	private int carrotEach;
 	private int berryEach;
 	
-	private ImageIcon playerL;
+	private ImageIcon keeper;
 	
-	public Store(StardewValleyFrame mContext) {
+	public Keeper(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
@@ -28,10 +28,10 @@ public class Store extends JLabel{
 	
 	private void initData() {
 		
-		x = 1000;
+		x = 200;
 		y = 200;
 		
-		playerL = new ImageIcon("img/seller.png");
+		keeper = new ImageIcon("img/keeper.png");
 		
 		parsnipEach = 0;
 		carrotEach = 0;
@@ -40,7 +40,7 @@ public class Store extends JLabel{
 	}
 	
 	private void setInitLayout() {
-		this.setIcon(playerL);
+		this.setIcon(keeper);
 		this.setLocation(x, y);
 		this.setSize(100, 140);
 	}
