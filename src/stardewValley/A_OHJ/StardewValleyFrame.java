@@ -17,6 +17,7 @@ public class StardewValleyFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
+	private int waterGage;
 
 	public StardewValleyFrame() {
 		initData();
@@ -101,34 +102,34 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
+					System.out.println(e.getKeyCode() + " : 씨앗심기");
 					player.plantParsnip();
-					allStop();
-//					add(new Parsnip(player));
 					break;
 				case KeyEvent.VK_NUMPAD4:
-					player.sprinkleWater();
+					System.out.println(e.getKeyCode() + " : 수확하기");
+					player.harvestParsnip();
+				case KeyEvent.VK_NUMPAD5:
+					System.out.println(e.getKeyCode() + " : 물 주기");
+					player.sprinkling();
 					break;
-				case KeyEvent.VK_NUMPAD2:
-					add(new Carrot(player));
-					allStop();
-					break;
-				case KeyEvent.VK_NUMPAD3:
-					add(new Strawberry(player));
-					allStop();
-					break;
+//				case KeyEvent.VK_NUMPAD2:
+//					add(new Carrot(player));
+//					allStop();
+//					break;
+//				case KeyEvent.VK_NUMPAD3:
+//					add(new Strawberry(player));
+//					allStop();
+//					break;
 				default:
 					break;
 				}
 			}
 		});
 	}
-
 	
 	public Player getPlayer() {
 		return player;
 	}
-
-
 
 	public void allStop() {
 		player.setLeft(false);
@@ -139,5 +140,14 @@ public class StardewValleyFrame extends JFrame {
 
 	public static void main(String[] args) {
 		new StardewValleyFrame();
+	}
+
+	public void sprinkling() {
+		player.sprinkling();
+
+	}
+
+	public void harvest() {
+		player.harvestParsnip();
 	}
 }

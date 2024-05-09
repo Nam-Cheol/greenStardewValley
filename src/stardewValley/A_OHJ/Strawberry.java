@@ -54,24 +54,24 @@ public class Strawberry extends JLabel implements vegetable {
 	@Override
 	public void grow() {
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				for(int i = 0; i < 1; i++) {
+				for (int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
 						Thread.sleep(1000);
 						setIcon(growing2);
-						
+
 						Thread.sleep(1000);
 						setIcon(growing3);
-						
+
 						Thread.sleep(1000);
 						setIcon(growing4);
-						
+
 						Thread.sleep(1000);
 						setIcon(growing5);
-						
+
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
 					} catch (InterruptedException e) {
@@ -87,7 +87,9 @@ public class Strawberry extends JLabel implements vegetable {
 	}
 
 	@Override
-	public void sprinkling() {
+	public void sprinkling(int water) {
+		// TODO Auto-generated method stub
+
 	}
 
 	// getter, setter

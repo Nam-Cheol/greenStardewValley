@@ -7,9 +7,8 @@ import javax.swing.JLabel;
 public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
-
-	Parsnip parsnip;
 	StardewValleyFrame mContext;
+	Parsnip parsnip;
 
 	// 플레이어의 이미지
 
@@ -388,14 +387,12 @@ public class Player extends JLabel implements Moveable {
 		parsnip = new Parsnip(mContext);
 		mContext.add(parsnip);
 	}
-
-	// 물뿌리기
-	public void sprinkleWater() {
-		synchronized(this) {
-		parsnip.setWater(1);
-		parsnip.sprinkling();
-		System.out.println("파스닙물 " + parsnip.getWater());
-		}
+	
+	public void sprinkling() {
+		parsnip.sprinkling(1);
+	}
+	public void harvestParsnip() {
+		parsnip.harvest();
 	}
 
 }

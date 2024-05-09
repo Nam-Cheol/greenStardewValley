@@ -21,6 +21,10 @@ public class Parsnip extends JLabel implements vegetable {
 	private ImageIcon growing3;
 	private ImageIcon growing4;
 	private ImageIcon lastGrowing;
+	private boolean canHarvest;
+	// 물
+	private int parsnipWaterGage;
+	private final int MAX_WATERGAGE = 4;
 
 	private int waterGage;
 
@@ -30,13 +34,16 @@ public class Parsnip extends JLabel implements vegetable {
 		this.player = mContext.getPlayer();
 		initData();
 		setInitLayout();
-		grow();
+		sowSeeds();
 	}
 
 	// 메소드
 	@Override
 	public void initData() {
 		growing = true;
+		canHarvest = false;
+		parsnipWaterGage = 2;
+
 		growing1 = new ImageIcon("img/Parsnip_Stage_1.png");
 		growing2 = new ImageIcon("img/Parsnip_Stage_2.png");
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
@@ -52,47 +59,6 @@ public class Parsnip extends JLabel implements vegetable {
 		setSize(48, 48);
 		setLocation(x, y + plantLocation);
 		setIcon(null);
-	}
-
-	@Override
-	public void grow() {
-		setIcon(growing1);
-	}
-
-	@Override
-	public void harvest() {
-		setIcon(null);
-	}
-
-	@Override
-	public void sprinkling() {
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				synchronized (mContext) {
-
-					for (int i = 0; i < 1; i++) {
-						try {
-							setIcon(growing1);
-							Thread.sleep(1000);
-							setIcon(growing2);
-
-							Thread.sleep(1000);
-							setIcon(growing3);
-
-							Thread.sleep(1000);
-							setIcon(growing4);
-
-							Thread.sleep(1000);
-							setIcon(lastGrowing);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}).start();
 	}
 
 	// getter, setter
@@ -112,12 +78,103 @@ public class Parsnip extends JLabel implements vegetable {
 		this.player = player;
 	}
 
+	public int getWaterParsnip() {
+		return parsnipWaterGage;
+	}
+
+	public void setWaterParsnip(int parsnipWaterGage) {
+		this.parsnipWaterGage = parsnipWaterGage;
+	}
+
+	//
+	public void sowSeeds() {
+		setIcon(growing1);
+		growing = true;
+		grow();
+	}
+
+	@Override
+	public void grow() {
+		System.out.println("-------------> 파스닙 클래스 grow : 시작");
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (growing == true) {
+					try {
+						Thread.sleep(3000);
+						setIcon(growing2);
+						System.out.println("-------------> 파스닙 클래스 grow : 파스닙 2단계");
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					if (growing == true) {
+						try {
+							Thread.sleep(3000);
+							setIcon(growing3);
+							System.out.println("-------------> 파스닙 클래스 grow : 파스닙 3단계");
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						if (growing == true) {
+							try {
+								Thread.sleep(3000);
+								setIcon(growing4);
+								System.out.println("-------------> 파스닙 클래스 grow : 파스닙 4단계");
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							if (growing == true) {
+								try {
+									Thread.sleep(3000);
+									setIcon(lastGrowing);
+									System.out.println("-------------> 파스닙 클래스 grow : 파스닙 다 자람");
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+								canHarvest = true;
+							} // 네 번째 if
+						} // 세 번째 if
+					} // 두 번째 if
+				} // 첫 번째 if
+				else {
+					Thread.yield();
+				}
+			}
+		}).start();
+	} // end of grow()
+
+	@Override
+	public void harvest() {
+		if (canHarvest == true) {
+			System.out.println("-------------> 파스닙 클래스 : 파스닙 수확한다.");
+			setIcon(null);
+		} else {
+			System.out.println("-------------> 파스닙 클래스 : 지금은 자라는 중이다.");
+		}
+	}
+
+	@Override
+	public void sprinkling(int water) {
+		synchronized (this) {
+			int currentWater = getWaterParsnip();
+			if (0 < currentWater && currentWater != MAX_WATERGAGE) {
+				setWaterParsnip(currentWater + water);
+				System.out.println("-------------> 파스닙 클래스 : " + currentWater);
+				growing = true;
+			} else {
+				growing = false;
+				setIcon(null);
+				System.out.println("-------------> 파스닙 클래스 : 물 너무 많이 줘서 죽었다.");
+			}
+		}
+	}
+
 	public int getWater() {
 		return waterGage;
 	}
 
 	public void setWater(int watherGage) {
-		this.waterGage += watherGage;
+		this.waterGage = watherGage;
 	}
 
 } // end of class

@@ -11,5 +11,5 @@ public interface vegetable {
 
 	void harvest();
 
-	void sprinkling();
+	void sprinkling(int water);
 }
