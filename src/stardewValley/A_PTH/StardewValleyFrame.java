@@ -16,6 +16,7 @@ public class StardewValleyFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
+	private Parsnip parsnip;
 
 	public StardewValleyFrame() {
 		initData();
@@ -39,6 +40,7 @@ public class StardewValleyFrame extends JFrame {
 		setVisible(true);
 
 		add(player);
+		add(parsnip);
 	}
 
 	private void addEventListener() {
