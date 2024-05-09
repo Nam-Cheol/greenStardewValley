@@ -107,9 +107,11 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-					parsnip = new Parsnip(player);
-					add(parsnip);
-					System.out.println(parsnip.getPrice());
+					if(player.isCreate()) {
+						parsnip = player.createParsnip();
+						add(parsnip);
+						System.out.println(parsnip.getPrice());
+					}
 					break;
 				case KeyEvent.VK_NUMPAD2:
 					add(new Carrot(player));

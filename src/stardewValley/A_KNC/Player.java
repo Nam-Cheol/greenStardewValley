@@ -93,6 +93,8 @@ public class Player extends JLabel implements Moveable {
 		up = false;
 		down = false;
 
+		create = false;
+		
 		leftWallCrash = false;
 		rightWallCrash = false;
 		upWallCrash = false;
@@ -283,6 +285,10 @@ public class Player extends JLabel implements Moveable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Parsnip createParsnip() {
+		return new Parsnip(this);
 	}
 
 	// getter, setter
