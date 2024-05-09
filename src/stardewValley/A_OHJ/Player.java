@@ -7,8 +7,9 @@ import javax.swing.JLabel;
 public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
-	StardewValleyFrame mContext;
+
 	Parsnip parsnip;
+	StardewValleyFrame mContext;
 
 	// 플레이어의 이미지
 
@@ -32,6 +33,8 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
 
+	private ImageIcon playerWater;
+
 	// 플레이어의 좌표
 	private int x;
 	private int y;
@@ -52,11 +55,14 @@ public class Player extends JLabel implements Moveable {
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
 
+	private boolean create;
+
+	private int wallet;
+
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
-		initThread();
 		this.mContext = mContext;
 		new Thread(new backgroundPlayerMapService(this)).start();
 	}
@@ -82,10 +88,14 @@ public class Player extends JLabel implements Moveable {
 		playerDown1 = new ImageIcon("img/PlayerWalkDown.png");
 		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
 
+		playerWater = new ImageIcon("img/PlayerWater.png");
+
 		left = false;
 		right = false;
 		up = false;
 		down = false;
+
+		create = false;
 
 		leftWallCrash = false;
 		rightWallCrash = false;
@@ -93,15 +103,14 @@ public class Player extends JLabel implements Moveable {
 		downWallCrash = false;
 
 		playerWay = PlayerWay.DOWN;
+
+		wallet = 0;
 	}
 
 	private void setInitLayout() {
 		this.setIcon(playerDown);
 		this.setLocation(x, y);
 		this.setSize(100, 120);
-	}
-
-	private void initThread() {
 
 	}
 
@@ -280,6 +289,14 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 
+//	public Parsnip createParsnip() {
+//		return parsnip;
+//	}
+	public void createParsnip() {
+		parsnip = new Parsnip(mContext);
+		mContext.add(parsnip);
+	}
+
 	// getter, setter
 
 	public int getX() {
@@ -382,17 +399,25 @@ public class Player extends JLabel implements Moveable {
 		return playerDown;
 	}
 
-	// 씨앗 심기
-	public void plantParsnip() {
-		parsnip = new Parsnip(mContext);
-		mContext.add(parsnip);
+	public ImageIcon getPlayerWater() {
+		return playerWater;
 	}
-	
+
+//	public Parsnip plantParsnip() {
+//		return parsnip = new Parsnip(this);
+//	}
+
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+
+	// 물 주기
 	public void sprinkling() {
-		parsnip.sprinkling(1);
-	}
-	public void harvestParsnip() {
-		parsnip.harvest();
+		parsnip.sprinkling();
 	}
 
 }

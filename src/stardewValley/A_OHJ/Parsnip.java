@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Parsnip extends JLabel implements vegetable {
+public class Parsnip extends JLabel implements IVegetable {
 
 	// 멤버 변수
 	private String name = "파스닙";
@@ -21,20 +21,25 @@ public class Parsnip extends JLabel implements vegetable {
 	private ImageIcon growing3;
 	private ImageIcon growing4;
 	private ImageIcon lastGrowing;
-	private boolean canHarvest;
 	// 물
-	private int parsnipWaterGage;
 	private final int MAX_WATERGAGE = 4;
-
 	private int waterGage;
+	private boolean vegeGetWater;
+	// 수확
+	private boolean canHarvest;
+
+	private boolean create;
+
+	private int price;
 
 	// 생성자
 	public Parsnip(StardewValleyFrame mContext) {
+//		this.player = player;
 		this.mContext = mContext;
 		this.player = mContext.getPlayer();
 		initData();
 		setInitLayout();
-		sowSeeds();
+		growStep1();
 	}
 
 	// 메소드
@@ -42,14 +47,16 @@ public class Parsnip extends JLabel implements vegetable {
 	public void initData() {
 		growing = true;
 		canHarvest = false;
-		parsnipWaterGage = 2;
+		waterGage = 2;
+		vegeGetWater = false;
+		create = false;
 
 		growing1 = new ImageIcon("img/Parsnip_Stage_1.png");
 		growing2 = new ImageIcon("img/Parsnip_Stage_2.png");
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
-		waterGage = 2;
+		price = (int) (Math.random() * 500) + 1000;
 	}
 
 	@Override
@@ -59,6 +66,68 @@ public class Parsnip extends JLabel implements vegetable {
 		setSize(48, 48);
 		setLocation(x, y + plantLocation);
 		setIcon(null);
+	}
+
+	@Override
+	public void growStep1() {
+		try {
+			setIcon(growing1);
+			System.out.println("--> 파스닙 클래스 grow : 시작");
+			Thread.sleep(3000);
+			setIcon(growing2);
+			System.out.println("--> 파스닙 클래스 grow : 파스닙 2단계");
+
+//			Thread.sleep(1000);
+//			setIcon(growing3);
+//
+//			Thread.sleep(1000);
+//			setIcon(growing4);
+//
+//			Thread.sleep(1000);
+//			setIcon(lastGrowing);
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (0 < getWaterGage() && getWaterGage() < MAX_WATERGAGE) {
+			growStep2();
+		}
+	}
+
+	// 시도
+	public void growStep2() {
+		try {
+			Thread.sleep(3000);
+			setIcon(growing3);
+			System.out.println("--> 파스닙 클래스 grow : 파스닙 3단계");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void harvest() {
+		if (canHarvest == true) {
+			System.out.println("--> 파스닙 클래스 : 파스닙 수확한다.");
+			setIcon(null);
+		} else {
+			System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
+		}
+	}
+
+	@Override
+	public void sprinkling() {
+		int currentWater = getWaterGage();
+		if (0 < currentWater && currentWater < MAX_WATERGAGE) {
+			vegeGetWater = true;
+			setWaterGage(currentWater + 1);
+			System.out.println("--> 파스닙 클래스 : " + getWaterGage());
+		} else {
+			vegeGetWater = false;
+			growing = false;
+			setIcon(null);
+			System.out.println("--> 파스닙 클래스 : 물 너무 많이 줘서 죽었다.");
+		}
 	}
 
 	// getter, setter
@@ -78,103 +147,25 @@ public class Parsnip extends JLabel implements vegetable {
 		this.player = player;
 	}
 
-	public int getWaterParsnip() {
-		return parsnipWaterGage;
+	public boolean isCreate() {
+		return create;
 	}
 
-	public void setWaterParsnip(int parsnipWaterGage) {
-		this.parsnipWaterGage = parsnipWaterGage;
+	public void setCreate(boolean create) {
+		this.create = create;
 	}
 
-	//
-	public void sowSeeds() {
-		setIcon(growing1);
-		growing = true;
-		grow();
+	public int getPrice() {
+		return price;
 	}
 
-	@Override
-	public void grow() {
-		System.out.println("-------------> 파스닙 클래스 grow : 시작");
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				if (growing == true) {
-					try {
-						Thread.sleep(3000);
-						setIcon(growing2);
-						System.out.println("-------------> 파스닙 클래스 grow : 파스닙 2단계");
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					if (growing == true) {
-						try {
-							Thread.sleep(3000);
-							setIcon(growing3);
-							System.out.println("-------------> 파스닙 클래스 grow : 파스닙 3단계");
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						if (growing == true) {
-							try {
-								Thread.sleep(3000);
-								setIcon(growing4);
-								System.out.println("-------------> 파스닙 클래스 grow : 파스닙 4단계");
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-							if (growing == true) {
-								try {
-									Thread.sleep(3000);
-									setIcon(lastGrowing);
-									System.out.println("-------------> 파스닙 클래스 grow : 파스닙 다 자람");
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-								canHarvest = true;
-							} // 네 번째 if
-						} // 세 번째 if
-					} // 두 번째 if
-				} // 첫 번째 if
-				else {
-					Thread.yield();
-				}
-			}
-		}).start();
-	} // end of grow()
-
-	@Override
-	public void harvest() {
-		if (canHarvest == true) {
-			System.out.println("-------------> 파스닙 클래스 : 파스닙 수확한다.");
-			setIcon(null);
-		} else {
-			System.out.println("-------------> 파스닙 클래스 : 지금은 자라는 중이다.");
-		}
-	}
-
-	@Override
-	public void sprinkling(int water) {
-		synchronized (this) {
-			int currentWater = getWaterParsnip();
-			if (0 < currentWater && currentWater != MAX_WATERGAGE) {
-				setWaterParsnip(currentWater + water);
-				System.out.println("-------------> 파스닙 클래스 : " + currentWater);
-				growing = true;
-			} else {
-				growing = false;
-				setIcon(null);
-				System.out.println("-------------> 파스닙 클래스 : 물 너무 많이 줘서 죽었다.");
-			}
-		}
-	}
-
-	public int getWater() {
+	// 물
+	public int getWaterGage() {
 		return waterGage;
 	}
 
-	public void setWater(int watherGage) {
-		this.waterGage = watherGage;
+	public void setWaterGage(int waterGage) {
+		this.waterGage = waterGage;
 	}
 
 } // end of class

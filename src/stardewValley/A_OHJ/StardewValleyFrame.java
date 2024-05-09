@@ -2,7 +2,6 @@ package stardewValley.A_OHJ;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,7 +16,8 @@ public class StardewValleyFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
-	private int waterGage;
+	private Parsnip parsnip;
+	private Store store;
 
 	public StardewValleyFrame() {
 		initData();
@@ -31,7 +31,8 @@ public class StardewValleyFrame extends JFrame {
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
-		player = new Player(this);
+		player = new Player(mContext);
+		store = new Store(mContext);
 	}
 
 	private void setInitLayout() {
@@ -41,6 +42,8 @@ public class StardewValleyFrame extends JFrame {
 		setVisible(true);
 
 		add(player);
+		add(store);
+		System.out.println(store.getX());
 	}
 
 	private void addEventListener() {
@@ -102,33 +105,35 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-					System.out.println(e.getKeyCode() + " : 씨앗심기");
-					player.plantParsnip();
+//					if (player.isCreate()) {
+//					}
+					player.createParsnip();
+					break;
+				case KeyEvent.VK_NUMPAD2:
+					add(new Carrot(player));
+					break;
+				case KeyEvent.VK_NUMPAD3:
+					add(new Strawberry(player));
 					break;
 				case KeyEvent.VK_NUMPAD4:
-					System.out.println(e.getKeyCode() + " : 수확하기");
-					player.harvestParsnip();
-				case KeyEvent.VK_NUMPAD5:
-					System.out.println(e.getKeyCode() + " : 물 주기");
+//					if (player.isCreate()) {
+//						player.setIcon(player.getPlayerWater());
+//						System.out.println(parsnip.getPrice());
+//					}
+					player.setIcon(player.getPlayerWater());
 					player.sprinkling();
 					break;
-//				case KeyEvent.VK_NUMPAD2:
-//					add(new Carrot(player));
-//					allStop();
-//					break;
-//				case KeyEvent.VK_NUMPAD3:
-//					add(new Strawberry(player));
-//					allStop();
-//					break;
+				case KeyEvent.VK_NUMPAD5:
+					if (player.isCreate()) {
+
+					}
+					break;
 				default:
 					break;
 				}
 			}
 		});
-	}
-	
-	public Player getPlayer() {
-		return player;
+
 	}
 
 	public void allStop() {
@@ -137,17 +142,12 @@ public class StardewValleyFrame extends JFrame {
 		player.setUp(false);
 		player.setDown(false);
 	}
+	
+	public Player getPlayer() {
+		return player;
+	}
 
 	public static void main(String[] args) {
 		new StardewValleyFrame();
-	}
-
-	public void sprinkling() {
-		player.sprinkling();
-
-	}
-
-	public void harvest() {
-		player.harvestParsnip();
 	}
 }

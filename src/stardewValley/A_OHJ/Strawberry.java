@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Strawberry extends JLabel implements vegetable {
+public class Strawberry extends JLabel implements IVegetable {
 
 	// 멤버 변수
 	private String name = "딸기";
@@ -27,7 +27,7 @@ public class Strawberry extends JLabel implements vegetable {
 		this.player = player;
 		initData();
 		setInitLayout();
-		grow();
+		growStep1();
 	}
 
 	// 메소드
@@ -52,7 +52,7 @@ public class Strawberry extends JLabel implements vegetable {
 	}
 
 	@Override
-	public void grow() {
+	public void growStep1() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -86,12 +86,6 @@ public class Strawberry extends JLabel implements vegetable {
 	public void harvest() {
 	}
 
-	@Override
-	public void sprinkling(int water) {
-		// TODO Auto-generated method stub
-
-	}
-
 	// getter, setter
 	public String getName() {
 		return name;
@@ -107,6 +101,12 @@ public class Strawberry extends JLabel implements vegetable {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	@Override
+	public void sprinkling() {
+		// TODO Auto-generated method stub
+		
 	}
 
 } // end of class
