@@ -25,7 +25,7 @@ public class backgroundPlayerMapService implements Runnable {
 		this.player = player;
 
 		try {
-			image = ImageIO.read(new File("img/StardewValleyMapColorFrame1.png"));
+			image = ImageIO.read(new File("img/StardewValleyMapColorFrame2.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,22 +67,22 @@ public class backgroundPlayerMapService implements Runnable {
 
 				
 				// 2. WATER	
-//			} else if (upColor.getRGB() == WATER) {
-//				player.setUpWallCrash(true);
-//				player.setUp(false);
-//				
-//			} else if (downColor.getRed() == WATER) {
-//				player.setDownWallCrash(true);
-//				player.setDown(false);
-//				
-//			} else if (leftColor.getRed() == WATER) {
-//				player.setLeftWallCrash(true);
-//				player.setLeft(false);
-//				
-//			} else if (rightColor.getRed() == WATER) {
-//				player.setRightWallCrash(true);
-//				player.setRight(false);
-//				
+			} else if (upColor.getRGB() == WATER) {
+				player.setUpWallCrash(true);
+				player.setUp(false);
+				
+			} else if (downColor.getRed() == WATER) {
+				player.setDownWallCrash(true);
+				player.setDown(false);
+				
+			} else if (leftColor.getRed() == WATER) {
+				player.setLeftWallCrash(true);
+				player.setLeft(false);
+				
+			} else if (rightColor.getRed() == WATER) {
+				player.setRightWallCrash(true);
+				player.setRight(false);
+				
 			} else {
 				player.setUpWallCrash(false);
 				player.setDownWallCrash(false);
