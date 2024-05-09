@@ -12,6 +12,15 @@ public class backgroundPlayerMapService implements Runnable {
 	private BufferedImage image;
 	private Player player;
 
+	// 플레이어 상하좌우 색상 인식
+	private Color upColor = new Color(image.getRGB(player.getX() + 50, player.getY() - 10));
+	private Color downColor = new Color(image.getRGB(player.getX() + 50, player.getY() + 170));
+	private Color leftColor = new Color(image.getRGB(player.getX() - 15, player.getY() + 50));
+	private Color rightColor = new Color(image.getRGB(player.getX() + 115, player.getY() + 70));
+	
+	// 필요한 색상
+	private Color redColor = new Color(255,0,0);
+	
 	public backgroundPlayerMapService(Player player) {
 		this.player = player;
 
@@ -28,14 +37,18 @@ public class backgroundPlayerMapService implements Runnable {
 
 		while (true) {
 			// Player Color Observe
-			Color upColor = new Color(image.getRGB(player.getX() + 50, player.getY() - 10));
-			Color downColor = new Color(image.getRGB(player.getX() + 50, player.getY() + 170));
-			Color leftColor = new Color(image.getRGB(player.getX() - 15, player.getY() + 50));
-			Color rightColor = new Color(image.getRGB(player.getX() + 115, player.getY() + 70));
+			
+			
+			Color redColor = new Color(255,0,0);
+			
+			int red = redColor.getRGB();
+			int up = upColor.getRGB();
 
+			System.out.println(redColor);
+			
 			// Player Wall Crash
 
-			if (upColor.getRed() == 255 && upColor.getGreen() == 0 && upColor.getBlue() == 0) {
+			if (up == red) {
 				player.setUpWallCrash(true);
 				player.setUp(false);
 
