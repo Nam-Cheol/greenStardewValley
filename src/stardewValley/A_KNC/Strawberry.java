@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Strawberry extends JLabel implements vegetable {
+public class Strawberry extends JLabel implements IVegetable {
 
 	// 멤버 변수
 	private String name = "딸기";

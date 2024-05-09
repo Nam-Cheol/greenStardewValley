@@ -8,8 +8,8 @@ public class Parsnip extends JLabel implements vegetable {
 
 	// 멤버 변수
 	private String name = "파스닙";
+	StardewValleyFrame mContext;
 	// 플레이어
-	private StardewValleyFrame mContext;
 	private Player player;
 	private int x;
 	private int y;
@@ -25,6 +25,8 @@ public class Parsnip extends JLabel implements vegetable {
 	// 물
 	private int parsnipWaterGage;
 	private final int MAX_WATERGAGE = 4;
+
+	private int waterGage;
 
 	// 생성자
 	public Parsnip(StardewValleyFrame mContext) {
@@ -47,6 +49,7 @@ public class Parsnip extends JLabel implements vegetable {
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
+		waterGage = 2;
 	}
 
 	@Override
@@ -104,7 +107,7 @@ public class Parsnip extends JLabel implements vegetable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if(growing == true) {
+					if (growing == true) {
 						try {
 							Thread.sleep(3000);
 							setIcon(growing3);
@@ -112,7 +115,7 @@ public class Parsnip extends JLabel implements vegetable {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						if(growing == true) {
+						if (growing == true) {
 							try {
 								Thread.sleep(3000);
 								setIcon(growing4);
@@ -120,7 +123,7 @@ public class Parsnip extends JLabel implements vegetable {
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
-							if(growing == true) {
+							if (growing == true) {
 								try {
 									Thread.sleep(3000);
 									setIcon(lastGrowing);
@@ -133,7 +136,7 @@ public class Parsnip extends JLabel implements vegetable {
 						} // 세 번째 if
 					} // 두 번째 if
 				} // 첫 번째 if
-				 else {
+				else {
 					Thread.yield();
 				}
 			}
@@ -164,7 +167,14 @@ public class Parsnip extends JLabel implements vegetable {
 				System.out.println("-------------> 파스닙 클래스 : 물 너무 많이 줘서 죽었다.");
 			}
 		}
+	}
 
+	public int getWater() {
+		return waterGage;
+	}
+
+	public void setWater(int watherGage) {
+		this.waterGage = watherGage;
 	}
 
 } // end of class

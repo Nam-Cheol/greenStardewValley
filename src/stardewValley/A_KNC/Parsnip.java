@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Parsnip extends JLabel implements vegetable {
+public class Parsnip extends JLabel implements IVegetable {
 
 	// 멤버 변수
 	private String name = "파스닙";
@@ -21,6 +21,10 @@ public class Parsnip extends JLabel implements vegetable {
 	private ImageIcon growing4;
 	private ImageIcon lastGrowing;
 
+	private boolean create;
+	
+	private int price;
+	
 	// 생성자
 	public Parsnip(Player player) {
 		this.player = player;
@@ -33,11 +37,13 @@ public class Parsnip extends JLabel implements vegetable {
 	@Override
 	public void initData() {
 		growing = true;
+		create = false;
 		growing1 = new ImageIcon("img/Parsnip_Stage_1.png");
 		growing2 = new ImageIcon("img/Parsnip_Stage_2.png");
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
+		price = (int)(Math.random()*500) + 1000;
 	}
 
 	@Override
@@ -69,6 +75,7 @@ public class Parsnip extends JLabel implements vegetable {
 						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
+						
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -101,5 +108,21 @@ public class Parsnip extends JLabel implements vegetable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+	
+	
+	
+	
 
 } // end of class

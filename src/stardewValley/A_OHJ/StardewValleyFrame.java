@@ -2,6 +2,7 @@ package stardewValley.A_OHJ;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -103,7 +104,6 @@ public class StardewValleyFrame extends JFrame {
 				case KeyEvent.VK_NUMPAD1:
 					System.out.println(e.getKeyCode() + " : 씨앗심기");
 					player.plantParsnip();
-					allStop();
 					break;
 				case KeyEvent.VK_NUMPAD4:
 					System.out.println(e.getKeyCode() + " : 수확하기");
@@ -126,16 +126,16 @@ public class StardewValleyFrame extends JFrame {
 			}
 		});
 	}
+	
+	public Player getPlayer() {
+		return player;
+	}
 
 	public void allStop() {
 		player.setLeft(false);
 		player.setRight(false);
 		player.setUp(false);
 		player.setDown(false);
-	}
-
-	public Player getPlayer() {
-		return player;
 	}
 
 	public static void main(String[] args) {

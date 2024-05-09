@@ -50,18 +50,18 @@ public class Carrot extends JLabel implements vegetable {
 	@Override
 	public void grow() {
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				for(int i = 0; i < 1; i++) {
+				for (int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
 						Thread.sleep(1000);
 						setIcon(growing2);
-						
+
 						Thread.sleep(1000);
 						setIcon(growing3);
-						
+
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
 					} catch (InterruptedException e) {

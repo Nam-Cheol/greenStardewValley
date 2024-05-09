@@ -381,11 +381,8 @@ public class Player extends JLabel implements Moveable {
 	public ImageIcon getPlayerDown() {
 		return playerDown;
 	}
-	
-	public Parsnip getParsnip() {
-		return this.parsnip;
-	}
 
+	// 씨앗 심기
 	public void plantParsnip() {
 		parsnip = new Parsnip(mContext);
 		mContext.add(parsnip);
@@ -394,13 +391,8 @@ public class Player extends JLabel implements Moveable {
 	public void sprinkling() {
 		parsnip.sprinkling(1);
 	}
-//	
 	public void harvestParsnip() {
 		parsnip.harvest();
-	}
-//	
-	public Parsnip getImParsnip() {
-		return parsnip;
 	}
 
 }
