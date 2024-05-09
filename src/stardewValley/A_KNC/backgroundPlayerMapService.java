@@ -78,6 +78,7 @@ public class backgroundPlayerMapService implements Runnable {
 				stopUp();
 			} else if (down == FARM){
 				stopDown();
+				player.setCreate(true);
 			} else if (left == FARM) {
 				stopLeft();
 			} else if (right == FARM) {
@@ -91,6 +92,7 @@ public class backgroundPlayerMapService implements Runnable {
 			} catch (InterruptedException e) {
 			}
 
+			player.setCreate(false);
 		}
 
 	}

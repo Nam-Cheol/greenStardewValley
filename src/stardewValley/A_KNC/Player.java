@@ -34,6 +34,8 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown; // -> 디폴트
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
+	
+	private ImageIcon playerWater;
 
 	// 플레이어의 좌표
 	private int x;
@@ -88,6 +90,8 @@ public class Player extends JLabel implements Moveable {
 		playerDown1 = new ImageIcon("img/PlayerWalkDown.png");
 		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
 
+		playerWater = new ImageIcon("img/PlayerWater.png");
+		
 		left = false;
 		right = false;
 		up = false;
@@ -393,6 +397,10 @@ public class Player extends JLabel implements Moveable {
 		return playerDown;
 	}
 	
+	public ImageIcon getPlayerWater() {
+		return playerWater;
+	}
+
 	public Parsnip plantParsnip() {
 		return parsnip = new Parsnip(this);
 	}
