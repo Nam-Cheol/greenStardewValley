@@ -62,49 +62,51 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (rightColor.getRGB() == BLOCK) {
 				player.setRightWallCrash(true);
 				player.setRight(false);
+				
+			
 
 				
 				// 2. WATER	
-			} else if (upColor.getRGB() == WATER) {
-				player.setUpWallCrash(true);
-				player.setUp(false);
-				
-			} else if (downColor.getRed() == WATER) {
-				player.setDownWallCrash(true);
-				player.setDown(false);
-				
-			} else if (leftColor.getRed() == WATER) {
-				player.setLeftWallCrash(true);
-				player.setLeft(false);
-				
-			} else if (rightColor.getRed() == WATER) {
-				player.setRightWallCrash(true);
-				player.setRight(false);
-				
-				
-			// 3. FARM
-			} else if (upColor.getRGB() == FARM) {
-				parsnip.setUpCreate(true);
-				parsnip.grow();
-				
-			} else if (downColor.getRGB() == FARM){
-				parsnip.setDownCreate(true);
-				parsnip.grow();
-				
-			} else if (leftColor.getRGB() == FARM) {
-				parsnip.setLeftCreate(true);
-				parsnip.grow();
-				
-			} else if (rightColor.getRGB() == FARM) {
-				parsnip.setRightCreate(true);
-				parsnip.grow();
-				
+//			} else if (upColor.getRGB() == WATER) {
+//				player.setUpWallCrash(true);
+//				player.setUp(false);
+//				
+//			} else if (downColor.getRed() == WATER) {
+//				player.setDownWallCrash(true);
+//				player.setDown(false);
+//				
+//			} else if (leftColor.getRed() == WATER) {
+//				player.setLeftWallCrash(true);
+//				player.setLeft(false);
+//				
+//			} else if (rightColor.getRed() == WATER) {
+//				player.setRightWallCrash(true);
+//				player.setRight(false);
+//				
 			} else {
 				player.setUpWallCrash(false);
 				player.setDownWallCrash(false);
 				player.setLeftWallCrash(false);
 				player.setRightWallCrash(false);
 			}
+				
+				
+			// 3. FARM
+//			} else if (upColor.getRGB() == FARM) {
+//				parsnip.setUpCreate(true);
+//				parsnip.grow();
+//				
+//			} else if (downColor.getRGB() == FARM){
+//				parsnip.setDownCreate(true);
+//				parsnip.grow();
+//				
+//			} else if (leftColor.getRGB() == FARM) {
+//				parsnip.setLeftCreate(true);
+//				parsnip.grow();
+//				
+//			} else if (rightColor.getRGB() == FARM) {
+//				parsnip.setRightCreate(true);
+//				parsnip.grow();
 
 			try {
 				Thread.sleep(100);

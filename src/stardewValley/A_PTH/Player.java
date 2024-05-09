@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
-public class Player extends JLabel implements Moveable{
+public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
 
@@ -58,6 +58,7 @@ public class Player extends JLabel implements Moveable{
 		initData();
 		setInitLayout();
 		initThread();
+		createParsnip();
 		this.mContext = mContext;
 		new Thread(new backgroundPlayerMapService(this)).start();
 	}
@@ -100,6 +101,19 @@ public class Player extends JLabel implements Moveable{
 		this.setIcon(playerDown);
 		this.setLocation(x, y);
 		this.setSize(100, 120);
+
+	}
+
+	private void createParsnip() {
+		boolean flag = true;
+		while(flag) {
+			if (this.x > 180 && this.x < 230 && this.y > 640 && this.y < 690) {
+				System.out.println("test");
+			} else {
+				System.out.println("NO");
+				return;
+			}
+		}
 	}
 
 	private void initThread() {
@@ -382,7 +396,7 @@ public class Player extends JLabel implements Moveable{
 	public ImageIcon getPlayerDown() {
 		return playerDown;
 	}
-	
+
 	public Parsnip plantParsnip() {
 		return parsnip = new Parsnip(this);
 	}
