@@ -40,7 +40,6 @@ public class StardewValleyFrame extends JFrame {
 		setVisible(true);
 
 		add(player);
-		add(parsnip);
 	}
 
 	private void addEventListener() {
