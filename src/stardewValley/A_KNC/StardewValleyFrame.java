@@ -2,6 +2,8 @@ package stardewValley.A_KNC;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -16,6 +18,7 @@ public class StardewValleyFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
+	private Vegetable vegetable;
 
 	public StardewValleyFrame() {
 		initData();
@@ -24,12 +27,13 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/StardewValleyMapColorFrame1.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
 		player = new Player(this);
+		vegetable = null;
 	}
 
 	private void setInitLayout() {
@@ -100,23 +104,20 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-//					Player.plantParsnip();
-					allStop();
 					add(new Parsnip(player));
 					break;
 				case KeyEvent.VK_NUMPAD2:
 					add(new Carrot(player));
-					allStop();
 					break;
 				case KeyEvent.VK_NUMPAD3:
 					add(new Strawberry(player));
-					allStop();
 					break;
 				default:
 					break;
 				}
 			}
 		});
+		
 	}
 	
 	public void allStop() {

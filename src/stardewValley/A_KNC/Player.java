@@ -1,5 +1,7 @@
 package stardewValley.A_KNC;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -52,14 +54,16 @@ public class Player extends JLabel implements Moveable {
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
-
+	
+	private boolean create;
+	
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		initThread();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this)).start();
+		new Thread(new backgroundPlayerMapService(this));
 	}
 
 	private void initData() {
@@ -100,6 +104,7 @@ public class Player extends JLabel implements Moveable {
 		this.setIcon(playerDown);
 		this.setLocation(x, y);
 		this.setSize(100, 120);
+
 	}
 
 	private void initThread() {
@@ -387,4 +392,12 @@ public class Player extends JLabel implements Moveable {
 		return parsnip = new Parsnip(this);
 	}
 
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+	
 }
