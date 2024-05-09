@@ -75,9 +75,11 @@ public class Carrot extends JLabel implements vegetable {
 	@Override
 	public void harvest() {
 	}
-
+	
 	@Override
-	public void sprinkling() {
+	public void sprinkling(int water) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// getter, setter
@@ -96,5 +98,7 @@ public class Carrot extends JLabel implements vegetable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+
 
 } // end of class

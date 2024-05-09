@@ -11,11 +11,12 @@ import javax.swing.JLabel;
 // 배경 추가해야 됨.
 //추후 컴포넌트(야채)들도 추가해야 함.
 public class StardewValleyFrame extends JFrame {
-	
+
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
 	private Player player;
+	private int waterGage;
 
 	public StardewValleyFrame() {
 		initData();
@@ -100,25 +101,32 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-//					Player.plantParsnip();
-					allStop();
-					add(new Parsnip(player));
-					break;
-				case KeyEvent.VK_NUMPAD2:
-					add(new Carrot(player));
+					System.out.println(e.getKeyCode() + " : 씨앗심기");
+					player.plantParsnip();
 					allStop();
 					break;
-				case KeyEvent.VK_NUMPAD3:
-					add(new Strawberry(player));
-					allStop();
+				case KeyEvent.VK_NUMPAD4:
+					System.out.println(e.getKeyCode() + " : 수확하기");
+					player.harvestParsnip();
+				case KeyEvent.VK_NUMPAD5:
+					System.out.println(e.getKeyCode() + " : 물 주기");
+					player.sprinkling();
 					break;
+//				case KeyEvent.VK_NUMPAD2:
+//					add(new Carrot(player));
+//					allStop();
+//					break;
+//				case KeyEvent.VK_NUMPAD3:
+//					add(new Strawberry(player));
+//					allStop();
+//					break;
 				default:
 					break;
 				}
 			}
 		});
 	}
-	
+
 	public void allStop() {
 		player.setLeft(false);
 		player.setRight(false);
@@ -126,7 +134,20 @@ public class StardewValleyFrame extends JFrame {
 		player.setDown(false);
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+
 	public static void main(String[] args) {
 		new StardewValleyFrame();
+	}
+
+	public void sprinkling() {
+		player.sprinkling();
+
+	}
+
+	public void harvest() {
+		player.harvestParsnip();
 	}
 }
