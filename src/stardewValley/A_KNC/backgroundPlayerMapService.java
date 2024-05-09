@@ -95,18 +95,19 @@ public class backgroundPlayerMapService implements Runnable {
 				
 				// 4. NPC
 			} else if (storeX < gap && storeY < gap) {
-				System.out.println("멈춰~~~~~~~!");
-//				stopMove();
-			} else if (keeperX < gap && storeY < gap) {
-				System.out.println("멈춰~~~~~~~!");
-				stopMove();
-			} else if (storeX < gap && storeY < gap) {
-				System.out.println("멈춰~~~~~~~!");
-//				stopMove();
+//				System.out.println("멈춰~~~~~~~!");
+				player.setSellParsnip(true);
+//				System.out.println(player.isSellParsnip());
+			} else if (keeperX < gap && keeperY < gap) {
+//				System.out.println("멈춰~~~~~~~!");
+			} else if (waterX < gap && waterY < gap) {
+//				System.out.println("멈춰~~~~~~~!");
 			} else {
 				notWallCrash();
+				player.setSellParsnip(false);
 			}
 
+			
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {

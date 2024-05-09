@@ -67,6 +67,8 @@ public class Player extends JLabel implements Moveable {
 	
 	private int wallet;
 	
+	private boolean sellParsnip;
+	
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
 		this.store = store;
@@ -116,6 +118,7 @@ public class Player extends JLabel implements Moveable {
 		playerWay = PlayerWay.DOWN;
 		
 		wallet = 0;
+		sellParsnip = true;
 	}
 
 	private void setInitLayout() {
@@ -428,6 +431,14 @@ public class Player extends JLabel implements Moveable {
 
 	public void setCreate(boolean create) {
 		this.create = create;
+	}
+	
+	public boolean isSellParsnip() {
+		return sellParsnip;
+	}
+	
+	public void setSellParsnip(boolean sellParsnip) {
+		this.sellParsnip = sellParsnip;
 	}
 	
 }

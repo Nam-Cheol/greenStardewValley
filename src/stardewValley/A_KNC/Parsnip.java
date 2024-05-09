@@ -43,7 +43,7 @@ public class Parsnip extends Vegetable{
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
-		price = (int)(Math.random()*500) + 1000;
+		price = (int)(Math.random()*1000) + 500;
 	}
 
 	@Override

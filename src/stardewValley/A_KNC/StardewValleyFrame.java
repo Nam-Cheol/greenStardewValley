@@ -137,6 +137,10 @@ public class StardewValleyFrame extends JFrame {
 						add(berry);
 						System.out.println(parsnip.getPrice());
 					}
+				case KeyEvent.VK_Q:
+					if(player.isSellParsnip()) {
+						System.out.println(store.getParsnipPrice());
+					}
 					break;
 				default:
 					break;

@@ -10,7 +10,7 @@ public class Store extends JLabel{
 	private int x;
 	private int y;
 	
-	private int parsnipPrice;
+	private int parsnipPrice = (int)(Math.random()*1000) + 500;;
 	private int carrotPrice;
 	private int berryPrice;
 	
@@ -18,11 +18,12 @@ public class Store extends JLabel{
 	private int carrotEach;
 	private int berryEach;
 	
-	private ImageIcon playerL;
+	private ImageIcon player;
 	
 	public Store(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
+		initThread();
 		this.mContext = mContext;
 	}
 	
@@ -31,18 +32,37 @@ public class Store extends JLabel{
 		x = 1000;
 		y = 200;
 		
-		playerL = new ImageIcon("img/seller.png");
+		player = new ImageIcon("img/seller.png");
 		
-		parsnipEach = 0;
-		carrotEach = 0;
-		berryEach = 0;
+		parsnipEach = (int)(Math.random()*1000) + 500;
+		carrotEach = (int)(Math.random()*1000) + 500;
+		berryEach = (int)(Math.random()*1000) + 500;
+		
+		
+		
 		
 	}
 	
 	private void setInitLayout() {
-		this.setIcon(playerL);
+		this.setIcon(player);
 		this.setLocation(x, y);
 		this.setSize(100, 140);
+	}
+	
+	private void initThread() {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				parsnipEach = (int)(Math.random()*1000) + 500;
+				carrotEach = (int)(Math.random()*1000) + 500;
+				berryEach = (int)(Math.random()*1000) + 500;
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+				}
+			}
+		}).start();
 	}
 
 	public StardewValleyFrame getmContext() {
