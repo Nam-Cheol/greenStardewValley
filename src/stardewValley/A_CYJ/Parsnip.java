@@ -14,6 +14,8 @@ public class Parsnip extends JLabel implements vegetable {
 	private int x;
 	private int y;
 	private int plantLocation = 130;
+	
+	public int parsnipEach;
 	// 성장
 	private boolean growing;
 	private ImageIcon growing1;
@@ -43,6 +45,7 @@ public class Parsnip extends JLabel implements vegetable {
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
 		waterGage = 2;
+		parsnipEach = 0;
 	}
 
 	@Override
@@ -85,7 +88,7 @@ public class Parsnip extends JLabel implements vegetable {
 							setIcon(growing4);
 
 							Thread.sleep(1000);
-							setIcon(lastGrowing);
+						  
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -93,6 +96,8 @@ public class Parsnip extends JLabel implements vegetable {
 				}
 			}
 		}).start();
+		parsnipEach++;
+		System.out.println("올라가니?" + parsnipEach);
 	}
 
 	// getter, setter

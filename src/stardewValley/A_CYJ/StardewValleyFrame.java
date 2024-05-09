@@ -70,6 +70,9 @@ public class StardewValleyFrame extends JFrame {
 					player.setDown(false);
 					player.setIcon(player.getPlayerDown());
 					break;
+				case KeyEvent.VK_Q:
+					player.setHarvesting(false);
+					player.setIcon(player.getPlayerUp());
 				default:
 					break;
 				}
@@ -114,7 +117,12 @@ public class StardewValleyFrame extends JFrame {
 				case KeyEvent.VK_NUMPAD3:
 					add(new Strawberry(player));
 					allStop();
+				case KeyEvent.VK_Q:
+					player.setIcon(player.getPlayerHarvesting());
+					player.each++;
 					break;
+				case KeyEvent.VK_A:
+					System.out.println(player.each);
 				default:
 					break;
 				}

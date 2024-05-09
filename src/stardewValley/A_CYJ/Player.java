@@ -35,6 +35,9 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
 
+	// 플레이어 수확 이미지
+	private ImageIcon playerHarvesting;
+
 	// 플레이어의 좌표
 	private int x;
 	private int y;
@@ -44,6 +47,7 @@ public class Player extends JLabel implements Moveable {
 	private boolean right;
 	private boolean up;
 	private boolean down;
+	private boolean harvesting;
 	PlayerWay playerWay;
 
 	// 벽에 충돌 상태
@@ -57,6 +61,8 @@ public class Player extends JLabel implements Moveable {
 
 	// 물
 	private int waterGage;
+	
+	public int each;
 
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext) {
@@ -88,10 +94,13 @@ public class Player extends JLabel implements Moveable {
 		playerDown1 = new ImageIcon("img/PlayerWalkDown.png");
 		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
 
+		playerHarvesting = new ImageIcon("img/PlayerHarvestin.png");
+
 		left = false;
 		right = false;
 		up = false;
 		down = false;
+		harvesting = false;
 
 		leftWallCrash = false;
 		rightWallCrash = false;
@@ -99,6 +108,8 @@ public class Player extends JLabel implements Moveable {
 		downWallCrash = false;
 
 		waterGage = 0;
+
+		each = 0;
 
 		playerWay = PlayerWay.DOWN;
 	}
@@ -390,6 +401,18 @@ public class Player extends JLabel implements Moveable {
 		return playerDown;
 	}
 
+	public ImageIcon getPlayerHarvesting() {
+		return playerHarvesting;
+	}
+
+	public void setHarvesting(boolean harvesting) {
+		this.harvesting = harvesting;
+	}
+
+	public void setCarrot(Carrot carrot) {
+		this.carrot = carrot;
+	}
+
 	// 씨앗 심기 일단 파스닙
 	public void plantParsnip() {
 //		if (greenArea == vegetabel) {
@@ -426,21 +449,14 @@ public class Player extends JLabel implements Moveable {
 
 	// 작물 수확하기
 	public void harvestingVege() {
-//		if (greenArea != lastGrow) {
-//			System.out.println("수확할 작물이 없습니다.");
-//		}
-//		// 만약 해당 영역(greeArea)가 작물의 최종단계(lastGrow))가 된다면
-//		else if (greenArea == lastGrow) {
-//			// lastGrow를 player에게 넣어라
-//			if (lastGrow == parsnip) {
-//				player.setParchinp(+1);
-//			} else if (lastGrow == strawberry) {
-//				player.setStrawberry(+1);
-//			} else if (lastGrow == Carrot) {
-//				player.setCarrot(+1);
-//
-//			}
-//		}
+		if (each != 0 ) {
+			System.out.println("수확할 작물이 없습니다.");
+		}
+		// 만약 해당 영역(greeArea)가 작물의 최종단계(lastGrow))가 된다면
+		else if (each == 1) {
+			// lastGrow를 player에게 넣어라
+		
+		}
 	}
 
 	// 수확작물 팔기
