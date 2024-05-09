@@ -8,7 +8,9 @@ public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
 
+	Carrot carrot;
 	Parsnip parsnip;
+	Strawberry strawberry;
 	StardewValleyFrame mContext;
 
 	// 플레이어의 이미지
@@ -53,6 +55,9 @@ public class Player extends JLabel implements Moveable {
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
 
+	// 물
+	private int waterGage;
+
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext) {
 		initData();
@@ -92,6 +97,8 @@ public class Player extends JLabel implements Moveable {
 		rightWallCrash = false;
 		upWallCrash = false;
 		downWallCrash = false;
+
+		waterGage = 0;
 
 		playerWay = PlayerWay.DOWN;
 	}
@@ -382,9 +389,68 @@ public class Player extends JLabel implements Moveable {
 	public ImageIcon getPlayerDown() {
 		return playerDown;
 	}
-	
-	public Parsnip plantParsnip() {
-		return parsnip = new Parsnip(this);
+
+	// 씨앗 심기 일단 파스닙
+	public void plantParsnip() {
+//		if (greenArea == vegetabel) {
+//			System.out.println("이미 농작물이 있습니다.");
+//			return;
+//		}
+		parsnip = new Parsnip(mContext);
+		mContext.add(parsnip);
+	}
+
+	// 기능 구현
+	// 물뿌리기
+	public void sprinkleWater() {
+		synchronized (this) {
+			if (waterGage == 0) {
+				System.out.println("물이 없습니다. 강에서 떠와주세요");
+			}
+			parsnip.setWater(1);
+			parsnip.sprinkling();
+			System.out.println("파스닙물 " + parsnip.getWater());
+		}
+	}
+
+	// 물 충전
+	public void fullWater() {
+		// 만약
+		if (waterGage == 4) {
+			System.out.println("물이 가득차 채울수 없습니다.");
+		} else if (waterGage <= 3) {
+			waterGage = 4;
+			System.out.println("물을 모두 담았습니다. ");
+		}
+	}
+
+	// 작물 수확하기
+	public void harvestingVege() {
+//		if (greenArea != lastGrow) {
+//			System.out.println("수확할 작물이 없습니다.");
+//		}
+//		// 만약 해당 영역(greeArea)가 작물의 최종단계(lastGrow))가 된다면
+//		else if (greenArea == lastGrow) {
+//			// lastGrow를 player에게 넣어라
+//			if (lastGrow == parsnip) {
+//				player.setParchinp(+1);
+//			} else if (lastGrow == strawberry) {
+//				player.setStrawberry(+1);
+//			} else if (lastGrow == Carrot) {
+//				player.setCarrot(+1);
+//
+//			}
+//		}
+	}
+
+	// 수확작물 팔기
+	public void sellVege() {
+		// 그럼 팔기는 tradingCenter에서 창고에 있는 수확값을 넘겨줘야한다.
+	}
+
+	// 창고에 저장하기
+	public void saveVege() {
+
 	}
 
 }

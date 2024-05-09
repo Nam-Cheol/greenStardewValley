@@ -2,6 +2,7 @@ package stardewValley.A_OHJ;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -11,7 +12,7 @@ import javax.swing.JLabel;
 // 배경 추가해야 됨.
 //추후 컴포넌트(야채)들도 추가해야 함.
 public class StardewValleyFrame extends JFrame {
-	
+
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
@@ -100,9 +101,12 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-//					Player.plantParsnip();
+					player.plantParsnip();
 					allStop();
-					add(new Parsnip(player));
+//					add(new Parsnip(player));
+					break;
+				case KeyEvent.VK_NUMPAD4:
+					player.sprinkleWater();
 					break;
 				case KeyEvent.VK_NUMPAD2:
 					add(new Carrot(player));
@@ -118,7 +122,14 @@ public class StardewValleyFrame extends JFrame {
 			}
 		});
 	}
+
 	
+	public Player getPlayer() {
+		return player;
+	}
+
+
+
 	public void allStop() {
 		player.setLeft(false);
 		player.setRight(false);

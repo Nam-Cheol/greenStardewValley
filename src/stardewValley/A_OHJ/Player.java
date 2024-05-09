@@ -382,9 +382,20 @@ public class Player extends JLabel implements Moveable {
 	public ImageIcon getPlayerDown() {
 		return playerDown;
 	}
-	
-	public Parsnip plantParsnip() {
-		return parsnip = new Parsnip(this);
+
+	// 씨앗 심기
+	public void plantParsnip() {
+		parsnip = new Parsnip(mContext);
+		mContext.add(parsnip);
+	}
+
+	// 물뿌리기
+	public void sprinkleWater() {
+		synchronized(this) {
+		parsnip.setWater(1);
+		parsnip.sprinkling();
+		System.out.println("파스닙물 " + parsnip.getWater());
+		}
 	}
 
 }

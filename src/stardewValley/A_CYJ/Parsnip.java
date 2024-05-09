@@ -8,6 +8,7 @@ public class Parsnip extends JLabel implements vegetable {
 
 	// 멤버 변수
 	private String name = "파스닙";
+	StardewValleyFrame mContext;
 	// 플레이어
 	private Player player;
 	private int x;
@@ -21,9 +22,12 @@ public class Parsnip extends JLabel implements vegetable {
 	private ImageIcon growing4;
 	private ImageIcon lastGrowing;
 
+	private int waterGage;
+
 	// 생성자
-	public Parsnip(Player player) {
-		this.player = player;
+	public Parsnip(StardewValleyFrame mContext) {
+		this.mContext = mContext;
+		this.player = mContext.getPlayer();
 		initData();
 		setInitLayout();
 		grow();
@@ -38,6 +42,7 @@ public class Parsnip extends JLabel implements vegetable {
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
+		waterGage = 2;
 	}
 
 	@Override
@@ -51,38 +56,43 @@ public class Parsnip extends JLabel implements vegetable {
 
 	@Override
 	public void grow() {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				for(int i = 0; i < 1; i++) {
-					try {
-						setIcon(growing1);
-						Thread.sleep(1000);
-						setIcon(growing2);
-						
-						Thread.sleep(1000);
-						setIcon(growing3);
-						
-						Thread.sleep(1000);
-						setIcon(growing4);
-						
-						Thread.sleep(1000);
-						setIcon(lastGrowing);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}).start();
+		setIcon(growing1);
 	}
 
 	@Override
 	public void harvest() {
+		setIcon(null);
 	}
 
 	@Override
 	public void sprinkling() {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				synchronized (mContext) {
+
+					for (int i = 0; i < 1; i++) {
+						try {
+							setIcon(growing1);
+							Thread.sleep(1000);
+							setIcon(growing2);
+
+							Thread.sleep(1000);
+							setIcon(growing3);
+
+							Thread.sleep(1000);
+							setIcon(growing4);
+
+							Thread.sleep(1000);
+							setIcon(lastGrowing);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}).start();
 	}
 
 	// getter, setter
@@ -100,6 +110,14 @@ public class Parsnip extends JLabel implements vegetable {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	public int getWater() {
+		return waterGage;
+	}
+
+	public void setWater(int watherGage) {
+		this.waterGage += watherGage;
 	}
 
 } // end of class
