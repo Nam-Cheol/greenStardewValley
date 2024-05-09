@@ -6,15 +6,15 @@ import javax.swing.JLabel;
 // TODO 각 야채의 특성 및 차이점 구현
 public class Parsnip extends JLabel implements vegetable {
 
-	StardewValleyFrame mContext;
 
 	// 멤버 변수
 	private String name = "파스닙";
+	StardewValleyFrame mContext;
 	// 플레이어
 	private Player player;
 	private int x;
 	private int y;
-	private int plantLocation = 130;
+	private int plantLocation = 170;
 	// 성장
 	private boolean growing;
 	private ImageIcon growing1;
@@ -29,15 +29,16 @@ public class Parsnip extends JLabel implements vegetable {
 	private boolean rightCreate;
 	private boolean upCreate;
 	private boolean downCreate;
+	
+	private boolean grow;
 
 	// 생성자
-	public Parsnip(Player player) {
-		this.player = player;
+	public Parsnip(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		grow();
+		this.mContext = mContext;
 	}
-	
 	
 	// 메소드
 	@Override
@@ -48,12 +49,15 @@ public class Parsnip extends JLabel implements vegetable {
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
-
-//		create = false;
-//		leftCreate = true;
-//		rightCreate = true;
-//		upCreate = true;
-//		downCreate = true;
+		
+		grow = false;
+		
+		create = false;
+		
+		leftCreate = false;
+		rightCreate = false;
+		upCreate = false;
+		downCreate = false;
 
 	}
 
@@ -62,36 +66,28 @@ public class Parsnip extends JLabel implements vegetable {
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 48);
-		if(leftCreate = true) {
-			setLocation(x, y + plantLocation);
-		} else if(rightCreate = true) {
-			setLocation(x, y + plantLocation);
-		} else if (upCreate = true) {
-			setLocation(x, y + plantLocation);
-		} else if (downCreate = true) {
-			setLocation(x, y + plantLocation);
-		}
+		setLocation(x, y + plantLocation);
 
 		setIcon(null);
 	}
 
 	@Override
 	public void grow() {
+		grow = true;
+		
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
-//				while(create) {
+				
+				while(create) {
 				setUpCreate(false);
 				setDownCreate(false);
 				setLeftCreate(false);
 				setRightCreate(false);
-//					if(upCreate && downCreate && leftCreate && rightCreate) {
-//						create = true;
-//					} else {
-//						break;
-//					}
-
+					if(downCreate) {
+						create = true;
+					} 
 				for (int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
@@ -110,7 +106,8 @@ public class Parsnip extends JLabel implements vegetable {
 						e.printStackTrace();
 					}
 				}
-//				}
+				grow = false;
+				}
 			}
 		}).start();
 	}
@@ -171,5 +168,22 @@ public class Parsnip extends JLabel implements vegetable {
 	public void setDownCreate(boolean downCreate) {
 		this.downCreate = downCreate;
 	}
+
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+
+	public boolean isGrow() {
+		return grow;
+	}
+
+	public void setGrow(boolean grow) {
+		this.grow = grow;
+	}
+	 
 
 } // end of class
