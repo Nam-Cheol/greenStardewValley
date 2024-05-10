@@ -11,20 +11,21 @@ import javax.swing.JLabel;
 // 배경 추가해야 됨.
 //추후 컴포넌트(야채)들도 추가해야 함.
 public class StardewValleyFrame extends JFrame {
-	
+
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
 	private Player player;
-	
+
 	private Vegetable[] vegetables;
-	
+
 	private Vegetable parsnip;
 	private Vegetable carrot;
 	private Vegetable berry;
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	int temp = 0;
 
 	public StardewValleyFrame() {
 		initData();
@@ -42,9 +43,9 @@ public class StardewValleyFrame extends JFrame {
 		keeper = new Keeper(mContext);
 		water = new Water(mContext);
 		player = new Player(mContext, store, keeper, water);
-		
+
 		vegetables = new Vegetable[3];
-		
+
 //		new Thread(store).start();
 	}
 
@@ -120,10 +121,10 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-					if(player.isCreate()) {
-						for(int i = 0; i < 3; i++) {
-							if(vegetables[i] ==null) {
-								vegetables[i] = player.createParsnip();;
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createParsnip();
 								player.setIcon(player.getPlayerWater());
 								add(vegetables[i]);
 								break;
@@ -132,23 +133,53 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD2:
-					if(player.isCreate()) {
+					if (player.isCreate()) {
 						carrot = player.createCarrot();
 						player.setIcon(player.getPlayerWater());
 						add(carrot);
 					}
 					break;
 				case KeyEvent.VK_NUMPAD3:
-					if(player.isCreate()) {
+					if (player.isCreate()) {
 						berry = player.createBerry();
 						player.setIcon(player.getPlayerWater());
 						add(berry);
 					}
 				case KeyEvent.VK_NUMPAD4:
-					vegetables[0].setIcon(null);
+					for (int i = temp; i < 3; i++) {
+						if (vegetables[temp] != null) {
+							if (vegetables[temp].isCanHarvest()) {
+								System.out.println("--> 파스닙 클래스 : 파스닙 수확한다.");
+								vegetables[temp].setCanHarvest(false);
+								vegetables[temp].setIcon(null);
+								vegetables[temp] = null;
+								System.out.println(temp);
+								temp++;
+								if(temp==3) {
+									temp=0;
+								}
+								System.out.println(temp);
+								System.out.println("동작됨");
+								break;
+							} else {
+								System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
+								break;
+							}
+						}
+						break;
+					}
+//					if (player.isCreate()) {
+//						if (vegetables[1] != null) {
+//							vegetables[1].setIcon(null);
+//						} else if (vegetables[2] != null) {
+//							vegetables[2].setIcon(null);
+//						} else {
+//							vegetables[3].setIcon(null);
+//						}
+//					}
 					break;
 				case KeyEvent.VK_Q:
-					if(player.isSellParsnip()) {
+					if (player.isSellParsnip()) {
 						System.out.println(store.getParsnipPrice());
 					}
 					break;
@@ -157,16 +188,16 @@ public class StardewValleyFrame extends JFrame {
 				}
 			}
 		});
-		
+
 	}
-	
+
 	public void allStop() {
 		player.setLeft(false);
 		player.setRight(false);
 		player.setUp(false);
 		player.setDown(false);
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}

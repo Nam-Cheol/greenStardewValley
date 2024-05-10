@@ -32,6 +32,8 @@ public class Vegetable extends JLabel implements IVegetable{
 	// 작물 가격
 	protected int price;
 	
+	
+	
 	@Override
 	public void initData() {
 	}
@@ -54,6 +56,14 @@ public class Vegetable extends JLabel implements IVegetable{
 
 	public int getPrice() {
 		return price;
+	}
+
+	public boolean isCanHarvest() {
+		return canHarvest;
+	}
+
+	public void setCanHarvest(boolean canHarvest) {
+		this.canHarvest = canHarvest;
 	}
 	
 }
