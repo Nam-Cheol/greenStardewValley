@@ -25,7 +25,8 @@ public class Parsnip extends JLabel implements vegetable {
 	private ImageIcon lastGrowing;
 
 	private int waterGage;
-
+	
+	
 	// 생성자
 	public Parsnip(StardewValleyFrame mContext) {
 		this.mContext = mContext;
@@ -84,8 +85,12 @@ public class Parsnip extends JLabel implements vegetable {
 							Thread.sleep(1000);
 							setIcon(growing3);
 
-							Thread.sleep(1000);
-							setIcon(growing4);
+							if(waterGage >= 1 && waterGage <= 3) {
+								Thread.sleep(1000);
+								setIcon(growing4);
+								parsnipEach++;
+								System.out.println(parsnipEach);
+							}
 
 							Thread.sleep(1000);
 						  
@@ -96,7 +101,6 @@ public class Parsnip extends JLabel implements vegetable {
 				}
 			}
 		}).start();
-		parsnipEach++;
 		System.out.println("올라가니?" + parsnipEach);
 	}
 
