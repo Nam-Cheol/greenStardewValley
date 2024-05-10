@@ -3,11 +3,6 @@ package stardewValley.A_PTH;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import stardewValley.A_PTH.Carrot;
-import stardewValley.A_PTH.Parsnip;
-import stardewValley.A_PTH.StardewValleyFrame;
-import stardewValley.A_PTH.Strawberry;
-
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
 public class Player extends JLabel implements Moveable {
@@ -17,7 +12,7 @@ public class Player extends JLabel implements Moveable {
 	Parsnip parsnip;
 	Carrot carrot;
 	Strawberry berry;
-	stardewValley.A_PTH.StardewValleyFrame mContext;
+	StardewValleyFrame mContext;
 
 	// 플레이어의 이미지
 
@@ -42,6 +37,8 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown2;
 	
 	private ImageIcon playerWater;
+	
+	// 도움말
 	
 	private Store store;
 	private Keeper keeper;

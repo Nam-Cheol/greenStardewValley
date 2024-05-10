@@ -23,7 +23,6 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
-	
 
 	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
 		this.player = player;
@@ -93,15 +92,15 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == FARM) {
 				stopRight();
-				
+
 				// 4. NPC
 			} else if (storeX < gap && storeY < gap) {
 				System.out.println("멈춰~~~~~~~!");
 //				stopMove();
-			} else if (keeperX < gap && storeY < gap) {
+			} else if (keeperX < gap && keeperY < gap) {
 				System.out.println("멈춰~~~~~~~!");
-				stopMove();
-			} else if (storeX < gap && storeY < gap) {
+//				stopMove();
+			} else if (waterX < gap && waterY < gap) {
 				System.out.println("멈춰~~~~~~~!");
 //				stopMove();
 			} else {
@@ -144,16 +143,16 @@ public class backgroundPlayerMapService implements Runnable {
 		player.setLeftWallCrash(false);
 		player.setRightWallCrash(false);
 	}
-	
+
 	public void stopMove() {
-		
-		if(player.isUp()) {
+
+		if (player.isUp()) {
 			player.setUp(false);
-		} else if(player.isDown()) {
+		} else if (player.isDown()) {
 			player.setDown(false);
-		} else if(player.isLeft()) {
+		} else if (player.isLeft()) {
 			player.setLeft(false);
-		} else if(player.isRight()) {
+		} else if (player.isRight()) {
 			player.setRight(false);
 		}
 	}

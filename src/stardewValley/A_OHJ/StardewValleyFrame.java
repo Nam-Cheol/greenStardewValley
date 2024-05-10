@@ -123,7 +123,7 @@ public class StardewValleyFrame extends JFrame {
 					if(player.isCreate()) {
 						for(int i = 0; i < 3; i++) {
 							if(vegetables[i] ==null) {
-								vegetables[i] = player.createParsnip();;
+//								vegetables[i] = player.createParsnip();;
 								player.setIcon(player.getPlayerWater());
 //								add(vegetables[i]);
 								break;
