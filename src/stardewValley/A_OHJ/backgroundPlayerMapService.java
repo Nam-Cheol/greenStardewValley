@@ -105,10 +105,13 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (waterX < gap && waterY < gap) {
 //				System.out.println("멈춰~~~~~~~!");
 				water.setIcon(water.getWaterOn());
+				// 시도
 				player.setScoopWater(true);
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);
+				// 시도
+				player.setScoopWater(false);
 				store.setIcon(store.getSeller());
 				keeper.setIcon(keeper.getKeeper());
 				water.setIcon(water.getWater());

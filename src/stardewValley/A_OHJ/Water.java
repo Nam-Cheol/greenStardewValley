@@ -46,7 +46,6 @@ public class Water extends JLabel {
 
 		// 우물에 물 전체 양
 		pondGage = 9999999999L;
-
 	}
 
 	private void setInitLayout() {
@@ -144,6 +143,12 @@ public class Water extends JLabel {
 
 	public void setPondGage(long pondGage) {
 		this.pondGage = pondGage;
+	}
+
+	public void minusPondGage() {
+		while (getPondGage() != 0) {
+			setPondGage(getPondGage() - 100);
+		}
 	}
 
 }
