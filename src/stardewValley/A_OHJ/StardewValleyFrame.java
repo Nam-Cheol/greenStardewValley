@@ -125,18 +125,10 @@ public class StardewValleyFrame extends JFrame {
 							if(vegetables[i] ==null) {
 								vegetables[i] = player.createParsnip();;
 								player.setIcon(player.getPlayerWater());
-//								add(vegetables[i]);
+								add(vegetables[i]);
 								break;
 							}
 						}
-					}
-					break;
-				case KeyEvent.VK_NUMPAD4:
-					
-					break;
-				case KeyEvent.VK_NUMPAD5:
-					if (player.isCreate()) {
-						player.harvest();
 					}
 					break;
 				case KeyEvent.VK_NUMPAD2:
@@ -152,6 +144,9 @@ public class StardewValleyFrame extends JFrame {
 						player.setIcon(player.getPlayerWater());
 						add(berry);
 					}
+				case KeyEvent.VK_NUMPAD4:
+					vegetables[0].setIcon(null);
+					break;
 				case KeyEvent.VK_Q:
 					if(player.isSellParsnip()) {
 						System.out.println(store.getParsnipPrice());

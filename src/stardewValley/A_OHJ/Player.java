@@ -304,13 +304,8 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	// 파스닙 심기
-//	public Vegetable createParsnip() {
-//		return new Parsnip(this);
-//	}
-
-	public void createParsnip() {
-		parsnip = new Parsnip(mContext);
-		mContext.add(parsnip);
+	public Vegetable createParsnip() {
+		return new Parsnip(this);
 	}
 
 	public Vegetable createCarrot() {
@@ -447,9 +442,9 @@ public class Player extends JLabel implements Moveable {
 		this.sellParsnip = sellParsnip;
 	}
 
-	// 수확
-	public void harvest() {
-		parsnip.harvest();
-	}
+//	// 수확
+//	public void harvest() {
+//		parsnip.harvest();
+//	}
 
 }

@@ -10,9 +10,8 @@ public class Parsnip extends Vegetable {
 	private String name = "파스닙";
 
 	// 생성자
-	public Parsnip(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-		this.player = mContext.getPlayer();
+	public Parsnip(Player player) {
+		this.player = player;
 		initData();
 		setInitLayout();
 		grow();
@@ -70,6 +69,16 @@ public class Parsnip extends Vegetable {
 		}).start();
 	}
 
+	@Override
+	public void harvest() {
+		if (canHarvest == true) {
+			System.out.println("--> 파스닙 클래스 : 파스닙 수확한다.");
+			setIcon(null);
+		} else {
+			System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
+		}
+	}
+	
 	@Override
 	public void sprinkling() {
 	}

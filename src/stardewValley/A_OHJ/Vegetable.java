@@ -46,12 +46,6 @@ public class Vegetable extends JLabel implements IVegetable{
 
 	@Override
 	public void harvest() {
-		if (canHarvest == true) {
-			System.out.println("--> 파스닙 클래스 : 파스닙 수확한다.");
-			setIcon(null);
-		} else {
-			System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
-		}
 	}
 
 	@Override
