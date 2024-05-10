@@ -19,6 +19,7 @@ public class Keeper extends JLabel{
 	private int berryEach;
 	
 	private ImageIcon keeper;
+	private ImageIcon keeperOn;
 	
 	public Keeper(StardewValleyFrame mContext) {
 		initData();
@@ -32,6 +33,7 @@ public class Keeper extends JLabel{
 		y = 200;
 		
 		keeper = new ImageIcon("img/keeper.png");
+		keeperOn = new ImageIcon("img/keeperOn.png");
 		
 		parsnipEach = 0;
 		carrotEach = 0;
@@ -42,7 +44,7 @@ public class Keeper extends JLabel{
 	private void setInitLayout() {
 		this.setIcon(keeper);
 		this.setLocation(x, y);
-		this.setSize(100, 140);
+		this.setSize(100, 180);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -117,6 +119,14 @@ public class Keeper extends JLabel{
 
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
+	}
+
+	public ImageIcon getKeeper() {
+		return keeper;
+	}
+
+	public ImageIcon getKeeperOn() {
+		return keeperOn;
 	}
 	
 	

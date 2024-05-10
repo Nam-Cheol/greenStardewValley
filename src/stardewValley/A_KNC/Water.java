@@ -18,7 +18,8 @@ public class Water extends JLabel{
 	private int carrotEach;
 	private int berryEach;
 	
-	private ImageIcon giveWater;
+	private ImageIcon water;
+	private ImageIcon waterOn;
 	
 	public Water(StardewValleyFrame mContext) {
 		initData();
@@ -31,7 +32,8 @@ public class Water extends JLabel{
 		x = 750;
 		y = 560;
 		
-		giveWater = new ImageIcon("img/waterMan.png");
+		water = new ImageIcon("img/waterMan.png");
+		waterOn = new ImageIcon("img/waterManOn.png");
 		
 		parsnipEach = 0;
 		carrotEach = 0;
@@ -40,9 +42,9 @@ public class Water extends JLabel{
 	}
 	
 	private void setInitLayout() {
-		this.setIcon(giveWater);
+		this.setIcon(water);
 		this.setLocation(x, y);
-		this.setSize(100, 140);
+		this.setSize(100, 180);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -117,6 +119,14 @@ public class Water extends JLabel{
 
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
+	}
+
+	public ImageIcon getWater() {
+		return water;
+	}
+
+	public ImageIcon getWaterOn() {
+		return waterOn;
 	}
 	
 	

@@ -3,7 +3,7 @@ package stardewValley.A_KNC;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Store extends JLabel{
+public class Store extends JLabel implements Runnable{
 
 	StardewValleyFrame mContext;
 	
@@ -18,7 +18,8 @@ public class Store extends JLabel{
 	private int carrotEach;
 	private int berryEach;
 	
-	private ImageIcon player;
+	private ImageIcon seller;
+	private ImageIcon sellerOn;
 	
 	public Store(StardewValleyFrame mContext) {
 		initData();
@@ -32,7 +33,9 @@ public class Store extends JLabel{
 		x = 1000;
 		y = 200;
 		
-		player = new ImageIcon("img/seller.png");
+		seller = new ImageIcon("img/seller.png");
+		sellerOn = new ImageIcon("img/sellerOn.png");
+		
 		
 		parsnipEach = (int)(Math.random()*1000) + 500;
 		carrotEach = (int)(Math.random()*1000) + 500;
@@ -44,9 +47,9 @@ public class Store extends JLabel{
 	}
 	
 	private void setInitLayout() {
-		this.setIcon(player);
+		this.setIcon(seller);
 		this.setLocation(x, y);
-		this.setSize(100, 140);
+		this.setSize(100, 180);
 	}
 	
 	private void initThread() {
@@ -137,6 +140,21 @@ public class Store extends JLabel{
 
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
+	}
+	
+	public ImageIcon getSeller() {
+		return seller;
+	}
+
+	public ImageIcon getSellerOn() {
+		return sellerOn;
+	}
+	
+	@Override
+	public void run() {
+		parsnipEach = (int)(Math.random()*1000) + 500;
+		carrotEach = (int)(Math.random()*1000) + 500;
+		berryEach = (int)(Math.random()*1000) + 500;
 	}
 	
 	

@@ -41,6 +41,7 @@ public class StardewValleyFrame extends JFrame {
 		keeper = new Keeper(mContext);
 		water = new Water(mContext);
 		player = new Player(mContext, store, keeper, water);
+		new Thread(store).start();
 	}
 
 	private void setInitLayout() {
