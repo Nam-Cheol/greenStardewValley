@@ -6,6 +6,7 @@ public class Vegetable extends JLabel implements IVegetable{
 
 	private int price;
 	
+	
 	@Override
 	public void initData() {
 	}

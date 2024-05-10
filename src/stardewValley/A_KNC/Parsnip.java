@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 // TODO 각 야채의 특성 및 차이점 구현
 public class Parsnip extends Vegetable{
 
+	Parsnip mCom = this;
+	
 	// 멤버 변수
 	private String name = "파스닙";
 	// 플레이어
@@ -24,6 +26,8 @@ public class Parsnip extends Vegetable{
 	private boolean create;
 	
 	private int price;
+	
+	public int growNum;
 	
 	// 생성자
 	public Parsnip(Player player) {
@@ -44,6 +48,7 @@ public class Parsnip extends Vegetable{
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
 		price = (int)(Math.random()*1000) + 500;
+		growNum = 0;
 	}
 
 	@Override
@@ -64,17 +69,22 @@ public class Parsnip extends Vegetable{
 				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
+						growNum++;
 						Thread.sleep(1000);
 						setIcon(growing2);
+						growNum++;
 						
 						Thread.sleep(1000);
 						setIcon(growing3);
+						growNum++;
 						
 						Thread.sleep(1000);
 						setIcon(growing4);
+						growNum++;
 						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
+						growNum = 0;
 						
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -120,6 +130,10 @@ public class Parsnip extends Vegetable{
 	@Override
 	public int getPrice() {
 		return price;
+	}
+
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
 	}
 	
 	
