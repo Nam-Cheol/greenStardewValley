@@ -8,7 +8,7 @@ public interface IVegetable {
 	void setInitLayout();
 
 	void grow();
-
+	
 	void harvest();
 
 	void sprinkling();

@@ -45,7 +45,6 @@ public class Carrot extends Vegetable {
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 64);
-		setLocation(x, y + plantLocation);
 		setIcon(null);
 	}
 

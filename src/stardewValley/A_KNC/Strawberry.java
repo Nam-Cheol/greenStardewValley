@@ -49,7 +49,6 @@ public class Strawberry extends Vegetable {
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 57);
-		setLocation(x, y + plantLocation);
 		setIcon(null);
 	}
 

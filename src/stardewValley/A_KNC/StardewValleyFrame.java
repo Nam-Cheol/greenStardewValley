@@ -24,6 +24,8 @@ public class StardewValleyFrame extends JFrame {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	
+	int temp = 0;
 
 	public StardewValleyFrame() {
 		initData();
@@ -159,14 +161,7 @@ public class StardewValleyFrame extends JFrame {
 					break;
 
 				case KeyEvent.VK_R:
-					for (int i = 0; i < 3; i++) {
-						if (vegetables[i] != null) {
-							vegetables[i].setIcon(null);
-							vegetables[i] = null;
-							System.out.println("동작됨");
-							break;
-						}
-					}
+					harvest();
 					break;
 				case KeyEvent.VK_Q:
 					if (player.isSellParsnip()) {
@@ -194,7 +189,30 @@ public class StardewValleyFrame extends JFrame {
 		vegetables[i].setLocation(190 + (temp*i), 690);
 	}
 	
-
+	public void harvest() {
+		for (int i = 0; i < temp+1; i++) {
+			if (vegetables[temp] != null) {
+				if (vegetables[temp].isCanHarvest()) {
+					System.out.println("--> " + vegetables[temp].name +  " 클래스 : 파스닙 수확한다.");
+					vegetables[temp].setCanHarvest(false);
+					vegetables[temp].setIcon(null);
+					vegetables[temp] = null;
+					System.out.println(temp);
+					temp++;
+					if(temp==3) {
+						temp=0;
+					}
+					System.out.println(temp);
+					System.out.println("동작됨");
+					break;
+				} else {
+					System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
+					break;
+				}
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}
