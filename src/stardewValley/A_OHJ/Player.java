@@ -1,5 +1,7 @@
 package stardewValley.A_OHJ;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -9,6 +11,8 @@ public class Player extends JLabel implements Moveable {
 	// TODO player 의 속성
 
 	Parsnip parsnip;
+	Carrot carrot;
+	Strawberry berry;
 	StardewValleyFrame mContext;
 
 	// 플레이어의 이미지
@@ -35,6 +39,10 @@ public class Player extends JLabel implements Moveable {
 
 	private ImageIcon playerWater;
 
+	private Store store;
+	private Keeper keeper;
+	private Water water;
+
 	// 플레이어의 좌표
 	private int x;
 	private int y;
@@ -59,12 +67,17 @@ public class Player extends JLabel implements Moveable {
 
 	private int wallet;
 
+	private boolean sellParsnip;
+
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
+		this.store = store;
+		this.keeper = keeper;
+		this.water = water;
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water)).start();
 	}
 
 	private void initData() {
@@ -105,6 +118,7 @@ public class Player extends JLabel implements Moveable {
 		playerWay = PlayerWay.DOWN;
 
 		wallet = 0;
+		sellParsnip = true;
 	}
 
 	private void setInitLayout() {
@@ -289,12 +303,22 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 
-//	public Parsnip createParsnip() {
-//		return parsnip;
+	// 파스닙 심기
+//	public Vegetable createParsnip() {
+//		return new Parsnip(this);
 //	}
+
 	public void createParsnip() {
 		parsnip = new Parsnip(mContext);
 		mContext.add(parsnip);
+	}
+
+	public Vegetable createCarrot() {
+		return new Carrot(this);
+	}
+
+	public Vegetable createBerry() {
+		return new Strawberry(this);
 	}
 
 	// getter, setter
@@ -415,9 +439,17 @@ public class Player extends JLabel implements Moveable {
 		this.create = create;
 	}
 
-	// 물 주기
-	public void sprinkling() {
-		parsnip.sprinkling();
+	public boolean isSellParsnip() {
+		return sellParsnip;
+	}
+
+	public void setSellParsnip(boolean sellParsnip) {
+		this.sellParsnip = sellParsnip;
+	}
+
+	// 수확
+	public void harvest() {
+		parsnip.harvest();
 	}
 
 }
