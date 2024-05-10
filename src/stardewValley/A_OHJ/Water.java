@@ -1,46 +1,54 @@
 package stardewValley.A_OHJ;
 
+import java.awt.Panel;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Water extends JLabel{
+public class Water extends JLabel {
 
 	StardewValleyFrame mContext;
-	
+
 	private int x;
 	private int y;
-	
+
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-	
+
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-	
+
 	private ImageIcon water;
 	private ImageIcon waterOn;
-	
+
+	// 우물에 물 전체 양
+	private long pondGage;
+
 	public Water(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-	
+
 	private void initData() {
-		
+
 		x = 750;
 		y = 560;
-		
+
 		water = new ImageIcon("img/waterMan.png");
 		waterOn = new ImageIcon("img/waterManOn.png");
-		
+
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
-		
+
+		// 우물에 물 전체 양
+		pondGage = 9999999999L;
+
 	}
-	
+
 	private void setInitLayout() {
 		this.setIcon(water);
 		this.setLocation(x, y);
@@ -52,7 +60,7 @@ public class Water extends JLabel{
 	}
 
 	// getter, setter
-	
+
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -128,7 +136,14 @@ public class Water extends JLabel{
 	public ImageIcon getWaterOn() {
 		return waterOn;
 	}
-	
-	
-	
+
+	// 시도
+	public long getPondGage() {
+		return pondGage;
+	}
+
+	public void setPondGage(long pondGage) {
+		this.pondGage = pondGage;
+	}
+
 }

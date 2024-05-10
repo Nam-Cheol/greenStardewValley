@@ -65,6 +65,11 @@ public class Player extends JLabel implements Moveable {
 
 	private boolean create;
 
+	// 우물에서 물 퍼낼 때
+	private boolean scoopWater;
+	private int sprinklingCanGage;
+	private final int MAX_CANGAGE = 10;
+
 	private int wallet;
 
 	private boolean sellParsnip;
@@ -109,6 +114,10 @@ public class Player extends JLabel implements Moveable {
 		down = false;
 
 		create = false;
+
+		// 우물에서 물 퍼낼 때
+		scoopWater = false;
+		sprinklingCanGage = 0;
 
 		leftWallCrash = false;
 		rightWallCrash = false;
@@ -442,9 +451,25 @@ public class Player extends JLabel implements Moveable {
 		this.sellParsnip = sellParsnip;
 	}
 
-	// 수확
-//	public void harvest() {
-//		parsnip.harvest();
-//	}
+	// 시도
+	public boolean isScoopWater() {
+		return scoopWater;
+	}
+
+	public void setScoopWater(boolean scoopWater) {
+		this.scoopWater = scoopWater;
+	}
+
+	public int getSprinklingCanGage() {
+		return sprinklingCanGage;
+	}
+
+	public void setSprinklingCanGage(int sprinklingCanGage) {
+		this.sprinklingCanGage = sprinklingCanGage;
+	}
+
+	public int getMAX_CANGAGE() {
+		return MAX_CANGAGE;
+	}
 
 }

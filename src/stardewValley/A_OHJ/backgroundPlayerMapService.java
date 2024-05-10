@@ -68,10 +68,10 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (down == BLOCK) {
 				stopDown();
 			} else if (left == BLOCK) {
+				System.out.println("나야 나");
 				stopLeft();
 			} else if (right == BLOCK) {
 				stopRight();
-
 				// 2. WATER
 			} else if (up == WATER) {
 				stopUp();
@@ -92,7 +92,7 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == FARM) {
 				stopRight();
-				
+
 				// 4. NPC
 			} else if (storeX < gap && storeY < gap) {
 //				System.out.println("멈춰~~~~~~~!");
@@ -105,6 +105,7 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (waterX < gap && waterY < gap) {
 //				System.out.println("멈춰~~~~~~~!");
 				water.setIcon(water.getWaterOn());
+				player.setScoopWater(true);
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);
@@ -113,7 +114,6 @@ public class backgroundPlayerMapService implements Runnable {
 				water.setIcon(water.getWater());
 			}
 
-			
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
@@ -125,23 +125,31 @@ public class backgroundPlayerMapService implements Runnable {
 	}
 
 	public void stopUp() {
-		player.setUpWallCrash(true);
-		player.setUp(false);
+		if (player.playerWay == PlayerWay.UP) {
+			player.setUpWallCrash(true);
+			player.setUp(false);
+		}
 	}
 
 	public void stopDown() {
-		player.setDownWallCrash(true);
-		player.setDown(false);
+		if (player.playerWay == PlayerWay.DOWN) {
+			player.setDownWallCrash(true);
+			player.setDown(false);
+		}
 	}
 
 	public void stopLeft() {
-		player.setLeftWallCrash(true);
-		player.setLeft(false);
+		if (player.playerWay == PlayerWay.LEFT) {
+			player.setLeftWallCrash(true);
+			player.setLeft(false);
+		}
 	}
 
 	public void stopRight() {
-		player.setRightWallCrash(true);
-		player.setRight(false);
+		if (player.playerWay == PlayerWay.RIGHT) {
+			player.setRightWallCrash(true);
+			player.setRight(false);
+		}
 	}
 
 	public void notWallCrash() {
@@ -150,16 +158,16 @@ public class backgroundPlayerMapService implements Runnable {
 		player.setLeftWallCrash(false);
 		player.setRightWallCrash(false);
 	}
-	
+
 	public void stopMove() {
-		
-		if(player.isUp()) {
+
+		if (player.isUp()) {
 			player.setUp(false);
-		} else if(player.isDown()) {
+		} else if (player.isDown()) {
 			player.setDown(false);
-		} else if(player.isLeft()) {
+		} else if (player.isLeft()) {
 			player.setLeft(false);
-		} else if(player.isRight()) {
+		} else if (player.isRight()) {
 			player.setRight(false);
 		}
 	}
