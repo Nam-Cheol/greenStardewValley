@@ -62,7 +62,8 @@ public class Player extends JLabel implements Moveable {
 	// 물
 	private int waterGage;
 	
-	public int each;
+	public int parsnipEach;
+	public int haveParsnip;
 
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext) {
@@ -109,7 +110,8 @@ public class Player extends JLabel implements Moveable {
 
 		waterGage = 0;
 
-		each = 0;
+		parsnipEach = 0;
+		haveParsnip = 0;
 
 		playerWay = PlayerWay.DOWN;
 	}
@@ -426,14 +428,13 @@ public class Player extends JLabel implements Moveable {
 	// 기능 구현
 	// 물뿌리기
 	public void sprinkleWater() {
-		synchronized (this) {
 			if (waterGage == 0) {
 				System.out.println("물이 없습니다. 강에서 떠와주세요");
 			}
 			parsnip.setWater(1);
 			parsnip.sprinkling();
 			System.out.println("파스닙물 " + parsnip.getWater());
-		}
+		
 	}
 
 	// 물 충전
@@ -449,12 +450,18 @@ public class Player extends JLabel implements Moveable {
 
 	// 작물 수확하기
 	public void harvestingVege() {
-		if (each != 0 ) {
+		System.out.println("수확키 작동");
+		
+		if (parsnip.parsnipEach != 1 ) {
 			System.out.println("수확할 작물이 없습니다.");
 		}
 		// 만약 해당 영역(greeArea)가 작물의 최종단계(lastGrow))가 된다면
-		else if (each == 1) {
-			// lastGrow를 player에게 넣어라
+		else if (parsnip.parsnipEach == 1) {
+			parsnip.parsnipEach = 0;
+			haveParsnip++;
+			parsnip.setIcon(null);
+			System.out.println(haveParsnip);
+			// lastGrow를 plaayer에게 넣어라
 		
 		}
 	}

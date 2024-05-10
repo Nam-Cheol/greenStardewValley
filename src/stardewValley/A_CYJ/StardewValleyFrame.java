@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import stardewValley.A_KNC.Vegetable;
+
 //TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
 // 배경 추가해야 됨.
 //추후 컴포넌트(야채)들도 추가해야 함.
@@ -16,6 +18,9 @@ public class StardewValleyFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
+	private Parsnip parsnip;
+
+	private Vegetable[] vegetables;
 
 	public StardewValleyFrame() {
 		initData();
@@ -30,6 +35,8 @@ public class StardewValleyFrame extends JFrame {
 		setSize(1930, 980);
 
 		player = new Player(this);
+
+		vegetables = new Vegetable[3];
 	}
 
 	private void setInitLayout() {
@@ -103,12 +110,15 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-					player.plantParsnip();
-					allStop();
-//					add(new Parsnip(player));
-					break;
-				case KeyEvent.VK_NUMPAD4:
-					player.sprinkleWater();
+//					if (player.plantParsnip()) {
+//						for (int i = 0; i < 3; i++) {
+//							if (vegetables[i] == null) {
+//								vegetables[i] = parsnip.sprinkling();
+//								add(vegetables[i]);
+//								break;
+//							}
+//						}
+//					}
 					break;
 				case KeyEvent.VK_NUMPAD2:
 					add(new Carrot(player));
@@ -117,12 +127,15 @@ public class StardewValleyFrame extends JFrame {
 				case KeyEvent.VK_NUMPAD3:
 					add(new Strawberry(player));
 					allStop();
+				case KeyEvent.VK_NUMPAD4:
+					player.sprinkleWater();
+					break;
 				case KeyEvent.VK_Q:
 					player.setIcon(player.getPlayerHarvesting());
-					player.each++;
+					player.harvestingVege();
 					break;
 				case KeyEvent.VK_A:
-					System.out.println(player.each);
+//					System.out.println(player.each);
 				default:
 					break;
 				}

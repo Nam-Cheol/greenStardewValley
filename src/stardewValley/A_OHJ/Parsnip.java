@@ -8,11 +8,11 @@ public class Parsnip extends Vegetable {
 
 	// 멤버 변수
 	private String name = "파스닙";
+	private int growSpeed = 5000; // thread.sleep 속도
 
 	// 생성자
-	public Parsnip(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-		this.player = mContext.getPlayer();
+	public Parsnip(Player player) {
+		this.player = player;
 		initData();
 		setInitLayout();
 		grow();
@@ -49,16 +49,17 @@ public class Parsnip extends Vegetable {
 				for (int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
-						Thread.sleep(1000);
+
+						Thread.sleep(growSpeed);
 						setIcon(growing2);
 
-						Thread.sleep(1000);
+						Thread.sleep(growSpeed);
 						setIcon(growing3);
 
-						Thread.sleep(1000);
+						Thread.sleep(growSpeed);
 						setIcon(growing4);
 
-						Thread.sleep(1000);
+						Thread.sleep(growSpeed);
 						setIcon(lastGrowing);
 
 						canHarvest = true;
@@ -68,10 +69,14 @@ public class Parsnip extends Vegetable {
 				}
 			}
 		}).start();
+		if (canHarvest == true) {
+			Thread.interrupted();
+		}
 	}
 
 	@Override
 	public void sprinkling() {
+
 	}
 
 	// getter, setter

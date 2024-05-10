@@ -11,20 +11,21 @@ import javax.swing.JLabel;
 // 배경 추가해야 됨.
 //추후 컴포넌트(야채)들도 추가해야 함.
 public class StardewValleyFrame extends JFrame {
-	
+
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
 	private Player player;
-	
+
 	private Vegetable[] vegetables;
-	
+
 	private Vegetable parsnip;
 	private Vegetable carrot;
 	private Vegetable berry;
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	int temp = 0;
 
 	public StardewValleyFrame() {
 		initData();
@@ -42,9 +43,9 @@ public class StardewValleyFrame extends JFrame {
 		keeper = new Keeper(mContext);
 		water = new Water(mContext);
 		player = new Player(mContext, store, keeper, water);
-		
+
 		vegetables = new Vegetable[3];
-		
+
 //		new Thread(store).start();
 	}
 
@@ -119,59 +120,148 @@ public class StardewValleyFrame extends JFrame {
 						player.down();
 					}
 					break;
-				case KeyEvent.VK_NUMPAD1:
-					if(player.isCreate()) {
-						for(int i = 0; i < 3; i++) {
-							if(vegetables[i] ==null) {
-//								vegetables[i] = player.createParsnip();;
-								player.setIcon(player.getPlayerWater());
-//								add(vegetables[i]);
+
+				case KeyEvent.VK_Q:
+					// 파스닙 심기
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							System.out.println("Q키 : 파스닙 심기");
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createParsnip();
+//								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
 								break;
 							}
 						}
 					}
 					break;
-				case KeyEvent.VK_NUMPAD4:
-					
-					break;
-				case KeyEvent.VK_NUMPAD5:
+				case KeyEvent.VK_W:
+					// 당근 심기
 					if (player.isCreate()) {
-						player.harvest();
+						for (int i = 0; i < 3; i++) {
+							System.out.println("W키 : 당근 심기");
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createCarrot();
+//								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
 					}
 					break;
-				case KeyEvent.VK_NUMPAD2:
-					if(player.isCreate()) {
-						carrot = player.createCarrot();
-						player.setIcon(player.getPlayerWater());
-						add(carrot);
+				case KeyEvent.VK_E:
+					// 딸기 심기
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							System.out.println("E키 : 딸기 심기");
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createBerry();
+//								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
+					}
+				case KeyEvent.VK_R:
+					// 수확하기
+					if (player.isCreate()) {
+						harvest();
+						break;
 					}
 					break;
-				case KeyEvent.VK_NUMPAD3:
-					if(player.isCreate()) {
-						berry = player.createBerry();
-						player.setIcon(player.getPlayerWater());
-						add(berry);
+				case KeyEvent.VK_SPACE:
+					// 물 주기
+					if (player.isCreate()) {
+						if(0 < player.getSprinklingCanGage()) {
+							player.setIcon(player.getPlayerWater());
+							player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
+							System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
+						}else {
+							System.out.println("연못에 가서 물을 채우세요.");
+						}
 					}
-				case KeyEvent.VK_Q:
-					if(player.isSellParsnip()) {
+					break;
+
+				case KeyEvent.VK_F:
+					// 상점에 팔기
+					if (player.isSellParsnip()) {
 						System.out.println(store.getParsnipPrice());
 					}
+					break;
+
+				case KeyEvent.VK_A:
+					water.minusPondGage();
+					// 연못에서 물 채우기
+					if (player.isScoopWater() == true) {
+						player.setIcon(player.getPlayerWater());
+						System.out.println("채우기 전" + player.getSprinklingCanGage());
+						System.out.println("연못 전 : " + water.getPondGage());
+						if (player.getSprinklingCanGage() < player.getMAX_CANGAGE()) {
+							player.setSprinklingCanGage(10);
+							water.setPondGage(water.getPondGage() - 10);
+							System.out.println("채운 후" + player.getSprinklingCanGage());
+							System.out.println("연못 후 : " + water.getPondGage());
+						} else {
+							System.out.println("물뿌리개가 이미 가득 찼어요.");
+						}
+					}
+
+					break;
+
+				case KeyEvent.VK_D:
+					// 창고에 저장
+					System.out.println("동작중");
+					break;
+				case KeyEvent.VK_F1:
+					// 도움말, 게임 설명
+					System.out.println("동작중");
 					break;
 				default:
 					break;
 				}
 			}
 		});
-		
+
 	}
-	
+
 	public void allStop() {
 		player.setLeft(false);
 		player.setRight(false);
 		player.setUp(false);
 		player.setDown(false);
 	}
-	
+
+	public void VLocation(int i) {
+		int temp = 60;
+		vegetables[i].setLocation(190 + (temp * i), 690);
+	}
+
+	public void harvest() {
+		for (int i = 0; i < temp + 1; i++) {
+			if (vegetables[temp] != null) {
+				if (vegetables[temp].isCanHarvest()) {
+					System.out.println(vegetables[temp].name + "을 수확했다.");
+					vegetables[temp].setCanHarvest(false);
+					vegetables[temp].setIcon(null);
+					vegetables[temp] = null;
+					System.out.println(temp);
+					temp++;
+					if (temp == 3) {
+						temp = 0;
+					}
+					System.out.println(temp);
+					break;
+				} else {
+					System.out.println(vegetables[temp].name + "은 지금은 자라는 중이다.");
+					break;
+				}
+			}
+		}
+	}
+
 	public Player getPlayer() {
 		return player;
 	}

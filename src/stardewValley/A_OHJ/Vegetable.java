@@ -3,7 +3,7 @@ package stardewValley.A_OHJ;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Vegetable extends JLabel implements IVegetable{
+public class Vegetable extends JLabel implements IVegetable {
 
 	// 멤버 변수
 	protected String name;
@@ -27,11 +27,12 @@ public class Vegetable extends JLabel implements IVegetable{
 	protected boolean vegeGetWater;
 	// 수확
 	protected boolean canHarvest;
+	int temp = 0;
 	// 밭에 접근
 	protected boolean create;
 	// 작물 가격
 	protected int price;
-	
+
 	@Override
 	public void initData() {
 	}
@@ -46,20 +47,35 @@ public class Vegetable extends JLabel implements IVegetable{
 
 	@Override
 	public void harvest() {
-		if (canHarvest == true) {
-			System.out.println("--> 파스닙 클래스 : 파스닙 수확한다.");
-			setIcon(null);
-		} else {
-			System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
-		}
 	}
 
 	@Override
 	public void sprinkling() {
 	}
 
+	// getter, setter
 	public int getPrice() {
 		return price;
 	}
+
+	public int getMaxWaterGage() {
+		return MAX_WATERGAGE;
+	}
 	
+	public int getWaterGage() {
+		return waterGage;
+	}
+
+	public void setWaterGage(int waterGage) {
+		this.waterGage = waterGage;
+	}
+
+	public boolean isCanHarvest() {
+		return canHarvest;
+	}
+
+	public void setCanHarvest(boolean canHarvest) {
+		this.canHarvest = canHarvest;
+	}
+
 }

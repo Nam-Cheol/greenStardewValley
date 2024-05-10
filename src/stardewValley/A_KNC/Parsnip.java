@@ -8,22 +8,6 @@ public class Parsnip extends Vegetable{
 
 	// 멤버 변수
 	private String name = "파스닙";
-	// 플레이어
-	private Player player;
-	private int x;
-	private int y;
-	private int plantLocation = 130;
-	// 성장
-	private boolean growing;
-	private ImageIcon growing1;
-	private ImageIcon growing2;
-	private ImageIcon growing3;
-	private ImageIcon growing4;
-	private ImageIcon lastGrowing;
-
-	private boolean create;
-	
-	private int price;
 	
 	// 생성자
 	public Parsnip(Player player) {
@@ -51,7 +35,6 @@ public class Parsnip extends Vegetable{
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 48);
-		setLocation(x, y + plantLocation);
 		setIcon(null);
 	}
 
@@ -76,6 +59,7 @@ public class Parsnip extends Vegetable{
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
 						
+						canHarvest = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -120,6 +104,10 @@ public class Parsnip extends Vegetable{
 	@Override
 	public int getPrice() {
 		return price;
+	}
+
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
 	}
 	
 	
