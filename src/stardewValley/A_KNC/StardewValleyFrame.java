@@ -18,6 +18,9 @@ public class StardewValleyFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
+	
+	private Vegetable[] vegetables;
+	
 	private Vegetable parsnip;
 	private Vegetable carrot;
 	private Vegetable berry;
@@ -41,7 +44,10 @@ public class StardewValleyFrame extends JFrame {
 		keeper = new Keeper(mContext);
 		water = new Water(mContext);
 		player = new Player(mContext, store, keeper, water);
-		new Thread(store).start();
+		
+		vegetables = new Vegetable[3];
+		
+//		new Thread(store).start();
 	}
 
 	private void setInitLayout() {
@@ -117,10 +123,14 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_NUMPAD1:
 					if(player.isCreate()) {
-						parsnip = player.createParsnip();
-						player.setIcon(player.getPlayerWater());
-						add(parsnip);
-						System.out.println(parsnip.getPrice());
+						for(int i = 0; i < 3; i++) {
+							if(vegetables[i] ==null) {
+								vegetables[i] = player.createParsnip();
+								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								break;
+							}
+						}
 					}
 					break;
 				case KeyEvent.VK_NUMPAD2:
@@ -128,7 +138,6 @@ public class StardewValleyFrame extends JFrame {
 						carrot = player.createCarrot();
 						player.setIcon(player.getPlayerWater());
 						add(carrot);
-						System.out.println(parsnip.getPrice());
 					}
 					break;
 				case KeyEvent.VK_NUMPAD3:
@@ -136,7 +145,6 @@ public class StardewValleyFrame extends JFrame {
 						berry = player.createBerry();
 						player.setIcon(player.getPlayerWater());
 						add(berry);
-						System.out.println(parsnip.getPrice());
 					}
 				case KeyEvent.VK_Q:
 					if(player.isSellParsnip()) {
