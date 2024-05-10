@@ -1,16 +1,19 @@
 package stardewValley.A_CYJ;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
 public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
 
-	Carrot carrot;
 	Parsnip parsnip;
-	Strawberry strawberry;
+	Carrot carrot;
+	Strawberry berry;
 	StardewValleyFrame mContext;
 
 	// 플레이어의 이미지
@@ -34,9 +37,12 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown; // -> 디폴트
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
-
-	// 플레이어 수확 이미지
-	private ImageIcon playerHarvesting;
+	
+	private ImageIcon playerWater;
+	
+	private Store store;
+	private Keeper keeper;
+	private Water water;
 
 	// 플레이어의 좌표
 	private int x;
@@ -47,7 +53,6 @@ public class Player extends JLabel implements Moveable {
 	private boolean right;
 	private boolean up;
 	private boolean down;
-	private boolean harvesting;
 	PlayerWay playerWay;
 
 	// 벽에 충돌 상태
@@ -58,21 +63,29 @@ public class Player extends JLabel implements Moveable {
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
-
-	// 물
-	private int waterGage;
 	
-	public int parsnipEach;
-	public int haveParsnip;
-
+	private boolean create;
+	
+	private int wallet;
+	
+	private boolean sellParsnip;
+	
+	private int haveParsnip;
+	private int haveCarrot;
+	private int haveBerry;
+	
+	
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
+		this.store = store;
+		this.keeper = keeper;
+		this.water = water;
 		initData();
 		setInitLayout();
-		initThread();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this)).start();
+		new Thread(new backgroundPlayerMapService(this, store , keeper, water)).start();
 	}
+
 
 	private void initData() {
 
@@ -95,34 +108,34 @@ public class Player extends JLabel implements Moveable {
 		playerDown1 = new ImageIcon("img/PlayerWalkDown.png");
 		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
 
-		playerHarvesting = new ImageIcon("img/PlayerHarvestin.png");
-
+		playerWater = new ImageIcon("img/PlayerWater.png");
+		
 		left = false;
 		right = false;
 		up = false;
 		down = false;
-		harvesting = false;
 
+		create = false;
+		
 		leftWallCrash = false;
 		rightWallCrash = false;
 		upWallCrash = false;
 		downWallCrash = false;
 
-		waterGage = 0;
-
-		parsnipEach = 0;
-		haveParsnip = 0;
-
 		playerWay = PlayerWay.DOWN;
+		
+		wallet = 0;
+		sellParsnip = true;
+		
+		haveParsnip = 0;
+		haveCarrot = 0;
+		haveBerry = 0;
 	}
 
 	private void setInitLayout() {
 		this.setIcon(playerDown);
 		this.setLocation(x, y);
 		this.setSize(100, 120);
-	}
-
-	private void initThread() {
 
 	}
 
@@ -300,6 +313,18 @@ public class Player extends JLabel implements Moveable {
 			e.printStackTrace();
 		}
 	}
+	
+	public Vegetable createParsnip() {
+		return new Parsnip(this);
+	}
+	
+	public Vegetable createCarrot() {
+		return new Carrot(this);
+	}
+	
+	public Vegetable createBerry() {
+		return new Strawberry(this);
+	}
 
 	// getter, setter
 
@@ -402,78 +427,61 @@ public class Player extends JLabel implements Moveable {
 	public ImageIcon getPlayerDown() {
 		return playerDown;
 	}
-
-	public ImageIcon getPlayerHarvesting() {
-		return playerHarvesting;
+	
+	public ImageIcon getPlayerWater() {
+		return playerWater;
 	}
 
-	public void setHarvesting(boolean harvesting) {
-		this.harvesting = harvesting;
+	public Parsnip plantParsnip() {
+		return parsnip = new Parsnip(this);
 	}
 
-	public void setCarrot(Carrot carrot) {
-		this.carrot = carrot;
+	public boolean isCreate() {
+		return create;
 	}
 
-	// 씨앗 심기 일단 파스닙
-	public void plantParsnip() {
-//		if (greenArea == vegetabel) {
-//			System.out.println("이미 농작물이 있습니다.");
-//			return;
-//		}
-		parsnip = new Parsnip(mContext);
-		mContext.add(parsnip);
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+	
+	public boolean isSellParsnip() {
+		return sellParsnip;
+	}
+	
+	public void setSellParsnip(boolean sellParsnip) {
+		this.sellParsnip = sellParsnip;
 	}
 
-	// 기능 구현
-	// 물뿌리기
-	public void sprinkleWater() {
-			if (waterGage == 0) {
-				System.out.println("물이 없습니다. 강에서 떠와주세요");
-			}
-			parsnip.setWater(1);
-			parsnip.sprinkling();
-			System.out.println("파스닙물 " + parsnip.getWater());
-		
+
+	public int getHaveParsnip() {
+		return haveParsnip;
 	}
 
-	// 물 충전
-	public void fullWater() {
-		// 만약
-		if (waterGage == 4) {
-			System.out.println("물이 가득차 채울수 없습니다.");
-		} else if (waterGage <= 3) {
-			waterGage = 4;
-			System.out.println("물을 모두 담았습니다. ");
-		}
+
+	public void setHaveParsnip(int haveParsnip) {
+		this.haveParsnip = haveParsnip;
 	}
 
-	// 작물 수확하기
-	public void harvestingVege() {
-		System.out.println("수확키 작동");
-		
-		if (parsnip.parsnipEach != 1 ) {
-			System.out.println("수확할 작물이 없습니다.");
-		}
-		// 만약 해당 영역(greeArea)가 작물의 최종단계(lastGrow))가 된다면
-		else if (parsnip.parsnipEach == 1) {
-			parsnip.parsnipEach = 0;
-			haveParsnip++;
-			parsnip.setIcon(null);
-			System.out.println(haveParsnip);
-			// lastGrow를 plaayer에게 넣어라
-		
-		}
+
+	public int getHaveCarrot() {
+		return haveCarrot;
 	}
 
-	// 수확작물 팔기
-	public void sellVege() {
-		// 그럼 팔기는 tradingCenter에서 창고에 있는 수확값을 넘겨줘야한다.
+
+	public void setHaveCarrot(int haveCarrot) {
+		this.haveCarrot = haveCarrot;
 	}
 
-	// 창고에 저장하기
-	public void saveVege() {
 
+	public int getHaveBerry() {
+		return haveBerry;
 	}
 
+
+	public void setHaveBerry(int haveBerry) {
+		this.haveBerry = haveBerry;
+	}
+	
+	
+	
 }

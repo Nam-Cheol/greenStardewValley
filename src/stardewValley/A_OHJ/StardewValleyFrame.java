@@ -120,60 +120,104 @@ public class StardewValleyFrame extends JFrame {
 						player.down();
 					}
 					break;
-				case KeyEvent.VK_NUMPAD1:
+
+				case KeyEvent.VK_Q:
+					// 파스닙 심기
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
+							System.out.println("Q키 : 파스닙 심기");
 							if (vegetables[i] == null) {
 								vegetables[i] = player.createParsnip();
-								player.setIcon(player.getPlayerWater());
+//								player.setIcon(player.getPlayerWater());
 								add(vegetables[i]);
+								VLocation(i);
 								break;
 							}
 						}
 					}
 					break;
-				case KeyEvent.VK_NUMPAD2:
+				case KeyEvent.VK_W:
+					// 당근 심기
 					if (player.isCreate()) {
-						carrot = player.createCarrot();
-						player.setIcon(player.getPlayerWater());
-						add(carrot);
-					}
-					break;
-				case KeyEvent.VK_NUMPAD3:
-					if (player.isCreate()) {
-						berry = player.createBerry();
-						player.setIcon(player.getPlayerWater());
-						add(berry);
-					}
-				case KeyEvent.VK_NUMPAD4:
-					for (int i = temp; i < 3; i++) {
-						if (vegetables[temp] != null) {
-							if (vegetables[temp].isCanHarvest()) {
-								System.out.println("--> 파스닙 클래스 : 파스닙 수확한다.");
-								vegetables[temp].setCanHarvest(false);
-								vegetables[temp].setIcon(null);
-								vegetables[temp] = null;
-								System.out.println(temp);
-								temp++;
-								if (temp == 3) {
-									temp = 0;
-								}
-								System.out.println(temp);
-								System.out.println("동작됨");
-								break;
-							} else {
-								System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
+						for (int i = 0; i < 3; i++) {
+							System.out.println("W키 : 당근 심기");
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createCarrot();
+//								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
 								break;
 							}
 						}
+					}
+					break;
+				case KeyEvent.VK_E:
+					// 딸기 심기
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							System.out.println("E키 : 딸기 심기");
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createBerry();
+//								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
+					}
+				case KeyEvent.VK_R:
+					// 수확하기
+					if (player.isCreate()) {
+						harvest();
 						break;
 					}
-
 					break;
-				case KeyEvent.VK_Q:
+				case KeyEvent.VK_SPACE:
+					// 물 주기
+					if (player.isCreate()) {
+						if(0 < player.getSprinklingCanGage()) {
+							player.setIcon(player.getPlayerWater());
+							player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
+							System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
+						}else {
+							System.out.println("연못에 가서 물을 채우세요.");
+						}
+					}
+					break;
+
+				case KeyEvent.VK_F:
+					// 상점에 팔기
 					if (player.isSellParsnip()) {
 						System.out.println(store.getParsnipPrice());
 					}
+					break;
+
+				case KeyEvent.VK_A:
+					water.minusPondGage();
+					// 연못에서 물 채우기
+					if (player.isScoopWater() == true) {
+						player.setIcon(player.getPlayerWater());
+						System.out.println("채우기 전" + player.getSprinklingCanGage());
+						System.out.println("연못 전 : " + water.getPondGage());
+						if (player.getSprinklingCanGage() < player.getMAX_CANGAGE()) {
+							player.setSprinklingCanGage(10);
+							water.setPondGage(water.getPondGage() - 10);
+							System.out.println("채운 후" + player.getSprinklingCanGage());
+							System.out.println("연못 후 : " + water.getPondGage());
+						} else {
+							System.out.println("물뿌리개가 이미 가득 찼어요.");
+						}
+					}
+
+					break;
+
+				case KeyEvent.VK_D:
+					// 창고에 저장
+					System.out.println("동작중");
+					break;
+				case KeyEvent.VK_F1:
+					// 도움말, 게임 설명
+					System.out.println("동작중");
 					break;
 				default:
 					break;
@@ -188,6 +232,34 @@ public class StardewValleyFrame extends JFrame {
 		player.setRight(false);
 		player.setUp(false);
 		player.setDown(false);
+	}
+
+	public void VLocation(int i) {
+		int temp = 60;
+		vegetables[i].setLocation(190 + (temp * i), 690);
+	}
+
+	public void harvest() {
+		for (int i = 0; i < temp + 1; i++) {
+			if (vegetables[temp] != null) {
+				if (vegetables[temp].isCanHarvest()) {
+					System.out.println(vegetables[temp].name + "을 수확했다.");
+					vegetables[temp].setCanHarvest(false);
+					vegetables[temp].setIcon(null);
+					vegetables[temp] = null;
+					System.out.println(temp);
+					temp++;
+					if (temp == 3) {
+						temp = 0;
+					}
+					System.out.println(temp);
+					break;
+				} else {
+					System.out.println(vegetables[temp].name + "은 지금은 자라는 중이다.");
+					break;
+				}
+			}
+		}
 	}
 
 	public Player getPlayer() {

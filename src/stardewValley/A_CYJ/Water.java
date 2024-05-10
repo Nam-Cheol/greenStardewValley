@@ -1,49 +1,50 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Keeper extends JLabel {
+public class Water extends JLabel{
 
 	StardewValleyFrame mContext;
-
+	
 	private int x;
 	private int y;
-
+	
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-
+	
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-
-	private ImageIcon keeper;
-	private ImageIcon keeperOn;
-
-	public Keeper(StardewValleyFrame mContext) {
+	
+	private ImageIcon water;
+	private ImageIcon waterOn;
+	
+	public Water(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-
+	
 	private void initData() {
-
-		x = 200;
-		y = 200;
-
-		keeper = new ImageIcon("img/keeper.png");
-
+		
+		x = 750;
+		y = 560;
+		
+		water = new ImageIcon("img/waterMan.png");
+		waterOn = new ImageIcon("img/waterManOn.png");
+		
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
-
+		
 	}
-
+	
 	private void setInitLayout() {
-		this.setIcon(keeper);
+		this.setIcon(water);
 		this.setLocation(x, y);
-		this.setSize(100, 140);
+		this.setSize(100, 180);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -51,7 +52,7 @@ public class Keeper extends JLabel {
 	}
 
 	// getter, setter
-
+	
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -120,20 +121,14 @@ public class Keeper extends JLabel {
 		this.berryEach = berryEach;
 	}
 
-	public ImageIcon getKeeper() {
-		return keeper;
+	public ImageIcon getWater() {
+		return water;
 	}
 
-	public void setKeeper(ImageIcon keeper) {
-		this.keeper = keeper;
+	public ImageIcon getWaterOn() {
+		return waterOn;
 	}
-
-	public ImageIcon getKeeperOn() {
-		return keeperOn;
-	}
-
-	public void setKeeperOn(ImageIcon keeperOn) {
-		this.keeperOn = keeperOn;
-	}
-
+	
+	
+	
 }

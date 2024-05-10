@@ -3,42 +3,42 @@ package stardewValley.A_PTH;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Store extends JLabel{
+public class Store extends JLabel {
 
 	StardewValleyFrame mContext;
-	
+
 	private int x;
 	private int y;
-	
+
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-	
+
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-	
+
 	private ImageIcon playerL;
-	
+
 	public Store(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-	
+
 	private void initData() {
-		
+
 		x = 1000;
 		y = 200;
-		
+
 		playerL = new ImageIcon("img/seller.png");
-		
+
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
-		
+
 	}
-	
+
 	private void setInitLayout() {
 		this.setIcon(playerL);
 		this.setLocation(x, y);
@@ -50,7 +50,7 @@ public class Store extends JLabel{
 	}
 
 	// getter, setter
-	
+
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -118,7 +118,5 @@ public class Store extends JLabel{
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
 	}
-	
-	
-	
+
 }

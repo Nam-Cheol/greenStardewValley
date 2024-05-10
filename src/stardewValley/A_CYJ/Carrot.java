@@ -4,21 +4,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Carrot extends JLabel implements vegetable {
+public class Carrot extends Vegetable {
 
 	// 멤버 변수
 	private String name = "당근";
-	// 플레이어
-	private Player player;
-	private int x;
-	private int y;
-	private int plantLocation = 130;
-	// 성장
-	private boolean growing;
-	private ImageIcon growing1;
-	private ImageIcon growing2;
-	private ImageIcon growing3;
-	private ImageIcon lastGrowing;
+	
+	protected int carrotNum = 2;
 
 	// 생성자
 	public Carrot(Player player) {
@@ -36,6 +27,7 @@ public class Carrot extends JLabel implements vegetable {
 		growing2 = new ImageIcon("img/Carrot_Stage_2.png");
 		growing3 = new ImageIcon("img/Carrot_Stage_3.png");
 		lastGrowing = new ImageIcon("img/Carrot_Stage_4.png");
+		sNum = 2;
 	}
 
 	@Override
@@ -43,27 +35,28 @@ public class Carrot extends JLabel implements vegetable {
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 64);
-		setLocation(x, y + plantLocation);
 		setIcon(null);
 	}
 
 	@Override
 	public void grow() {
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
-				for (int i = 0; i < 1; i++) {
+				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
 						Thread.sleep(1000);
 						setIcon(growing2);
-
+						
 						Thread.sleep(1000);
 						setIcon(growing3);
-
+						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
+						
+						canHarvest = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -95,6 +88,23 @@ public class Carrot extends JLabel implements vegetable {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	@Override
+	public int getPrice() {
+		return price;
+	}
+	
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+	
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
 	}
 
 } // end of class

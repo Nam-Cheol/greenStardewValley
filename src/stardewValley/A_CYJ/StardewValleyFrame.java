@@ -2,12 +2,14 @@ package stardewValley.A_CYJ;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import stardewValley.A_KNC.Vegetable;
+import stardewValley.vegetable.vegetable;
 
 //TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
 // 배경 추가해야 됨.
@@ -18,9 +20,18 @@ public class StardewValleyFrame extends JFrame {
 
 	private JLabel backgroundMap;
 	private Player player;
-	private Parsnip parsnip;
 
 	private Vegetable[] vegetables;
+	
+	private Vegetable sNum;
+	
+	
+
+	private Store store;
+	private Keeper keeper;
+	private Water water;
+
+	int temp = 0;
 
 	public StardewValleyFrame() {
 		initData();
@@ -34,9 +45,14 @@ public class StardewValleyFrame extends JFrame {
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
-		player = new Player(this);
+		store = new Store(mContext);
+		keeper = new Keeper(mContext);
+		water = new Water(mContext);
+		player = new Player(mContext, store, keeper, water);
 
 		vegetables = new Vegetable[3];
+
+//		new Thread(store).start();
 	}
 
 	private void setInitLayout() {
@@ -46,6 +62,10 @@ public class StardewValleyFrame extends JFrame {
 		setVisible(true);
 
 		add(player);
+		add(store);
+		add(keeper);
+		add(water);
+		System.out.println(store.getX());
 	}
 
 	private void addEventListener() {
@@ -77,9 +97,6 @@ public class StardewValleyFrame extends JFrame {
 					player.setDown(false);
 					player.setIcon(player.getPlayerDown());
 					break;
-				case KeyEvent.VK_Q:
-					player.setHarvesting(false);
-					player.setIcon(player.getPlayerUp());
 				default:
 					break;
 				}
@@ -109,42 +126,65 @@ public class StardewValleyFrame extends JFrame {
 						player.down();
 					}
 					break;
-				case KeyEvent.VK_NUMPAD1:
-//					if (player.plantParsnip()) {
-//						for (int i = 0; i < 3; i++) {
-//							if (vegetables[i] == null) {
-//								vegetables[i] = parsnip.sprinkling();
-//								add(vegetables[i]);
-//								break;
-//							}
-//						}
-//					}
-					break;
-				case KeyEvent.VK_NUMPAD2:
-					add(new Carrot(player));
-					allStop();
-					break;
-				case KeyEvent.VK_NUMPAD3:
-					add(new Strawberry(player));
-					allStop();
-				case KeyEvent.VK_NUMPAD4:
-					player.sprinkleWater();
-					break;
 				case KeyEvent.VK_Q:
-					player.setIcon(player.getPlayerHarvesting());
-					player.harvestingVege();
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createParsnip();
+								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
+					}
 					break;
-				case KeyEvent.VK_A:
-//					System.out.println(player.each);
+				case KeyEvent.VK_W:
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createCarrot();
+								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
+					}
+					break;
+				case KeyEvent.VK_E:
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createBerry();
+								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
+					}
+					break;
+
+				case KeyEvent.VK_R:
+					harvest();
+					break;
+				case KeyEvent.VK_S:
+					if (player.isSellParsnip()) {
+						System.out.println(store.getParsnipPrice());
+					}
+					break;
+				case KeyEvent.VK_D:
+					System.out.println("작물 저장");
+					
+					break;
 				default:
 					break;
 				}
+
 			}
 		});
-	}
 
-	public Player getPlayer() {
-		return player;
 	}
 
 	public void allStop() {
@@ -152,6 +192,46 @@ public class StardewValleyFrame extends JFrame {
 		player.setRight(false);
 		player.setUp(false);
 		player.setDown(false);
+	}
+
+	public void VLocation(int i) {
+		int temp = 60;
+		vegetables[i].setLocation(190 + (temp * i), 690);
+	}
+
+	public void harvest() {
+		for (int i = 0; i < temp + 1; i++) {
+			if (vegetables[temp] != null) {
+				if (vegetables[temp].isCanHarvest()) {
+					System.out.println(vegetables[temp].getsNum());
+					System.out.println(vegetables[temp].name + "을 수확했다.");
+					if(vegetables[temp].getsNum() == 1) {
+						player.getHaveParsnip();
+	
+					}
+					vegetables[temp].setCanHarvest(false);
+					vegetables[temp].setIcon(null);
+					vegetables[temp] = null;
+					
+					System.out.println(temp);
+					temp++;
+					if (temp == 3) {
+						temp = 0;
+					}
+					System.out.println(temp);
+					System.out.println();
+					System.out.println("파스닙의 갯수 :" + player.getHaveParsnip());
+					break;
+				} else {
+					System.out.println(vegetables[temp].name + "은 지금은 자라는 중이다.");
+					break;
+				}
+			}
+		}
+	}
+
+	public void saveCrop() {
+
 	}
 
 	public static void main(String[] args) {

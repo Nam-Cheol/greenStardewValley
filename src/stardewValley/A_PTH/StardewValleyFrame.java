@@ -2,6 +2,8 @@ package stardewValley.A_PTH;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ public class StardewValleyFrame extends JFrame {
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
+
 	private Player player;
 	private Vegetable parsnip;
 	private Vegetable carrot;
@@ -22,6 +25,9 @@ public class StardewValleyFrame extends JFrame {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private HelpInfo info;
+
+//	private boolean q;
 
 	private Vegetable[] vegetables;
 
@@ -32,7 +38,7 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/StardewValleyMapColorFrame3.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
@@ -40,9 +46,13 @@ public class StardewValleyFrame extends JFrame {
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		water = new Water(mContext);
+
 		player = new Player(mContext, store, keeper, water);
+		info = new HelpInfo(mContext);
 
 		vegetables = new Vegetable[3];
+
+//		q = false;
 	}
 
 	private void setInitLayout() {
@@ -55,6 +65,11 @@ public class StardewValleyFrame extends JFrame {
 		add(store);
 		add(keeper);
 		add(water);
+		add(info);
+//		if(q) {
+//		}
+//		add(info);
+
 		System.out.println(store.getX());
 	}
 
@@ -87,6 +102,14 @@ public class StardewValleyFrame extends JFrame {
 					player.setDown(false);
 					player.setIcon(player.getPlayerDown());
 					break;
+				case KeyEvent.VK_F1:
+					info.setIcon(info.getHelpInfo());
+					info.setSize(50, 50);
+					info.setLocation(1200, 15);
+					keeper.setIcon(keeper.getKeeper());
+					water.setIcon(water.getWater());
+					player.setIcon(player.getPlayerDown());
+
 				default:
 					break;
 				}
@@ -95,6 +118,7 @@ public class StardewValleyFrame extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
+//				System.out.println(e.getKeyCode());
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
 					if (!player.isLeft()) {
@@ -159,6 +183,23 @@ public class StardewValleyFrame extends JFrame {
 						berry = player.createBerry();
 
 					}
+					break;
+				case KeyEvent.VK_F1:
+//					q = true;
+//					add(info);
+//					backgroundMap.add(info);
+					info.setIcon(info.getHelpInfo1());
+					info.setSize(800, 520);
+					info.setLocation(200, 200);
+					keeper.setIcon(null);
+					water.setIcon(null);
+					System.out.println(e.getKeyCode());
+					player.mContext.allStop();
+					player.setIcon(null);
+					player.setUp(false);
+					player.setDown(false);
+					player.setLeft(false);
+					player.setRight(false);
 					break;
 				default:
 					break;

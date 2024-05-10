@@ -8,6 +8,7 @@ public class Parsnip extends Vegetable {
 
 	// 멤버 변수
 	private String name = "파스닙";
+	private int growSpeed = 5000; // thread.sleep 속도
 
 	// 생성자
 	public Parsnip(Player player) {
@@ -48,16 +49,17 @@ public class Parsnip extends Vegetable {
 				for (int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
-						Thread.sleep(1000);
+
+						Thread.sleep(growSpeed);
 						setIcon(growing2);
 
-						Thread.sleep(1000);
+						Thread.sleep(growSpeed);
 						setIcon(growing3);
 
-						Thread.sleep(1000);
+						Thread.sleep(growSpeed);
 						setIcon(growing4);
 
-						Thread.sleep(1000);
+						Thread.sleep(growSpeed);
 						setIcon(lastGrowing);
 
 						canHarvest = true;
@@ -67,20 +69,14 @@ public class Parsnip extends Vegetable {
 				}
 			}
 		}).start();
+		if (canHarvest == true) {
+			Thread.interrupted();
+		}
 	}
 
-//	@Override
-//	public void harvest() {
-//		if (canHarvest == true) {
-//			System.out.println("--> 파스닙 클래스 : 파스닙 수확한다.");
-//			setIcon(null);
-//		} else {
-//			System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
-//		}
-//	}
-	
 	@Override
 	public void sprinkling() {
+
 	}
 
 	// getter, setter

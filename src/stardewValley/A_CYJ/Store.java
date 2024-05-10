@@ -1,49 +1,71 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Keeper extends JLabel {
+public class Store extends JLabel implements Runnable{
 
 	StardewValleyFrame mContext;
-
+	
 	private int x;
 	private int y;
-
-	private int parsnipPrice;
+	
+	private int parsnipPrice = (int)(Math.random()*1000) + 500;;
 	private int carrotPrice;
 	private int berryPrice;
-
+	
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-
-	private ImageIcon keeper;
-	private ImageIcon keeperOn;
-
-	public Keeper(StardewValleyFrame mContext) {
+	
+	private ImageIcon seller;
+	private ImageIcon sellerOn;
+	
+	public Store(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
+		initThread();
 		this.mContext = mContext;
 	}
-
+	
 	private void initData() {
-
-		x = 200;
+		
+		x = 1000;
 		y = 200;
-
-		keeper = new ImageIcon("img/keeper.png");
-
-		parsnipEach = 0;
-		carrotEach = 0;
-		berryEach = 0;
-
+		
+		seller = new ImageIcon("img/seller.png");
+		sellerOn = new ImageIcon("img/sellerOn.png");
+		
+		
+		parsnipEach = (int)(Math.random()*1000) + 500;
+		carrotEach = (int)(Math.random()*1000) + 500;
+		berryEach = (int)(Math.random()*1000) + 500;
+		
+		
+		
+		
 	}
-
+	
 	private void setInitLayout() {
-		this.setIcon(keeper);
+		this.setIcon(seller);
 		this.setLocation(x, y);
-		this.setSize(100, 140);
+		this.setSize(100, 180);
+	}
+	
+	private void initThread() {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				parsnipEach = (int)(Math.random()*1000) + 500;
+				carrotEach = (int)(Math.random()*1000) + 500;
+				berryEach = (int)(Math.random()*1000) + 500;
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+				}
+			}
+		}).start();
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -51,7 +73,7 @@ public class Keeper extends JLabel {
 	}
 
 	// getter, setter
-
+	
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -119,21 +141,22 @@ public class Keeper extends JLabel {
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
 	}
-
-	public ImageIcon getKeeper() {
-		return keeper;
+	
+	public ImageIcon getSeller() {
+		return seller;
 	}
 
-	public void setKeeper(ImageIcon keeper) {
-		this.keeper = keeper;
+	public ImageIcon getSellerOn() {
+		return sellerOn;
 	}
-
-	public ImageIcon getKeeperOn() {
-		return keeperOn;
+	
+	@Override
+	public void run() {
+		parsnipEach = (int)(Math.random()*1000) + 500;
+		carrotEach = (int)(Math.random()*1000) + 500;
+		berryEach = (int)(Math.random()*1000) + 500;
 	}
-
-	public void setKeeperOn(ImageIcon keeperOn) {
-		this.keeperOn = keeperOn;
-	}
-
+	
+	
+	
 }

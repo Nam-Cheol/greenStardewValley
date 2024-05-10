@@ -3,44 +3,44 @@ package stardewValley.A_PTH;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Water extends JLabel{
+public class Water extends JLabel {
 
 	StardewValleyFrame mContext;
-	
+
 	private int x;
 	private int y;
-	
+
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-	
+
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-	
-	private ImageIcon giveWater;
-	
+
+	private ImageIcon water;
+
 	public Water(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-	
+
 	private void initData() {
-		
+
 		x = 750;
 		y = 560;
-		
-		giveWater = new ImageIcon("img/waterMan.png");
-		
+
+		water = new ImageIcon("img/waterMan.png");
+
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
-		
+
 	}
-	
+
 	private void setInitLayout() {
-		this.setIcon(giveWater);
+		this.setIcon(water);
 		this.setLocation(x, y);
 		this.setSize(100, 140);
 	}
@@ -50,7 +50,7 @@ public class Water extends JLabel{
 	}
 
 	// getter, setter
-	
+
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -118,7 +118,9 @@ public class Water extends JLabel{
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
 	}
-	
-	
-	
+
+	public ImageIcon getWater() {
+		return water;
+	}
+
 }

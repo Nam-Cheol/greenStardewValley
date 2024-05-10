@@ -4,23 +4,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Strawberry extends JLabel implements vegetable {
+public class Strawberry extends Vegetable {
 
 	// 멤버 변수
 	private String name = "딸기";
-	// 플레이어
-	private Player player;
-	private int x;
-	private int y;
-	private int plantLocation = 130;
-	// 성장
-	private boolean growing;
-	private ImageIcon growing1;
-	private ImageIcon growing2;
-	private ImageIcon growing3;
-	private ImageIcon growing4;
-	private ImageIcon growing5;
-	private ImageIcon lastGrowing;
+
+	protected int berryNum = 3;
 
 	// 생성자
 	public Strawberry(Player player) {
@@ -40,6 +29,7 @@ public class Strawberry extends JLabel implements vegetable {
 		growing4 = new ImageIcon("img/Strawberry_Stage_4.png");
 		growing5 = new ImageIcon("img/Strawberry_Stage_5.png");
 		lastGrowing = new ImageIcon("img/Strawberry_Stage_6.png");
+		sNum = 3;
 	}
 
 	@Override
@@ -47,7 +37,6 @@ public class Strawberry extends JLabel implements vegetable {
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 57);
-		setLocation(x, y + plantLocation);
 		setIcon(null);
 	}
 
@@ -74,6 +63,8 @@ public class Strawberry extends JLabel implements vegetable {
 
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
+
+						canHarvest = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -105,6 +96,23 @@ public class Strawberry extends JLabel implements vegetable {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	@Override
+	public int getPrice() {
+		return price;
+	}
+
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
 	}
 
 } // end of class
