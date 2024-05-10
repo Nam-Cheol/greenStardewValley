@@ -155,8 +155,8 @@ public class StardewValleyFrame extends JFrame {
 								vegetables[temp] = null;
 								System.out.println(temp);
 								temp++;
-								if(temp==3) {
-									temp=0;
+								if (temp == 3) {
+									temp = 0;
 								}
 								System.out.println(temp);
 								System.out.println("동작됨");
@@ -168,15 +168,7 @@ public class StardewValleyFrame extends JFrame {
 						}
 						break;
 					}
-//					if (player.isCreate()) {
-//						if (vegetables[1] != null) {
-//							vegetables[1].setIcon(null);
-//						} else if (vegetables[2] != null) {
-//							vegetables[2].setIcon(null);
-//						} else {
-//							vegetables[3].setIcon(null);
-//						}
-//					}
+
 					break;
 				case KeyEvent.VK_Q:
 					if (player.isSellParsnip()) {

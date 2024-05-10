@@ -442,7 +442,7 @@ public class Player extends JLabel implements Moveable {
 		this.sellParsnip = sellParsnip;
 	}
 
-//	// 수확
+	// 수확
 //	public void harvest() {
 //		parsnip.harvest();
 //	}
