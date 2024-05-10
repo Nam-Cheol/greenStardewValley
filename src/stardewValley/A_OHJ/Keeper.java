@@ -3,14 +3,14 @@ package stardewValley.A_OHJ;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Store extends JLabel implements Runnable{
+public class Keeper extends JLabel{
 
 	StardewValleyFrame mContext;
 	
 	private int x;
 	private int y;
 	
-	private int parsnipPrice = (int)(Math.random()*1000) + 500;;
+	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
 	
@@ -18,54 +18,33 @@ public class Store extends JLabel implements Runnable{
 	private int carrotEach;
 	private int berryEach;
 	
-	private ImageIcon seller;
-	private ImageIcon sellerOn;
+	private ImageIcon keeper;
+	private ImageIcon keeperOn;
 	
-	public Store(StardewValleyFrame mContext) {
+	public Keeper(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
-		initThread();
 		this.mContext = mContext;
 	}
 	
 	private void initData() {
 		
-		x = 1000;
+		x = 200;
 		y = 200;
 		
-		seller = new ImageIcon("img/seller.png");
-		sellerOn = new ImageIcon("img/sellerOn.png");
+		keeper = new ImageIcon("img/keeper.png");
+		keeperOn = new ImageIcon("img/keeperOn.png");
 		
-		
-		parsnipEach = (int)(Math.random()*1000) + 500;
-		carrotEach = (int)(Math.random()*1000) + 500;
-		berryEach = (int)(Math.random()*1000) + 500;
-		
-		
-		
+		parsnipEach = 0;
+		carrotEach = 0;
+		berryEach = 0;
 		
 	}
 	
 	private void setInitLayout() {
-		this.setIcon(seller);
+		this.setIcon(keeper);
 		this.setLocation(x, y);
 		this.setSize(100, 180);
-	}
-	
-	private void initThread() {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				parsnipEach = (int)(Math.random()*1000) + 500;
-				carrotEach = (int)(Math.random()*1000) + 500;
-				berryEach = (int)(Math.random()*1000) + 500;
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-				}
-			}
-		}).start();
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -141,20 +120,13 @@ public class Store extends JLabel implements Runnable{
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
 	}
-	
-	public ImageIcon getSeller() {
-		return seller;
+
+	public ImageIcon getKeeper() {
+		return keeper;
 	}
 
-	public ImageIcon getSellerOn() {
-		return sellerOn;
-	}
-	
-	@Override
-	public void run() {
-		parsnipEach = (int)(Math.random()*1000) + 500;
-		carrotEach = (int)(Math.random()*1000) + 500;
-		berryEach = (int)(Math.random()*1000) + 500;
+	public ImageIcon getKeeperOn() {
+		return keeperOn;
 	}
 	
 	

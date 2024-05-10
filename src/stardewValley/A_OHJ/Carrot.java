@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Carrot extends JLabel implements IVegetable {
+public class Carrot extends Vegetable {
 
 	// 멤버 변수
 	private String name = "당근";
@@ -19,13 +19,15 @@ public class Carrot extends JLabel implements IVegetable {
 	private ImageIcon growing2;
 	private ImageIcon growing3;
 	private ImageIcon lastGrowing;
+	
+	private int price;
 
 	// 생성자
 	public Carrot(Player player) {
 		this.player = player;
 		initData();
 		setInitLayout();
-		growStep1();
+		grow();
 	}
 
 	// 메소드
@@ -48,7 +50,7 @@ public class Carrot extends JLabel implements IVegetable {
 	}
 
 	@Override
-	public void growStep1() {
+	public void grow() {
 		new Thread(new Runnable() {
 			
 			@Override
@@ -75,7 +77,11 @@ public class Carrot extends JLabel implements IVegetable {
 	@Override
 	public void harvest() {
 	}
-	
+
+	@Override
+	public void sprinkling() {
+	}
+
 	// getter, setter
 	public String getName() {
 		return name;
@@ -92,13 +98,10 @@ public class Carrot extends JLabel implements IVegetable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
+	
 	@Override
-	public void sprinkling() {
-		// TODO Auto-generated method stub
-		
+	public int getPrice() {
+		return price;
 	}
-
-
 
 } // end of class

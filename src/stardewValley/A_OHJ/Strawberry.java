@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Strawberry extends JLabel implements IVegetable {
+public class Strawberry extends Vegetable {
 
 	// 멤버 변수
 	private String name = "딸기";
@@ -21,13 +21,15 @@ public class Strawberry extends JLabel implements IVegetable {
 	private ImageIcon growing4;
 	private ImageIcon growing5;
 	private ImageIcon lastGrowing;
+	
+	private int price;
 
 	// 생성자
 	public Strawberry(Player player) {
 		this.player = player;
 		initData();
 		setInitLayout();
-		growStep1();
+		grow();
 	}
 
 	// 메소드
@@ -52,26 +54,26 @@ public class Strawberry extends JLabel implements IVegetable {
 	}
 
 	@Override
-	public void growStep1() {
+	public void grow() {
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
-				for (int i = 0; i < 1; i++) {
+				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
 						Thread.sleep(1000);
 						setIcon(growing2);
-
+						
 						Thread.sleep(1000);
 						setIcon(growing3);
-
+						
 						Thread.sleep(1000);
 						setIcon(growing4);
-
+						
 						Thread.sleep(1000);
 						setIcon(growing5);
-
+						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
 					} catch (InterruptedException e) {
@@ -84,6 +86,10 @@ public class Strawberry extends JLabel implements IVegetable {
 
 	@Override
 	public void harvest() {
+	}
+
+	@Override
+	public void sprinkling() {
 	}
 
 	// getter, setter
@@ -102,11 +108,10 @@ public class Strawberry extends JLabel implements IVegetable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
+	
 	@Override
-	public void sprinkling() {
-		// TODO Auto-generated method stub
-		
+	public int getPrice() {
+		return price;
 	}
 
 } // end of class
