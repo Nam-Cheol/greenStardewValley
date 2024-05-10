@@ -2,8 +2,7 @@ package stardewValley.A_KNC;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -25,6 +24,35 @@ public class StardewValleyFrame extends JFrame {
 	private Keeper keeper;
 	private Water water;
 	
+	private TimeGauge timeGauge;
+	
+	private JLabel timeGauge1;
+	private JLabel timeGauge2;
+	private JLabel waterGauge;
+	private JLabel waterGauge1;
+	private JLabel waterGauge2;
+	private JLabel waterGauge3;
+	private JLabel waterGauge4;
+	private JLabel waterGauge5;
+	private JLabel parsnipGauge;
+	private JLabel parsnipGauge1;
+	private JLabel parsnipGauge2;
+	private JLabel parsnipGauge3;
+	private JLabel parsnipGauge4;
+	private JLabel parsnipGauge5;
+	private JLabel carrotGauge;
+	private JLabel carrotGauge1;
+	private JLabel carrotGauge2;
+	private JLabel carrotGauge3;
+	private JLabel carrotGauge4;
+	private JLabel carrotGauge5;
+	private JLabel berryGauge;
+	private JLabel berryGauge1;
+	private JLabel berryGauge2;
+	private JLabel berryGauge3;
+	private JLabel berryGauge4;
+	private JLabel berryGauge5;
+	
 	int temp = 0;
 
 	public StardewValleyFrame() {
@@ -43,6 +71,7 @@ public class StardewValleyFrame extends JFrame {
 		keeper = new Keeper(mContext);
 		water = new Water(mContext);
 		player = new Player(mContext, store, keeper, water);
+		timeGauge = new TimeGauge(mContext);
 
 		vegetables = new Vegetable[3];
 
@@ -59,7 +88,7 @@ public class StardewValleyFrame extends JFrame {
 		add(store);
 		add(keeper);
 		add(water);
-		System.out.println(store.getX());
+		add(timeGauge);
 	}
 
 	private void addEventListener() {
@@ -120,7 +149,7 @@ public class StardewValleyFrame extends JFrame {
 						player.down();
 					}
 					break;
-				case KeyEvent.VK_NUMPAD1:
+				case KeyEvent.VK_Q:
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -133,7 +162,7 @@ public class StardewValleyFrame extends JFrame {
 						}
 					}
 					break;
-				case KeyEvent.VK_NUMPAD2:
+				case KeyEvent.VK_W:
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -146,7 +175,7 @@ public class StardewValleyFrame extends JFrame {
 						}
 					}
 					break;
-				case KeyEvent.VK_NUMPAD3:
+				case KeyEvent.VK_E:
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -159,14 +188,25 @@ public class StardewValleyFrame extends JFrame {
 						}
 					}
 					break;
-
 				case KeyEvent.VK_R:
 					harvest();
 					break;
-				case KeyEvent.VK_Q:
+				case KeyEvent.VK_D:
+					System.out.println("동작중");
+					break;
+				case KeyEvent.VK_F:
 					if (player.isSellParsnip()) {
 						System.out.println(store.getParsnipPrice());
 					}
+					break;
+				case KeyEvent.VK_SPACE:
+					System.out.println("동작중");
+					break;
+				case KeyEvent.VK_A:
+					System.out.println("동작중");
+					break;
+				case KeyEvent.VK_F1:
+					System.out.println("동작중");
 					break;
 				default:
 					break;
