@@ -8,21 +8,6 @@ public class Strawberry extends Vegetable {
 
 	// 멤버 변수
 	private String name = "딸기";
-	// 플레이어
-	private Player player;
-	private int x;
-	private int y;
-	private int plantLocation = 130;
-	// 성장
-	private boolean growing;
-	private ImageIcon growing1;
-	private ImageIcon growing2;
-	private ImageIcon growing3;
-	private ImageIcon growing4;
-	private ImageIcon growing5;
-	private ImageIcon lastGrowing;
-	
-	private int price;
 
 	// 생성자
 	public Strawberry(Player player) {
@@ -75,6 +60,8 @@ public class Strawberry extends Vegetable {
 						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
+						
+						canHarvest = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -111,6 +98,18 @@ public class Strawberry extends Vegetable {
 	@Override
 	public int getPrice() {
 		return price;
+	}
+	
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+	
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
 	}
 
 } // end of class

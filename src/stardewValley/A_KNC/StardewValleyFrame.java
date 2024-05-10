@@ -154,7 +154,7 @@ public class StardewValleyFrame extends JFrame {
 								player.setIcon(player.getPlayerWater());
 								add(vegetables[i]);
 								VLocation(i);
-								//break;
+								break;
 							}
 						}
 					}
@@ -193,7 +193,7 @@ public class StardewValleyFrame extends JFrame {
 		for (int i = 0; i < temp+1; i++) {
 			if (vegetables[temp] != null) {
 				if (vegetables[temp].isCanHarvest()) {
-					System.out.println("--> " + vegetables[temp].name +  " 클래스 : 파스닙 수확한다.");
+					System.out.println( vegetables[temp].name +  "을 수확했다.");
 					vegetables[temp].setCanHarvest(false);
 					vegetables[temp].setIcon(null);
 					vegetables[temp] = null;
@@ -203,10 +203,9 @@ public class StardewValleyFrame extends JFrame {
 						temp=0;
 					}
 					System.out.println(temp);
-					System.out.println("동작됨");
 					break;
 				} else {
-					System.out.println("--> 파스닙 클래스 : 지금은 자라는 중이다.");
+					System.out.println(vegetables[temp].name +"은 지금은 자라는 중이다.");
 					break;
 				}
 			}
