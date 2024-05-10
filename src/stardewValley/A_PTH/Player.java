@@ -3,6 +3,11 @@ package stardewValley.A_PTH;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import stardewValley.A_PTH.Carrot;
+import stardewValley.A_PTH.Parsnip;
+import stardewValley.A_PTH.StardewValleyFrame;
+import stardewValley.A_PTH.Strawberry;
+
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
 public class Player extends JLabel implements Moveable {
@@ -10,7 +15,9 @@ public class Player extends JLabel implements Moveable {
 	// TODO player 의 속성
 
 	Parsnip parsnip;
-	StardewValleyFrame mContext;
+	Carrot carrot;
+	Strawberry berry;
+	stardewValley.A_PTH.StardewValleyFrame mContext;
 
 	// 플레이어의 이미지
 
@@ -33,6 +40,12 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown; // -> 디폴트
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
+	
+	private ImageIcon playerWater;
+	
+	private Store store;
+	private Keeper keeper;
+	private Water water;
 
 	// 플레이어의 좌표
 	private int x;
@@ -52,18 +65,31 @@ public class Player extends JLabel implements Moveable {
 	private boolean downWallCrash;
 	
 	// 식물을 심을 수 있는 상태
-	private boolean canPlant;
+	private boolean create;
+	
+	// 플레이어의 돈
+	private int wallet;
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
 
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
+		this.store = store;
+		this.keeper = keeper;
+		this.water = water;
 		initData();
 		setInitLayout();
-		initThread();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water)).start();
+	}
+	public Player(StardewValleyFrame mContext, Parsnip parsnip, Carrot carrot, Strawberry berry) {
+		this.parsnip = parsnip;
+		this.carrot = carrot;
+		this.berry = berry;
+		this.mContext = mContext;
+		
+		new Thread(new backgroundVegetableService(this, parsnip, carrot, berry)).start();
 	}
 
 	private void initData() {
@@ -86,6 +112,8 @@ public class Player extends JLabel implements Moveable {
 		playerDown = new ImageIcon("img/PlayerStand.png");
 		playerDown1 = new ImageIcon("img/PlayerWalkDown.png");
 		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
+		
+		playerWater = new ImageIcon("img/PlayerWater.png");
 
 		left = false;
 		right = false;
@@ -97,9 +125,11 @@ public class Player extends JLabel implements Moveable {
 		upWallCrash = false;
 		downWallCrash = false;
 		
-		canPlant = false;
+		create = false;
 
 		playerWay = PlayerWay.DOWN;
+		
+		wallet = 0;
 	}
 
 	private void setInitLayout() {
@@ -291,7 +321,17 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	// getter, setter
-
+	
+	public Vegetable createParsnip() {
+		return new Parsnip(this);
+	}
+	public Vegetable createCarrot() {
+		return new Carrot(this);
+	}
+	public Vegetable createBerry() {
+		return new Strawberry(this);
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -391,18 +431,22 @@ public class Player extends JLabel implements Moveable {
 	public ImageIcon getPlayerDown() {
 		return playerDown;
 	}
+
+	public ImageIcon getPlayerWater() {
+		return playerWater;
+	}
+
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
 	
 
-	public boolean isCanPlant() {
-		return canPlant;
-	}
-
-	public void setCanPlant(boolean canPlant) {
-		this.canPlant = canPlant;
-	}
-
 	public Parsnip plantParsnip() {
-		return parsnip = new Parsnip(mContext);
+		return parsnip = new Parsnip(this);
 	}
 
 }

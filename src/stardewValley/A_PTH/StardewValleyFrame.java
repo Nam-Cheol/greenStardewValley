@@ -11,12 +11,19 @@ import javax.swing.JLabel;
 // 배경 추가해야 됨.
 //추후 컴포넌트(야채)들도 추가해야 함.
 public class StardewValleyFrame extends JFrame {
-	
+
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
 	private Player player;
-	private Parsnip parsnip;
+	private Vegetable parsnip;
+	private Vegetable carrot;
+	private Vegetable berry;
+	private Store store;
+	private Keeper keeper;
+	private Water water;
+
+	private Vegetable[] vegetables;
 
 	public StardewValleyFrame() {
 		initData();
@@ -25,12 +32,17 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/StardewValleyMapColorFrame3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
-		player = new Player(this);
+		store = new Store(mContext);
+		keeper = new Keeper(mContext);
+		water = new Water(mContext);
+		player = new Player(mContext, store, keeper, water);
+
+		vegetables = new Vegetable[3];
 	}
 
 	private void setInitLayout() {
@@ -40,6 +52,10 @@ public class StardewValleyFrame extends JFrame {
 		setVisible(true);
 
 		add(player);
+		add(store);
+		add(keeper);
+		add(water);
+		System.out.println(store.getX());
 	}
 
 	private void addEventListener() {
@@ -101,25 +117,57 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-//					Player.plantParsnip();
-					allStop();
-					add(new Parsnip(mContext));
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createParsnip();
+								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
+					}
 					break;
+
 				case KeyEvent.VK_NUMPAD2:
-					add(new Carrot(player));
-					allStop();
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createParsnip();
+								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
+
+					}
 					break;
 				case KeyEvent.VK_NUMPAD3:
-					add(new Strawberry(player));
-					allStop();
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createParsnip();
+								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+
+						}
+						berry = player.createBerry();
+
+					}
 					break;
 				default:
 					break;
 				}
 			}
 		});
+
 	}
-	
+
 	public void allStop() {
 		player.setLeft(false);
 		player.setRight(false);
@@ -127,7 +175,13 @@ public class StardewValleyFrame extends JFrame {
 		player.setDown(false);
 	}
 
+	public void VLocation(int i) {
+		int temp = 60;
+		vegetables[i].setLocation(180 + (temp * i), 690);
+	}
+
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}
+
 }

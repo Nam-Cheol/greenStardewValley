@@ -1,10 +1,9 @@
 package stardewValley.A_PTH;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Carrot extends JLabel implements vegetable {
+public class Carrot extends Vegetable {
 
 	// 멤버 변수
 	private String name = "당근";
@@ -40,11 +39,11 @@ public class Carrot extends JLabel implements vegetable {
 
 	@Override
 	public void setInitLayout() {
-		x = player.getX();
-		y = player.getY();
-		setSize(48, 64);
-		setLocation(x, y + plantLocation);
-		setIcon(null);
+//		x = player.getX();
+//		y = player.getY();
+//		setSize(48, 64);
+//		setLocation(x, y + plantLocation);
+//		setIcon(null);
 	}
 
 	@Override

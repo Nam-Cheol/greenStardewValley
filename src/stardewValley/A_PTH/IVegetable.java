@@ -1,15 +1,15 @@
 package stardewValley.A_PTH;
 
 //TODO 야채에 대한 기능 및 속성
-public interface vegetable {
+public interface IVegetable {
 
-	void initData() ;
+	void initData();
 
 	void setInitLayout();
 
 	void grow();
 
-	void harvest() ;
+	void harvest();
 
-	void sprinkling() ;
+	void sprinkling();
 }
