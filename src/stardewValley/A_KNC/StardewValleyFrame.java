@@ -1,8 +1,8 @@
 package stardewValley.A_KNC;
 
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,38 +22,21 @@ public class StardewValleyFrame extends JFrame {
 
 	private Store store;
 	private Keeper keeper;
-	private Water water;
-	
+	private Water waterMan;
+
 	private TimeGauge timeGauge;
+	private CarrotGauge carrotGauge;
+	private WaterGauge waterGauge;
+	private BerryGauge berryGauge;
+	private ParsnipGauge parsnipGauge;
+
+	private int tempMoney;
+	private JLabel money;
 	
-	private JLabel timeGauge1;
-	private JLabel timeGauge2;
-	private JLabel waterGauge;
-	private JLabel waterGauge1;
-	private JLabel waterGauge2;
-	private JLabel waterGauge3;
-	private JLabel waterGauge4;
-	private JLabel waterGauge5;
-	private JLabel parsnipGauge;
-	private JLabel parsnipGauge1;
-	private JLabel parsnipGauge2;
-	private JLabel parsnipGauge3;
-	private JLabel parsnipGauge4;
-	private JLabel parsnipGauge5;
-	private JLabel carrotGauge;
-	private JLabel carrotGauge1;
-	private JLabel carrotGauge2;
-	private JLabel carrotGauge3;
-	private JLabel carrotGauge4;
-	private JLabel carrotGauge5;
-	private JLabel berryGauge;
-	private JLabel berryGauge1;
-	private JLabel berryGauge2;
-	private JLabel berryGauge3;
-	private JLabel berryGauge4;
-	private JLabel berryGauge5;
+	private Gold gold;
 	
-	int temp = 0;
+	
+	private int temp = 0;
 
 	public StardewValleyFrame() {
 		initData();
@@ -62,19 +45,31 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/TempBackgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
+		tempMoney = 9999;
+		
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
-		water = new Water(mContext);
-		player = new Player(mContext, store, keeper, water);
+		waterMan = new Water(mContext);
+		
+		player = new Player(mContext, store, keeper, waterMan);
+		
 		timeGauge = new TimeGauge(mContext);
+		carrotGauge = new CarrotGauge(mContext);
+		waterGauge = new WaterGauge(mContext);
+		berryGauge = new BerryGauge(mContext);
+		parsnipGauge = new ParsnipGauge(mContext);
+		
+		Font f = new Font("PF스타더스트", Font.PLAIN, 3);
 
+		gold = new Gold();
+		
 		vegetables = new Vegetable[3];
-
+		
 //		new Thread(store).start();
 	}
 
@@ -87,8 +82,14 @@ public class StardewValleyFrame extends JFrame {
 		add(player);
 		add(store);
 		add(keeper);
-		add(water);
+		add(waterMan);
+		
 		add(timeGauge);
+		add(carrotGauge);
+		add(waterGauge);
+		add(berryGauge);
+		add(parsnipGauge);
+		add(gold);
 	}
 
 	private void addEventListener() {
@@ -211,7 +212,7 @@ public class StardewValleyFrame extends JFrame {
 				default:
 					break;
 				}
-				
+
 			}
 		});
 
@@ -223,35 +224,33 @@ public class StardewValleyFrame extends JFrame {
 		player.setUp(false);
 		player.setDown(false);
 	}
-	
+
 	public void VLocation(int i) {
 		int temp = 60;
-		vegetables[i].setLocation(190 + (temp*i), 690);
+		vegetables[i].setLocation(190 + (temp * i), 690);
 	}
-	
+
 	public void harvest() {
-		for (int i = 0; i < temp+1; i++) {
+		for (int i = 0; i < temp + 1; i++) {
 			if (vegetables[temp] != null) {
 				if (vegetables[temp].isCanHarvest()) {
-					System.out.println( vegetables[temp].name +  "을 수확했다.");
 					vegetables[temp].setCanHarvest(false);
 					vegetables[temp].setIcon(null);
 					vegetables[temp] = null;
 					System.out.println(temp);
 					temp++;
-					if(temp==3) {
-						temp=0;
+					if (temp == 3) {
+						temp = 0;
 					}
 					System.out.println(temp);
 					break;
 				} else {
-					System.out.println(vegetables[temp].name +"은 지금은 자라는 중이다.");
 					break;
 				}
 			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}

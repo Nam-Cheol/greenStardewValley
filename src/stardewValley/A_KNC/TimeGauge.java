@@ -22,18 +22,18 @@ public class TimeGauge extends JLabel {
 
 	private void initData() {
 
-		x = 500;
-		y = 500;
+		x = 1680;
+		y = -40;
 
-		timeGauge = new ImageIcon("img/Time1.png");
-		timeGauge1 = new ImageIcon("img/sellerOn.png");
-		timeGauge2 = new ImageIcon("img/sellerOn.png");
+		timeGauge = new ImageIcon("img/gauge/Time1.png");
+		timeGauge1 = new ImageIcon("img/gauge/Time2.png");
+		timeGauge2 = new ImageIcon("img/gauge/Time3.png");
 		
 	}
 
 	private void setInitLayout() {
 		this.setIcon(timeGauge);
 		this.setLocation(x, y);
-		this.setSize(100, 180);
+		this.setSize(250, 180);
 	}
 }
