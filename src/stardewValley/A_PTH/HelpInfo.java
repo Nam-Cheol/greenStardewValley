@@ -26,7 +26,7 @@ public class HelpInfo extends JLabel {
 		infoY = 15;
 
 		helpInfo = new ImageIcon("img/questionMark1.png");
-		helpInfo1 = new ImageIcon("img/temp111.png");
+		helpInfo1 = new ImageIcon("img/HelpInfoImage.png");
 
 	}
 

@@ -196,10 +196,7 @@ public class StardewValleyFrame extends JFrame {
 					System.out.println(e.getKeyCode());
 					player.mContext.allStop();
 					player.setIcon(null);
-					player.setUp(false);
-					player.setDown(false);
-					player.setLeft(false);
-					player.setRight(false);
+				
 					break;
 				default:
 					break;
