@@ -42,4 +42,30 @@ public class ParsnipGauge extends JLabel{
 		this.setLocation(x, y);
 		this.setSize(300, 180);
 	}
+
+	public ImageIcon getParsnipGauge() {
+		return parsnipGauge;
+	}
+
+	public ImageIcon getParsnipGauge1() {
+		return parsnipGauge1;
+	}
+
+	public ImageIcon getParsnipGauge2() {
+		return parsnipGauge2;
+	}
+
+	public ImageIcon getParsnipGauge3() {
+		return parsnipGauge3;
+	}
+
+	public ImageIcon getParsnipGauge4() {
+		return parsnipGauge4;
+	}
+
+	public ImageIcon getParsnipGauge5() {
+		return parsnipGauge5;
+	}
+	
+	
 }

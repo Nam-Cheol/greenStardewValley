@@ -36,4 +36,18 @@ public class TimeGauge extends JLabel {
 		this.setLocation(x, y);
 		this.setSize(250, 180);
 	}
+
+	public ImageIcon getTimeGauge() {
+		return timeGauge;
+	}
+
+	public ImageIcon getTimeGauge1() {
+		return timeGauge1;
+	}
+
+	public ImageIcon getTimeGauge2() {
+		return timeGauge2;
+	}
+	
+	
 }

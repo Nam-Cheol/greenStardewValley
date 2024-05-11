@@ -42,4 +42,30 @@ public class WaterGauge extends JLabel{
 		this.setLocation(x, y);
 		this.setSize(300, 180);
 	}
+
+	public ImageIcon getWaterGauge() {
+		return waterGauge;
+	}
+
+	public ImageIcon getWaterGauge1() {
+		return waterGauge1;
+	}
+
+	public ImageIcon getWaterGauge2() {
+		return waterGauge2;
+	}
+
+	public ImageIcon getWaterGauge3() {
+		return waterGauge3;
+	}
+
+	public ImageIcon getWaterGauge4() {
+		return waterGauge4;
+	}
+
+	public ImageIcon getWaterGauge5() {
+		return waterGauge5;
+	}
+	
+	
 }

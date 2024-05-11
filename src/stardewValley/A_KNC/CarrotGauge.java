@@ -42,4 +42,30 @@ public class CarrotGauge extends JLabel{
 		this.setLocation(x, y);
 		this.setSize(400, 180);
 	}
+
+	public ImageIcon getCarrotGauge() {
+		return carrotGauge;
+	}
+
+	public ImageIcon getCarrotGauge1() {
+		return carrotGauge1;
+	}
+
+	public ImageIcon getCarrotGauge2() {
+		return carrotGauge2;
+	}
+
+	public ImageIcon getCarrotGauge3() {
+		return carrotGauge3;
+	}
+
+	public ImageIcon getCarrotGauge4() {
+		return carrotGauge4;
+	}
+
+	public ImageIcon getCarrotGauge5() {
+		return carrotGauge5;
+	}
+	
+	
 }

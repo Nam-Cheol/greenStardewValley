@@ -1,8 +1,11 @@
 package stardewValley.A_KNC;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.font.TextLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -32,9 +35,8 @@ public class StardewValleyFrame extends JFrame {
 
 	private int tempMoney;
 	private JLabel money;
-	
-	private Gold gold;
-	
+
+	Graphics gold;
 	
 	private int temp = 0;
 
@@ -50,7 +52,7 @@ public class StardewValleyFrame extends JFrame {
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
-		tempMoney = 9999;
+		tempMoney = 1231145;
 		
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
@@ -63,10 +65,6 @@ public class StardewValleyFrame extends JFrame {
 		waterGauge = new WaterGauge(mContext);
 		berryGauge = new BerryGauge(mContext);
 		parsnipGauge = new ParsnipGauge(mContext);
-		
-		Font f = new Font("PF스타더스트", Font.PLAIN, 3);
-
-		gold = new Gold();
 		
 		vegetables = new Vegetable[3];
 		
@@ -89,7 +87,12 @@ public class StardewValleyFrame extends JFrame {
 		add(waterGauge);
 		add(berryGauge);
 		add(parsnipGauge);
-		add(gold);
+		
+		gold = backgroundMap.getGraphics();
+		gold.setColor(Color.black);
+		gold.setFont(new Font("굴림", Font.PLAIN, 50));
+		gold.drawString(Integer.toString(tempMoney), 1400, 340);
+		gold.dispose();
 	}
 
 	private void addEventListener() {
@@ -202,8 +205,11 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_SPACE:
 					System.out.println("동작중");
+					tempMoney++;
+					repaint();
 					break;
 				case KeyEvent.VK_A:
+					parsnipGauge.setIcon(parsnipGauge.getParsnipGauge1());
 					System.out.println("동작중");
 					break;
 				case KeyEvent.VK_F1:

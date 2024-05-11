@@ -42,4 +42,30 @@ public class BerryGauge extends JLabel{
 		this.setLocation(x, y);
 		this.setSize(300, 180);
 	}
+
+	public ImageIcon getBerryGauge() {
+		return berryGauge;
+	}
+
+	public ImageIcon getBerryGauge1() {
+		return berryGauge1;
+	}
+
+	public ImageIcon getBerryGauge2() {
+		return berryGauge2;
+	}
+
+	public ImageIcon getBerryGauge3() {
+		return berryGauge3;
+	}
+
+	public ImageIcon getBerryGauge4() {
+		return berryGauge4;
+	}
+
+	public ImageIcon getBerryGauge5() {
+		return berryGauge5;
+	}
+	
+	
 }
