@@ -22,10 +22,8 @@ public class StardewValleyFrame extends JFrame {
 	private Player player;
 
 	private Vegetable[] vegetables;
-	
+
 	private Vegetable sNum;
-	
-	
 
 	private Store store;
 	private Keeper keeper;
@@ -176,7 +174,7 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_D:
 					System.out.println("작물 저장");
-					
+
 					break;
 				default:
 					break;
@@ -205,14 +203,20 @@ public class StardewValleyFrame extends JFrame {
 				if (vegetables[temp].isCanHarvest()) {
 					System.out.println(vegetables[temp].getsNum());
 					System.out.println(vegetables[temp].name + "을 수확했다.");
-					if(vegetables[temp].getsNum() == 1) {
-						player.getHaveParsnip();
-	
+					// 작물 종류에 따라서 플레이어의 작물 보유량 증가
+					if (vegetables[temp] instanceof Parsnip) {
+						player.setHaveParsnip(player.getHaveParsnip() + 1);
+						System.out.println("파스닙의 갯수 :" + player.getHaveParsnip());
+					} else if (vegetables[temp] instanceof Carrot) {
+						player.setHaveCarrot(player.getHaveCarrot() + 1);
+						System.out.println("당근의 갯수 :" + player.getHaveCarrot());
+					} else if (vegetables[temp] instanceof Strawberry) {
+						player.setHaveBerry(player.getHaveBerry() + 1);
+						System.out.println("딸기의 갯수 :" + player.getHaveBerry());
 					}
 					vegetables[temp].setCanHarvest(false);
 					vegetables[temp].setIcon(null);
 					vegetables[temp] = null;
-					
 					System.out.println(temp);
 					temp++;
 					if (temp == 3) {
@@ -220,7 +224,6 @@ public class StardewValleyFrame extends JFrame {
 					}
 					System.out.println(temp);
 					System.out.println();
-					System.out.println("파스닙의 갯수 :" + player.getHaveParsnip());
 					break;
 				} else {
 					System.out.println(vegetables[temp].name + "은 지금은 자라는 중이다.");
