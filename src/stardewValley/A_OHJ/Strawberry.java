@@ -8,7 +8,6 @@ public class Strawberry extends Vegetable {
 
 	// 멤버 변수
 	private String name = "딸기";
-	private int growSpeed = 5000; // thread.sleep 속도
 
 	// 생성자
 	public Strawberry(Player player) {
@@ -21,15 +20,12 @@ public class Strawberry extends Vegetable {
 	// 메소드
 	@Override
 	public void initData() {
-		waterGage = 2;
 		growing = true;
-		create = false;
-
 		growing1 = new ImageIcon("img/Strawberry_Stage_1.png");
 		growing2 = new ImageIcon("img/Strawberry_Stage_2.png");
 		growing3 = new ImageIcon("img/Strawberry_Stage_3.png");
 		growing4 = new ImageIcon("img/Strawberry_Stage_4.png");
-//		growing5 = new ImageIcon("img/Strawberry_Stage_5.png");
+		growing5 = new ImageIcon("img/Strawberry_Stage_5.png");
 		lastGrowing = new ImageIcon("img/Strawberry_Stage_6.png");
 	}
 
@@ -38,134 +34,38 @@ public class Strawberry extends Vegetable {
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 57);
-		setLocation(x, y + plantLocation);
 		setIcon(null);
 	}
 
 	@Override
 	public void grow() {
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
-				synchronized (this) {
+				MAX_PLANT--;
+				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
-						Thread.sleep(3000);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						Thread.sleep(growSpeed);
+						Thread.sleep(1000);
 						setIcon(growing2);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						Thread.sleep(growSpeed);
+						
+						Thread.sleep(1000);
 						setIcon(growing3);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						Thread.sleep(growSpeed);
+						
+						Thread.sleep(1000);
 						setIcon(growing4);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						Thread.sleep(growSpeed);
+						
+						Thread.sleep(1000);
+						setIcon(growing5);
+						
+						Thread.sleep(1000);
 						setIcon(lastGrowing);
+						
 						canHarvest = true;
-						System.out.println(getWaterGage());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-
 				}
 			}
 		}).start();
@@ -195,10 +95,22 @@ public class Strawberry extends Vegetable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
+	
 	@Override
 	public int getPrice() {
 		return price;
+	}
+	
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+	
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
 	}
 
 } // end of class

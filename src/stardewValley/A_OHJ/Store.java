@@ -1,5 +1,9 @@
 package stardewValley.A_OHJ;
 
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -10,7 +14,7 @@ public class Store extends JLabel implements Runnable{
 	private int x;
 	private int y;
 	
-	private int parsnipPrice = (int)(Math.random()*1000) + 500;;
+	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
 	
@@ -20,6 +24,10 @@ public class Store extends JLabel implements Runnable{
 	
 	private ImageIcon seller;
 	private ImageIcon sellerOn;
+	
+	private boolean seeNPC;
+	
+	Random random = new Random();
 	
 	public Store(StardewValleyFrame mContext) {
 		initData();
@@ -31,41 +39,38 @@ public class Store extends JLabel implements Runnable{
 	private void initData() {
 		
 		x = 1000;
-		y = 180;
+		y = 160;
 		
 		seller = new ImageIcon("img/seller 복사.png");
 		sellerOn = new ImageIcon("img/sellerOn 복사.png");
 		
+		seeNPC = false;
 		
-		parsnipEach = (int)(Math.random()*1000) + 500;
-		carrotEach = (int)(Math.random()*1000) + 500;
-		berryEach = (int)(Math.random()*1000) + 500;
-		
-		
-		
-		
+		parsnipPrice = (int) (random.nextInt(1000)) + 500;
 	}
 	
 	private void setInitLayout() {
 		this.setIcon(seller);
 		this.setLocation(x, y);
-		this.setSize(120, 180);
+		this.setSize(130, 200);
 	}
 	
 	private void initThread() {
-		new Thread(new Runnable() {
+//		new Thread(new Runnable() {
+		
+		Timer timer = new Timer();
+		
+		TimerTask task = new TimerTask() {
 			
 			@Override
 			public void run() {
-				parsnipEach = (int)(Math.random()*1000) + 500;
-				carrotEach = (int)(Math.random()*1000) + 500;
-				berryEach = (int)(Math.random()*1000) + 500;
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-				}
+				parsnipPrice = (int) (random.nextInt(1000)) + 500;
+				carrotPrice = (int) (random.nextInt(1000)) + 500;
+				berryPrice = (int) (random.nextInt(1000)) + 500;
+				
 			}
-		}).start();
+		};
+		timer.scheduleAtFixedRate(task, 0, 1000);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -148,6 +153,14 @@ public class Store extends JLabel implements Runnable{
 
 	public ImageIcon getSellerOn() {
 		return sellerOn;
+	}
+	
+	public boolean isSeeNPC() {
+		return seeNPC;
+	}
+
+	public void setSeeNPC(boolean seeNPC) {
+		this.seeNPC = seeNPC;
 	}
 	
 	@Override

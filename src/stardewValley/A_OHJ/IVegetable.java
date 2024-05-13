@@ -12,5 +12,4 @@ public interface IVegetable {
 	void harvest();
 
 	void sprinkling();
-
 }

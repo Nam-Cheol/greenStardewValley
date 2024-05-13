@@ -50,7 +50,7 @@ public class backgroundPlayerMapService implements Runnable {
 			int left = leftColor.getRGB();
 			int right = rightColor.getRGB();
 
-			int gap = 50;
+			int gap = 150;
 
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
@@ -68,7 +68,7 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (down == BLOCK) {
 				stopDown();
 			} else if (left == BLOCK) {
-//				System.out.println("나야 나");
+				System.out.println("나야 나");
 				stopLeft();
 			} else if (right == BLOCK) {
 				stopRight();
@@ -94,27 +94,18 @@ public class backgroundPlayerMapService implements Runnable {
 				stopRight();
 
 				// 4. NPC
-			} else if (storeX < 30 && storeY < 130) {
-//				System.out.println("멈춰~~~~~~~!");
+			} else if (storeX < gap && storeY < gap) {
 				player.setSellParsnip(true);
 				store.setIcon(store.getSellerOn());
-//				System.out.println(player.isSellParsnip());
-			} else if (keeperX < 30 && keeperY < 170) {
-//				System.out.println("멈춰~~~~~~~!");
+			} else if (keeperX < gap && keeperY < gap) {
 				keeper.setIcon(keeper.getKeeperOn());
-			} else if (waterX < 100 && waterY < 110) {
-//				System.out.println("멈춰~~~~~~~!");
+			} else if (waterX < gap && waterY < gap) {
 				water.setIcon(water.getWaterOn());
-				// 시도
 				player.setScoopWater(true);
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);
-				// 시도
-				player.setScoopWater(false);
-				store.setIcon(store.getSeller());
-				keeper.setIcon(keeper.getKeeper());
-				water.setIcon(water.getWater());
+				seeNPC();
 			}
 
 			try {
@@ -175,4 +166,16 @@ public class backgroundPlayerMapService implements Runnable {
 		}
 	}
 
+	public void seeNPC() {
+		if(store.isSeeNPC() == false) {
+			store.setIcon(store.getSeller());
+		}
+		if(keeper.isSeeNPC() == false) {
+			keeper.setIcon(keeper.getKeeper());
+		}
+		if(water.isSeeNPC() == false) {
+			water.setIcon(water.getWater());
+		}
+	}
+	
 }

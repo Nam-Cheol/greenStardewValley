@@ -4,12 +4,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Parsnip extends Vegetable {
+public class Parsnip extends Vegetable{
 
 	// 멤버 변수
 	private String name = "파스닙";
-	private int growSpeed = 5000; // thread.sleep 속도
-
+	private int growSpeed = 5000;
+	
 	// 생성자
 	public Parsnip(Player player) {
 		this.player = player;
@@ -24,13 +24,11 @@ public class Parsnip extends Vegetable {
 		waterGage = 2;
 		growing = true;
 		create = false;
-
 		growing1 = new ImageIcon("img/Parsnip_Stage_1.png");
 		growing2 = new ImageIcon("img/Parsnip_Stage_2.png");
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
-		price = (int) (Math.random() * 1000) + 500;
 	}
 
 	@Override
@@ -38,17 +36,16 @@ public class Parsnip extends Vegetable {
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 48);
-		setLocation(x, y + plantLocation);
 		setIcon(null);
 	}
 
 	@Override
 	public void grow() {
-
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
+				MAX_PLANT--;
 				synchronized (this) {
 					try {
 						setIcon(growing1);
@@ -174,13 +171,11 @@ public class Parsnip extends Vegetable {
 	}
 
 	@Override
-	public void sprinkling() {
-
+	public void harvest() {
 	}
 
 	@Override
-	public int getPrice() {
-		return price;
+	public void sprinkling() {
 	}
 
 	// getter, setter
@@ -207,5 +202,18 @@ public class Parsnip extends Vegetable {
 	public void setCreate(boolean create) {
 		this.create = create;
 	}
+
+	@Override
+	public int getPrice() {
+		return price;
+	}
+
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
+	}
+	
+	
+	
+	
 
 } // end of class

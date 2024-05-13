@@ -8,7 +8,6 @@ public class Carrot extends Vegetable {
 
 	// 멤버 변수
 	private String name = "당근";
-	private int growSpeed = 5000; // thread.sleep 속도
 
 	// 생성자
 	public Carrot(Player player) {
@@ -21,14 +20,10 @@ public class Carrot extends Vegetable {
 	// 메소드
 	@Override
 	public void initData() {
-		waterGage = 2;
 		growing = true;
-		create = false;
-		
 		growing1 = new ImageIcon("img/Carrot_Stage_1.png");
 		growing2 = new ImageIcon("img/Carrot_Stage_2.png");
 		growing3 = new ImageIcon("img/Carrot_Stage_3.png");
-		growing4 = new ImageIcon("img/Carrot_Stage_3.png");
 		lastGrowing = new ImageIcon("img/Carrot_Stage_4.png");
 	}
 
@@ -37,134 +32,32 @@ public class Carrot extends Vegetable {
 		x = player.getX();
 		y = player.getY();
 		setSize(48, 64);
-		setLocation(x, y + plantLocation);
 		setIcon(null);
 	}
 
 	@Override
 	public void grow() {
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
-				synchronized (this) {
+				MAX_PLANT--;
+				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
-						Thread.sleep(3000);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						Thread.sleep(growSpeed);
+						Thread.sleep(1000);
 						setIcon(growing2);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						Thread.sleep(growSpeed);
+						
+						Thread.sleep(1000);
 						setIcon(growing3);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						Thread.sleep(growSpeed);
-						setIcon(growing4);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						Thread.sleep(growSpeed);
+						
+						Thread.sleep(1000);
 						setIcon(lastGrowing);
+						
 						canHarvest = true;
-						System.out.println(getWaterGage());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-
 				}
 			}
 		}).start();
@@ -198,6 +91,18 @@ public class Carrot extends Vegetable {
 	@Override
 	public int getPrice() {
 		return price;
+	}
+	
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+	
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
 	}
 
 } // end of class

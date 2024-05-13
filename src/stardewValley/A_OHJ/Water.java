@@ -1,7 +1,5 @@
 package stardewValley.A_OHJ;
 
-import java.awt.Panel;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -23,6 +21,8 @@ public class Water extends JLabel {
 	private ImageIcon water;
 	private ImageIcon waterOn;
 
+	private boolean seeNPC;
+
 	// 우물에 물 전체 양
 	private long pondGage;
 
@@ -35,7 +35,7 @@ public class Water extends JLabel {
 	private void initData() {
 
 		x = 750;
-		y = 540;
+		y = 500;
 
 		water = new ImageIcon("img/waterMan 복사.png");
 		waterOn = new ImageIcon("img/waterManOn 복사.png");
@@ -44,14 +44,15 @@ public class Water extends JLabel {
 		carrotEach = 0;
 		berryEach = 0;
 
-		// 우물에 물 전체 양
+		seeNPC = false;
+
 		pondGage = 9999999999L;
 	}
 
 	private void setInitLayout() {
 		this.setIcon(water);
 		this.setLocation(x, y);
-		this.setSize(120, 200);
+		this.setSize(130, 200);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -132,8 +133,20 @@ public class Water extends JLabel {
 		return water;
 	}
 
+	public void setWater(ImageIcon water) {
+		this.water = water;
+	}
+
 	public ImageIcon getWaterOn() {
 		return waterOn;
+	}
+
+	public boolean isSeeNPC() {
+		return seeNPC;
+	}
+
+	public void setSeeNPC(boolean seeNPC) {
+		this.seeNPC = seeNPC;
 	}
 
 	// 시도

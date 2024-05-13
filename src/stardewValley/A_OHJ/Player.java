@@ -1,7 +1,5 @@
 package stardewValley.A_OHJ;
 
-import java.awt.Color;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -65,17 +63,21 @@ public class Player extends JLabel implements Moveable {
 
 	private boolean create;
 
+	private int money;
+
+	private boolean sellParsnip;
+
+	private int haveParsnip;
+	private int haveCarrot;
+	private int haveBerry;
+
 	// 파스닙에 물 줄 때
 	private boolean waterToParsnip;
-	
+
 	// 우물에서 물 퍼낼 때
 	private boolean scoopWater;
 	private int sprinklingCanGage;
 	private final int MAX_CANGAGE = 5;
-
-	private int wallet;
-
-	private boolean sellParsnip;
 
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
@@ -118,13 +120,6 @@ public class Player extends JLabel implements Moveable {
 
 		create = false;
 
-		// 파스닙에 물 줄 때 위치
-		waterToParsnip = false;
-		
-		// 우물에서 물 퍼낼 때
-		scoopWater = false;
-		sprinklingCanGage = 0;
-
 		leftWallCrash = false;
 		rightWallCrash = false;
 		upWallCrash = false;
@@ -132,7 +127,7 @@ public class Player extends JLabel implements Moveable {
 
 		playerWay = PlayerWay.DOWN;
 
-		wallet = 0;
+		money = 0;
 		sellParsnip = true;
 	}
 
@@ -318,7 +313,6 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 
-	// 파스닙 심기
 	public Vegetable createParsnip() {
 		return new Parsnip(this);
 	}
@@ -437,6 +431,10 @@ public class Player extends JLabel implements Moveable {
 		return playerWater;
 	}
 
+	public Parsnip plantParsnip() {
+		return parsnip = new Parsnip(this);
+	}
+
 	public boolean isCreate() {
 		return create;
 	}
@@ -451,6 +449,38 @@ public class Player extends JLabel implements Moveable {
 
 	public void setSellParsnip(boolean sellParsnip) {
 		this.sellParsnip = sellParsnip;
+	}
+
+	public int getHaveParsnip() {
+		return haveParsnip;
+	}
+
+	public void setHaveParsnip(int haveParsnip) {
+		this.haveParsnip = haveParsnip;
+	}
+
+	public int getHaveCarrot() {
+		return haveCarrot;
+	}
+
+	public void setHaveCarrot(int haveCarrot) {
+		this.haveCarrot = haveCarrot;
+	}
+
+	public int getHaveBerry() {
+		return haveBerry;
+	}
+
+	public void setHaveBerry(int haveBerry) {
+		this.haveBerry = haveBerry;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
 	// 시도
@@ -481,5 +511,4 @@ public class Player extends JLabel implements Moveable {
 	public void setWaterToParsnip(boolean waterToParsnip) {
 		this.waterToParsnip = waterToParsnip;
 	}
-	
 }
