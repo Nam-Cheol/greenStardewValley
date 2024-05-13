@@ -14,7 +14,7 @@ public class Store extends JLabel implements Runnable{
 	private int x;
 	private int y;
 	
-	private int parsnipPrice = (int)(Math.random()*1000) + 500;
+	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
 	

@@ -78,6 +78,17 @@ public class Status extends JLabel {
 		berry.setSize(100,100);
 		berry.setFont(f);
 		berry.setText(Integer.toString(keeper.getBerryEach()));
+		
+		// 파스닙의 가격
+		mContext.add(parsnipPrice);
+		parsnipPrice.setLocation(1780, 190);
+		parsnipPrice.setSize(100,100);
+		parsnipPrice.setFont(f);
+		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
+		// 당근의 가격
+		
+		// 딸기의 가격
+		
 	}
 
 	public JLabel getWallet() {
@@ -110,6 +121,18 @@ public class Status extends JLabel {
 
 	public void setBerry(JLabel berry) {
 		this.berry = berry;
+	}
+
+	public JLabel getParsnipPrice() {
+		return parsnipPrice;
+	}
+
+	public JLabel getCarrotPrice() {
+		return carrotPrice;
+	}
+
+	public JLabel getBerryPrice() {
+		return berryPrice;
 	}
 	
 	

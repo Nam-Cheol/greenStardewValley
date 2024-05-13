@@ -50,7 +50,7 @@ public class StardewValleyFrame extends JFrame {
 		keeper = new Keeper(mContext);
 		waterMan = new Water(mContext);
 		
-		player = new Player(mContext, store, keeper, waterMan);
+		player = new Player(mContext, store, keeper, waterMan, status);
 		info = new HelpInfo(mContext);
 		
 		timeGauge = new TimeGauge(mContext);
@@ -60,7 +60,13 @@ public class StardewValleyFrame extends JFrame {
 		parsnipGauge = new ParsnipGauge(mContext);
 		
 		status = new Status(mContext, player, store, keeper, waterMan);
-		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				status.getParsnipPrice().setText(Integer.toString(store.getParsnipPrice()));
+			}
+		}).start();
 		vegetables = new Vegetable[3];
 		
 //		new Thread(store).start();
@@ -155,6 +161,7 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_Q:
+					vCount();
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -168,6 +175,7 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_W:
+					vCount();
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -181,6 +189,7 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_E:
+					vCount();
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -203,6 +212,7 @@ public class StardewValleyFrame extends JFrame {
 					sellCrop();
 					break;
 				case KeyEvent.VK_SPACE:
+					Vegetable.MAX_PLANT = 2;
 					System.out.println("동작중");
 					player.setMoney(player.getMoney() + 10000);
 					status.getWallet().setText(Integer.toString(player.getMoney()));
@@ -302,6 +312,13 @@ public class StardewValleyFrame extends JFrame {
 			keeper.setParsnipEach(0);
 			status.getWallet().setText(Integer.toString(player.getMoney()));
 			System.out.println("플레이어가 파스닙 팔아서 창고에 남은 갯수 " + keeper.getParsnipEach());
+		}
+	}
+	
+	public void vCount() {
+		if(Vegetable.MAX_PLANT == 0) {
+			player.setCreate(false);
+			return;
 		}
 	}
 	
