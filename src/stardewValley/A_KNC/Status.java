@@ -18,6 +18,10 @@ public class Status extends JLabel {
 	private JLabel carrot;
 	private JLabel berry;
 	
+	private JLabel parsnipPrice;
+	private JLabel carrotPrice;
+	private JLabel berryPrice;
+	
 	private Font f;
 	
 	public Status(StardewValleyFrame mContext, Player player, Store store, Keeper keeper, Water water) {
@@ -37,6 +41,10 @@ public class Status extends JLabel {
 		parsnip = new JLabel();
 		carrot = new JLabel();
 		berry = new JLabel();
+		
+		parsnipPrice = new JLabel();
+		carrotPrice = new JLabel();
+		berryPrice = new JLabel();
 		
 		f = new Font("휴먼편지체", Font.PLAIN, 40);
 	}

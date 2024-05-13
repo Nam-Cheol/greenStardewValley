@@ -95,22 +95,16 @@ public class backgroundPlayerMapService implements Runnable {
 
 				// 4. NPC
 			} else if (storeX < gap && storeY < gap) {
-//				System.out.println("멈춰~~~~~~~!");
 				player.setSellParsnip(true);
 				store.setIcon(store.getSellerOn());
-//				System.out.println(player.isSellParsnip());
 			} else if (keeperX < gap && keeperY < gap) {
-//				System.out.println("멈춰~~~~~~~!");
 				keeper.setIcon(keeper.getKeeperOn());
 			} else if (waterX < gap && waterY < gap) {
-//				System.out.println("멈춰~~~~~~~!");
 				water.setIcon(water.getWaterOn());
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);
-				store.setIcon(store.getSeller());
-				keeper.setIcon(keeper.getKeeper());
-				water.setIcon(water.getWater());
+				seeNPC();
 			}
 
 			try {
@@ -171,4 +165,16 @@ public class backgroundPlayerMapService implements Runnable {
 		}
 	}
 
+	public void seeNPC() {
+		if(store.isSeeNPC() == false) {
+			store.setIcon(store.getSeller());
+		}
+		if(keeper.isSeeNPC() == false) {
+			keeper.setIcon(keeper.getKeeper());
+		}
+		if(water.isSeeNPC() == false) {
+			water.setIcon(water.getWater());
+		}
+	}
+	
 }

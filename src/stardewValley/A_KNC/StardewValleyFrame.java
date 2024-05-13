@@ -30,9 +30,6 @@ public class StardewValleyFrame extends JFrame {
 	private ParsnipGauge parsnipGauge;
 	
 	private HelpInfo info;
-	
-	private int tempMoney;
-
 	private Status status;
 	
 	private int temp = 0;
@@ -48,10 +45,6 @@ public class StardewValleyFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
-
-		
-		
-		tempMoney = 0;
 		
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
@@ -127,7 +120,9 @@ public class StardewValleyFrame extends JFrame {
 					info.setSize(50, 50);
 					info.setLocation(1200, 15);
 					keeper.setIcon(keeper.getKeeper());
+					keeper.setSeeNPC(false);
 					waterMan.setIcon(waterMan.getWater());
+					waterMan.setSeeNPC(false);
 					player.setIcon(player.getPlayerDown());
 					break;
 				default:
@@ -205,9 +200,7 @@ public class StardewValleyFrame extends JFrame {
 					saveCrop();
 					break;
 				case KeyEvent.VK_F:
-					if (player.isSellParsnip()) {
-						System.out.println(store.getParsnipPrice());
-					}
+					sellCrop();
 					break;
 				case KeyEvent.VK_SPACE:
 					System.out.println("동작중");
@@ -222,7 +215,9 @@ public class StardewValleyFrame extends JFrame {
 					info.setSize(800, 520);
 					info.setLocation(200, 200);
 					keeper.setIcon(null);
+					keeper.setSeeNPC(true);
 					waterMan.setIcon(null);
+					waterMan.setSeeNPC(true);
 					player.setIcon(null);
 					break;
 				default:
@@ -295,6 +290,19 @@ public class StardewValleyFrame extends JFrame {
 		status.getParsnip().setText(Integer.toString(keeper.getParsnipEach()));
 		status.getCarrot().setText(Integer.toString(keeper.getCarrotEach()));
 		status.getBerry().setText(Integer.toString(keeper.getBerryEach()));
+	}
+	
+	public void sellCrop() {
+		System.out.println("작물을 판다. 동작확인");
+		System.out.println("현재 파스닙 가격" + store.getParsnipPrice());
+		if (keeper.getParsnipEach() == 0) {
+			System.out.println("보관된 파스닙이 없습니다.");
+		} else {
+			player.setMoney(player.getMoney() + (keeper.getParsnipEach() * store.getParsnipPrice()));
+			keeper.setParsnipEach(0);
+			status.getWallet().setText(Integer.toString(player.getMoney()));
+			System.out.println("플레이어가 파스닙 팔아서 창고에 남은 갯수 " + keeper.getParsnipEach());
+		}
 	}
 	
 	public static void main(String[] args) {

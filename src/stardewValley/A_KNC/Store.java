@@ -1,5 +1,9 @@
 package stardewValley.A_KNC;
 
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -21,6 +25,10 @@ public class Store extends JLabel implements Runnable{
 	private ImageIcon seller;
 	private ImageIcon sellerOn;
 	
+	private boolean seeNPC;
+	
+	Random random = new Random();
+	
 	public Store(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
@@ -36,13 +44,7 @@ public class Store extends JLabel implements Runnable{
 		seller = new ImageIcon("img/seller.png");
 		sellerOn = new ImageIcon("img/sellerOn.png");
 		
-		
-		parsnipEach = (int)(Math.random()*1000) + 500;
-		carrotEach = (int)(Math.random()*1000) + 500;
-		berryEach = (int)(Math.random()*1000) + 500;
-		
-		
-		
+		seeNPC = false;
 		
 	}
 	
@@ -53,19 +55,21 @@ public class Store extends JLabel implements Runnable{
 	}
 	
 	private void initThread() {
-		new Thread(new Runnable() {
+//		new Thread(new Runnable() {
+		
+		Timer timer = new Timer();
+		
+		TimerTask task = new TimerTask() {
 			
 			@Override
 			public void run() {
-				parsnipEach = (int)(Math.random()*1000) + 500;
-				carrotEach = (int)(Math.random()*1000) + 500;
-				berryEach = (int)(Math.random()*1000) + 500;
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-				}
+				parsnipPrice = (int) (random.nextInt(1000)) + 500;
+				carrotPrice = (int) (random.nextInt(1000)) + 500;
+				berryPrice = (int) (random.nextInt(1000)) + 500;
+				
 			}
-		}).start();
+		};
+		timer.scheduleAtFixedRate(task, 0, 10000);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -148,6 +152,14 @@ public class Store extends JLabel implements Runnable{
 
 	public ImageIcon getSellerOn() {
 		return sellerOn;
+	}
+	
+	public boolean isSeeNPC() {
+		return seeNPC;
+	}
+
+	public void setSeeNPC(boolean seeNPC) {
+		this.seeNPC = seeNPC;
 	}
 	
 	@Override
