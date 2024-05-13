@@ -65,6 +65,9 @@ public class Player extends JLabel implements Moveable {
 
 	private boolean create;
 
+	// 파스닙에 물 줄 때
+	private boolean waterToParsnip;
+	
 	// 우물에서 물 퍼낼 때
 	private boolean scoopWater;
 	private int sprinklingCanGage;
@@ -115,6 +118,9 @@ public class Player extends JLabel implements Moveable {
 
 		create = false;
 
+		// 파스닙에 물 줄 때 위치
+		waterToParsnip = false;
+		
 		// 우물에서 물 퍼낼 때
 		scoopWater = false;
 		sprinklingCanGage = 0;
@@ -431,10 +437,6 @@ public class Player extends JLabel implements Moveable {
 		return playerWater;
 	}
 
-//	public Parsnip plantParsnip() {
-//		return parsnip = new Parsnip(this);
-//	}
-
 	public boolean isCreate() {
 		return create;
 	}
@@ -472,4 +474,12 @@ public class Player extends JLabel implements Moveable {
 		return MAX_CANGAGE;
 	}
 
+	public boolean isWaterToParsnip() {
+		return waterToParsnip;
+	}
+
+	public void setWaterToParsnip(boolean waterToParsnip) {
+		this.waterToParsnip = waterToParsnip;
+	}
+	
 }

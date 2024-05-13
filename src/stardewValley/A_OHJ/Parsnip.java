@@ -21,8 +21,10 @@ public class Parsnip extends Vegetable {
 	// 메소드
 	@Override
 	public void initData() {
+		waterGage = 2;
 		growing = true;
 		create = false;
+
 		growing1 = new ImageIcon("img/Parsnip_Stage_1.png");
 		growing2 = new ImageIcon("img/Parsnip_Stage_2.png");
 		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
@@ -42,41 +44,143 @@ public class Parsnip extends Vegetable {
 
 	@Override
 	public void grow() {
+
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				for (int i = 0; i < 1; i++) {
+				synchronized (this) {
 					try {
 						setIcon(growing1);
-
-						Thread.sleep(growSpeed);
-						setIcon(growing2);
-
-						Thread.sleep(growSpeed);
-						setIcon(growing3);
-
-						Thread.sleep(growSpeed);
-						setIcon(growing4);
-
-						Thread.sleep(growSpeed);
-						setIcon(lastGrowing);
-
-						canHarvest = true;
+						Thread.sleep(3000);
+						setWaterGage(getWaterGage() - 1);
+						System.out.println(getWaterGage());
+						notify();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+
+					if (getWaterGage() == 0) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					
+					if (getWaterGage() == MAX_WATERGAGE) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					try {
+						Thread.sleep(growSpeed);
+						setIcon(growing2);
+						setWaterGage(getWaterGage() - 1);
+						System.out.println(getWaterGage());
+						notify();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+					if (getWaterGage() == 0) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					if (getWaterGage() == MAX_WATERGAGE) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					try {
+						Thread.sleep(growSpeed);
+						setIcon(growing3);
+						setWaterGage(getWaterGage() - 1);
+						System.out.println(getWaterGage());
+						notify();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+					if (getWaterGage() == 0) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					if (getWaterGage() == MAX_WATERGAGE) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					try {
+						Thread.sleep(growSpeed);
+						setIcon(growing4);
+						setWaterGage(getWaterGage() - 1);
+						System.out.println(getWaterGage());
+						notify();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+					if (getWaterGage() == 0) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					if (getWaterGage() == MAX_WATERGAGE) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					try {
+						Thread.sleep(growSpeed);
+						setIcon(lastGrowing);
+						canHarvest = true;
+						System.out.println(getWaterGage());
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
 				}
 			}
 		}).start();
-		if (canHarvest == true) {
-			Thread.interrupted();
-		}
 	}
 
 	@Override
 	public void sprinkling() {
 
+	}
+
+	@Override
+	public int getPrice() {
+		return price;
 	}
 
 	// getter, setter
@@ -102,11 +206,6 @@ public class Parsnip extends Vegetable {
 
 	public void setCreate(boolean create) {
 		this.create = create;
-	}
-
-	@Override
-	public int getPrice() {
-		return price;
 	}
 
 } // end of class
