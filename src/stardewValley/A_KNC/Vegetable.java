@@ -66,5 +66,15 @@ public class Vegetable extends JLabel implements IVegetable{
 	public void setCanHarvest(boolean canHarvest) {
 		this.canHarvest = canHarvest;
 	}
+
+	public int getWaterGage() {
+		return waterGage;
+	}
+
+	public void setWaterGage(int waterGage) {
+		this.waterGage = waterGage;
+	}
+	
+	
 	
 }
