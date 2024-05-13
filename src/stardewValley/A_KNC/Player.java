@@ -1,10 +1,7 @@
 package stardewValley.A_KNC;
 
-import java.awt.Color;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
 public class Player extends JLabel implements Moveable {
@@ -37,9 +34,9 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown; // -> 디폴트
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
-	
+
 	private ImageIcon playerWater;
-	
+
 	private Store store;
 	private Keeper keeper;
 	private Water water;
@@ -63,13 +60,17 @@ public class Player extends JLabel implements Moveable {
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
-	
+
 	private boolean create;
-	
-	private int wallet;
-	
+
+	private int money;
+
 	private boolean sellParsnip;
-	
+
+	private int haveParsnip;
+	private int haveCarrot;
+	private int haveBerry;
+
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
 		this.store = store;
@@ -78,9 +79,8 @@ public class Player extends JLabel implements Moveable {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this, store , keeper, water)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water)).start();
 	}
-
 
 	private void initData() {
 
@@ -104,22 +104,22 @@ public class Player extends JLabel implements Moveable {
 		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
 
 		playerWater = new ImageIcon("img/PlayerWater.png");
-		
+
 		left = false;
 		right = false;
 		up = false;
 		down = false;
 
 		create = false;
-		
+
 		leftWallCrash = false;
 		rightWallCrash = false;
 		upWallCrash = false;
 		downWallCrash = false;
 
 		playerWay = PlayerWay.DOWN;
-		
-		wallet = 0;
+
+		money = 0;
 		sellParsnip = true;
 	}
 
@@ -304,15 +304,15 @@ public class Player extends JLabel implements Moveable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Vegetable createParsnip() {
 		return new Parsnip(this);
 	}
-	
+
 	public Vegetable createCarrot() {
 		return new Carrot(this);
 	}
-	
+
 	public Vegetable createBerry() {
 		return new Strawberry(this);
 	}
@@ -418,7 +418,7 @@ public class Player extends JLabel implements Moveable {
 	public ImageIcon getPlayerDown() {
 		return playerDown;
 	}
-	
+
 	public ImageIcon getPlayerWater() {
 		return playerWater;
 	}
@@ -434,13 +434,47 @@ public class Player extends JLabel implements Moveable {
 	public void setCreate(boolean create) {
 		this.create = create;
 	}
-	
+
 	public boolean isSellParsnip() {
 		return sellParsnip;
 	}
-	
+
 	public void setSellParsnip(boolean sellParsnip) {
 		this.sellParsnip = sellParsnip;
 	}
+
+	public int getHaveParsnip() {
+		return haveParsnip;
+	}
+
+	public void setHaveParsnip(int haveParsnip) {
+		this.haveParsnip = haveParsnip;
+	}
+
+	public int getHaveCarrot() {
+		return haveCarrot;
+	}
+
+	public void setHaveCarrot(int haveCarrot) {
+		this.haveCarrot = haveCarrot;
+	}
+
+	public int getHaveBerry() {
+		return haveBerry;
+	}
+
+	public void setHaveBerry(int haveBerry) {
+		this.haveBerry = haveBerry;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	
+	
 	
 }

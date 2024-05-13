@@ -124,6 +124,10 @@ public class Water extends JLabel{
 	public ImageIcon getWater() {
 		return water;
 	}
+	
+	public void setWater(ImageIcon water) {
+		this.water = water;
+	}
 
 	public ImageIcon getWaterOn() {
 		return waterOn;
