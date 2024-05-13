@@ -7,10 +7,6 @@ public class Vegetable extends JLabel implements IVegetable{
 
 	// 멤버 변수
 		protected String name;
-		
-		protected int sNum;
-		
-		
 		// 포함관계 - 프레임, 플레이어
 		StardewValleyFrame mContext;
 		protected Player player;
@@ -35,6 +31,8 @@ public class Vegetable extends JLabel implements IVegetable{
 		protected boolean create;
 		// 작물 가격
 		protected int price;
+		
+		protected static int MAX_PLANT = 2;
 	
 	
 	@Override
@@ -69,12 +67,12 @@ public class Vegetable extends JLabel implements IVegetable{
 		this.canHarvest = canHarvest;
 	}
 
-	public int getsNum() {
-		return sNum;
+	public int getWaterGage() {
+		return waterGage;
 	}
 
-	public void setsNum(int sNum) {
-		this.sNum = sNum;
+	public void setWaterGage(int waterGage) {
+		this.waterGage = waterGage;
 	}
 	
 	
