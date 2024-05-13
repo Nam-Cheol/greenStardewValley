@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -173,8 +174,8 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_D:
-					System.out.println("작물 저장");
-
+					saveCrop();
+					
 					break;
 				default:
 					break;
@@ -234,7 +235,21 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	public void saveCrop() {
-
+		System.out.println("작물 저장");
+		keeper.setParsnipEach(player.getHaveParsnip());
+		player.setHaveParsnip(0);
+		System.out.println("창고 파스닙 : " + keeper.getParsnipEach());
+		System.out.println("플레이어 파스닙의 갯수 :" + player.getHaveParsnip());
+		
+		keeper.setCarrotEach(player.getHaveCarrot());
+		player.setHaveCarrot(0);
+		System.out.println("창고 당근 : " + keeper.getCarrotEach());
+		System.out.println("플레이어 당근의 갯수 " + player.getHaveCarrot());
+		
+		keeper.setBerryEach(player.getHaveBerry());
+		player.setHaveBerry(0);
+		System.out.println("창고 딸기 :" + keeper.getBerryEach());
+		System.out.println("플레이어 딸기의 갯수" + player.getHaveBerry());
 	}
 
 	public static void main(String[] args) {

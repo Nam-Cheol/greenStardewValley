@@ -4,7 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Store extends JLabel implements Runnable{
-
+	
+	
+	// map을 쓴다면? 
 	StardewValleyFrame mContext;
 	
 	private int x;
@@ -37,7 +39,7 @@ public class Store extends JLabel implements Runnable{
 		sellerOn = new ImageIcon("img/sellerOn.png");
 		
 		
-		parsnipEach = (int)(Math.random()*1000) + 500;
+		parsnipEach =0;
 		carrotEach = (int)(Math.random()*1000) + 500;
 		berryEach = (int)(Math.random()*1000) + 500;
 		
@@ -149,6 +151,8 @@ public class Store extends JLabel implements Runnable{
 	public ImageIcon getSellerOn() {
 		return sellerOn;
 	}
+	
+	
 	
 	@Override
 	public void run() {

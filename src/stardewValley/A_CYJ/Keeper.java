@@ -3,44 +3,46 @@ package stardewValley.A_CYJ;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Keeper extends JLabel{
+public class Keeper extends JLabel {
 
 	StardewValleyFrame mContext;
-	
+
+	private Player player;
+
 	private int x;
 	private int y;
-	
+
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-	
+
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-	
+
 	private ImageIcon keeper;
 	private ImageIcon keeperOn;
-	
+
 	public Keeper(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-	
+
 	private void initData() {
-		
+
 		x = 200;
 		y = 200;
-		
+
 		keeper = new ImageIcon("img/keeper.png");
 		keeperOn = new ImageIcon("img/keeperOn.png");
-		
+
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
-		
+
 	}
-	
+
 	private void setInitLayout() {
 		this.setIcon(keeper);
 		this.setLocation(x, y);
@@ -52,7 +54,7 @@ public class Keeper extends JLabel{
 	}
 
 	// getter, setter
-	
+
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -128,12 +130,5 @@ public class Keeper extends JLabel{
 	public ImageIcon getKeeperOn() {
 		return keeperOn;
 	}
-	
-	// 저장하는 기능
-	public void saveVege () {
-		
-	}
-	
-	
-	
+
 }
