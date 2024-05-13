@@ -32,7 +32,7 @@ public class Vegetable extends JLabel implements IVegetable{
 		// 작물 가격
 		protected int price;
 		
-		protected static int MAX_PLANT = 2;
+		protected static int MAX_PLANT = 5;
 	
 	
 	@Override
