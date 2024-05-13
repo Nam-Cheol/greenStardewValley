@@ -82,6 +82,7 @@ public class Parsnip extends Vegetable{
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					canHarvest = true;
 				}
 			}
 		}).start();

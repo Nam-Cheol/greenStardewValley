@@ -66,6 +66,7 @@ public class Carrot extends Vegetable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					canHarvest = true;
 				}
 			}
 		}).start();

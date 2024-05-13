@@ -81,6 +81,7 @@ public class Strawberry extends Vegetable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					canHarvest = true;
 				}
 			}
 		}).start();

@@ -19,6 +19,8 @@ public class Water extends JLabel {
 	private int berryEach;
 
 	private ImageIcon water;
+	
+	private boolean seeNPC;
 
 	public Water(StardewValleyFrame mContext) {
 		initData();
@@ -123,4 +125,13 @@ public class Water extends JLabel {
 		return water;
 	}
 
+	public boolean isSeeNPC() {
+		return seeNPC;
+	}
+
+	public void setSeeNPC(boolean seeNPC) {
+		this.seeNPC = seeNPC;
+	}
+	
+	
 }
