@@ -7,6 +7,7 @@ public class Parsnip extends Vegetable{
 
 	// 멤버 변수
 	private String name = "파스닙";
+	private int growSpeed = 5000;
 	// 플레이어
 	private Player player;
 	private int x;
@@ -19,6 +20,8 @@ public class Parsnip extends Vegetable{
 	private ImageIcon growing3;
 	private ImageIcon growing4;
 	private ImageIcon lastGrowing;
+	
+	private ParsnipGauge gauge;
 	
 	private Parsnip[] parsnip;
 	
@@ -63,26 +66,127 @@ public class Parsnip extends Vegetable{
 			
 			@Override
 			public void run() {
-				maxPlant--;
-				for(int i = 0; i < 1; i++) {
+				MAX_PLANT--;
+				synchronized (this) {
 					try {
 						setIcon(growing1);
-						Thread.sleep(1000);
-						setIcon(growing2);
-						
-						Thread.sleep(1000);
-						setIcon(growing3);
-						
-						Thread.sleep(1000);
-						setIcon(growing4);
-						
-						Thread.sleep(1000);
-						setIcon(lastGrowing);
-						
+						Thread.sleep(3000);
+						setWaterGage(getWaterGage() - 1);
+						System.out.println(getWaterGage());
+						gauge.setIcon(new ImageIcon("img/gauge/ParsnipWater1.png"));
+						notify();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					canHarvest = true;
+
+					if (getWaterGage() == 0) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					
+					if (getWaterGage() == MAX_WATERGAGE) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					try {
+						Thread.sleep(growSpeed);
+						setIcon(growing2);
+						setWaterGage(getWaterGage() - 1);
+						System.out.println(getWaterGage());
+						notify();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+					if (getWaterGage() == 0) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					if (getWaterGage() == MAX_WATERGAGE) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					try {
+						Thread.sleep(growSpeed);
+						setIcon(growing3);
+						setWaterGage(getWaterGage() - 1);
+						System.out.println(getWaterGage());
+						notify();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+					if (getWaterGage() == 0) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					if (getWaterGage() == MAX_WATERGAGE) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					try {
+						Thread.sleep(growSpeed);
+						setIcon(growing4);
+						setWaterGage(getWaterGage() - 1);
+						System.out.println(getWaterGage());
+						notify();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+					if (getWaterGage() == 0) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					if (getWaterGage() == MAX_WATERGAGE) {
+						try {
+							setIcon(null);
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+
+					try {
+						Thread.sleep(growSpeed);
+						setIcon(lastGrowing);
+						canHarvest = true;
+						System.out.println(getWaterGage());
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
 				}
 			}
 		}).start();

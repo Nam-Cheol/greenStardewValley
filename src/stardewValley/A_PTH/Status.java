@@ -86,9 +86,17 @@ public class Status extends JLabel {
 		parsnipPrice.setFont(f);
 		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
 		// 당근의 가격
-		
+		mContext.add(carrotPrice);
+		carrotPrice.setLocation(1780, 260);
+		carrotPrice.setSize(100, 100);
+		carrotPrice.setFont(f);
+		carrotPrice.setText(Integer.toString(store.getCarrotPrice()));
 		// 딸기의 가격
-		
+		mContext.add(berryPrice);
+		berryPrice.setLocation(1780, 340);
+		berryPrice.setSize(100, 100);
+		berryPrice.setFont(f);
+		berryPrice.setText(Integer.toString(store.getBerryPrice()));
 	}
 
 	public JLabel getWallet() {
@@ -134,7 +142,11 @@ public class Status extends JLabel {
 	public JLabel getBerryPrice() {
 		return berryPrice;
 	}
-	
+	public void rePrice() {
+		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
+		carrotPrice.setText(Integer.toString(store.getCarrotPrice()));
+		berryPrice.setText(Integer.toString(store.getBerryPrice()));
+	}
 	
 	
 }

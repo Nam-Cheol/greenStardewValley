@@ -212,7 +212,7 @@ public class StardewValleyFrame extends JFrame {
 					sellCrop();
 					break;
 				case KeyEvent.VK_SPACE:
-					Vegetable.maxPlant = 5;
+					Vegetable.MAX_PLANT = 5;
 					System.out.println("동작중");
 					player.setMoney(player.getMoney() + 10000);
 					status.getWallet().setText(Integer.toString(player.getMoney()));
@@ -252,41 +252,28 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	public void harvest() {
-		for (int i = 0; i < temp + 1; i++) {
-			if(vegetables[temp] == null) {
-				return;
-			}
-//			if ((vegetables[temp].getName() == "파스닙" || vegetables[temp].getName() == "딸기" || vegetables[temp].getName() == "당근") || vegetables[temp] != null) {
-			if(vegetables[temp].getName() != null) {	
+		for (int i = 0; i < 3; i++) {
+			
+			if(vegetables[i] != null) {	
 			System.out.println("인식은 했음");
-				if (vegetables[temp].isCanHarvest()) {
-					System.out.println(vegetables[temp].getName() + "을 수확했다.");
+				if (vegetables[i].isCanHarvest()) {
+					System.out.println(vegetables[i].getName() + "을 수확했다.");
 					// 작물 종류에 따라 플레이어의 작물 보유량 증가
-					if (vegetables[temp] instanceof Parsnip) {
+					if (vegetables[i] instanceof Parsnip) {
 						player.setHaveParsnip(player.getHaveParsnip() + 1);
 						System.out.println("파스닙의 갯수 : " + player.getHaveParsnip());
-					} else if (vegetables[temp] instanceof Carrot) {
+					} else if (vegetables[i] instanceof Carrot) {
 						player.setHaveCarrot(player.getHaveCarrot() + 1);
 						System.out.println("당근의 갯수 : " + player.getHaveCarrot());
-					} else if (vegetables[temp] instanceof Strawberry) {
+					} else if (vegetables[i] instanceof Strawberry) {
 						player.setHaveBerry(player.getHaveBerry() + 1);
 						System.out.println("딸기의 갯수 : " + player.getHaveBerry());
 					}
-					vegetables[temp].setIcon(null);
-					vegetables[temp] = null;
-					System.out.println(temp);
-					temp++;
-					if (temp == 3) {
-						System.out.println("3번은 찼다리우스");
-						temp = 0;
-
-					}
-					System.out.println(temp);
-					System.out.println();
+					vegetables[i].setIcon(null);
+					vegetables[i] = null;
 					break;
 				} else {
 					System.out.println(vegetables[temp].getName() + " 은(는) 지금 자라는 중이다.");
-					return;
 				}
 			}
 		}
@@ -322,7 +309,7 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	public void vCount() {
-		if (Vegetable.maxPlant == 0) {
+		if (Vegetable.MAX_PLANT == 0) {
 			player.setCreate(false);
 //			temp = 0;
 			return;

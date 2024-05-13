@@ -60,7 +60,7 @@ public class Strawberry extends Vegetable {
 			
 			@Override
 			public void run() {
-				maxPlant--;
+				MAX_PLANT--;
 				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
@@ -78,10 +78,11 @@ public class Strawberry extends Vegetable {
 						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
+						
+						canHarvest = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					canHarvest = true;
 				}
 			}
 		}).start();
