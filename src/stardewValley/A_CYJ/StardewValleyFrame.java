@@ -233,23 +233,29 @@ public class StardewValleyFrame extends JFrame {
 			}
 		}
 	}
-
+	
+	// 저장하는 기능
 	public void saveCrop() {
 		System.out.println("작물 저장");
-		keeper.setParsnipEach(player.getHaveParsnip());
+		keeper.setParsnipEach(keeper.getParsnipEach() + player.getHaveParsnip());
 		player.setHaveParsnip(0);
-		System.out.println("창고 파스닙 : " + keeper.getParsnipEach());
+		System.out.println("창고 파스닙 : " + keeper.getParsnipEach() );
 		System.out.println("플레이어 파스닙의 갯수 :" + player.getHaveParsnip());
 		
-		keeper.setCarrotEach(player.getHaveCarrot());
+		keeper.setCarrotEach(keeper.getCarrotEach() + player.getHaveCarrot());
 		player.setHaveCarrot(0);
 		System.out.println("창고 당근 : " + keeper.getCarrotEach());
 		System.out.println("플레이어 당근의 갯수 " + player.getHaveCarrot());
 		
-		keeper.setBerryEach(player.getHaveBerry());
+		keeper.setBerryEach(keeper.getBerryEach() + player.getHaveBerry());
 		player.setHaveBerry(0);
 		System.out.println("창고 딸기 :" + keeper.getBerryEach());
 		System.out.println("플레이어 딸기의 갯수" + player.getHaveBerry());
+	}
+	
+	// 작물을 파는 기능
+	public void sellCrop() {
+		
 	}
 
 	public static void main(String[] args) {
