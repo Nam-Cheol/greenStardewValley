@@ -23,7 +23,7 @@ public class Strawberry extends Vegetable {
 	private ImageIcon lastGrowing;
 	
 	private Strawberry[] berry;
-
+	
 	// 생성자
 	public Strawberry(Player player) {
 		this.player = player;
@@ -60,6 +60,7 @@ public class Strawberry extends Vegetable {
 			
 			@Override
 			public void run() {
+				maxPlant--;
 				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);

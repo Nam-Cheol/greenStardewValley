@@ -39,11 +39,10 @@ public class Carrot extends Vegetable {
 
 	@Override
 	public void setInitLayout() {
-//		x = player.getX();
-//		y = player.getY();
-//		setSize(48, 64);
-//		setLocation(x, y + plantLocation);
-//		setIcon(null);
+		x = player.getX();
+		y = player.getY();
+		setSize(48, 64);
+		setIcon(null);
 	}
 
 	@Override
@@ -52,6 +51,7 @@ public class Carrot extends Vegetable {
 			
 			@Override
 			public void run() {
+				maxPlant--;
 				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);

@@ -63,6 +63,7 @@ public class Parsnip extends Vegetable{
 			
 			@Override
 			public void run() {
+				maxPlant--;
 				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
