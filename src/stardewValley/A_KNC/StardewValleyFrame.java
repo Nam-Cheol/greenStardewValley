@@ -162,7 +162,7 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_Q:
-//					vCount();
+					vCount();
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -176,7 +176,8 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_W:
-//					vCount();
+					vCount();
+					System.out.println(player.isCreate());
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -190,7 +191,7 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_E:
-//					vCount();
+					vCount();
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -243,6 +244,7 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_F1:
+					Vegetable.MAX_PLANT = 2;
 					info.setIcon(info.getHelpInfo1());
 					info.setSize(800, 520);
 					info.setLocation(200, 200);
@@ -275,9 +277,12 @@ public class StardewValleyFrame extends JFrame {
 
 	public void harvest() {
 		for (int i = 0; i < temp + 1; i++) {
-			if (vegetables[temp] != null) {
+			System.out.println("ㅋㅋ");
+			System.out.println(player.isCreate());
+			if (vegetables[temp].getName()  != null) {
+				System.out.println("효정이 바보");
 				if (vegetables[temp].isCanHarvest()) {
-					System.out.println(vegetables[temp].name + "을 수확했다.");
+					System.out.println(vegetables[temp].getName() + "을 수확했다.");
 					// 작물 종류에 따라서 플레이어의 작물 보유량 증가
 					if (vegetables[temp] instanceof Parsnip) {
 						player.setHaveParsnip(player.getHaveParsnip() + 1);
@@ -289,7 +294,6 @@ public class StardewValleyFrame extends JFrame {
 						player.setHaveBerry(player.getHaveBerry() + 1);
 						System.out.println("딸기의 갯수 :" + player.getHaveBerry());
 					}
-					vegetables[temp].setCanHarvest(false);
 					vegetables[temp].setIcon(null);
 					vegetables[temp] = null;
 					System.out.println(temp);
@@ -301,7 +305,7 @@ public class StardewValleyFrame extends JFrame {
 					System.out.println();
 					break;
 				} else {
-					System.out.println(vegetables[temp].name + "은 지금은 자라는 중이다.");
+					System.out.println(vegetables[temp].getName() + "은 지금은 자라는 중이다.");
 					break;
 				}
 			}
@@ -361,7 +365,8 @@ public class StardewValleyFrame extends JFrame {
 	public void vCount() {
 		if(Vegetable.MAX_PLANT == 0) {
 			player.setCreate(false);
-			return;
+		} else {
+			player.setCreate(true);
 		}
 	}
 	

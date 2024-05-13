@@ -82,7 +82,6 @@ public class Parsnip extends Vegetable{
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
 					}
 
 					if (getWaterGage() == 0) {
@@ -90,7 +89,6 @@ public class Parsnip extends Vegetable{
 							setIcon(null);
 							this.wait();
 						} catch (InterruptedException e) {
-							e.printStackTrace();
 						}
 					}
 					if (getWaterGage() == MAX_WATERGAGE) {
@@ -98,7 +96,6 @@ public class Parsnip extends Vegetable{
 							setIcon(null);
 							this.wait();
 						} catch (InterruptedException e) {
-							e.printStackTrace();
 						}
 					}
 
@@ -109,7 +106,6 @@ public class Parsnip extends Vegetable{
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
 					}
 
 					if (getWaterGage() == 0) {
