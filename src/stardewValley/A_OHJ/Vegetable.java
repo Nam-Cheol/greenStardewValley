@@ -24,10 +24,8 @@ public class Vegetable extends JLabel implements IVegetable {
 	// 물
 	protected final int MAX_WATERGAGE = 4;
 	protected int waterGage;
-	protected boolean vegeGetWater;
 	// 수확
 	protected boolean canHarvest;
-	int temp = 0;
 	// 밭에 접근
 	protected boolean create;
 	// 작물 가격

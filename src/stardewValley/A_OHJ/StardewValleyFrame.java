@@ -165,6 +165,7 @@ public class StardewValleyFrame extends JFrame {
 							}
 						}
 					}
+					break;
 				case KeyEvent.VK_R:
 					// 수확하기
 					if (player.isCreate()) {
@@ -193,7 +194,6 @@ public class StardewValleyFrame extends JFrame {
 					break;
 
 				case KeyEvent.VK_A:
-					water.minusPondGage();
 					// 연못에서 물 채우기
 					if (player.isScoopWater() == true) {
 						player.setIcon(player.getPlayerWater());

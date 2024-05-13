@@ -68,7 +68,7 @@ public class Player extends JLabel implements Moveable {
 	// 우물에서 물 퍼낼 때
 	private boolean scoopWater;
 	private int sprinklingCanGage;
-	private final int MAX_CANGAGE = 10;
+	private final int MAX_CANGAGE = 5;
 
 	private int wallet;
 
