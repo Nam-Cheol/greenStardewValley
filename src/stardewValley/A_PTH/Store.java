@@ -118,5 +118,6 @@ public class Store extends JLabel {
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
 	}
+	
 
 }

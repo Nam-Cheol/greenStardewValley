@@ -1,9 +1,10 @@
 package stardewValley.A_PTH;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,17 +20,35 @@ public class StardewValleyFrame extends JFrame {
 	private JLabel backgroundMap;
 
 	private Player player;
-	private Vegetable parsnip;
-	private Vegetable carrot;
-	private Vegetable berry;
+
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+
+	private Vegetable[] vegetables;
+
+	private TimeGauge timeGauge;
+	private ParsnipGauge parsnipGauge;
+	private CarrotGauge carrotGauge;
+	private BerryGauge berryGauge;
+	private WaterGauge waterGauge;
+
+//	private Vegetable parsnipCount;
+//	private Vegetable carrotCount;
+//	private Vegetable berryCount;
+
+	private int tempMoney;
+	private JLabel money;
+	
+
+
+	Graphics gold;
+
+	private int temp = 0;
+
 	private HelpInfo info;
 
 //	private boolean q;
-
-	private Vegetable[] vegetables;
 
 	public StardewValleyFrame() {
 		initData();
@@ -43,12 +62,20 @@ public class StardewValleyFrame extends JFrame {
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
+		tempMoney = 10_000;
+
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		water = new Water(mContext);
 
 		player = new Player(mContext, store, keeper, water);
 		info = new HelpInfo(mContext);
+
+		timeGauge = new TimeGauge(mContext);
+		parsnipGauge = new ParsnipGauge(mContext);
+		carrotGauge = new CarrotGauge(mContext);
+		berryGauge = new BerryGauge(mContext);
+		waterGauge = new WaterGauge(mContext);
 
 		vegetables = new Vegetable[3];
 
@@ -65,7 +92,20 @@ public class StardewValleyFrame extends JFrame {
 		add(store);
 		add(keeper);
 		add(water);
+
 		add(info);
+
+		add(timeGauge);
+		add(parsnipGauge);
+		add(carrotGauge);
+		add(berryGauge);
+		add(waterGauge);
+
+		gold = backgroundMap.getGraphics();
+		gold.setColor(Color.black);
+		gold.setFont(new Font("굴림", Font.PLAIN, 50));
+		gold.drawString(Integer.toString(tempMoney), 1400, 340);
+		gold.dispose();
 //		if(q) {
 //		}
 //		add(info);
@@ -140,21 +180,8 @@ public class StardewValleyFrame extends JFrame {
 						player.down();
 					}
 					break;
-				case KeyEvent.VK_NUMPAD1:
-					if (player.isCreate()) {
-						for (int i = 0; i < 3; i++) {
-							if (vegetables[i] == null) {
-								vegetables[i] = player.createParsnip();
-								player.setIcon(player.getPlayerWater());
-								add(vegetables[i]);
-								VLocation(i);
-								break;
-							}
-						}
-					}
-					break;
-
-				case KeyEvent.VK_NUMPAD2:
+				case KeyEvent.VK_Q:
+					vCount();
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
@@ -168,11 +195,28 @@ public class StardewValleyFrame extends JFrame {
 
 					}
 					break;
-				case KeyEvent.VK_NUMPAD3:
+
+				case KeyEvent.VK_W:
+					vCount();
 					if (player.isCreate()) {
 						for (int i = 0; i < 3; i++) {
 							if (vegetables[i] == null) {
-								vegetables[i] = player.createParsnip();
+								vegetables[i] = player.createCarrot();
+								player.setIcon(player.getPlayerWater());
+								add(vegetables[i]);
+								VLocation(i);
+								break;
+							}
+						}
+
+					}
+					break;
+				case KeyEvent.VK_E:
+					vCount();
+					if (player.isCreate()) {
+						for (int i = 0; i < 3; i++) {
+							if (vegetables[i] == null) {
+								vegetables[i] = player.createBerry();
 								player.setIcon(player.getPlayerWater());
 								add(vegetables[i]);
 								VLocation(i);
@@ -180,9 +224,15 @@ public class StardewValleyFrame extends JFrame {
 							}
 
 						}
-						berry = player.createBerry();
 
 					}
+					break;
+				case KeyEvent.VK_R:
+					harvest();
+					break;
+				case KeyEvent.VK_T:
+					Vegetable.maxPlant = 2;
+					System.out.println("씨앗 채워짐");
 					break;
 				case KeyEvent.VK_F1:
 //					q = true;
@@ -193,10 +243,10 @@ public class StardewValleyFrame extends JFrame {
 					info.setLocation(200, 200);
 					keeper.setIcon(null);
 					water.setIcon(null);
-					System.out.println(e.getKeyCode());
+//					System.out.println(e.getKeyCode());
 					player.mContext.allStop();
 					player.setIcon(null);
-				
+
 					break;
 				default:
 					break;
@@ -215,7 +265,39 @@ public class StardewValleyFrame extends JFrame {
 
 	public void VLocation(int i) {
 		int temp = 60;
-		vegetables[i].setLocation(180 + (temp * i), 690);
+		vegetables[i].setLocation(180 + (temp * i), 680);
+	}
+
+	public void vCount() {
+				player.setCreate(true);
+			System.out.println("Planted");
+			if(Vegetable.maxPlant == 0){ // maxPlant == 0 이라면
+				player.setCreate(false);
+				System.out.println("end");
+				return;
+			}
+		
+	}
+
+	public void harvest() {
+		for (int i = 0; i < temp + 1; i++) {
+			if (vegetables[temp] != null) {
+				if (vegetables[temp].isCanHarvest()) {
+					vegetables[temp].setCanHarvest(false);
+					vegetables[temp].setIcon(null);
+					vegetables[temp] = null;
+					System.out.println(temp);
+					temp++;
+					if (temp == 3) {
+						temp = 0;
+					}
+					System.out.println(temp);
+					break;
+				} else {
+					break;
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) {
