@@ -9,8 +9,6 @@ public class Strawberry extends Vegetable {
 	// 멤버 변수
 	private String name = "딸기";
 
-	protected int berryNum = 3;
-
 	// 생성자
 	public Strawberry(Player player) {
 		this.player = player;
@@ -29,7 +27,6 @@ public class Strawberry extends Vegetable {
 		growing4 = new ImageIcon("img/Strawberry_Stage_4.png");
 		growing5 = new ImageIcon("img/Strawberry_Stage_5.png");
 		lastGrowing = new ImageIcon("img/Strawberry_Stage_6.png");
-		sNum = 3;
 	}
 
 	@Override
@@ -43,27 +40,28 @@ public class Strawberry extends Vegetable {
 	@Override
 	public void grow() {
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
-				for (int i = 0; i < 1; i++) {
+				MAX_PLANT--;
+				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);
 						Thread.sleep(1000);
 						setIcon(growing2);
-
+						
 						Thread.sleep(1000);
 						setIcon(growing3);
-
+						
 						Thread.sleep(1000);
 						setIcon(growing4);
-
+						
 						Thread.sleep(1000);
 						setIcon(growing5);
-
+						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
-
+						
 						canHarvest = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -97,12 +95,12 @@ public class Strawberry extends Vegetable {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
+	
 	@Override
 	public int getPrice() {
 		return price;
 	}
-
+	
 	public boolean isCreate() {
 		return create;
 	}
@@ -110,7 +108,7 @@ public class Strawberry extends Vegetable {
 	public void setCreate(boolean create) {
 		this.create = create;
 	}
-
+	
 	public ImageIcon getLastGrowing() {
 		return lastGrowing;
 	}

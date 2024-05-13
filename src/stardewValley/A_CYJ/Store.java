@@ -7,47 +7,54 @@ import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Store extends JLabel {
+public class Store extends JLabel implements Runnable{
 
 	StardewValleyFrame mContext;
-
+	
 	private int x;
 	private int y;
-
-	Random random = new Random();
-
-	private int parsnipPrice = (int) (random.nextInt(1000)) + 500;
-	private int carrotPrice = (int) (random.nextInt(1000)) + 500;
-	private int berryPrice = (int) (random.nextInt(1000)) + 500;
-
+	
+	private int parsnipPrice;
+	private int carrotPrice;
+	private int berryPrice;
+	
+	private int parsnipEach;
+	private int carrotEach;
+	private int berryEach;
+	
 	private ImageIcon seller;
 	private ImageIcon sellerOn;
-
+	
+	private boolean seeNPC;
+	
+	Random random = new Random();
+	
 	public Store(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		initThread();
 		this.mContext = mContext;
 	}
-
+	
 	private void initData() {
-
+		
 		x = 1000;
-		y = 200;
-
-		seller = new ImageIcon("img/seller.png");
-		sellerOn = new ImageIcon("img/sellerOn.png");
-
-
-
+		y = 160;
+		
+		seller = new ImageIcon("img/seller 복사.png");
+		sellerOn = new ImageIcon("img/sellerOn 복사.png");
+		
+		seeNPC = false;
+		
+		parsnipPrice = (int) (random.nextInt(1000)) + 500;
 	}
-
+	
 	private void setInitLayout() {
 		this.setIcon(seller);
 		this.setLocation(x, y);
-		this.setSize(100, 180);
+		this.setSize(130, 200);
 	}
-
+	
 	private void initThread() {
 //		new Thread(new Runnable() {
 		
@@ -57,13 +64,13 @@ public class Store extends JLabel {
 			
 			@Override
 			public void run() {
-				parsnipPrice = (int) (random.nextInt(1000 - 500 +1)) + 500;
-				carrotPrice = (int) (random.nextInt(1000 - 500+1)) + 500;
-				berryPrice = (int) (random.nextInt(1000 - 500+1)) + 500;
+				parsnipPrice = (int) (random.nextInt(1000)) + 500;
+				carrotPrice = (int) (random.nextInt(1000)) + 500;
+				berryPrice = (int) (random.nextInt(1000)) + 500;
 				
 			}
 		};
-		timer.scheduleAtFixedRate(task, 0, 10000);
+		timer.scheduleAtFixedRate(task, 0, 1000);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -71,7 +78,7 @@ public class Store extends JLabel {
 	}
 
 	// getter, setter
-
+	
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -116,6 +123,30 @@ public class Store extends JLabel {
 		this.berryPrice = berryPrice;
 	}
 
+	public int getParsnipEach() {
+		return parsnipEach;
+	}
+
+	public void setParsnipEach(int parsnipEach) {
+		this.parsnipEach = parsnipEach;
+	}
+
+	public int getCarrotEach() {
+		return carrotEach;
+	}
+
+	public void setCarrotEach(int carrotEach) {
+		this.carrotEach = carrotEach;
+	}
+
+	public int getBerryEach() {
+		return berryEach;
+	}
+
+	public void setBerryEach(int berryEach) {
+		this.berryEach = berryEach;
+	}
+	
 	public ImageIcon getSeller() {
 		return seller;
 	}
@@ -123,8 +154,22 @@ public class Store extends JLabel {
 	public ImageIcon getSellerOn() {
 		return sellerOn;
 	}
-
-
 	
+	public boolean isSeeNPC() {
+		return seeNPC;
+	}
 
+	public void setSeeNPC(boolean seeNPC) {
+		this.seeNPC = seeNPC;
+	}
+	
+	@Override
+	public void run() {
+		parsnipEach = (int)(Math.random()*1000) + 500;
+		carrotEach = (int)(Math.random()*1000) + 500;
+		berryEach = (int)(Math.random()*1000) + 500;
+	}
+	
+	
+	
 }

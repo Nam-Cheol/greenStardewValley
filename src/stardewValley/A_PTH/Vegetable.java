@@ -5,10 +5,8 @@ import javax.swing.JLabel;
 
 public class Vegetable extends JLabel implements IVegetable {
 	
-	protected String name;
-	
+	protected String name = "ㅋㅋ 효정이 바보";
 	StardewValleyFrame mContext;
-	
 	protected Player player;
 	protected int x;
 	protected int y;
@@ -27,19 +25,16 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected boolean vegeGetWater;
 	// 수확
 	protected boolean canHarvest;
-	int temp = 0;
-	protected static int maxPlant = 2;
-	protected boolean allplant;
 	// 밭에 접근
 	protected boolean create;
-	
 	// 작물 가격
-	private int price;
+	protected int price;
 	
+	protected static int maxPlant = 2;
 
 	@Override
 	public void initData() {
-
+		canHarvest = true;
 	}
 
 	@Override
@@ -98,9 +93,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	public int getMaxPlant() {
 		return maxPlant;
 	}
-	public boolean getAllplant() {
-		return allplant;
-	}
+
 	
 	
 }
