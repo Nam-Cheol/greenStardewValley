@@ -40,6 +40,8 @@ public class Player extends JLabel implements Moveable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	
+	private Status status;
 
 	// 플레이어의 좌표
 	private int x;
@@ -72,14 +74,15 @@ public class Player extends JLabel implements Moveable {
 	private int haveBerry;
 
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Status status) {
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
+		this.status = status;
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water, status)).start();
 	}
 
 	private void initData() {

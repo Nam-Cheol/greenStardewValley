@@ -41,6 +41,7 @@ public class Carrot extends Vegetable {
 			
 			@Override
 			public void run() {
+				MAX_PLANT--;
 				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);

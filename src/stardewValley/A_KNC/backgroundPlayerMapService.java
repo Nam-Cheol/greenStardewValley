@@ -23,12 +23,14 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private Status status;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Status status) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
+		this.status = status;
 		try {
 			image = ImageIO.read(new File("img/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {

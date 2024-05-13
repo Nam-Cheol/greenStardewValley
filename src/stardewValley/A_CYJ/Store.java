@@ -7,7 +7,7 @@ import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Store extends JLabel implements Runnable {
+public class Store extends JLabel {
 
 	StardewValleyFrame mContext;
 
@@ -38,9 +38,7 @@ public class Store extends JLabel implements Runnable {
 		seller = new ImageIcon("img/seller.png");
 		sellerOn = new ImageIcon("img/sellerOn.png");
 
-//		parsnipPrice = (int) (random.nextInt(1000)) + 500;
-//		carrotPrice = (int) (random.nextInt(1000)) + 500;
-//		berryPrice = (int) (random.nextInt(1000)) + 500;
+
 
 	}
 
@@ -59,9 +57,9 @@ public class Store extends JLabel implements Runnable {
 			
 			@Override
 			public void run() {
-				parsnipPrice = (int) (random.nextInt(1000)) + 500;
-				carrotPrice = (int) (random.nextInt(1000)) + 500;
-				berryPrice = (int) (random.nextInt(1000)) + 500;
+				parsnipPrice = (int) (random.nextInt(1000 - 500 +1)) + 500;
+				carrotPrice = (int) (random.nextInt(1000 - 500+1)) + 500;
+				berryPrice = (int) (random.nextInt(1000 - 500+1)) + 500;
 				
 			}
 		};
@@ -126,11 +124,7 @@ public class Store extends JLabel implements Runnable {
 		return sellerOn;
 	}
 
-	@Override
-	public void run() {
-		parsnipPrice = (int) (random.nextInt(1000)) + 500;
-		carrotPrice = (int) (random.nextInt(1000)) + 500;
-		berryPrice = (int) (random.nextInt(1000)) + 500;
-	}
+
+	
 
 }
