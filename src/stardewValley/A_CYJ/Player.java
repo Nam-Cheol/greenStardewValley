@@ -481,6 +481,16 @@ public class Player extends JLabel implements Moveable {
 	public void setHaveBerry(int haveBerry) {
 		this.haveBerry = haveBerry;
 	}
+
+
+	public int getWallet() {
+		return wallet;
+	}
+
+
+	public void setWallet(int wallet) {
+		this.wallet = wallet;
+	}
 	
 	
 	

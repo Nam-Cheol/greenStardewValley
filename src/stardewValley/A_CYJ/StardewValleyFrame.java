@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Map;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -169,13 +170,14 @@ public class StardewValleyFrame extends JFrame {
 					harvest();
 					break;
 				case KeyEvent.VK_S:
-					if (player.isSellParsnip()) {
-						System.out.println(store.getParsnipPrice());
-					}
+					sellCrop();
+//					if (player.isSellParsnip()) {
+//						System.out.println(store.getParsnipPrice());
+//					}
 					break;
 				case KeyEvent.VK_D:
 					saveCrop();
-					
+
 					break;
 				default:
 					break;
@@ -233,29 +235,38 @@ public class StardewValleyFrame extends JFrame {
 			}
 		}
 	}
-	
+
 	// 저장하는 기능
 	public void saveCrop() {
 		System.out.println("작물 저장");
 		keeper.setParsnipEach(keeper.getParsnipEach() + player.getHaveParsnip());
 		player.setHaveParsnip(0);
-		System.out.println("창고 파스닙 : " + keeper.getParsnipEach() );
+		System.out.println("창고 파스닙 : " + keeper.getParsnipEach());
 		System.out.println("플레이어 파스닙의 갯수 :" + player.getHaveParsnip());
-		
+
 		keeper.setCarrotEach(keeper.getCarrotEach() + player.getHaveCarrot());
 		player.setHaveCarrot(0);
 		System.out.println("창고 당근 : " + keeper.getCarrotEach());
 		System.out.println("플레이어 당근의 갯수 " + player.getHaveCarrot());
-		
+
 		keeper.setBerryEach(keeper.getBerryEach() + player.getHaveBerry());
 		player.setHaveBerry(0);
 		System.out.println("창고 딸기 :" + keeper.getBerryEach());
 		System.out.println("플레이어 딸기의 갯수" + player.getHaveBerry());
 	}
-	
+
 	// 작물을 파는 기능
 	public void sellCrop() {
-		
+		System.out.println("작물을 판다. 동작확인");
+		System.out.println("현재 파스닙 가격" + store.getParsnipPrice());
+		if (keeper.getParsnipEach() == 0) {
+			System.out.println("보관된 파스닙이 없습니다.");
+		} else {
+			player.setWallet(keeper.getParsnipEach() * store.getParsnipPrice());
+			keeper.setParsnipEach(0);
+			System.out.println(player.getWallet());
+			System.out.println("플레이어가 파스닙 팔아서 창고에 남은 갯수 " + keeper.getParsnipEach());
+		}
 	}
 
 	public static void main(String[] args) {
