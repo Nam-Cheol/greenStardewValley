@@ -19,15 +19,13 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected ImageIcon growing2;
 	protected ImageIcon growing3;
 	protected ImageIcon growing4;
-	protected ImageIcon growing5;
+//	protected ImageIcon growing5;
 	protected ImageIcon lastGrowing;
 	// 물
-	protected final int MAX_WATERGAGE = 4;
+	protected final int MAX_WATERGAGE = 5;
 	protected int waterGage;
-	protected boolean vegeGetWater;
 	// 수확
 	protected boolean canHarvest;
-	int temp = 0;
 	// 밭에 접근
 	protected boolean create;
 	// 작물 가격
@@ -61,7 +59,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	public int getMaxWaterGage() {
 		return MAX_WATERGAGE;
 	}
-	
+
 	public int getWaterGage() {
 		return waterGage;
 	}

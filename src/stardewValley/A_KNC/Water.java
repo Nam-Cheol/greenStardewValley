@@ -3,52 +3,56 @@ package stardewValley.A_KNC;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Water extends JLabel{
+public class Water extends JLabel {
 
 	StardewValleyFrame mContext;
-	
+
 	private int x;
 	private int y;
-	
+
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-	
+
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-	
+
 	private ImageIcon water;
 	private ImageIcon waterOn;
-	
+
 	private boolean seeNPC;
-	
+
+	// 우물에 물 전체 양
+	private long pondGage;
+
 	public Water(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-	
+
 	private void initData() {
-		
+
 		x = 750;
-		y = 560;
-		
-		water = new ImageIcon("img/waterMan.png");
-		waterOn = new ImageIcon("img/waterManOn.png");
-		
+		y = 500;
+
+		water = new ImageIcon("img/waterMan 복사.png");
+		waterOn = new ImageIcon("img/waterManOn 복사.png");
+
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
-		
+
 		seeNPC = false;
-		
+
+		pondGage = 9999999999L;
 	}
-	
+
 	private void setInitLayout() {
 		this.setIcon(water);
 		this.setLocation(x, y);
-		this.setSize(100, 180);
+		this.setSize(130, 200);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -56,7 +60,7 @@ public class Water extends JLabel{
 	}
 
 	// getter, setter
-	
+
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -128,7 +132,7 @@ public class Water extends JLabel{
 	public ImageIcon getWater() {
 		return water;
 	}
-	
+
 	public void setWater(ImageIcon water) {
 		this.water = water;
 	}
@@ -144,7 +148,21 @@ public class Water extends JLabel{
 	public void setSeeNPC(boolean seeNPC) {
 		this.seeNPC = seeNPC;
 	}
-	
-	
-	
+
+	// 시도
+	public long getPondGage() {
+		return pondGage;
+	}
+
+	public void setPondGage(long pondGage) {
+		this.pondGage = pondGage;
+	}
+
+	// TODO - 수정 필요, 연못에 물이 자동적으로 줄어들도록
+	public void minusPondGage() {
+		while (getPondGage() != 0) {
+			setPondGage(getPondGage() - 100);
+		}
+	}
+
 }

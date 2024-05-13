@@ -29,11 +29,11 @@ public class Keeper extends JLabel{
 	
 	private void initData() {
 		
-		x = 200;
-		y = 200;
+		x = 220;
+		y = 150;
 		
-		keeper = new ImageIcon("img/keeper.png");
-		keeperOn = new ImageIcon("img/keeperOn.png");
+		keeper = new ImageIcon("img/keeper 복사.png");
+		keeperOn = new ImageIcon("img/keeperOn 복사.png");
 		
 		parsnipEach = 0;
 		carrotEach = 0;
@@ -44,7 +44,7 @@ public class Keeper extends JLabel{
 	private void setInitLayout() {
 		this.setIcon(keeper);
 		this.setLocation(x, y);
-		this.setSize(100, 180);
+		this.setSize(110, 200);
 	}
 
 	public StardewValleyFrame getmContext() {

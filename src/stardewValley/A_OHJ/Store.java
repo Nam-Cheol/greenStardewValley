@@ -31,10 +31,10 @@ public class Store extends JLabel implements Runnable{
 	private void initData() {
 		
 		x = 1000;
-		y = 200;
+		y = 180;
 		
-		seller = new ImageIcon("img/seller.png");
-		sellerOn = new ImageIcon("img/sellerOn.png");
+		seller = new ImageIcon("img/seller 복사.png");
+		sellerOn = new ImageIcon("img/sellerOn 복사.png");
 		
 		
 		parsnipEach = (int)(Math.random()*1000) + 500;
@@ -49,7 +49,7 @@ public class Store extends JLabel implements Runnable{
 	private void setInitLayout() {
 		this.setIcon(seller);
 		this.setLocation(x, y);
-		this.setSize(100, 180);
+		this.setSize(120, 180);
 	}
 	
 	private void initThread() {

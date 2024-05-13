@@ -40,8 +40,6 @@ public class Player extends JLabel implements Moveable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
-	
-	private Status status;
 
 	// 플레이어의 좌표
 	private int x;
@@ -73,16 +71,23 @@ public class Player extends JLabel implements Moveable {
 	private int haveCarrot;
 	private int haveBerry;
 
+	// 파스닙에 물 줄 때
+	private boolean waterToParsnip;
+
+	// 우물에서 물 퍼낼 때
+	private boolean scoopWater;
+	private int sprinklingCanGage;
+	private final int MAX_CANGAGE = 5;
+
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Status status) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
-		this.status = status;
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water, status)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water)).start();
 	}
 
 	private void initData() {
@@ -477,7 +482,33 @@ public class Player extends JLabel implements Moveable {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-	
-	
-	
+
+	// 시도
+	public boolean isScoopWater() {
+		return scoopWater;
+	}
+
+	public void setScoopWater(boolean scoopWater) {
+		this.scoopWater = scoopWater;
+	}
+
+	public int getSprinklingCanGage() {
+		return sprinklingCanGage;
+	}
+
+	public void setSprinklingCanGage(int sprinklingCanGage) {
+		this.sprinklingCanGage = sprinklingCanGage;
+	}
+
+	public int getMAX_CANGAGE() {
+		return MAX_CANGAGE;
+	}
+
+	public boolean isWaterToParsnip() {
+		return waterToParsnip;
+	}
+
+	public void setWaterToParsnip(boolean waterToParsnip) {
+		this.waterToParsnip = waterToParsnip;
+	}
 }

@@ -35,10 +35,10 @@ public class Water extends JLabel {
 	private void initData() {
 
 		x = 750;
-		y = 560;
+		y = 540;
 
-		water = new ImageIcon("img/waterMan.png");
-		waterOn = new ImageIcon("img/waterManOn.png");
+		water = new ImageIcon("img/waterMan 복사.png");
+		waterOn = new ImageIcon("img/waterManOn 복사.png");
 
 		parsnipEach = 0;
 		carrotEach = 0;
@@ -51,7 +51,7 @@ public class Water extends JLabel {
 	private void setInitLayout() {
 		this.setIcon(water);
 		this.setLocation(x, y);
-		this.setSize(100, 180);
+		this.setSize(120, 200);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -145,6 +145,7 @@ public class Water extends JLabel {
 		this.pondGage = pondGage;
 	}
 
+	// TODO - 수정 필요, 연못에 물이 자동적으로 줄어들도록
 	public void minusPondGage() {
 		while (getPondGage() != 0) {
 			setPondGage(getPondGage() - 100);

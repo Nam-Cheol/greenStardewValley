@@ -23,14 +23,12 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
-	private Status status;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Status status) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
-		this.status = status;
 		try {
 			image = ImageIO.read(new File("img/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
@@ -52,7 +50,7 @@ public class backgroundPlayerMapService implements Runnable {
 			int left = leftColor.getRGB();
 			int right = rightColor.getRGB();
 
-			int gap = 100;
+			int gap = 150;
 
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
@@ -103,6 +101,7 @@ public class backgroundPlayerMapService implements Runnable {
 				keeper.setIcon(keeper.getKeeperOn());
 			} else if (waterX < gap && waterY < gap) {
 				water.setIcon(water.getWaterOn());
+				player.setScoopWater(true);
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);

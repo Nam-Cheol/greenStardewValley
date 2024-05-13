@@ -39,19 +39,20 @@ public class Store extends JLabel implements Runnable{
 	private void initData() {
 		
 		x = 1000;
-		y = 200;
+		y = 160;
 		
-		seller = new ImageIcon("img/seller.png");
-		sellerOn = new ImageIcon("img/sellerOn.png");
+		seller = new ImageIcon("img/seller 복사.png");
+		sellerOn = new ImageIcon("img/sellerOn 복사.png");
 		
 		seeNPC = false;
 		
+		parsnipPrice = (int) (random.nextInt(1000)) + 500;
 	}
 	
 	private void setInitLayout() {
 		this.setIcon(seller);
 		this.setLocation(x, y);
-		this.setSize(100, 180);
+		this.setSize(130, 200);
 	}
 	
 	private void initThread() {
@@ -69,7 +70,7 @@ public class Store extends JLabel implements Runnable{
 				
 			}
 		};
-		timer.scheduleAtFixedRate(task, 0, 10000);
+		timer.scheduleAtFixedRate(task, 0, 1000);
 	}
 
 	public StardewValleyFrame getmContext() {
