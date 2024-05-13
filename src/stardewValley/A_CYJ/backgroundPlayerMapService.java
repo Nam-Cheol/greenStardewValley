@@ -95,10 +95,11 @@ public class backgroundPlayerMapService implements Runnable {
 
 				// 4. NPC
 			} else if (storeX < gap && storeY < gap) {
-				player.setSellParsnip(true);
 				store.setIcon(store.getSellerOn());
+				store.setSellOn(true);
 			} else if (keeperX < gap && keeperY < gap) {
 				keeper.setIcon(keeper.getKeeperOn());
+				keeper.setSaveOn(true);
 			} else if (waterX < gap && waterY < gap) {
 				water.setIcon(water.getWaterOn());
 				player.setScoopWater(true);

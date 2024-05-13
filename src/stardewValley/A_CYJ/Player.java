@@ -41,6 +41,8 @@ public class Player extends JLabel implements Moveable {
 	private Keeper keeper;
 	private Water water;
 
+	private WaterGauge gauge;
+
 	// 플레이어의 좌표
 	private int x;
 	private int y;
@@ -510,5 +512,21 @@ public class Player extends JLabel implements Moveable {
 
 	public void setWaterToParsnip(boolean waterToParsnip) {
 		this.waterToParsnip = waterToParsnip;
+	}
+
+	public void amountWater() {
+		if (sprinklingCanGage == 0) {
+			gauge.setIcon(gauge.getWaterGauge());
+		} else if (sprinklingCanGage == 1) {
+			gauge.setIcon(gauge.getWaterGauge1());
+		} else if (sprinklingCanGage == 2) {
+			gauge.setIcon(gauge.getWaterGauge2());
+		} else if (sprinklingCanGage == 3) {
+			gauge.setIcon(gauge.getWaterGauge3());
+		} else if (sprinklingCanGage == 4) {
+			gauge.setIcon(gauge.getWaterGauge4());
+		} else if (sprinklingCanGage == 5) {
+			gauge.setIcon(gauge.getWaterGauge5());
+		}
 	}
 }

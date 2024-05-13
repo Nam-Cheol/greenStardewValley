@@ -3,17 +3,13 @@ package stardewValley.A_CYJ;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import stardewValley.vegetable.vegetable;
-
 // TODO 각 야채의 특성 및 차이점 구현
-public class Parsnip extends Vegetable {
+public class Parsnip extends Vegetable{
 
 	// 멤버 변수
 	private String name = "파스닙";
 	private int growSpeed = 5000;
-	private Vegetable[] vegetables;
-	private int temp = 0;
-
+	
 	// 생성자
 	public Parsnip(Player player) {
 		this.player = player;
@@ -46,7 +42,7 @@ public class Parsnip extends Vegetable {
 	@Override
 	public void grow() {
 		new Thread(new Runnable() {
-
+			
 			@Override
 			public void run() {
 				MAX_PLANT--;
@@ -65,14 +61,11 @@ public class Parsnip extends Vegetable {
 						try {
 							setIcon(null);
 							this.wait();
-							vegetables[temp] = null;
-							System.out.println(vegetables);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						notifyAll();
 					}
-
+					
 					if (getWaterGage() == MAX_WATERGAGE) {
 						try {
 							setIcon(null);
@@ -89,7 +82,6 @@ public class Parsnip extends Vegetable {
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
 					}
 
 					if (getWaterGage() == 0) {
@@ -97,7 +89,6 @@ public class Parsnip extends Vegetable {
 							setIcon(null);
 							this.wait();
 						} catch (InterruptedException e) {
-							e.printStackTrace();
 						}
 					}
 					if (getWaterGage() == MAX_WATERGAGE) {
@@ -105,7 +96,6 @@ public class Parsnip extends Vegetable {
 							setIcon(null);
 							this.wait();
 						} catch (InterruptedException e) {
-							e.printStackTrace();
 						}
 					}
 
@@ -116,7 +106,6 @@ public class Parsnip extends Vegetable {
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
 					}
 
 					if (getWaterGage() == 0) {
@@ -218,5 +207,9 @@ public class Parsnip extends Vegetable {
 	public ImageIcon getLastGrowing() {
 		return lastGrowing;
 	}
+	
+	
+	
+	
 
 } // end of class
