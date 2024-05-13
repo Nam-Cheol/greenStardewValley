@@ -6,84 +6,88 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
+
+
 //TODO 플레이어의 기능 추가, 포함관계여야 함
 public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
 
-	Parsnip parsnip;
-	Carrot carrot;
-	Strawberry berry;
-	StardewValleyFrame mContext;
+		Parsnip parsnip;
+		Carrot carrot;
+		Strawberry berry;
+		StardewValleyFrame mContext;
 
-	// 플레이어의 이미지
+		// 플레이어의 이미지
 
-	// 플레이어 왼쪽 이미지
-	private ImageIcon playerL;
-	private ImageIcon playerL1;
-	private ImageIcon playerL2;
+		// 플레이어 왼쪽 이미지
+		private ImageIcon playerL;
+		private ImageIcon playerL1;
+		private ImageIcon playerL2;
 
-	// 플레이어 오른쪽 이미지
-	private ImageIcon playerR;
-	private ImageIcon playerR1;
-	private ImageIcon playerR2;
+		// 플레이어 오른쪽 이미지
+		private ImageIcon playerR;
+		private ImageIcon playerR1;
+		private ImageIcon playerR2;
 
-	// 플레이어 위 이미지
-	private ImageIcon playerUp;
-	private ImageIcon playerUp1;
-	private ImageIcon playerUp2;
+		// 플레이어 위 이미지
+		private ImageIcon playerUp;
+		private ImageIcon playerUp1;
+		private ImageIcon playerUp2;
 
-	// 플레이어 아래 이미지
-	private ImageIcon playerDown; // -> 디폴트
-	private ImageIcon playerDown1;
-	private ImageIcon playerDown2;
-	
-	private ImageIcon playerWater;
-	
-	private Store store;
-	private Keeper keeper;
-	private Water water;
+		// 플레이어 아래 이미지
+		private ImageIcon playerDown; // -> 디폴트
+		private ImageIcon playerDown1;
+		private ImageIcon playerDown2;
 
-	// 플레이어의 좌표
-	private int x;
-	private int y;
+		private ImageIcon playerWater;
 
-	// 움직임의 on/off
-	private boolean left;
-	private boolean right;
-	private boolean up;
-	private boolean down;
-	PlayerWay playerWay;
+		private Store store;
+		private Keeper keeper;
+		private Water water;
+		
+		private Status status;
 
-	// 벽에 충돌 상태
-	private boolean leftWallCrash;
-	private boolean rightWallCrash;
-	private boolean upWallCrash;
-	private boolean downWallCrash;
+		// 플레이어의 좌표
+		private int x;
+		private int y;
 
-	// 플레이어 속도 상태
-	private final int SPEED = 20;
-	
-	private boolean create;
-	
-	private int wallet;
-	
-	private boolean sellParsnip;
-	
-	private int haveParsnip;
-	private int haveCarrot;
-	private int haveBerry;
+		// 움직임의 on/off
+		private boolean left;
+		private boolean right;
+		private boolean up;
+		private boolean down;
+		PlayerWay playerWay;
+
+		// 벽에 충돌 상태
+		private boolean leftWallCrash;
+		private boolean rightWallCrash;
+		private boolean upWallCrash;
+		private boolean downWallCrash;
+
+		// 플레이어 속도 상태
+		private final int SPEED = 20;
+
+		private boolean create;
+
+		private int money;
+
+		private boolean sellParsnip;
+
+		private int haveParsnip;
+		private int haveCarrot;
+		private int haveBerry;
 	
 	
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Status status) {
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this, store , keeper, water)).start();
+		new Thread(new backgroundPlayerMapService(this, store , keeper, water, status)).start();
 	}
 
 
@@ -124,7 +128,7 @@ public class Player extends JLabel implements Moveable {
 
 		playerWay = PlayerWay.DOWN;
 		
-		wallet = 0;
+		money = 0;
 		sellParsnip = true;
 		
 		haveParsnip = 0;
@@ -483,14 +487,16 @@ public class Player extends JLabel implements Moveable {
 	}
 
 
-	public int getWallet() {
-		return wallet;
+	public int getMoney() {
+		return money;
 	}
 
 
-	public void setWallet(int wallet) {
-		this.wallet = wallet;
+	public void setMoney(int money) {
+		this.money = money;
 	}
+	
+	
 	
 	
 	

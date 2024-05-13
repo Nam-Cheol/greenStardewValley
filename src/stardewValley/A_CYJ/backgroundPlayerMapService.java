@@ -24,7 +24,7 @@ public class backgroundPlayerMapService implements Runnable {
 	private Keeper keeper;
 	private Water water;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Status status) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;

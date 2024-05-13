@@ -25,12 +25,13 @@ public class StardewValleyFrame extends JFrame {
 
 	private Vegetable[] vegetables;
 
-	private Vegetable sNum;
-
+	
 	private Store store;
 	private Keeper keeper;
 	private Water water;
-
+	
+	private Status status;
+	
 	int temp = 0;
 
 	public StardewValleyFrame() {
@@ -48,7 +49,8 @@ public class StardewValleyFrame extends JFrame {
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		water = new Water(mContext);
-		player = new Player(mContext, store, keeper, water);
+		player = new Player(mContext, store, keeper, water, status);
+		status = new Status(mContext, player, store, keeper, water);
 
 		vegetables = new Vegetable[3];
 
@@ -169,16 +171,19 @@ public class StardewValleyFrame extends JFrame {
 				case KeyEvent.VK_R:
 					harvest();
 					break;
-				case KeyEvent.VK_S:
-					sellCrop();
-//					if (player.isSellParsnip()) {
-//						System.out.println(store.getParsnipPrice());
-//					}
-					break;
 				case KeyEvent.VK_D:
 					saveCrop();
-
+				case KeyEvent.VK_NUMPAD1:
+					sellPasnip();
 					break;
+				case KeyEvent.VK_NUMPAD2:
+					sellCarrot();
+					break;
+				case KeyEvent.VK_NUMPAD3:
+					sellBerry();
+					break;
+				case KeyEvent.VK_NUMPAD0:
+					sellAll();
 				default:
 					break;
 				}
@@ -255,19 +260,62 @@ public class StardewValleyFrame extends JFrame {
 		System.out.println("플레이어 딸기의 갯수" + player.getHaveBerry());
 	}
 
-	// 작물을 파는 기능
-	public void sellCrop() {
-		System.out.println("작물을 판다. 동작확인");
+	// 파스닙 팔기 기능
+	public void sellPasnip() {
+		System.out.println("파스넵 팔기 동작확인");
 		System.out.println("현재 파스닙 가격" + store.getParsnipPrice());
 		if (keeper.getParsnipEach() == 0) {
 			System.out.println("보관된 파스닙이 없습니다.");
 		} else {
-			player.setWallet(keeper.getParsnipEach() * store.getParsnipPrice());
+			player.setMoney(keeper.getParsnipEach() * store.getParsnipPrice());
 			keeper.setParsnipEach(0);
-			System.out.println(player.getWallet());
+			System.out.println(player.getMoney());
 			System.out.println("플레이어가 파스닙 팔아서 창고에 남은 갯수 " + keeper.getParsnipEach());
 		}
 	}
+	// 당근 팔기 기능
+	public void sellCarrot() {
+		System.out.println("당근 판기 동작확인");
+		System.out.println("현재 당근 가격" + store.getCarrotPrice());
+		if (keeper.getParsnipEach() == 0) {
+			System.out.println("보관된 당근이 없습니다.");
+		} else {
+			player.setMoney(keeper.getCarrotEach() * store.getCarrotPrice());
+			keeper.setCarrotEach(0);
+			System.out.println(player.getMoney());
+			System.out.println("플레이어가 당근 팔아서 창고에 남은 갯수 " + keeper.getCarrotEach());
+		}
+	}
+	
+	// 딸기 팔기 기능
+		public void sellBerry() {
+			System.out.println("딸기 팔기 동작확인");
+			System.out.println("현재 딸기 가격" + store.getBerryPrice());
+			if (keeper.getBerryEach() == 0) {
+				System.out.println("보관된 딸기가 없습니다.");
+			} else {
+				player.setMoney(keeper.getBerryEach() * store.getBerryPrice());
+				keeper.setBerryEach(0);
+				System.out.println(player.getMoney());
+				System.out.println("플레이어가 딸기를 팔아서 창고에 남은 갯수 " + keeper.getBerryEach());
+			}
+		}
+	// 모두 팔기 기능
+		public void sellAll() {
+			System.out.println("일괄 판매 동작 확인");
+
+			sellPasnip();
+			sellCarrot();
+			sellBerry();
+			
+//			player.setMoney((keeper.getCarrotEach() * store.getCarrotPrice()) + (keeper.getBerryEach() * store.getBerryPrice()) 
+//					+ (keeper.getBerryEach() * store.getBerryPrice()));
+//			
+//			keeper.setParsnipEach(0);
+//			keeper.setBerryEach(0);
+//			keeper.setBerryEach(0);
+//			System.out.println("플레이어 입금 : " + player.getMoney());
+		}
 
 	public static void main(String[] args) {
 		new StardewValleyFrame();
