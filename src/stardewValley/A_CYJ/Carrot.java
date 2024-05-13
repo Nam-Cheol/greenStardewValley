@@ -8,8 +8,6 @@ public class Carrot extends Vegetable {
 
 	// 멤버 변수
 	private String name = "당근";
-	
-	protected int carrotNum = 2;
 
 	// 생성자
 	public Carrot(Player player) {
@@ -27,7 +25,6 @@ public class Carrot extends Vegetable {
 		growing2 = new ImageIcon("img/Carrot_Stage_2.png");
 		growing3 = new ImageIcon("img/Carrot_Stage_3.png");
 		lastGrowing = new ImageIcon("img/Carrot_Stage_4.png");
-		sNum = 2;
 	}
 
 	@Override
@@ -44,6 +41,7 @@ public class Carrot extends Vegetable {
 			
 			@Override
 			public void run() {
+				MAX_PLANT--;
 				for(int i = 0; i < 1; i++) {
 					try {
 						setIcon(growing1);

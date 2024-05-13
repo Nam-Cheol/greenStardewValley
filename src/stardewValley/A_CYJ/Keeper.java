@@ -3,50 +3,52 @@ package stardewValley.A_CYJ;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Keeper extends JLabel {
+public class Keeper extends JLabel{
 
 	StardewValleyFrame mContext;
-
-	private Player player;
-
+	
 	private int x;
 	private int y;
-
+	
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-
+	
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-
+	
 	private ImageIcon keeper;
 	private ImageIcon keeperOn;
-
+	
+	private boolean seeNPC;
+	
 	public Keeper(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-
+	
 	private void initData() {
-
+		
 		x = 200;
-		y = 200;
-
-		keeper = new ImageIcon("img/keeper.png");
-		keeperOn = new ImageIcon("img/keeperOn.png");
-
+		y = 160;
+		
+		keeper = new ImageIcon("img/keeper 복사.png");
+		keeperOn = new ImageIcon("img/keeperOn 복사.png");
+		
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
-
+		
+		seeNPC = false;
+		
 	}
-
+	
 	private void setInitLayout() {
 		this.setIcon(keeper);
 		this.setLocation(x, y);
-		this.setSize(100, 180);
+		this.setSize(130, 200);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -54,7 +56,7 @@ public class Keeper extends JLabel {
 	}
 
 	// getter, setter
-
+	
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -131,4 +133,13 @@ public class Keeper extends JLabel {
 		return keeperOn;
 	}
 
+	public boolean isSeeNPC() {
+		return seeNPC;
+	}
+
+	public void setSeeNPC(boolean seeNPC) {
+		this.seeNPC = seeNPC;
+	}
+	
+	
 }
