@@ -1,18 +1,42 @@
 package stardewValley.A_PTH;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Vegetable extends JLabel implements IVegetable {
 	
+	protected String name;
+	
+	StardewValleyFrame mContext;
+	
+	protected Player player;
+	protected int x;
+	protected int y;
+	protected int plantLocation = 130;
+	// 성장
+	protected boolean growing;
+	protected ImageIcon growing1;
+	protected ImageIcon growing2;
+	protected ImageIcon growing3;
+	protected ImageIcon growing4;
+	protected ImageIcon growing5;
+	protected ImageIcon lastGrowing;
+	// 물
+	protected final int MAX_WATERGAGE = 4;
+	protected int waterGage;
+	protected boolean vegeGetWater;
+	// 수확
+	protected boolean canHarvest;
+	int temp = 0;
+	protected static int maxPlant = 2;
+	protected boolean allplant;
+	// 밭에 접근
+	protected boolean create;
+	
+	// 작물 가격
 	private int price;
-	Player player;
-	Parsnip parsnip;
-	Strawberry berry;
-	Carrot carrot;
+	
 
-	private Vegetable[] vegetables;
-	
-	
 	@Override
 	public void initData() {
 
@@ -33,8 +57,6 @@ public class Vegetable extends JLabel implements IVegetable {
 
 	@Override
 	public void grow() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -52,4 +74,33 @@ public class Vegetable extends JLabel implements IVegetable {
 	public int getPrice() {
 		return price;
 	}
+
+	public int getWaterGage() {
+		return waterGage;
+	}
+
+	public void setWaterGage(int waterGage) {
+		this.waterGage = waterGage;
+	}
+
+	public boolean isCanHarvest() {
+		return canHarvest;
+	}
+
+	public void setCanHarvest(boolean canHarvest) {
+		this.canHarvest = canHarvest;
+	}
+
+	public int getMAX_WATERGAGE() {
+		return MAX_WATERGAGE;
+	}
+
+	public int getMaxPlant() {
+		return maxPlant;
+	}
+	public boolean getAllplant() {
+		return allplant;
+	}
+	
+	
 }
