@@ -53,7 +53,7 @@ public class Carrot extends Vegetable {
 						
 						Thread.sleep(1000);
 						setIcon(lastGrowing);
-						
+						System.out.println("우우");
 						canHarvest = true;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
