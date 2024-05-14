@@ -323,7 +323,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	public Vegetable createParsnip() {
-		return new Parsnip(this);
+		return new Parsnip(this, mContext, mContext.farm);
 	}
 
 	public Vegetable createCarrot() {
@@ -441,7 +441,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	public Parsnip plantParsnip() {
-		return parsnip = new Parsnip(this);
+		return parsnip = new Parsnip(this, mContext, mContext.farm);
 	}
 
 	public boolean isCreate() {

@@ -7,19 +7,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-//TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
-// 배경 추가해야 됨.
-//추후 컴포넌트(야채)들도 추가해야 함.
 public class StardewValleyFrame extends JFrame {
 
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
-	private Player player;
+	public Player player;
 
-	private int choice;
+	public int choice;
 
-	private Farm farm;
+	public Farm farm;
 
 	private Store store;
 	private Keeper keeper;
@@ -65,8 +62,6 @@ public class StardewValleyFrame extends JFrame {
 		choice = 0;
 		
 		status.getParsnipPrice().setText(Integer.toString(store.getParsnipPrice()));
-
-		
 
 	}
 
@@ -169,6 +164,8 @@ public class StardewValleyFrame extends JFrame {
 							player.setIcon(player.getPlayerWater());
 							add(farm.vegetables[choice-1]);
 							farm.VLocation(choice);
+							farm.waterValue(choice);
+							farm.waterValueLocation(choice);
 						}
 					}
 					break;
@@ -179,6 +176,8 @@ public class StardewValleyFrame extends JFrame {
 								player.setIcon(player.getPlayerWater());
 								add(farm.vegetables[choice-1]);
 								farm.VLocation(choice);
+								farm.waterValue(choice);
+								farm.waterValueLocation(choice);
 						}
 					}
 					break;
@@ -189,6 +188,8 @@ public class StardewValleyFrame extends JFrame {
 							player.setIcon(player.getPlayerWater());
 							add(farm.vegetables[choice-1]);
 							farm.VLocation(choice);
+							farm.waterValue(choice);
+							farm.waterValueLocation(choice);
 						}
 					}
 					break;

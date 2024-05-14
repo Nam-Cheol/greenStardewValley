@@ -10,9 +10,13 @@ public class Parsnip extends Vegetable{
 	private String name = "파스닙";
 	private int growSpeed = 5000;
 	
+	private int temp;
+	
 	// 생성자
-	public Parsnip(Player player) {
+	public Parsnip(Player player, StardewValleyFrame mContext, Farm farm) {
 		this.player = player;
+		this.mContext = mContext;
+		this.farm = farm;
 		initData();
 		setInitLayout();
 		grow();
@@ -24,6 +28,7 @@ public class Parsnip extends Vegetable{
 		waterGage = 2;
 		growing = true;
 		create = false;
+		temp = mContext.choice;
 		growing1 = new ImageIcon("img/vege/Parsnip_Stage_1.png");
 		growing2 = new ImageIcon("img/vege/Parsnip_Stage_2.png");
 		growing3 = new ImageIcon("img/vege/Parsnip_Stage_3.png");
@@ -33,9 +38,7 @@ public class Parsnip extends Vegetable{
 
 	@Override
 	public void setInitLayout() {
-		x = player.getX();
-		y = player.getY();
-		setSize(48, 48);
+		setSize(100, 110);
 		setIcon(null);
 	}
 
@@ -51,110 +54,140 @@ public class Parsnip extends Vegetable{
 						setIcon(growing1);
 						Thread.sleep(3000);
 						setWaterGage(getWaterGage() - 1);
+						mContext.farm.vegetableWaterGauge(waterGage, temp);
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
 					}
-
 					if (getWaterGage() == 0) {
+						mContext.farm.vegetableWaterGauge(waterGage, temp);
 						try {
 							setIcon(null);
+							mContext.farm.vegetableWaters[temp-1].setIcon(null);
+							mContext.farm.vegetableWaters[temp-1] = null;
 							this.wait();
 						} catch (InterruptedException e) {
-							e.printStackTrace();
 						}
 					}
-					
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					if (getWaterGage() == MAX_WATERGAGE) {
+						mContext.farm.vegetableWaterGauge(waterGage, temp);
 						try {
 							setIcon(null);
+							mContext.farm.vegetableWaters[temp-1].setIcon(null);
+							mContext.farm.vegetableWaters[temp-1] = null;
 							this.wait();
 						} catch (InterruptedException e) {
-							e.printStackTrace();
 						}
 					}
-
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					try {
 						Thread.sleep(growSpeed);
 						setIcon(growing2);
 						setWaterGage(getWaterGage() - 1);
+						mContext.farm.vegetableWaterGauge(waterGage, temp);
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
 					}
-
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					if (getWaterGage() == 0) {
 						try {
 							setIcon(null);
+							mContext.farm.vegetableWaters[temp-1].setIcon(null);
+							mContext.farm.vegetableWaters[temp-1] = null;
+							mContext.farm.vegetableWaterGauge(waterGage, temp);
 							this.wait();
 						} catch (InterruptedException e) {
 						}
 					}
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					if (getWaterGage() == MAX_WATERGAGE) {
 						try {
 							setIcon(null);
+							mContext.farm.vegetableWaters[temp-1].setIcon(null);
+							mContext.farm.vegetableWaters[temp-1] = null;
+							mContext.farm.vegetableWaterGauge(waterGage, temp);
 							this.wait();
 						} catch (InterruptedException e) {
 						}
 					}
-
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					try {
 						Thread.sleep(growSpeed);
 						setIcon(growing3);
 						setWaterGage(getWaterGage() - 1);
+						mContext.farm.vegetableWaterGauge(waterGage, temp);
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
 					}
-
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					if (getWaterGage() == 0) {
 						try {
 							setIcon(null);
+							mContext.farm.vegetableWaterGauge(waterGage, temp);
+							mContext.farm.vegetableWaters[temp-1].setIcon(null);
+							mContext.farm.vegetableWaters[temp-1] = null;
 							this.wait();
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					if (getWaterGage() == MAX_WATERGAGE) {
 						try {
 							setIcon(null);
+							mContext.farm.vegetableWaterGauge(waterGage, temp);
+							mContext.farm.vegetableWaters[temp-1].setIcon(null);
+							mContext.farm.vegetableWaters[temp-1] = null;
 							this.wait();
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
-
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					try {
 						Thread.sleep(growSpeed);
 						setIcon(growing4);
 						setWaterGage(getWaterGage() - 1);
+						mContext.farm.vegetableWaterGauge(waterGage, temp);
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					if (getWaterGage() == 0) {
 						try {
 							setIcon(null);
+							mContext.farm.vegetableWaterGauge(waterGage, temp);
+							mContext.farm.vegetableWaters[temp-1].setIcon(null);
+							mContext.farm.vegetableWaters[temp-1] = null;
 							this.wait();
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					if (getWaterGage() == MAX_WATERGAGE) {
 						try {
 							setIcon(null);
+							mContext.farm.vegetableWaterGauge(waterGage, temp);
+							mContext.farm.vegetableWaters[temp-1].setIcon(null);
+							mContext.farm.vegetableWaters[temp-1] = null;
 							this.wait();
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
-
+					mContext.farm.vegetableWaterGauge(waterGage, temp);
 					try {
 						Thread.sleep(growSpeed);
 						setIcon(lastGrowing);
+						mContext.farm.vegetableWaterGauge(waterGage, temp);
+						mContext.farm.vegetableWaters[temp-1].setIcon(null);
+						mContext.farm.vegetableWaters[temp-1] = null;
 						canHarvest = true;
 						System.out.println(getWaterGage());
 					} catch (InterruptedException e) {

@@ -8,6 +8,7 @@ public class Carrot extends Vegetable {
 
 	// 멤버 변수
 	private String name = "당근";
+	private int growSpeed = 5000;
 
 	// 생성자
 	public Carrot(Player player) {
@@ -20,7 +21,9 @@ public class Carrot extends Vegetable {
 	// 메소드
 	@Override
 	public void initData() {
+		waterGage = 2;
 		growing = true;
+		create = false;
 		growing1 = new ImageIcon("img/vege/Carrot_Stage_1.png");
 		growing2 = new ImageIcon("img/vege/Carrot_Stage_2.png");
 		growing3 = new ImageIcon("img/vege/Carrot_Stage_3.png");
@@ -29,8 +32,6 @@ public class Carrot extends Vegetable {
 
 	@Override
 	public void setInitLayout() {
-		x = player.getX();
-		y = player.getY();
 		setSize(100, 110);
 		setIcon(null);
 	}

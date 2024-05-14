@@ -10,6 +10,7 @@ public class Vegetable extends JLabel implements IVegetable{
 		// 포함관계 - 프레임, 플레이어
 		StardewValleyFrame mContext;
 		protected Player player;
+		protected Farm farm;
 		protected int x;
 		protected int y;
 		protected int plantLocation = 130;
