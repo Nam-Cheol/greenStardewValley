@@ -95,23 +95,23 @@ public class Player extends JLabel implements Moveable {
 		x = 600;
 		y = 600;
 
-		playerL = new ImageIcon("img/PlayerStandLeft.png");
-		playerL1 = new ImageIcon("img/PlayerWalkLeft.png");
-		playerL2 = new ImageIcon("img/PlayerWalkLeft2.png");
+		playerL = new ImageIcon("img/character/PlayerStandLeft.png");
+		playerL1 = new ImageIcon("img/character/PlayerWalkLeft.png");
+		playerL2 = new ImageIcon("img/character/PlayerWalkLeft2.png");
 
-		playerR = new ImageIcon("img/PlayerStandRight.png");
-		playerR1 = new ImageIcon("img/PlayerWalkRight.png");
-		playerR2 = new ImageIcon("img/PlayerWalkRight2.png");
+		playerR = new ImageIcon("img/character/PlayerStandRight.png");
+		playerR1 = new ImageIcon("img/character/PlayerWalkRight.png");
+		playerR2 = new ImageIcon("img/character/PlayerWalkRight2.png");
 
-		playerUp = new ImageIcon("img/PlayerStandUp.png");
-		playerUp1 = new ImageIcon("img/PlayerWalkUp.png");
-		playerUp2 = new ImageIcon("img/PlayerWalkUp2.png");
+		playerUp = new ImageIcon("img/character/PlayerStandUp.png");
+		playerUp1 = new ImageIcon("img/character/PlayerWalkUp.png");
+		playerUp2 = new ImageIcon("img/character/PlayerWalkUp2.png");
 
-		playerDown = new ImageIcon("img/PlayerStand.png");
-		playerDown1 = new ImageIcon("img/PlayerWalkDown.png");
-		playerDown2 = new ImageIcon("img/PlayerWalkDown2.png");
+		playerDown = new ImageIcon("img/character/PlayerStand.png");
+		playerDown1 = new ImageIcon("img/character/PlayerWalkDown.png");
+		playerDown2 = new ImageIcon("img/character/PlayerWalkDown2.png");
 
-		playerWater = new ImageIcon("img/PlayerWater.png");
+		playerWater = new ImageIcon("img/character/PlayerWater.png");
 
 		left = false;
 		right = false;

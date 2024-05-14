@@ -4,12 +4,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Parsnip extends Vegetable{
+public class Parsnip extends Vegetable {
 
 	// 멤버 변수
 	private String name = "파스닙";
 	private int growSpeed = 5000;
-	
+
 	// 생성자
 	public Parsnip(Player player) {
 		this.player = player;
@@ -24,11 +24,11 @@ public class Parsnip extends Vegetable{
 		waterGage = 2;
 		growing = true;
 		create = false;
-		growing1 = new ImageIcon("img/Parsnip_Stage_1.png");
-		growing2 = new ImageIcon("img/Parsnip_Stage_2.png");
-		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
-		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
-		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
+		growing1 = new ImageIcon("img/vege/Parsnip_Stage_1.png");
+		growing2 = new ImageIcon("img/vege/Parsnip_Stage_2.png");
+		growing3 = new ImageIcon("img/vege/Parsnip_Stage_3.png");
+		growing4 = new ImageIcon("img/vege/Parsnip_Stage_4.png");
+		lastGrowing = new ImageIcon("img/vege/Parsnip_Stage_5.png");
 	}
 
 	@Override
@@ -41,8 +41,9 @@ public class Parsnip extends Vegetable{
 
 	@Override
 	public void grow() {
+
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				MAX_PLANT--;
@@ -65,7 +66,6 @@ public class Parsnip extends Vegetable{
 							e.printStackTrace();
 						}
 					}
-					
 					if (getWaterGage() == MAX_WATERGAGE) {
 						try {
 							setIcon(null);
@@ -211,9 +211,5 @@ public class Parsnip extends Vegetable{
 	public ImageIcon getLastGrowing() {
 		return lastGrowing;
 	}
-	
-	
-	
-	
 
 } // end of class

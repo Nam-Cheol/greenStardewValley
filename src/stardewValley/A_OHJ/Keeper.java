@@ -34,8 +34,8 @@ public class Keeper extends JLabel{
 		x = 200;
 		y = 160;
 		
-		keeper = new ImageIcon("img/keeper 복사.png");
-		keeperOn = new ImageIcon("img/keeperOn 복사.png");
+		keeper = new ImageIcon("img/npc/keeper.png");
+		keeperOn = new ImageIcon("img/npc/keeperOn.png");
 		
 		parsnipEach = 0;
 		carrotEach = 0;

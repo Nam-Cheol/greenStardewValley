@@ -37,8 +37,8 @@ public class Water extends JLabel {
 		x = 750;
 		y = 500;
 
-		water = new ImageIcon("img/waterMan 복사.png");
-		waterOn = new ImageIcon("img/waterManOn 복사.png");
+		water = new ImageIcon("img/npc/waterMan.png");
+		waterOn = new ImageIcon("img/npc/waterManOn.png");
 
 		parsnipEach = 0;
 		carrotEach = 0;

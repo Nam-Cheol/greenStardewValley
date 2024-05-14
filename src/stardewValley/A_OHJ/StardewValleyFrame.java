@@ -41,7 +41,7 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/TempBackgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/bg/TempBackgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
@@ -238,8 +238,8 @@ public class StardewValleyFrame extends JFrame {
 
 							System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
 							vegetables[0].setWaterGage(vegetables[0].getWaterGage() + 1);
-							vegetables[1].setWaterGage(vegetables[1].getWaterGage() + 1);
-							vegetables[2].setWaterGage(vegetables[2].getWaterGage() + 1);
+//							vegetables[1].setWaterGage(vegetables[1].getWaterGage() + 1);
+//							vegetables[2].setWaterGage(vegetables[2].getWaterGage() + 1);
 							System.out.println("식물이 받은 물 : " + vegetables[0].getWaterGage());
 						} else {
 							System.out.println("연못에 가서 물을 채우세요.");
@@ -295,7 +295,7 @@ public class StardewValleyFrame extends JFrame {
 
 	public void harvest() {
 		for (int i = 0; i < temp + 1; i++) {
-			if(vegetables[temp] == null) {
+			if (vegetables[temp] == null) {
 				return;
 			}
 			if (vegetables[temp] != null) {
