@@ -1,4 +1,4 @@
-package stardewValley.A_KNC;
+package stardewValley.B_KNC;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -19,6 +19,8 @@ public class StardewValleyFrame extends JFrame {
 
 	private Vegetable[] vegetables;
 
+	private Farm farm;
+	
 	private Store store;
 	private Keeper keeper;
 	private Water waterMan;
@@ -37,11 +39,13 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/TempBackgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/StardewValleyMapColorFrame3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
+		farm = new Farm(mContext);
+		
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		waterMan = new Water(mContext);
@@ -76,6 +80,7 @@ public class StardewValleyFrame extends JFrame {
 //		add(waterGauge);
 		add(berryGauge);
 		add(parsnipGauge);
+		add(farm);
 
 	}
 
