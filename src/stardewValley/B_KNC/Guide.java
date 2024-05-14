@@ -26,8 +26,8 @@ public class Guide extends JLabel {
 		x = 430;
 		y = 430;
 		
-		guide = new ImageIcon("img/seller 복사.png");
-		guideOn = new ImageIcon("img/sellerOn 복사.png");
+		guide = new ImageIcon("img/npc/seller 복사.png");
+		guideOn = new ImageIcon("img/npc/sellerOn 복사.png");
 		
 		seeNPC = false;
 		plantOn = false;
