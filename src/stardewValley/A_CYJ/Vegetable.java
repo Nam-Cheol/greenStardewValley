@@ -80,6 +80,9 @@ public class Vegetable extends JLabel implements IVegetable{
 	}
 
 	public static int getMAX_PLANT() {
+		if(MAX_PLANT < 0) {
+			
+		}
 		return MAX_PLANT;
 	}
 	

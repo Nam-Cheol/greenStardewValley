@@ -35,6 +35,7 @@ public class StardewValleyFrame extends JFrame {
 
 	private HelpInfo info;
 	private Status status;
+	private GameOver gameOver;
 
 	private int turn;
 
@@ -57,6 +58,7 @@ public class StardewValleyFrame extends JFrame {
 
 		player = new Player(mContext, store, keeper, waterMan, seedZone);
 		info = new HelpInfo(mContext);
+		gameOver =  new GameOver(mContext);
 
 		timeGauge = new TimeGauge(mContext);
 		carrotGauge = new CarrotGauge(mContext);
@@ -84,6 +86,7 @@ public class StardewValleyFrame extends JFrame {
 		add(keeper);
 		add(waterMan);
 		add(info);
+		add(gameOver);
 
 		add(timeGauge);
 		add(carrotGauge);
@@ -294,9 +297,6 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_M:
 					System.out.println(vegetable.getMAX_PLANT());
-					if (vegetable.getMAX_PLANT() == 0) {
-						timeGauge.getTimeGauge1();
-					}
 					plusSeed();
 					break;
 				default:
@@ -427,6 +427,22 @@ public class StardewValleyFrame extends JFrame {
 	        } else if (turn == 2) {
 	            vegetable.setMAX_PLANT(5);
 	            timeGauge.setIcon(timeGauge.getTimeGauge2());
+	            turn++;
+	        } else if (turn == 3) {
+	        	if(player.getMoney() < 300000 ) {
+	        		gameOver.setIcon(gameOver.getGameOver());
+					gameOver.setSize(1930, 930);
+					gameOver.setLocation(0, 0);
+					keeper.setSeeNPC(true);
+					keeper.setIcon(null);
+					waterMan.setIcon(null);
+					waterMan.setSeeNPC(true);
+					store.setIcon(null);
+					player.setIcon(null);
+					info.setIcon(null);
+					player = null;
+	        	}
+	        	
 	        }
 	    }
 	}
