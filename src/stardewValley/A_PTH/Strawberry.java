@@ -36,12 +36,12 @@ public class Strawberry extends Vegetable {
 	@Override
 	public void initData() {
 		growing = true;
-		growing1 = new ImageIcon("img/Strawberry_Stage_1.png");
-		growing2 = new ImageIcon("img/Strawberry_Stage_2.png");
-		growing3 = new ImageIcon("img/Strawberry_Stage_3.png");
-		growing4 = new ImageIcon("img/Strawberry_Stage_4.png");
-		growing5 = new ImageIcon("img/Strawberry_Stage_5.png");
-		lastGrowing = new ImageIcon("img/Strawberry_Stage_6.png");
+		growing1 = new ImageIcon("img/vege/Strawberry_Stage_1.png");
+		growing2 = new ImageIcon("img/vege/Strawberry_Stage_2.png");
+		growing3 = new ImageIcon("img/vege/Strawberry_Stage_3.png");
+		growing4 = new ImageIcon("img/vege/Strawberry_Stage_4.png");
+		growing5 = new ImageIcon("img/vege/Strawberry_Stage_5.png");
+		lastGrowing = new ImageIcon("img/vege/Strawberry_Stage_6.png");
 	}
 
 	@Override

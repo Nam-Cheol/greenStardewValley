@@ -26,8 +26,6 @@ public class Parsnip extends Vegetable {
 
 	private ParsnipGauge gauge;
 	
-	StardewValleyFrame st;
-
 	private JLabel waterGauge;
 	private ImageIcon watergauge0;
 	private ImageIcon watergauge1;
@@ -216,7 +214,7 @@ public class Parsnip extends Vegetable {
 
 	public void rmParsnip() {
 		if (waterGage == 0 || waterGage == MAX_WATERGAGE) {
-			setIcon(rottened);
+			setRmRottened(isRmRottened());
 			try {
 				this.wait();
 			} catch (InterruptedException e) {

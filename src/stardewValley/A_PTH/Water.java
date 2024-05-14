@@ -33,7 +33,7 @@ public class Water extends JLabel {
 		x = 750;
 		y = 560;
 
-		water = new ImageIcon("img/waterMan.png");
+		water = new ImageIcon("img/npc/waterMan.png");
 
 		parsnipEach = 0;
 		carrotEach = 0;
@@ -44,7 +44,7 @@ public class Water extends JLabel {
 	private void setInitLayout() {
 		this.setIcon(water);
 		this.setLocation(x, y);
-		this.setSize(100, 140);
+		this.setSize(130, 200);
 	}
 
 	public StardewValleyFrame getmContext() {

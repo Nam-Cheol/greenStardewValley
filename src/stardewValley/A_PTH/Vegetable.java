@@ -26,6 +26,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected boolean vegeGetWater;
 	// 수확
 	protected boolean canHarvest;
+	protected boolean rmRottened;
 	// 밭에 접근
 	protected boolean create;
 	// 작물 가격
@@ -36,6 +37,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	@Override
 	public void initData() {
 		canHarvest = true;
+		rmRottened = true;
 	}
 
 	@Override
@@ -95,6 +97,23 @@ public class Vegetable extends JLabel implements IVegetable {
 		return MAX_PLANT;
 	}
 
+	public ImageIcon getRottened() {
+		return rottened;
+	}
+
+	public void setRottened(ImageIcon rottened) {
+		this.rottened = rottened;
+	}
+
+	public boolean isRmRottened() {
+		return rmRottened;
+	}
+
+	public void setRmRottened(boolean rmRottened) {
+		this.rmRottened = rmRottened;
+	}
+	
+	
 	
 	
 }

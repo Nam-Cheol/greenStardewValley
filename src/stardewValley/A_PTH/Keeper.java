@@ -21,6 +21,7 @@ public class Keeper extends JLabel {
 	private ImageIcon keeper;
 	private ImageIcon keeperOn;
 	
+	private boolean saveOn;
 	private boolean seeNPC;
 
 	public Keeper(StardewValleyFrame mContext) {
@@ -34,18 +35,21 @@ public class Keeper extends JLabel {
 		x = 200;
 		y = 200;
 
-		keeper = new ImageIcon("img/keeper.png");
+		keeper = new ImageIcon("img/npc/keeper.png");
 
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
+		
+		seeNPC = false;
+		saveOn = false;
 
 	}
 
 	private void setInitLayout() {
 		this.setIcon(keeper);
 		this.setLocation(x, y);
-		this.setSize(100, 140);
+		this.setSize(130, 200);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -145,5 +149,14 @@ public class Keeper extends JLabel {
 	public void setSeeNPC(boolean seeNPC) {
 		this.seeNPC = seeNPC;
 	}
+
+	public boolean isSaveOn() {
+		return saveOn;
+	}
+
+	public void setSaveOn(boolean saveOn) {
+		this.saveOn = saveOn;
+	}
+	
 	
 }

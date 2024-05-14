@@ -26,6 +26,7 @@ public class Store extends JLabel implements Runnable{
 	private ImageIcon sellerOn;
 	
 	private boolean seeNPC;
+	private boolean sellOn;
 	
 	Random random = new Random();
 	
@@ -41,11 +42,11 @@ public class Store extends JLabel implements Runnable{
 		x = 1000;
 		y = 160;
 		
-		seller = new ImageIcon("img/seller 복사.png");
-		sellerOn = new ImageIcon("img/sellerOn 복사.png");
+		seller = new ImageIcon("img/npc/seller.png");
+		sellerOn = new ImageIcon("img/npc/sellerOn.png");
 		
 		seeNPC = false;
-		
+		sellOn = false;
 //		parsnipPrice = (int) (random.nextInt(1000)) + 500;
 	}
 	
@@ -163,12 +164,29 @@ public class Store extends JLabel implements Runnable{
 		this.seeNPC = seeNPC;
 	}
 	
+
+	public boolean isSellOn() {
+		return sellOn;
+	}
+
+	public void setSellOn(boolean sellOn) {
+		this.sellOn = sellOn;
+	}
+
+	public void setSeller(ImageIcon seller) {
+		this.seller = seller;
+	}
+
+	public void setSellerOn(ImageIcon sellerOn) {
+		this.sellerOn = sellerOn;
+	}
+
 	@Override
 	public void run() {
-		parsnipEach = (int)(Math.random()*1000) + 500;
-		carrotEach = (int)(Math.random()*1000) + 500;
-		berryEach = (int)(Math.random()*1000) + 500;
+		// TODO Auto-generated method stub
+		
 	}
+	
 	
 	
 	
