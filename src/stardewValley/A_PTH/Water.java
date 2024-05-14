@@ -19,8 +19,11 @@ public class Water extends JLabel {
 	private int berryEach;
 
 	private ImageIcon water;
+	private ImageIcon waterOn;
 	
 	private boolean seeNPC;
+	
+	private long pondGage;
 
 	public Water(StardewValleyFrame mContext) {
 		initData();
@@ -34,10 +37,15 @@ public class Water extends JLabel {
 		y = 560;
 
 		water = new ImageIcon("img/npc/waterMan.png");
+		waterOn = new ImageIcon("img/npc/waterManOn.png");
 
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
+		
+		seeNPC = false;
+		
+		pondGage = 9999999999L;
 
 	}
 
@@ -131,6 +139,31 @@ public class Water extends JLabel {
 
 	public void setSeeNPC(boolean seeNPC) {
 		this.seeNPC = seeNPC;
+	}
+
+	public ImageIcon getWaterOn() {
+		return waterOn;
+	}
+
+	public void setWaterOn(ImageIcon waterOn) {
+		this.waterOn = waterOn;
+	}
+
+	public long getPondGage() {
+		return pondGage;
+	}
+
+	public void setPondGage(long pondGage) {
+		this.pondGage = pondGage;
+	}
+
+	public void setWater(ImageIcon water) {
+		this.water = water;
+	}
+	public void minusPondGage() {
+		while(getPondGage() != 0) {
+			setPondGage(getPondGage() - 100);
+		}
 	}
 	
 	

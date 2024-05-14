@@ -26,6 +26,13 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected final int MAX_WATERGAGE = 4;
 	protected int waterGage;
 	protected boolean vegeGetWater;
+	protected JLabel waterGauge;
+	protected ImageIcon watergauge0;
+	protected ImageIcon watergauge1;
+	protected ImageIcon watergauge2;
+	protected ImageIcon watergauge3;
+	protected ImageIcon watergauge4;
+	protected ImageIcon watergauge5;
 	// 수확
 	protected boolean canHarvest;
 	protected boolean rotten;

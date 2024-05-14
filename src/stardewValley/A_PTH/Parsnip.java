@@ -77,11 +77,9 @@ public class Parsnip extends Vegetable {
 	public void setInitLayout() {
 		x = player.getX();
 		y = player.getY();
-		setSize(48, 48);
+		setSize(100, 110);
 
-		setLocation(x, y + plantLocation);
 		setIcon(null);
-		waterGauge.setLocation(x - 110, y - 60);
 
 	}
 
@@ -97,7 +95,7 @@ public class Parsnip extends Vegetable {
 						setIcon(growing1);
 						Thread.sleep(growSpeed);
 						setWaterGage(getWaterGage() - 1);
-						rmParsnip();
+//						rmParsnip();
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
@@ -108,7 +106,7 @@ public class Parsnip extends Vegetable {
 						Thread.sleep(growSpeed);
 						setIcon(growing2);
 						setWaterGage(getWaterGage() - 1);
-						rmParsnip();
+//						rmParsnip();
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
@@ -119,7 +117,7 @@ public class Parsnip extends Vegetable {
 						Thread.sleep(growSpeed);
 						setIcon(growing3);
 						setWaterGage(getWaterGage() - 1);
-						rmParsnip();
+//						rmParsnip();
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
@@ -130,7 +128,7 @@ public class Parsnip extends Vegetable {
 						Thread.sleep(growSpeed);
 						setIcon(growing4);
 						setWaterGage(getWaterGage() - 1);
-						rmParsnip();
+//						rmParsnip();
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
@@ -211,17 +209,17 @@ public class Parsnip extends Vegetable {
 			waterGauge.setIcon(watergauge0);
 		}
 	}
-
-	public void rmParsnip() {
-		if (waterGage == 0 || waterGage == MAX_WATERGAGE) {
-			setRmRottened(isRmRottened());
-			try {
-				this.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-		}
-	}
+//
+//	public void rmParsnip() {
+//		if (getWaterGage() == 0 || getWaterGage() == MAX_WATERGAGE) {
+//			try {
+//				setIcon(rottened);
+//				rmRottened = true;
+//				this.wait();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 
 } // end of class

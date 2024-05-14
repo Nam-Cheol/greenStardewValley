@@ -28,12 +28,6 @@ public class BerryGauge extends JLabel{
 		x = 1300;
 		y = 755;
 
-		berryGauge = new ImageIcon("img/gauge/StrawberryWater1.png");
-		berryGauge1 = new ImageIcon("img/gauge/StrawberryWater2.png");
-		berryGauge2 = new ImageIcon("img/gauge/StrawberryWater3.png");
-		berryGauge3 = new ImageIcon("img/gauge/StrawberryWater4.png");
-		berryGauge4 = new ImageIcon("img/gauge/StrawberryWater5.png");
-		berryGauge5 = new ImageIcon("img/gauge/StrawberryWater6.png");
 		
 	}
 	

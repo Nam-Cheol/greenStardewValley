@@ -18,7 +18,7 @@ public class StardewValleyFrame extends JFrame {
 	private Player player;
 
 //	private Vegetable[] vegetables;
-	
+
 	private int choice;
 
 	private Farm farm;
@@ -27,7 +27,7 @@ public class StardewValleyFrame extends JFrame {
 	private Keeper keeper;
 	private Water waterMan;
 	private Guide guide;
-	
+
 	private CarrotGauge carrotGauge;
 	private BerryGauge berryGauge;
 	private ParsnipGauge parsnipGauge;
@@ -47,7 +47,6 @@ public class StardewValleyFrame extends JFrame {
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
-
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		waterMan = new Water(mContext);
@@ -64,12 +63,10 @@ public class StardewValleyFrame extends JFrame {
 //		vegetables = new Vegetable[3];
 
 		farm = new Farm(mContext, player);
-		
-		choice = 0;
-		
-		status.getParsnipPrice().setText(Integer.toString(store.getParsnipPrice()));
 
-		
+		choice = 0;
+
+		status.getParsnipPrice().setText(Integer.toString(store.getParsnipPrice()));
 
 	}
 
@@ -168,36 +165,39 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_Q:
 					if (player.isCreate()) {
-						if (farm.vegetables[choice-1] == null) {
-							farm.vegetables[choice-1] = player.createParsnip();
+						if (farm.vegetables[choice - 1] == null) {
+							farm.vegetables[choice - 1] = player.createParsnip();
 							player.setIcon(player.getPlayerWater());
-							add(farm.vegetables[choice-1]);
+							add(farm.vegetables[choice - 1]);
 							farm.VLocation(choice);
 						}
 					}
 					break;
 				case KeyEvent.VK_W:
 					if (player.isCreate()) {
-							if (farm.vegetables[choice-1] == null) {
-								farm.vegetables[choice-1] = player.createCarrot();
-								player.setIcon(player.getPlayerWater());
-								add(farm.vegetables[choice-1]);
-								farm.VLocation(choice);
+						if (farm.vegetables[choice - 1] == null) {
+							farm.vegetables[choice - 1] = player.createCarrot();
+							player.setIcon(player.getPlayerWater());
+							add(farm.vegetables[choice - 1]);
+							farm.VLocation(choice);
 						}
 					}
 					break;
 				case KeyEvent.VK_E:
 					if (player.isCreate()) {
-						if (farm.vegetables[choice-1] == null) {
-							farm.vegetables[choice-1] = player.createBerry();
+						if (farm.vegetables[choice - 1] == null) {
+							farm.vegetables[choice - 1] = player.createBerry();
 							player.setIcon(player.getPlayerWater());
-							add(farm.vegetables[choice-1]);
+							add(farm.vegetables[choice - 1]);
 							farm.VLocation(choice);
 						}
 					}
 					break;
 				case KeyEvent.VK_R:
 					farm.harvest(choice);
+					break;
+				case KeyEvent.VK_T:
+					farm.remove(choice);
 					break;
 				case KeyEvent.VK_D:
 					if (keeper.isSaveOn()) {
@@ -350,8 +350,9 @@ public class StardewValleyFrame extends JFrame {
 		status.getCarrot().setText(Integer.toString(keeper.getCarrotEach()));
 		status.getBerry().setText(Integer.toString(keeper.getBerryEach()));
 	}
-	
+
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}
+
 }

@@ -21,7 +21,7 @@ public class Parsnip extends Vegetable {
 	// 메소드
 	@Override
 	public void initData() {
-		waterGage = 1;
+		waterGage = 4;
 		growing = true;
 		create = false;
 		rotten = false;
@@ -32,14 +32,25 @@ public class Parsnip extends Vegetable {
 		lastGrowing = new ImageIcon("img/vege/Parsnip_Stage_5.png");
 
 		rottenImg = new ImageIcon("img/vege/Rotten_Plant.png");
+
+		watergauge0 = new ImageIcon("img/Water_gauge_0.png");
+		watergauge1 = new ImageIcon("img/Water_gauge_1.png");
+		watergauge2 = new ImageIcon("img/Water_gauge_2.png");
+		watergauge3 = new ImageIcon("img/Water_gauge_3.png");
+		watergauge4 = new ImageIcon("img/Water_gauge_4.png");
+		watergauge5 = new ImageIcon("img/Water_gauge_5.png");
+		
+		waterGauge = new JLabel();
 	}
 
 	@Override
 	public void setInitLayout() {
 		x = player.getX();
 		y = player.getY();
-		setSize(48, 48);
+		setSize(100, 110);
 		setIcon(null);
+		
+		waterGauge.setLocation(x - 110, y - 60);
 	}
 
 	@Override
@@ -51,10 +62,11 @@ public class Parsnip extends Vegetable {
 				MAX_PLANT--;
 				synchronized (this) {
 					try {
+						setIcon(watergauge4);
 						setIcon(growing1);
 						Thread.sleep(3000);
 						setWaterGage(getWaterGage() - 1);
-						rotten();
+//						rotten();
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
@@ -88,21 +100,6 @@ public class Parsnip extends Vegetable {
 					} catch (InterruptedException e) {
 					}
 
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-						}
-					}
-
 					try {
 						Thread.sleep(growSpeed);
 						setIcon(growing3);
@@ -110,23 +107,6 @@ public class Parsnip extends Vegetable {
 						System.out.println(getWaterGage());
 						notify();
 					} catch (InterruptedException e) {
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
 					}
 
 					try {
@@ -137,23 +117,6 @@ public class Parsnip extends Vegetable {
 						notify();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
-					}
-
-					if (getWaterGage() == 0) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (getWaterGage() == MAX_WATERGAGE) {
-						try {
-							setIcon(null);
-							this.wait();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
 					}
 
 					try {
@@ -223,5 +186,38 @@ public class Parsnip extends Vegetable {
 			}
 		}
 	}
+	
+	public void waterGaugeP() {
+
+		if (waterGage == 1) {
+			waterGauge.setIcon(watergauge1);
+
+		} else if (waterGage == 2) {
+			waterGauge.setIcon(watergauge2);
+
+		} else if (waterGage == 3) {
+			waterGauge.setIcon(watergauge3);
+
+		} else if (waterGage == 4) {
+			waterGauge.setIcon(watergauge4);
+
+		} else if (waterGage == 5) {
+			waterGauge.setIcon(watergauge5);
+		
+		} else if (waterGage == 0) {
+			waterGauge.setIcon(watergauge0);
+		}
+	}
+	
+//	class innerClass() {
+//		protected boolean vegeGetWater;
+//		protected JLabel waterGauge;
+//		protected ImageIcon watergauge0;
+//		protected ImageIcon watergauge1;
+//		protected ImageIcon watergauge2;
+//		protected ImageIcon watergauge3;
+//		protected ImageIcon watergauge4;
+//		protected ImageIcon watergauge5;
+//	}
 
 } // end of class

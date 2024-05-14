@@ -43,9 +43,11 @@ public class Player extends JLabel implements Moveable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private Guide guide;
 	
-	private Status status;
-
+	private WaterGauge waterGauge;
+	private TimeGauge timeGauge;
+	
 	// 플레이어의 좌표
 	private int x;
 	private int y;
@@ -87,24 +89,17 @@ public class Player extends JLabel implements Moveable {
 	private final int MAX_CANGAGE = 5;
 
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Status status) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide) {
+		this.mContext = mContext;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
-		this.status = status;
+		this.guide = guide;
 		initData();
 		setInitLayout();
-		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide)).start();
 	}
-	public Player(StardewValleyFrame mContext, Parsnip parsnip, Carrot carrot, Strawberry berry) {
-		this.parsnip = parsnip;
-		this.carrot = carrot;
-		this.berry = berry;
-		this.mContext = mContext;
-		
-		new Thread(new backgroundVegetableService(this, parsnip, carrot, berry)).start();
-	}
+
 
 	private void initData() {
 
@@ -146,13 +141,23 @@ public class Player extends JLabel implements Moveable {
 		money = 0;
 		sellParsnip = true;
 		
+		waterGauge = new WaterGauge(mContext);
+		timeGauge = new TimeGauge(mContext);
+		
+		haveParsnip = 0;
+		haveCarrot = 0;
+		haveBerry = 0;
 	}
 
 	private void setInitLayout() {
 		this.setIcon(playerDown);
 		this.setLocation(x, y);
 		this.setSize(100, 120);
-
+		mContext.add(waterGauge);
+		mContext.add(timeGauge);
+	}
+	public StardewValleyFrame getmContext() {
+		return mContext;
 	}
 
 
@@ -515,6 +520,21 @@ public class Player extends JLabel implements Moveable {
 	}
 	public int getMAX_CANGAGE() {
 		return MAX_CANGAGE;
+	}
+	public void amountWater() {
+		if (sprinklingCanGage == 0) {
+			waterGauge.setIcon(waterGauge.getWaterGauge());
+		} else if (sprinklingCanGage == 1) {
+			waterGauge.setIcon(waterGauge.getWaterGauge1());
+		} else if (sprinklingCanGage == 2) {
+			waterGauge.setIcon(waterGauge.getWaterGauge2());
+		} else if (sprinklingCanGage == 3) {
+			waterGauge.setIcon(waterGauge.getWaterGauge3());
+		} else if (sprinklingCanGage == 4) {
+			waterGauge.setIcon(waterGauge.getWaterGauge4());
+		} else if (sprinklingCanGage == 5) {
+			waterGauge.setIcon(waterGauge.getWaterGauge5());
+		}
 	}
 	
 	public Parsnip plantParsnip() {

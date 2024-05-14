@@ -28,12 +28,6 @@ public class ParsnipGauge extends JLabel{
 		x = 1300;
 		y = 520;
 
-		parsnipGauge = new ImageIcon("img/gauge/ParsnipWater1.png");
-		parsnipGauge1 = new ImageIcon("img/gauge/ParsnipWater2.png");
-		parsnipGauge2 = new ImageIcon("img/gauge/ParsnipWater3.png");
-		parsnipGauge3 = new ImageIcon("img/gauge/ParsnipWater4.png");
-		parsnipGauge4 = new ImageIcon("img/gauge/ParsnipWater5.png");
-		parsnipGauge5 = new ImageIcon("img/gauge/ParsnipWater6.png");
 		
 	}
 	

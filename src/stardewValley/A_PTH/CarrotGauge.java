@@ -28,12 +28,6 @@ public class CarrotGauge extends JLabel{
 		x = 1300;
 		y = 640;
 
-		carrotGauge = new ImageIcon("img/gauge/CarrotWater1.png");
-		carrotGauge1 = new ImageIcon("img/gauge/CarrotWater2.png");
-		carrotGauge2 = new ImageIcon("img/gauge/CarrotWater3.png");
-		carrotGauge3 = new ImageIcon("img/gauge/CarrotWater4.png");
-		carrotGauge4 = new ImageIcon("img/gauge/CarrotWater5.png");
-		carrotGauge5 = new ImageIcon("img/gauge/CarrotWater6.png");
 		
 	}
 	
