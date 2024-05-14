@@ -20,7 +20,7 @@ public class StardewValleyFrame extends JFrame {
 	private Vegetable[] vegetables;
 
 	private Farm farm;
-	
+
 	private Store store;
 	private Keeper keeper;
 	private Water waterMan;
@@ -44,8 +44,7 @@ public class StardewValleyFrame extends JFrame {
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
-		farm = new Farm(mContext, player);
-		
+
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		waterMan = new Water(mContext);
@@ -60,7 +59,11 @@ public class StardewValleyFrame extends JFrame {
 		status = new Status(mContext, player, store, keeper, waterMan);
 		vegetables = new Vegetable[3];
 
+		farm = new Farm(mContext, player);
+		
 		status.getParsnipPrice().setText(Integer.toString(store.getParsnipPrice()));
+
+		
 
 	}
 
@@ -203,12 +206,12 @@ public class StardewValleyFrame extends JFrame {
 					harvest();
 					break;
 				case KeyEvent.VK_D:
-					if(keeper.isSaveOn()) {
+					if (keeper.isSaveOn()) {
 						saveCrop();
 					}
 					break;
 				case KeyEvent.VK_F:
-					if(store.isSellOn()) {
+					if (store.isSellOn()) {
 						sellParsnip();
 						sellCarrot();
 						sellBerry();
@@ -371,7 +374,7 @@ public class StardewValleyFrame extends JFrame {
 		status.getCarrot().setText(Integer.toString(keeper.getCarrotEach()));
 		status.getBerry().setText(Integer.toString(keeper.getBerryEach()));
 	}
-
+	
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}

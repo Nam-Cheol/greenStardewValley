@@ -54,8 +54,6 @@ public class backgroundPlayerMapService implements Runnable {
 			int gapY = 150;
 			int gapX = 100;
 			
-//			int startFarm = Math.
-
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
 
@@ -86,18 +84,7 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (right == WATER) {
 				stopRight();
 
-				// 3. FARM
-			} else if (up == FARM) {
-				stopUp();
-			} else if (down == FARM) {
-				stopDown();
-				player.setCreate(true);
-			} else if (left == FARM) {
-				stopLeft();
-			} else if (right == FARM) {
-				stopRight();
-
-				// 4. NPC
+				// 3. NPC
 			} else if (storeX < gapX && storeY < gapY) {
 				store.setIcon(store.getSellerOn());
 				store.setSellOn(true);
