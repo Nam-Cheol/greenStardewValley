@@ -40,6 +40,7 @@ public class Player extends JLabel implements Moveable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private SeedZone seedZone;
 
 	private WaterGauge gauge;
 	
@@ -83,14 +84,14 @@ public class Player extends JLabel implements Moveable {
 	private final int MAX_CANGAGE = 5;
 
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, SeedZone seedZone) {
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water, seedZone)).start();
 	}
 
 	private void initData() {

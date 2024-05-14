@@ -12,10 +12,13 @@ public class backgroundPlayerMapService implements Runnable {
 	private Color redColor = new Color(255, 0, 0);
 	private Color greenColor = new Color(0, 255, 0);
 	private Color blueColor = new Color(0, 0, 255);
+	private Color acuaColor = new Color(0,255,255);
 
 	private final int BLOCK = redColor.getRGB();
 	private final int FARM = greenColor.getRGB();
 	private final int WATER = blueColor.getRGB();
+	private final int SEED_ZOON = acuaColor.getRGB();
+	
 
 	private BufferedImage image;
 
@@ -23,12 +26,14 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private SeedZone seedZone;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, SeedZone seedZone) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
+		this.seedZone = seedZone;
 		try {
 			image = ImageIO.read(new File("img/ColorFrameTest.png"));
 		} catch (IOException e) {
@@ -60,6 +65,9 @@ public class backgroundPlayerMapService implements Runnable {
 
 			int waterX = Math.abs(player.getX() - water.getX());
 			int waterY = Math.abs(player.getY() - water.getY());
+			
+			int seedZoonX = Math.abs(player.getX() - seedZone.getX());
+			int seedZoonY = Math.abs(player.getY() - seedZone.getY());
 
 			// 1. BLOCK
 
@@ -92,6 +100,17 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == FARM) {
 				stopRight();
+				
+				// 3. SEED_ZOON
+			} else if (up == SEED_ZOON) {
+				stopUp();
+			} else if (down == SEED_ZOON) {
+				stopDown();
+//				player.setCreate(true);
+			} else if (left == SEED_ZOON) {
+				stopLeft();
+			} else if (right == SEED_ZOON) {
+				stopRight();	
 
 				// 4. NPC
 			} else if (storeX < gap && storeY < gap) {
@@ -103,6 +122,9 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (waterX < gap && waterY < gap) {
 				water.setIcon(water.getWaterOn());
 				player.setScoopWater(true);
+			} else if (seedZoonX < gap && seedZoonY < gap) {
+				seedZone.setIcon(seedZone.getSeedZoneOn());
+//				player.setScoopWater(true);
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);
@@ -176,6 +198,9 @@ public class backgroundPlayerMapService implements Runnable {
 		}
 		if(water.isSeeNPC() == false) {
 			water.setIcon(water.getWater());
+		}
+		if(seedZone.isSeeNpc()== false) {
+			seedZone.setIcon(seedZone.getSeedZone());
 		}
 	}
 	
