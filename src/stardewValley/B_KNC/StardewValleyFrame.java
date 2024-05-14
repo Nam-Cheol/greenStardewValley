@@ -17,8 +17,6 @@ public class StardewValleyFrame extends JFrame {
 	private JLabel backgroundMap;
 	private Player player;
 
-//	private Vegetable[] vegetables;
-	
 	private int choice;
 
 	private Farm farm;
@@ -61,7 +59,6 @@ public class StardewValleyFrame extends JFrame {
 		parsnipGauge = new ParsnipGauge(mContext);
 
 		status = new Status(mContext, player, store, keeper, waterMan);
-//		vegetables = new Vegetable[3];
 
 		farm = new Farm(mContext, player);
 		
@@ -86,7 +83,6 @@ public class StardewValleyFrame extends JFrame {
 		add(info);
 
 		add(carrotGauge);
-//		add(waterGauge);
 		add(berryGauge);
 		add(parsnipGauge);
 		add(farm);
@@ -214,28 +210,16 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_SPACE:
 					if (player.isCreate()) {
-						if (0 < player.getSprinklingCanGage()) {
-							player.setIcon(player.getPlayerWater());
-							player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
-							System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
-//							vegetables[0].setWaterGage(vegetables[0].getWaterGage() + 1);
-//							System.out.println("식물이 받은 물 : " + vegetables[0].getWaterGage());
-						} else {
-							System.out.println("연못에 가서 물을 채우세요.");
-						}
+						farm.sprinkling(choice);
 						player.amountWater();
 					}
 					break;
 				case KeyEvent.VK_A:
 					if (player.isScoopWater() == true) {
 						player.setIcon(player.getPlayerWater());
-						System.out.println("채우기 전" + player.getSprinklingCanGage());
-						System.out.println("연못 전 : " + waterMan.getPondGage());
 						if (player.getSprinklingCanGage() < player.getMAX_CANGAGE()) {
 							player.setSprinklingCanGage(player.getMAX_CANGAGE());
 							waterMan.setPondGage(waterMan.getPondGage() - 5);
-							System.out.println("채운 후" + player.getSprinklingCanGage());
-							System.out.println("연못 후 : " + waterMan.getPondGage());
 						} else {
 							System.out.println("물뿌리개가 이미 가득 찼어요.");
 						}
