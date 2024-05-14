@@ -1,4 +1,4 @@
-package stardewValley.A_CYJ;
+package stardewValley.B_KNC;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -45,8 +45,8 @@ public class Water extends JLabel {
 		berryEach = 0;
 
 		seeNPC = false;
-		// todo 테스트로 총량 줄여놓음
-		pondGage = 99L;
+
+		pondGage = 9999999999L;
 	}
 
 	private void setInitLayout() {

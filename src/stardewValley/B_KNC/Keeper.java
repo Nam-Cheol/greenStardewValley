@@ -1,56 +1,53 @@
-package stardewValley.A_CYJ;
+package stardewValley.B_KNC;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Water extends JLabel {
+public class Keeper extends JLabel{
 
 	StardewValleyFrame mContext;
-
+	
 	private int x;
 	private int y;
-
+	
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-
+	
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-
-	private ImageIcon water;
-	private ImageIcon waterOn;
-
+	
+	private ImageIcon keeper;
+	private ImageIcon keeperOn;
+	
+	private boolean saveOn;
 	private boolean seeNPC;
-
-	// 우물에 물 전체 양
-	private long pondGage;
-
-	public Water(StardewValleyFrame mContext) {
+	
+	public Keeper(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-
+	
 	private void initData() {
-
-		x = 750;
-		y = 500;
-
-		water = new ImageIcon("img/waterMan 복사.png");
-		waterOn = new ImageIcon("img/waterManOn 복사.png");
-
+		
+		x = 200;
+		y = 160;
+		
+		keeper = new ImageIcon("img/keeper 복사.png");
+		keeperOn = new ImageIcon("img/keeperOn 복사.png");
+		
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
-
+		
 		seeNPC = false;
-		// todo 테스트로 총량 줄여놓음
-		pondGage = 99L;
+		saveOn = false;
 	}
-
+	
 	private void setInitLayout() {
-		this.setIcon(water);
+		this.setIcon(keeper);
 		this.setLocation(x, y);
 		this.setSize(130, 200);
 	}
@@ -60,7 +57,7 @@ public class Water extends JLabel {
 	}
 
 	// getter, setter
-
+	
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -129,16 +126,12 @@ public class Water extends JLabel {
 		this.berryEach = berryEach;
 	}
 
-	public ImageIcon getWater() {
-		return water;
+	public ImageIcon getKeeper() {
+		return keeper;
 	}
 
-	public void setWater(ImageIcon water) {
-		this.water = water;
-	}
-
-	public ImageIcon getWaterOn() {
-		return waterOn;
+	public ImageIcon getKeeperOn() {
+		return keeperOn;
 	}
 
 	public boolean isSeeNPC() {
@@ -149,20 +142,14 @@ public class Water extends JLabel {
 		this.seeNPC = seeNPC;
 	}
 
-	// 시도
-	public long getPondGage() {
-		return pondGage;
+	public boolean isSaveOn() {
+		return saveOn;
 	}
 
-	public void setPondGage(long pondGage) {
-		this.pondGage = pondGage;
+	public void setSaveOn(boolean saveOn) {
+		this.saveOn = saveOn;
 	}
-
-	// TODO - 수정 필요, 연못에 물이 자동적으로 줄어들도록
-	public void minusPondGage() {
-		while (getPondGage() != 0) {
-			setPondGage(getPondGage() - 100);
-		}
-	}
-
+	
+	
+	
 }

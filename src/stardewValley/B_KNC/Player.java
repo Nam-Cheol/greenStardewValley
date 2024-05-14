@@ -1,4 +1,4 @@
-package stardewValley.A_KNC;
+package stardewValley.B_KNC;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;

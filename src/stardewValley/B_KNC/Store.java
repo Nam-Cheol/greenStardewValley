@@ -1,58 +1,77 @@
-package stardewValley.A_CYJ;
+package stardewValley.B_KNC;
+
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Water extends JLabel {
+public class Store extends JLabel{
 
 	StardewValleyFrame mContext;
-
+	
 	private int x;
 	private int y;
-
+	
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-
+	
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-
-	private ImageIcon water;
-	private ImageIcon waterOn;
-
+	
+	private ImageIcon seller;
+	private ImageIcon sellerOn;
+	
 	private boolean seeNPC;
-
-	// 우물에 물 전체 양
-	private long pondGage;
-
-	public Water(StardewValleyFrame mContext) {
+	private boolean sellOn;
+	
+	Random random = new Random();
+	
+	public Store(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
+		initThread();
 		this.mContext = mContext;
 	}
-
+	
 	private void initData() {
-
-		x = 750;
-		y = 500;
-
-		water = new ImageIcon("img/waterMan 복사.png");
-		waterOn = new ImageIcon("img/waterManOn 복사.png");
-
-		parsnipEach = 0;
-		carrotEach = 0;
-		berryEach = 0;
-
+		
+		x = 1000;
+		y = 160;
+		
+		seller = new ImageIcon("img/seller 복사.png");
+		sellerOn = new ImageIcon("img/sellerOn 복사.png");
+		
 		seeNPC = false;
-		// todo 테스트로 총량 줄여놓음
-		pondGage = 99L;
+		sellOn = false;
+		
 	}
-
+	
 	private void setInitLayout() {
-		this.setIcon(water);
+		this.setIcon(seller);
 		this.setLocation(x, y);
 		this.setSize(130, 200);
+	}
+	
+	private void initThread() {
+//		new Thread(new Runnable() {
+		
+		Timer timer = new Timer();
+		
+		TimerTask task = new TimerTask() {
+			
+			@Override
+			public void run() {
+				parsnipPrice = (int) (random.nextInt(1000)) + 500;
+				carrotPrice = (int) (random.nextInt(1000)) + 500;
+				berryPrice = (int) (random.nextInt(1000)) + 500;
+				
+			}
+		};
+		timer.scheduleAtFixedRate(task, 0, 1000);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -60,7 +79,7 @@ public class Water extends JLabel {
 	}
 
 	// getter, setter
-
+	
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -128,19 +147,15 @@ public class Water extends JLabel {
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
 	}
-
-	public ImageIcon getWater() {
-		return water;
+	
+	public ImageIcon getSeller() {
+		return seller;
 	}
 
-	public void setWater(ImageIcon water) {
-		this.water = water;
+	public ImageIcon getSellerOn() {
+		return sellerOn;
 	}
-
-	public ImageIcon getWaterOn() {
-		return waterOn;
-	}
-
+	
 	public boolean isSeeNPC() {
 		return seeNPC;
 	}
@@ -149,20 +164,12 @@ public class Water extends JLabel {
 		this.seeNPC = seeNPC;
 	}
 
-	// 시도
-	public long getPondGage() {
-		return pondGage;
+	public boolean isSellOn() {
+		return sellOn;
 	}
 
-	public void setPondGage(long pondGage) {
-		this.pondGage = pondGage;
+	public void setSellOn(boolean sellOn) {
+		this.sellOn = sellOn;
 	}
-
-	// TODO - 수정 필요, 연못에 물이 자동적으로 줄어들도록
-	public void minusPondGage() {
-		while (getPondGage() != 0) {
-			setPondGage(getPondGage() - 100);
-		}
-	}
-
+	
 }
