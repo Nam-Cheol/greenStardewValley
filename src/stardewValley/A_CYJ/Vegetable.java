@@ -78,6 +78,13 @@ public class Vegetable extends JLabel implements IVegetable{
 	public static void setMAX_PLANT(int mAX_PLANT) {
 		MAX_PLANT = mAX_PLANT;
 	}
+
+	public static int getMAX_PLANT() {
+		return MAX_PLANT;
+	}
+	
+	
+	
 	
 	
 	

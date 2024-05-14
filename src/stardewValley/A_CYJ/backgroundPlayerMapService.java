@@ -30,7 +30,7 @@ public class backgroundPlayerMapService implements Runnable {
 		this.keeper = keeper;
 		this.water = water;
 		try {
-			image = ImageIO.read(new File("img/StardewValleyMapColorFrame3.png"));
+			image = ImageIO.read(new File("img/ColorFrameTest.png"));
 		} catch (IOException e) {
 		}
 	}

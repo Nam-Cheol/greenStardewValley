@@ -28,6 +28,7 @@ public class StardewValleyFrame extends JFrame {
 	private WaterGauge waterGauge;
 	private BerryGauge berryGauge;
 	private ParsnipGauge parsnipGauge;
+//	private SeedZone seedZone;
 
 	private HelpInfo info;
 	private Status status;
@@ -41,7 +42,7 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/TempBackgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/TestBack.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
@@ -83,6 +84,7 @@ public class StardewValleyFrame extends JFrame {
 		add(waterGauge);
 		add(berryGauge);
 		add(parsnipGauge);
+//		add(seedZone);
 
 	}
 

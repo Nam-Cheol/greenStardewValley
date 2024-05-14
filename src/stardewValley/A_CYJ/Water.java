@@ -151,7 +151,10 @@ public class Water extends JLabel {
 
 	// 시도
 	public long getPondGage() {
-		return pondGage;
+		if(pondGage < 0) {
+			return pondGage;			
+		}
+		return 0;
 	}
 
 	public void setPondGage(long pondGage) {
