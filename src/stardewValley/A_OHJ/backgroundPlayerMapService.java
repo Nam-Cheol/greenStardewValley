@@ -10,11 +10,9 @@ import javax.imageio.ImageIO;
 public class backgroundPlayerMapService implements Runnable {
 
 	private Color redColor = new Color(255, 0, 0);
-	private Color greenColor = new Color(0, 255, 0);
 	private Color blueColor = new Color(0, 0, 255);
 
 	private final int BLOCK = redColor.getRGB();
-	private final int FARM = greenColor.getRGB();
 	private final int WATER = blueColor.getRGB();
 
 	private BufferedImage image;
@@ -23,14 +21,16 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private Guide guide;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
+		this.guide = guide;
 		try {
-			image = ImageIO.read(new File("img/bg/ColorFrameTest.png"));
+			image = ImageIO.read(new File("img/bg/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
 		}
 	}
@@ -50,8 +50,9 @@ public class backgroundPlayerMapService implements Runnable {
 			int left = leftColor.getRGB();
 			int right = rightColor.getRGB();
 
-			int gap = 150;
-
+			int gapY = 150;
+			int gapX = 100;
+			
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
 
@@ -60,6 +61,9 @@ public class backgroundPlayerMapService implements Runnable {
 
 			int waterX = Math.abs(player.getX() - water.getX());
 			int waterY = Math.abs(player.getY() - water.getY());
+			
+			int guideX = Math.abs(player.getX() - guide.getX());
+			int guideY = Math.abs(player.getY() - guide.getY());
 
 			// 1. BLOCK
 
@@ -72,6 +76,7 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == BLOCK) {
 				stopRight();
+				
 				// 2. WATER
 			} else if (up == WATER) {
 				stopUp();
@@ -81,27 +86,21 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == WATER) {
 				stopRight();
-
-				// 3. FARM
-			} else if (up == FARM) {
-				stopUp();
-			} else if (down == FARM) {
-				stopDown();
-				player.setCreate(true);
-			} else if (left == FARM) {
-				stopLeft();
-			} else if (right == FARM) {
-				stopRight();
-
-				// 4. NPC
-			} else if (storeX < gap && storeY < gap) {
-				player.setSellParsnip(true);
+				
+				// 3. NPC
+			} else if (storeX < gapX && storeY < gapY) {
 				store.setIcon(store.getSellerOn());
-			} else if (keeperX < gap && keeperY < gap) {
+				store.setSellOn(true);
+			} else if (keeperX < gapX && keeperY < gapY) {
 				keeper.setIcon(keeper.getKeeperOn());
-			} else if (waterX < gap && waterY < gap) {
+				keeper.setSaveOn(true);
+			} else if (waterX < gapX && waterY < gapX) {
 				water.setIcon(water.getWaterOn());
 				player.setScoopWater(true);
+			} else if (guideX < gapX && guideY < gapX) {
+				guide.setIcon(guide.getGuideOn());
+				player.setCreate(true);
+				guide.setPlantOn(true);
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);
@@ -176,6 +175,12 @@ public class backgroundPlayerMapService implements Runnable {
 		if(water.isSeeNPC() == false) {
 			water.setIcon(water.getWater());
 		}
+		
+		if(guide.isSeeNPC() == false) {
+			guide.setIcon(guide.getGuide());
+		}
+		player.setScoopWater(false);
+		guide.setPlantOn(false);
 	}
 	
 }

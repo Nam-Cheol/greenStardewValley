@@ -40,6 +40,10 @@ public class Player extends JLabel implements Moveable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private Guide guide;
+
+	private WaterGauge waterGauge;
+	private TimeGauge timeGauge;
 
 	// 플레이어의 좌표
 	private int x;
@@ -80,14 +84,15 @@ public class Player extends JLabel implements Moveable {
 	private final int MAX_CANGAGE = 5;
 
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide) {
+		this.mContext = mContext;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
+		this.guide = guide;
 		initData();
 		setInitLayout();
-		this.mContext = mContext;
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide)).start();
 	}
 
 	private void initData() {
@@ -129,13 +134,17 @@ public class Player extends JLabel implements Moveable {
 
 		money = 0;
 		sellParsnip = true;
+		
+		waterGauge = new WaterGauge(mContext);
+		timeGauge = new TimeGauge(mContext);
 	}
 
 	private void setInitLayout() {
 		this.setIcon(playerDown);
 		this.setLocation(x, y);
 		this.setSize(100, 120);
-
+		mContext.add(waterGauge);
+		mContext.add(timeGauge);
 	}
 
 	// TODO 움직임 구현
@@ -510,5 +519,21 @@ public class Player extends JLabel implements Moveable {
 
 	public void setWaterToParsnip(boolean waterToParsnip) {
 		this.waterToParsnip = waterToParsnip;
+	}
+
+	public void amountWater() {
+		if (sprinklingCanGage == 0) {
+			waterGauge.setIcon(waterGauge.getWaterGauge());
+		} else if (sprinklingCanGage == 1) {
+			waterGauge.setIcon(waterGauge.getWaterGauge1());
+		} else if (sprinklingCanGage == 2) {
+			waterGauge.setIcon(waterGauge.getWaterGauge2());
+		} else if (sprinklingCanGage == 3) {
+			waterGauge.setIcon(waterGauge.getWaterGauge3());
+		} else if (sprinklingCanGage == 4) {
+			waterGauge.setIcon(waterGauge.getWaterGauge4());
+		} else if (sprinklingCanGage == 5) {
+			waterGauge.setIcon(waterGauge.getWaterGauge5());
+		}
 	}
 }

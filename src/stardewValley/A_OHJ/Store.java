@@ -7,7 +7,7 @@ import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Store extends JLabel implements Runnable{
+public class Store extends JLabel{
 
 	StardewValleyFrame mContext;
 	
@@ -26,6 +26,7 @@ public class Store extends JLabel implements Runnable{
 	private ImageIcon sellerOn;
 	
 	private boolean seeNPC;
+	private boolean sellOn;
 	
 	Random random = new Random();
 	
@@ -39,14 +40,14 @@ public class Store extends JLabel implements Runnable{
 	private void initData() {
 		
 		x = 1000;
-		y = 160;
+		y = 200;
 		
 		seller = new ImageIcon("img/npc/seller.png");
 		sellerOn = new ImageIcon("img/npc/sellerOn.png");
 		
 		seeNPC = false;
+		sellOn = false;
 		
-		parsnipPrice = (int) (random.nextInt(1000)) + 500;
 	}
 	
 	private void setInitLayout() {
@@ -162,14 +163,13 @@ public class Store extends JLabel implements Runnable{
 	public void setSeeNPC(boolean seeNPC) {
 		this.seeNPC = seeNPC;
 	}
-	
-	@Override
-	public void run() {
-		parsnipEach = (int)(Math.random()*1000) + 500;
-		carrotEach = (int)(Math.random()*1000) + 500;
-		berryEach = (int)(Math.random()*1000) + 500;
+
+	public boolean isSellOn() {
+		return sellOn;
 	}
-	
-	
+
+	public void setSellOn(boolean sellOn) {
+		this.sellOn = sellOn;
+	}
 	
 }

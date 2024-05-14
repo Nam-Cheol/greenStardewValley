@@ -31,7 +31,7 @@ public class Carrot extends Vegetable {
 	public void setInitLayout() {
 		x = player.getX();
 		y = player.getY();
-		setSize(48, 64);
+		setSize(100, 110);
 		setIcon(null);
 	}
 
