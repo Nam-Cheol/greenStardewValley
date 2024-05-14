@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import stardewValley.vegetable.vegetable;
+
 public class backgroundPlayerMapService implements Runnable {
 
 	private Color redColor = new Color(255, 0, 0);
@@ -35,7 +37,7 @@ public class backgroundPlayerMapService implements Runnable {
 		this.water = water;
 		this.seedZone = seedZone;
 		try {
-			image = ImageIO.read(new File("img/ColorFrameTest.png"));
+			image = ImageIO.read(new File("img/bg/ColorFrameTest.png"));
 		} catch (IOException e) {
 		}
 	}
@@ -106,7 +108,7 @@ public class backgroundPlayerMapService implements Runnable {
 				stopUp();
 			} else if (down == SEED_ZOON) {
 				stopDown();
-//				player.setCreate(true);
+				
 			} else if (left == SEED_ZOON) {
 				stopLeft();
 			} else if (right == SEED_ZOON) {

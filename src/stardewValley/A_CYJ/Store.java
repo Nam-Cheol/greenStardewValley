@@ -42,8 +42,8 @@ public class Store extends JLabel{
 		x = 1000;
 		y = 160;
 		
-		seller = new ImageIcon("img/seller 복사.png");
-		sellerOn = new ImageIcon("img/sellerOn 복사.png");
+		seller = new ImageIcon("img/npc/seller.png");
+		sellerOn = new ImageIcon("img/npc/sellerOn.png");
 		
 		seeNPC = false;
 		sellOn = false;
