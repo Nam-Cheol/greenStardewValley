@@ -39,12 +39,12 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/StardewValleyMapColorFrame3.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/TempBackgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
-		farm = new Farm(mContext);
+		farm = new Farm(mContext, player);
 		
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);

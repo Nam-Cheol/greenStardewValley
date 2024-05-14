@@ -23,6 +23,7 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private Farm farm;
 
 	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
 		this.player = player;
@@ -50,7 +51,10 @@ public class backgroundPlayerMapService implements Runnable {
 			int left = leftColor.getRGB();
 			int right = rightColor.getRGB();
 
-			int gap = 150;
+			int gapY = 150;
+			int gapX = 100;
+			
+//			int startFarm = Math.
 
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
@@ -94,13 +98,13 @@ public class backgroundPlayerMapService implements Runnable {
 				stopRight();
 
 				// 4. NPC
-			} else if (storeX < gap && storeY < gap) {
+			} else if (storeX < gapX && storeY < gapY) {
 				store.setIcon(store.getSellerOn());
 				store.setSellOn(true);
-			} else if (keeperX < gap && keeperY < gap) {
+			} else if (keeperX < gapX && keeperY < gapY) {
 				keeper.setIcon(keeper.getKeeperOn());
 				keeper.setSaveOn(true);
-			} else if (waterX < gap && waterY < gap) {
+			} else if (waterX < gapX && waterY < gapX) {
 				water.setIcon(water.getWaterOn());
 				player.setScoopWater(true);
 			} else {

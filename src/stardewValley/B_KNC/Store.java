@@ -40,7 +40,7 @@ public class Store extends JLabel{
 	private void initData() {
 		
 		x = 1000;
-		y = 160;
+		y = 200;
 		
 		seller = new ImageIcon("img/seller 복사.png");
 		sellerOn = new ImageIcon("img/sellerOn 복사.png");

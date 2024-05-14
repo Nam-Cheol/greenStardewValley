@@ -33,7 +33,7 @@ public class Keeper extends JLabel{
 	private void initData() {
 		
 		x = 200;
-		y = 160;
+		y = 190;
 		
 		keeper = new ImageIcon("img/keeper 복사.png");
 		keeperOn = new ImageIcon("img/keeperOn 복사.png");
