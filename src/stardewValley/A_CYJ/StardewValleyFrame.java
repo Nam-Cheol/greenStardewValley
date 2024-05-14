@@ -32,6 +32,8 @@ public class StardewValleyFrame extends JFrame {
 	private HelpInfo info;
 	private Status status;
 
+	private Water water;
+
 	public StardewValleyFrame() {
 		initData();
 		setInitLayout();
@@ -136,24 +138,33 @@ public class StardewValleyFrame extends JFrame {
 					if (!player.isLeft()) {
 						status.rePrice();
 						player.left();
+						waterMan.setPondGage(waterMan.getPondGage() - 10L);
+						System.out.println(waterMan.getPondGage());
+//						
 					}
 					break;
 				case KeyEvent.VK_RIGHT:
 					if (!player.isRight()) {
 						status.rePrice();
 						player.right();
+						waterMan.setPondGage(waterMan.getPondGage() - 10L);
+						System.out.println(waterMan.getPondGage());
 					}
 					break;
 				case KeyEvent.VK_UP:
 					if (!player.isUp()) {
 						status.rePrice();
 						player.up();
+						waterMan.setPondGage(waterMan.getPondGage() - 10L);
+						System.out.println(waterMan.getPondGage());
 					}
 					break;
 				case KeyEvent.VK_DOWN:
 					if (!player.isDown()) {
 						status.rePrice();
 						player.down();
+						waterMan.setPondGage(waterMan.getPondGage() - 10L);
+						System.out.println(waterMan.getPondGage());
 					}
 					break;
 				case KeyEvent.VK_Q:
@@ -203,12 +214,12 @@ public class StardewValleyFrame extends JFrame {
 					harvest();
 					break;
 				case KeyEvent.VK_D:
-					if(keeper.isSaveOn()) {
+					if (keeper.isSaveOn()) {
 						saveCrop();
 					}
 					break;
 				case KeyEvent.VK_F:
-					if(store.isSellOn()) {
+					if (store.isSellOn()) {
 						sellParsnip();
 						sellCarrot();
 						sellBerry();
@@ -239,6 +250,9 @@ public class StardewValleyFrame extends JFrame {
 							waterMan.setPondGage(waterMan.getPondGage() - 5);
 							System.out.println("채운 후" + player.getSprinklingCanGage());
 							System.out.println("연못 후 : " + waterMan.getPondGage());
+						} else if (waterMan.getPondGage() <= 0) {
+							player.setScoopWater(false);
+							System.out.println("우물이 말랐습니다. 다음날 ㄱㄱ");
 						} else {
 							System.out.println("물뿌리개가 이미 가득 찼어요.");
 						}
@@ -387,7 +401,7 @@ public class StardewValleyFrame extends JFrame {
 			waterGauge.setIcon(waterGauge.getWaterGauge5());
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}

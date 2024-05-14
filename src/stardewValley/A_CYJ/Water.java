@@ -45,8 +45,8 @@ public class Water extends JLabel {
 		berryEach = 0;
 
 		seeNPC = false;
-
-		pondGage = 9999999999L;
+		// todo 테스트로 총량 줄여놓음
+		pondGage = 99L;
 	}
 
 	private void setInitLayout() {

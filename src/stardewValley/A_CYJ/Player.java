@@ -42,6 +42,7 @@ public class Player extends JLabel implements Moveable {
 	private Water water;
 
 	private WaterGauge gauge;
+	
 
 	// 플레이어의 좌표
 	private int x;
