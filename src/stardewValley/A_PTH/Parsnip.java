@@ -73,7 +73,6 @@ public class Parsnip extends Vegetable{
 						Thread.sleep(3000);
 						setWaterGage(getWaterGage() - 1);
 						System.out.println(getWaterGage());
-						gauge.setIcon(new ImageIcon("img/gauge/ParsnipWater1.png"));
 						notify();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
