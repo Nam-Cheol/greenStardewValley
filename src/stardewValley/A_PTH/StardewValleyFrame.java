@@ -33,7 +33,6 @@ public class StardewValleyFrame extends JFrame {
 	private HelpInfo info;
 	private Status status;
 
-
 	public StardewValleyFrame() {
 		initData();
 		setInitLayout();
@@ -211,11 +210,74 @@ public class StardewValleyFrame extends JFrame {
 				case KeyEvent.VK_F:
 					sellCrop();
 					break;
+				case KeyEvent.VK_NUMPAD1:
+					if (vegetables != null) {
+
+					}
+					break;
+				case KeyEvent.VK_NUMPAD2:
+
+					break;
+				case KeyEvent.VK_NUMPAD3:
+
+					break;
+				case KeyEvent.VK_NUMPAD4:
+
+					break;
+				case KeyEvent.VK_NUMPAD5:
+
+					break;
+				case KeyEvent.VK_NUMPAD6:
+
+					break;
+				case KeyEvent.VK_NUMPAD7:
+
+					break;
+				case KeyEvent.VK_NUMPAD8:
+
+					break;
+				case KeyEvent.VK_NUMPAD9:
+					break;
+				case KeyEvent.VK_M:
+					for (int i = 0; i < 9; i++) {
+						vegetables[i] = null;
+					}
+					break;
 				case KeyEvent.VK_SPACE:
 					Vegetable.MAX_PLANT = 5;
 					System.out.println("동작중");
 					player.setMoney(player.getMoney() + 10000);
 					status.getWallet().setText(Integer.toString(player.getMoney()));
+					if (player.isCreate()) {
+						if (0 < player.getSprinklingCanGage()) {
+							player.setIcon(player.getPlayerWater());
+							player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
+
+							if (player.getSprinklingCanGage() == 4) {
+								waterGauge.setIcon(waterGauge.getWaterGauge4());
+							}
+							if (player.getSprinklingCanGage() == 3) {
+								waterGauge.setIcon(waterGauge.getWaterGauge3());
+							}
+							if (player.getSprinklingCanGage() == 2) {
+								waterGauge.setIcon(waterGauge.getWaterGauge2());
+							}
+							if (player.getSprinklingCanGage() == 1) {
+								waterGauge.setIcon(waterGauge.getWaterGauge1());
+							}
+							if (player.getSprinklingCanGage() == 0) {
+								waterGauge.setIcon(waterGauge.getWaterGauge());
+							}
+
+							System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
+							vegetables[0].setWaterGage(vegetables[0].getWaterGage() + 1);
+							vegetables[1].setWaterGage(vegetables[1].getWaterGage() + 1);
+							vegetables[2].setWaterGage(vegetables[2].getWaterGage() + 1);
+							System.out.println("식물이 받은 물 : " + vegetables[0].getWaterGage());
+						} else {
+							System.out.println("연못에 가서 물을 채우세요.");
+						}
+					}
 					break;
 				case KeyEvent.VK_A:
 					parsnipGauge.setIcon(parsnipGauge.getParsnipGauge1());
@@ -253,9 +315,9 @@ public class StardewValleyFrame extends JFrame {
 
 	public void harvest() {
 		for (int i = 0; i < 3; i++) {
-			
-			if(vegetables[i] != null) {	
-			System.out.println("인식은 했음");
+
+			if (vegetables[i] != null) {
+				System.out.println("인식은 했음");
 				if (vegetables[i].isCanHarvest()) {
 					System.out.println(vegetables[i].getName() + "을 수확했다.");
 					// 작물 종류에 따라 플레이어의 작물 보유량 증가
@@ -314,6 +376,14 @@ public class StardewValleyFrame extends JFrame {
 //			temp = 0;
 			return;
 		}
+	}
+
+	public Vegetable[] getVegetables() {
+		return vegetables;
+	}
+
+	public void setVegetables(Vegetable[] vegetables) {
+		this.vegetables = vegetables;
 	}
 
 	public static void main(String[] args) {
