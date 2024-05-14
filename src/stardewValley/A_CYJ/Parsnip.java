@@ -24,11 +24,11 @@ public class Parsnip extends Vegetable{
 		waterGage = 2;
 		growing = true;
 		create = false;
-		growing1 = new ImageIcon("img/Parsnip_Stage_1.png");
-		growing2 = new ImageIcon("img/Parsnip_Stage_2.png");
-		growing3 = new ImageIcon("img/Parsnip_Stage_3.png");
-		growing4 = new ImageIcon("img/Parsnip_Stage_4.png");
-		lastGrowing = new ImageIcon("img/Parsnip_Stage_5.png");
+		growing1 = new ImageIcon("img/vege/Parsnip_Stage_1.png");
+		growing2 = new ImageIcon("img/vege/Parsnip_Stage_2.png");
+		growing3 = new ImageIcon("img/vege/Parsnip_Stage_3.png");
+		growing4 = new ImageIcon("img/vege/Parsnip_Stage_4.png");
+		lastGrowing = new ImageIcon("img/vege/Parsnip_Stage_5.png");
 	}
 
 	@Override
