@@ -67,16 +67,16 @@ public class Farm extends JLabel {
 	public void VLocation(int choice) {
 		int temp = 110;
 		if (choice < 4) {
-			vegetables[choice - 1].setLocation(120 + (temp * (choice - 1)), 580);
+			vegetables[choice - 1].setLocation(110 + (temp * (choice - 1)), 560);
 		} else if (choice < 7) {
-			vegetables[choice - 1].setLocation((temp * (choice - 1)) - 170, 680);
+			vegetables[choice - 1].setLocation((temp * (choice - 1)) - 220, 660);
 		} else if (choice < 10) {
-			vegetables[choice - 1].setLocation((temp * (choice - 1)) - 500, 780);
+			vegetables[choice - 1].setLocation((temp * (choice - 1)) - 550, 760);
 		}
 	}
 
 	public void harvest(int choice) {
-
+		mContext.currentHave();
 		if (vegetables[choice - 1] != null) {
 
 			if (vegetables[choice - 1].isCanHarvest()) {
@@ -85,6 +85,7 @@ public class Farm extends JLabel {
 					player.setHaveParsnip(player.getHaveParsnip() + 1);
 				} else if (vegetables[choice - 1] instanceof Carrot) {
 					player.setHaveCarrot(player.getHaveCarrot() + 1);
+					
 				} else if (vegetables[choice - 1] instanceof Strawberry) {
 					player.setHaveBerry(player.getHaveBerry() + 1);
 				}
@@ -94,6 +95,7 @@ public class Farm extends JLabel {
 				System.out.println(vegetables[choice - 1].getName() + "은 지금은 자라는 중이다.");
 			}
 		}
+		
 	}
 	
 	public void remove(int choice) {
@@ -107,6 +109,17 @@ public class Farm extends JLabel {
 			
 		}
 		
+	}
+	public void sprinkling(int choice) {
+		if (0 < player.getSprinklingCanGage()) {
+			player.setIcon(player.getPlayerWater());
+			player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
+			System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
+			vegetables[choice-1].setWaterGage(vegetables[choice-1].getWaterGage() + 1);
+			System.out.println("식물이 받은 물 : " + vegetables[choice-1].getWaterGage());
+		} else {
+			System.out.println("연못에 가서 물을 채우세요.");
+		}
 	}
 
 }

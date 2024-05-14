@@ -7,14 +7,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+
 public class backgroundPlayerMapService implements Runnable {
 
 	private Color redColor = new Color(255, 0, 0);
-	private Color greenColor = new Color(0, 255, 0);
 	private Color blueColor = new Color(0, 0, 255);
 
 	private final int BLOCK = redColor.getRGB();
-	private final int FARM = greenColor.getRGB();
 	private final int WATER = blueColor.getRGB();
 
 	private BufferedImage image;
@@ -23,12 +22,14 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private Guide guide;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
+		this.guide = guide;
 		try {
 			image = ImageIO.read(new File("img/bg/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
@@ -50,7 +51,8 @@ public class backgroundPlayerMapService implements Runnable {
 			int left = leftColor.getRGB();
 			int right = rightColor.getRGB();
 
-			int gap = 100;
+			int gapX = 100;
+			int gapY = 100;
 
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
@@ -60,6 +62,9 @@ public class backgroundPlayerMapService implements Runnable {
 
 			int waterX = Math.abs(player.getX() - water.getX());
 			int waterY = Math.abs(player.getY() - water.getY());
+
+			int guideX = Math.abs(player.getX() - guide.getX());
+			int guideY = Math.abs(player.getY() - guide.getY());
 
 			// 1. BLOCK
 
@@ -82,29 +87,24 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (right == WATER) {
 				stopRight();
 
-				// 3. FARM
-			} else if (up == FARM) {
-				stopUp();
-			} else if (down == FARM) {
-				stopDown();
+				// 3. NPC
+			} else if (storeX < gapX && storeY < gapY) {
+				store.setIcon(store.getSellerOn());
+				store.setSellOn(true);
+			} else if (keeperX < gapX && keeperY < gapY) {
+				keeper.setIcon(keeper.getKeeperOn());
+				keeper.setSaveOn(true);
+			} else if (waterX < gapX && waterY < gapY) {
+				water.setIcon(water.getWaterOn());
+				player.setScoopWater(true);
+			} else if (guideX < gapX && guideY < gapY) {
+				guide.setIcon(guide.getGuideOn());
 				player.setCreate(true);
-			} else if (left == FARM) {
-				stopLeft();
-			} else if (right == FARM) {
-				stopRight();
-
-				// 4. NPC
-			} else if (storeX < gap && storeY < gap) {
-				System.out.println("멈춰~~~~~~~!");
-//				stopMove();
-			} else if (keeperX < gap && keeperY < gap) {
-				System.out.println("멈춰~~~~~~~!");
-//				stopMove();
-			} else if (waterX < gap && waterY < gap) {
-				System.out.println("멈춰~~~~~~~!");
-//				stopMove();
+				guide.setPlantOn(true);
 			} else {
 				notWallCrash();
+				player.setSellParsnip(false);
+				seeNPC();
 			}
 
 			try {
@@ -118,25 +118,32 @@ public class backgroundPlayerMapService implements Runnable {
 	}
 
 	public void stopUp() {
-		player.setUpWallCrash(true);
-		player.setUp(false);
+		if (player.playerWay == PlayerWay.UP) {
+			player.setUpWallCrash(true);
+			player.setUp(false);
+		}
 	}
 
 	public void stopDown() {
-		player.setDownWallCrash(true);
-		player.setDown(false);
+		if (player.playerWay == PlayerWay.DOWN) {
+			player.setDownWallCrash(true);
+			player.setDown(false);
+		}
 	}
 
 	public void stopLeft() {
-		player.setLeftWallCrash(true);
-		player.setLeft(false);
+		if (player.playerWay == PlayerWay.LEFT) {
+			player.setLeftWallCrash(true);
+			player.setLeft(false);
+		}
 	}
 
 	public void stopRight() {
-		player.setRightWallCrash(true);
-		player.setRight(false);
+		if (player.playerWay == PlayerWay.RIGHT) {
+			player.setRightWallCrash(true);
+			player.setRight(false);
+		}
 	}
-
 	public void notWallCrash() {
 		player.setUpWallCrash(false);
 		player.setDownWallCrash(false);
@@ -155,6 +162,23 @@ public class backgroundPlayerMapService implements Runnable {
 		} else if (player.isRight()) {
 			player.setRight(false);
 		}
+	}
+	public void seeNPC() {
+		if(store.isSeeNPC() == false) {
+			store.setIcon(store.getSeller());
+		}
+		if(keeper.isSeeNPC() == false) {
+			keeper.setIcon(keeper.getKeeper());
+		}
+		if(water.isSeeNPC() == false) {
+			water.setIcon(water.getWater());
+		}
+		
+		if(guide.isSeeNPC() == false) {
+			guide.setIcon(guide.getGuide());
+		}
+		player.setScoopWater(false);
+		guide.setPlantOn(false);
 	}
 
 }

@@ -22,6 +22,8 @@ public class Status extends JLabel {
 	private JLabel carrotPrice;
 	private JLabel berryPrice;
 	
+	private JLabel carrotCurrent;
+	
 	private Font f;
 	
 	public Status(StardewValleyFrame mContext, Player player, Store store, Keeper keeper, Water water) {
@@ -46,6 +48,8 @@ public class Status extends JLabel {
 		carrotPrice = new JLabel();
 		berryPrice = new JLabel();
 		
+		carrotCurrent = new JLabel();
+		
 		f = new Font("휴먼편지체", Font.PLAIN, 40);
 	}
 	
@@ -58,26 +62,34 @@ public class Status extends JLabel {
 		wallet.setFont(f);
 		wallet.setText(Integer.toString(player.getMoney()));
 		
-		// 파스닙의 저장 개수
+		// 플레이어 작물 보유 현황
+		mContext.add(carrotCurrent);
+		carrotCurrent.setLocation(1600, 700);
+		carrotCurrent.setSize(100, 100);
+		carrotCurrent.setFont(f);
+		carrotCurrent.setText(Integer.toString(player.getHaveCarrot()));
+		
+		// 파스닙의 창고 저장 개수
 		mContext.add(parsnip);
 		parsnip.setLocation(1850, 580);
 		parsnip.setSize(100,100);
 		parsnip.setFont(f);
 		parsnip.setText(Integer.toString(keeper.getParsnipEach()));
 		
-		// 당근의 저장 개수
+		// 당근의 창고 저장 개수
 		mContext.add(carrot);
 		carrot.setLocation(1850, 700);
 		carrot.setSize(100,100);
 		carrot.setFont(f);
+		
 		carrot.setText(Integer.toString(keeper.getCarrotEach()));
 		
-		// 딸기의 저장 개수
+		// 딸기의 창고 저장 개수
 		mContext.add(berry);
 		berry.setLocation(1850, 810);
 		berry.setSize(100,100);
 		berry.setFont(f);
-		berry.setText(Integer.toString(keeper.getBerryEach()));
+		berry.setText(Integer.toString(player.getHaveBerry()));
 		
 		// 파스닙의 가격
 		mContext.add(parsnipPrice);
@@ -142,10 +154,24 @@ public class Status extends JLabel {
 	public JLabel getBerryPrice() {
 		return berryPrice;
 	}
+	
+	public JLabel getCarrotCurrent() {
+		return carrotCurrent;
+	}
+
+	public void setCarrotCurrent(JLabel carrotCurrent) {
+		this.carrotCurrent = carrotCurrent;
+	}
+
 	public void rePrice() {
 		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
 		carrotPrice.setText(Integer.toString(store.getCarrotPrice()));
 		berryPrice.setText(Integer.toString(store.getBerryPrice()));
+	}
+	public void currentHave() {
+		parsnip.setText(Integer.toString(player.getHaveParsnip()));
+		carrot.setText(Integer.toString(player.getHaveCarrot()));
+		berry.setText(Integer.toString(player.getHaveBerry()));
 	}
 	
 	

@@ -36,6 +36,7 @@ public class Keeper extends JLabel {
 		y = 200;
 
 		keeper = new ImageIcon("img/npc/keeper.png");
+		keeperOn = new ImageIcon("img/npc/keeperOn.png");
 
 		parsnipEach = 0;
 		carrotEach = 0;

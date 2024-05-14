@@ -40,7 +40,7 @@ public class Store extends JLabel implements Runnable{
 	private void initData() {
 		
 		x = 1000;
-		y = 160;
+		y = 300;
 		
 		seller = new ImageIcon("img/npc/seller.png");
 		sellerOn = new ImageIcon("img/npc/sellerOn.png");
