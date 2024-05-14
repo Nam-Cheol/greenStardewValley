@@ -10,11 +10,9 @@ import javax.imageio.ImageIO;
 public class backgroundPlayerMapService implements Runnable {
 
 	private Color redColor = new Color(255, 0, 0);
-	private Color greenColor = new Color(0, 255, 0);
 	private Color blueColor = new Color(0, 0, 255);
 
 	private final int BLOCK = redColor.getRGB();
-	private final int FARM = greenColor.getRGB();
 	private final int WATER = blueColor.getRGB();
 
 	private BufferedImage image;
@@ -23,13 +21,14 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
-	private Farm farm;
+	private Guide guide;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
+		this.guide = guide;
 		try {
 			image = ImageIO.read(new File("img/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
@@ -62,6 +61,9 @@ public class backgroundPlayerMapService implements Runnable {
 
 			int waterX = Math.abs(player.getX() - water.getX());
 			int waterY = Math.abs(player.getY() - water.getY());
+			
+			int guideX = Math.abs(player.getX() - guide.getX());
+			int guideY = Math.abs(player.getY() - guide.getY());
 
 			// 1. BLOCK
 
@@ -74,6 +76,7 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == BLOCK) {
 				stopRight();
+				
 				// 2. WATER
 			} else if (up == WATER) {
 				stopUp();
@@ -83,7 +86,7 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == WATER) {
 				stopRight();
-
+				
 				// 3. NPC
 			} else if (storeX < gapX && storeY < gapY) {
 				store.setIcon(store.getSellerOn());
@@ -94,6 +97,10 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (waterX < gapX && waterY < gapX) {
 				water.setIcon(water.getWaterOn());
 				player.setScoopWater(true);
+			} else if (guideX < gapX && guideY < gapX) {
+				guide.setIcon(guide.getGuideOn());
+				player.setCreate(true);
+				guide.setPlantOn(true);
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);
@@ -168,7 +175,12 @@ public class backgroundPlayerMapService implements Runnable {
 		if(water.isSeeNPC() == false) {
 			water.setIcon(water.getWater());
 		}
+		
+		if(guide.isSeeNPC() == false) {
+			guide.setIcon(guide.getGuide());
+		}
 		player.setScoopWater(false);
+		guide.setPlantOn(false);
 	}
 	
 }

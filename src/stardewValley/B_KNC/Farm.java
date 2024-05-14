@@ -18,38 +18,35 @@ public class Farm extends JLabel {
 	
 	private Player player;
 	
-	private int choice;
 	
-	private Guide guide;
+	private int choice;
 	
 	public Farm(StardewValleyFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
 		initData();
 		setInitLayout();
-//		new Thread(new backgroundFarmService(player, this)).start();
 	}
 	
 	private void initData() {
 		
 		choice = 0;
 		
-		farm = new ImageIcon("img/Farm.png");
+		farm = new ImageIcon();
 		
 		vegetables = new Vegetable[PLANT_MAX];
 		
-		guide = new Guide();
 	}
 	
 	private void setInitLayout() {
 		this.setIcon(farm);
 		this.setLocation(x, y);
 		this.setSize(300, 300);
-		mContext.add(guide);
 	}
 	
-	public void plantOn(int plantNum) {
-		vegetables[plantNum] = new Parsnip(player);
+	public void plantOn(int choice) {
+		this.choice = choice;
+		vegetables[choice-1] = new Carrot(player);
 	}
 
 	public int getX() {
@@ -67,20 +64,41 @@ public class Farm extends JLabel {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	static class Guide extends JLabel {
-		private int x = 150;
-		private int y = 450;
-		
-		private ImageIcon guide;
-		private ImageIcon guideOn;
-		
-		public Guide() {
-			guide = new ImageIcon("img/seller 복사.png");
-			guideOn = new ImageIcon("img/sellerOn 복사.png");
-			setIcon(guide);
-			setLocation(x, y);
-			setSize(100, 160);
+
+	public void VLocation(int choice) {
+		int temp = 110;
+		if(choice < 4) {
+			vegetables[choice-1].setLocation(160 + (temp * (choice-1)), 580);
+		} else if (choice < 7) {
+			vegetables[choice-1].setLocation((temp * (choice-1)) - 170, 680);
+		} else if (choice < 10) {
+			vegetables[choice-1].setLocation((temp * (choice-1))- 500, 780);
 		}
 	}
+	
+	public void harvest(int choice) {
+
+		if (vegetables[choice-1] != null) {
+			System.out.println("인식");
+			if (vegetables[choice-1].isCanHarvest()) {
+				System.out.println(vegetables[choice-1].getName() + "을 수확했다.");
+				// 작물 종류에 따라서 플레이어의 작물 보유량 증가
+				if (vegetables[choice-1] instanceof Parsnip) {
+					player.setHaveParsnip(player.getHaveParsnip() + 1);
+					System.out.println("파스닙의 갯수 :" + player.getHaveParsnip());
+				} else if (vegetables[choice-1] instanceof Carrot) {
+					player.setHaveCarrot(player.getHaveCarrot() + 1);
+					System.out.println("당근의 갯수 :" + player.getHaveCarrot());
+				} else if (vegetables[choice-1] instanceof Strawberry) {
+					player.setHaveBerry(player.getHaveBerry() + 1);
+					System.out.println("딸기의 갯수 :" + player.getHaveBerry());
+				}
+				vegetables[choice-1].setIcon(null);
+				vegetables[choice-1] = null;
+			} else {
+				System.out.println(vegetables[choice-1].getName() + "은 지금은 자라는 중이다.");
+			}
+		}
+}
+	
 }
