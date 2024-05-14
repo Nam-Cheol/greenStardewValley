@@ -21,17 +21,17 @@ public class Carrot extends Vegetable {
 	@Override
 	public void initData() {
 		growing = true;
-		growing1 = new ImageIcon("img/Carrot_Stage_1.png");
-		growing2 = new ImageIcon("img/Carrot_Stage_2.png");
-		growing3 = new ImageIcon("img/Carrot_Stage_3.png");
-		lastGrowing = new ImageIcon("img/Carrot_Stage_4.png");
+		growing1 = new ImageIcon("img/vege/Carrot_Stage_1.png");
+		growing2 = new ImageIcon("img/vege/Carrot_Stage_2.png");
+		growing3 = new ImageIcon("img/vege/Carrot_Stage_3.png");
+		lastGrowing = new ImageIcon("img/vege/Carrot_Stage_4.png");
 	}
 
 	@Override
 	public void setInitLayout() {
 		x = player.getX();
 		y = player.getY();
-		setSize(48, 64);
+		setSize(100, 110);
 		setIcon(null);
 	}
 

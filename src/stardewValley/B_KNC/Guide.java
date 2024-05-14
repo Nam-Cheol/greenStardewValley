@@ -26,8 +26,8 @@ public class Guide extends JLabel {
 		x = 430;
 		y = 430;
 		
-		guide = new ImageIcon("img/npc/seller 복사.png");
-		guideOn = new ImageIcon("img/npc/sellerOn 복사.png");
+		guide = new ImageIcon("img/npc/scarecrow.png");
+		guideOn = new ImageIcon("img/npc/scarecrowOn.png");
 		
 		seeNPC = false;
 		plantOn = false;
@@ -36,7 +36,7 @@ public class Guide extends JLabel {
 	private void setInitLayout() {
 		this.setIcon(guide);
 		this.setLocation(x, y);
-		this.setSize(100, 160);
+		this.setSize(125, 180);
 	}
 
 	public int getX() {

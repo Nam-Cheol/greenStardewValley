@@ -67,7 +67,7 @@ public class Farm extends JLabel {
 	public void VLocation(int choice) {
 		int temp = 110;
 		if (choice < 4) {
-			vegetables[choice - 1].setLocation(160 + (temp * (choice - 1)), 580);
+			vegetables[choice - 1].setLocation(120 + (temp * (choice - 1)), 580);
 		} else if (choice < 7) {
 			vegetables[choice - 1].setLocation((temp * (choice - 1)) - 170, 680);
 		} else if (choice < 10) {
