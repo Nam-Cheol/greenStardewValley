@@ -194,7 +194,12 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_R:
-					farm.harvest(choice);
+					if(farm.vegetables[choice-1] != null) {
+						if(farm.vegetables[choice-1].getIcon() == farm.vegetables[choice-1].rotten) {
+							farm.remove(choice);
+						}
+						farm.harvest(choice);
+					}
 					break;
 				case KeyEvent.VK_D:
 					if (keeper.isSaveOn()) {

@@ -327,11 +327,11 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	public Vegetable createCarrot() {
-		return new Carrot(this);
+		return new Carrot(this, mContext, mContext.farm);
 	}
 
 	public Vegetable createBerry() {
-		return new Strawberry(this);
+		return new Strawberry(this, mContext, mContext.farm);
 	}
 
 	// getter, setter

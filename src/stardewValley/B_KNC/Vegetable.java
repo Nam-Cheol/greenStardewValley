@@ -22,9 +22,10 @@ public class Vegetable extends JLabel implements IVegetable{
 		protected ImageIcon growing4;
 		protected ImageIcon growing5;
 		protected ImageIcon lastGrowing;
+		protected ImageIcon rotten = new ImageIcon("img/vege/Rotten_Plant.png");
 		// 물
 		protected final int MAX_WATERGAGE = 4;
-		protected int waterGage;
+		protected int waterGauge;
 		protected boolean vegeGetWater;
 		// 수확
 		protected boolean canHarvest;
@@ -69,11 +70,11 @@ public class Vegetable extends JLabel implements IVegetable{
 	}
 
 	public int getWaterGage() {
-		return waterGage;
+		return waterGauge;
 	}
 
 	public void setWaterGage(int waterGage) {
-		this.waterGage = waterGage;
+		this.waterGauge = waterGage;
 	}
 
 	public static void setMAX_PLANT(int mAX_PLANT) {
