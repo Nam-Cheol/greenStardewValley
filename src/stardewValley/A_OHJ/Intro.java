@@ -2,15 +2,45 @@ package stardewValley.A_OHJ;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+class AudioPlay extends JPanel {
+	Clip clip = null;
+
+	AudioPlay() {
+
+		try {
+			clip = AudioSystem.getClip(); // 사용 가능한 쓰레드 할당
+			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
+
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+			clip.open(audioInputStream);
+			clip.start();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+}
+
 public class Intro extends JFrame {
 
-	private JPanel frame;
+	private JPanel jPanel;
 	private JLabel intro;
 	private StardewValleyFrame game;
 
@@ -22,13 +52,14 @@ public class Intro extends JFrame {
 
 	private void initData() {
 		setTitle("Stardew Valley");
-		frame = new JPanel();
+		jPanel = new JPanel();
 		intro = new JLabel(new ImageIcon("img/intro/intro.png"));
 	}
 
 	private void setInitLayout() {
-		frame.add(intro);
-		add(frame);
+		jPanel.add(intro);
+		jPanel.add(new AudioPlay());
+		add(jPanel);
 
 		setSize(1930, 980);
 		setVisible(true);
