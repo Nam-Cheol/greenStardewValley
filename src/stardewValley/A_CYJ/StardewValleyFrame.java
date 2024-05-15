@@ -36,6 +36,7 @@ public class StardewValleyFrame extends JFrame {
 	private HelpInfo info;
 	private Status status;
 	private GameOver gameOver;
+	private GameClear gameClear;
 
 	private int turn;
 
@@ -58,7 +59,8 @@ public class StardewValleyFrame extends JFrame {
 
 		player = new Player(mContext, store, keeper, waterMan, seedZone);
 		info = new HelpInfo(mContext);
-		gameOver =  new GameOver(mContext);
+		gameOver = new GameOver(mContext);
+		gameClear = new GameClear(mContext);
 
 		timeGauge = new TimeGauge(mContext);
 		carrotGauge = new CarrotGauge(mContext);
@@ -87,6 +89,7 @@ public class StardewValleyFrame extends JFrame {
 		add(waterMan);
 		add(info);
 		add(gameOver);
+		add(gameClear);
 
 		add(timeGauge);
 		add(carrotGauge);
@@ -420,34 +423,42 @@ public class StardewValleyFrame extends JFrame {
 	public void plusSeed() {
 
 		if (vegetable.getMAX_PLANT() == 0) {
-	        if (turn == 1) {
-	            vegetable.setMAX_PLANT(5);
-	            timeGauge.setIcon(timeGauge.getTimeGauge1());
-	            turn++;
-	        } else if (turn == 2) {
-	            vegetable.setMAX_PLANT(5);
-	            timeGauge.setIcon(timeGauge.getTimeGauge2());
-	            turn++;
-	        } else if (turn == 3) {
-	        	if(player.getMoney() < 300000 ) {
-	        		gameOver.setIcon(gameOver.getGameOver());
-					gameOver.setSize(1930, 930);
-					gameOver.setLocation(0, 0);
-					keeper.setSeeNPC(true);
-					keeper.setIcon(null);
-					waterMan.setIcon(null);
-					waterMan.setSeeNPC(true);
-					store.setIcon(null);
-					player.setIcon(null);
-					info.setIcon(null);
-					player = null;
-	        	}
-	        	
-	        }
-	    }
-	}
+			if (turn == 1) {
+				vegetable.setMAX_PLANT(5);
+				timeGauge.setIcon(timeGauge.getTimeGauge1());
+				turn++;
+			} else if (turn == 2) {
+				vegetable.setMAX_PLANT(5);
+				timeGauge.setIcon(timeGauge.getTimeGauge2());
+				turn++;
+			} else if (turn == 3 && player.getMoney() <= 300) {
+				gameOver.setIcon(gameOver.getGameOver());
+				gameOver.setSize(1930, 930);
+				gameOver.setLocation(0, 0);
+				keeper.setSeeNPC(true);
+				keeper.setIcon(null);
+				waterMan.setIcon(null);
+				waterMan.setSeeNPC(true);
+				store.setIcon(null);
+				player.setIcon(null);
+				info.setIcon(null);
+				player = null;
 
-	
+			} else if (turn == 3 && player.getMoney() >= 300) {
+				gameOver.setIcon(gameClear.getGameClear());
+				gameOver.setSize(1930, 930);
+				gameOver.setLocation(0, 0);
+				keeper.setSeeNPC(true);
+				keeper.setIcon(null);
+				waterMan.setIcon(null);
+				waterMan.setSeeNPC(true);
+				store.setIcon(null);
+				player.setIcon(null);
+				info.setIcon(null);
+				player = null;
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		new StardewValleyFrame();
