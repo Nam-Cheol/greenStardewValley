@@ -361,8 +361,8 @@ public class StardewValleyFrame extends JFrame {
 		status.getBerry().setText(Integer.toString(keeper.getBerryEach()));
 	}
 
-	public static void main(String[] args) {
-		new StardewValleyFrame();
-	}
+//	public static void main(String[] args) {
+//		new StardewValleyFrame();
+//	}
 
 }
