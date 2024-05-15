@@ -36,6 +36,7 @@ public class StardewValleyFrame extends JFrame {
 	private Status status;
 
 	public StardewValleyFrame() {
+		super("Stardew Valley");
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -247,30 +248,39 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_NUMPAD1:
 					choice = 7;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_1.png"));
 					break;
 				case KeyEvent.VK_NUMPAD2:
 					choice = 8;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_2.png"));
 					break;
 				case KeyEvent.VK_NUMPAD3:
 					choice = 9;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_3.png"));
 					break;
 				case KeyEvent.VK_NUMPAD4:
 					choice = 4;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_4.png"));
 					break;
 				case KeyEvent.VK_NUMPAD5:
 					choice = 5;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_5.png"));
 					break;
 				case KeyEvent.VK_NUMPAD6:
 					choice = 6;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_6.png"));
 					break;
 				case KeyEvent.VK_NUMPAD7:
 					choice = 1;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_7.png"));
 					break;
 				case KeyEvent.VK_NUMPAD8:
 					choice = 2;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_8.png"));
 					break;
 				case KeyEvent.VK_NUMPAD9:
 					choice = 3;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_9.png"));
 					break;
 				case KeyEvent.VK_F1:
 					info.setIcon(info.getHelpInfo1());
