@@ -215,16 +215,48 @@ public class Status extends JLabel {
 		seed.setText(Integer.toString(mContext.vegetable.getMAX_PLANT()));
 	}
 	
-	public JLabel removeText() {
+	public void removeText() {
+		// 텍스트만 초기화
 		parsnip.setText(null);
-		carrot.setText(null);
-		berry.setText(null);
-		parsnipPrice.setText(null);
-		carrotPrice.setText(null);
-		berryPrice.setText(null);
-		wallet.setText(null);
-		return removeText();
-		
+	    carrot.setText(null);
+	    berry.setText(null);
+	    parsnipPrice.setText(null);
+	    carrotPrice.setText(null);
+	    berryPrice.setText(null);
+	    wallet.setText(null);
+	    haveCarrot.setText(null);
+	    haveParsnip.setText(null);
+	    haveBerry.setText(null);
+	    seed.setText(null);
+	    nameField.setText(null);
+	    
+	    // UI를 제거하고 null로 설정
+	    mContext.remove(parsnip);
+	    mContext.remove(carrot);
+	    mContext.remove(berry);
+	    mContext.remove(parsnipPrice);
+	    mContext.remove(carrotPrice);
+	    mContext.remove(berryPrice);
+	    mContext.remove(wallet);
+	    mContext.remove(haveCarrot);
+	    mContext.remove(haveParsnip);
+	    mContext.remove(haveBerry);
+	    mContext.remove(seed);
+	    mContext.remove(nameField);
+	    
+	    // null로 설정
+	    parsnip = null;
+	    carrot = null;
+	    berry = null;
+	    parsnipPrice = null;
+	    carrotPrice = null;
+	    berryPrice = null;
+	    wallet = null;
+	    haveCarrot = null;
+	    haveParsnip = null;
+	    haveBerry = null;
+	    seed = null;
+	    nameField = null;
 		
 	}
 }

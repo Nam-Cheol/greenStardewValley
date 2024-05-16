@@ -517,6 +517,17 @@ public class Player extends JLabel implements Moveable {
 	public void setWaterToParsnip(boolean waterToParsnip) {
 		this.waterToParsnip = waterToParsnip;
 	}
+	
+	
+
+	public WaterGauge getWaterGauge() {
+		return waterGauge;
+	}
+
+	public void setWaterGauge(WaterGauge waterGauge) {
+		this.waterGauge = waterGauge;
+	}
+	
 
 	public void amountWater() {
 		if (sprinklingCanGage == 0) {

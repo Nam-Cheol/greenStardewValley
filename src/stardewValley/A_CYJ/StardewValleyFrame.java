@@ -389,23 +389,29 @@ public class StardewValleyFrame extends JFrame {
 				gameOver.setSize(1930, 930);
 				gameOver.setLocation(0, 0);
 				player.setIcon(null);
-				player = null;
-				keeper.setSeeNPC(true);
-				keeper.setIcon(null);
-				waterMan.setIcon(null);
-				waterMan.setSeeNPC(true);
-				store.setIcon(null);
-				store.setSeeNPC(true);
-				info.setIcon(null);
-				timeGauge.setIcon(null);
-				waterMan.removeWaterGage();
+	            player = null;
+	            guide.setIcon(null);
+	            guide.setSeeNPC(true);
+	            seedZone.setIcon(null);
+	            seedZone.setSeedZoneOn(null);
+	            keeper.setIcon(null);
+	            keeper.setSeeNPC(true);
+	            waterMan.setIcon(null);
+	            waterMan.setSeeNPC(true);
+	            
+	            store.setIcon(null);
+	            store.setSeeNPC(true);
+	            info.setIcon(null);
+	            timeGauge.setIcon(null);
+	            waterMan.removeWaterGage();
+	            status.removeText();
+	            store = null;
+	            keeper = null;
+	            waterMan = null;
+	            guide = null;
+	            seedZone = null;
 				
-				store = null;
-				keeper = null;
-				waterMan = null;
-				guide = null;
-				seedZone = null;
-				status.removeText();
+				
 
 			} else if (turn == 3 && player.getMoney() >= 300) {
 				gameOver.setIcon(gameClear.getGameClear());
@@ -419,7 +425,6 @@ public class StardewValleyFrame extends JFrame {
 				store.setSeeNPC(true);
 				player.setIcon(null);
 				info.setIcon(null);
-				status.removeText();
 				player = null;
 			}
 		}
