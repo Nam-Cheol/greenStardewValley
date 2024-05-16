@@ -23,7 +23,7 @@ public class SeedZone extends JLabel {
 	
 	private void initData() {
 		
-		x = 525;
+		x = 580;
 		y = 10;
 		
 		seedZone = new ImageIcon("img/npc/seedmakerTest.png");
@@ -36,7 +36,7 @@ public class SeedZone extends JLabel {
 	private void setInitLayout() {
 		this.setIcon(seedZone);
 		this.setLocation(x, y);
-		this.setSize(100, 200);
+		this.setSize(120, 200);
 	}
 
 	public StardewValleyFrame getmContext() {

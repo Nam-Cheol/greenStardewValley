@@ -39,7 +39,7 @@ public class Store extends JLabel{
 	
 	private void initData() {
 		
-		x = 1000;
+		x = 800;
 		y = 200;
 		
 		seller = new ImageIcon("img/npc/seller.png");

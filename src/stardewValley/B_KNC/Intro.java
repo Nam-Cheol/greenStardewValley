@@ -15,8 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import stardewValley.A_OHJ.IntroName;
-
 class AudioPlay extends JPanel {
 	Clip clip = null;
 

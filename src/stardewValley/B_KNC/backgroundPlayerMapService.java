@@ -52,23 +52,23 @@ public class backgroundPlayerMapService implements Runnable {
 			int left = leftColor.getRGB();
 			int right = rightColor.getRGB();
 
-			int gapY = 150;
-			int gapX = 100;
+			int gapY = 100;
+			int gapX = 50;
 			
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
 
-			int keeperX = Math.abs(player.getX() - keeper.getX());
-			int keeperY = Math.abs(player.getY() - keeper.getY());
+			int keeperX = Math.abs(player.getX()+30 - keeper.getX());
+			int keeperY = Math.abs(player.getY()-100 - keeper.getY());
 
-			int waterX = Math.abs(player.getX() - water.getX());
-			int waterY = Math.abs(player.getY() - water.getY());
+			int waterX = Math.abs(player.getX() - water.getX()-50);
+			int waterY = Math.abs(player.getY() - water.getY()-50);
 			
 			int guideX = Math.abs(player.getX() - guide.getX());
 			int guideY = Math.abs(player.getY() - guide.getY());
 			
-			int seedZoonX = Math.abs(player.getX() - seedZone.getX());
-			int seedZoonY = Math.abs(player.getY() - seedZone.getY());
+			int seedZoonX = Math.abs(player.getX()-40 - seedZone.getX());
+			int seedZoonY = Math.abs(player.getY()-70 - seedZone.getY());
 
 			// 1. BLOCK
 
@@ -93,20 +93,20 @@ public class backgroundPlayerMapService implements Runnable {
 				stopRight();
 				
 				// 3. NPC
-			} else if (storeX < gapX && storeY < gapY) {
+			} else if (storeX < 80 && storeY < 170) {
 				store.setIcon(store.getSellerOn());
 				store.setSellOn(true);
-			} else if (keeperX < gapX && keeperY < gapY) {
+			} else if (keeperX < 100 && keeperY < 60) {
 				keeper.setIcon(keeper.getKeeperOn());
 				keeper.setSaveOn(true);
-			} else if (waterX < gapX && waterY < gapX) {
+			} else if (waterX < 100 && waterY < 100) {
 				water.setIcon(water.getWaterOn());
 				player.setScoopWater(true);
-			} else if (guideX < gapX && guideY < gapX) {
+			} else if (guideX < 80 && guideY < 100) {
 				guide.setIcon(guide.getGuideOn());
 				player.setCreate(true);
 				guide.setPlantOn(true);
-			} else if (seedZoonX < gapX && seedZoonY < gapY) {
+			} else if (seedZoonX < 100 && seedZoonY < 50) {
 				seedZone.setIcon(seedZone.getSeedZoneOn());
 				seedZone.setSeedOn(true);
 			}else {
@@ -116,7 +116,7 @@ public class backgroundPlayerMapService implements Runnable {
 			}
 
 			try {
-				Thread.sleep(10);
+				Thread.sleep(1);
 			} catch (InterruptedException e) {
 			}
 
@@ -161,14 +161,13 @@ public class backgroundPlayerMapService implements Runnable {
 	}
 
 	public void stopMove() {
-
-		if (player.isUp()) {
+		if (player.playerWay == PlayerWay.UP) {
 			player.setUp(false);
-		} else if (player.isDown()) {
+		} else if (player.playerWay == PlayerWay.DOWN) {
 			player.setDown(false);
-		} else if (player.isLeft()) {
+		} else if (player.playerWay == PlayerWay.LEFT) {
 			player.setLeft(false);
-		} else if (player.isRight()) {
+		} else if (player.playerWay == PlayerWay.RIGHT) {
 			player.setRight(false);
 		}
 	}

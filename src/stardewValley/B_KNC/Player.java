@@ -97,7 +97,7 @@ public class Player extends JLabel implements Moveable {
 	private void initData() {
 
 		x = 600;
-		y = 600;
+		y = 400;
 
 		playerL = new ImageIcon("img/character/PlayerStandLeft.png");
 		playerL1 = new ImageIcon("img/character/PlayerWalkLeft.png");
