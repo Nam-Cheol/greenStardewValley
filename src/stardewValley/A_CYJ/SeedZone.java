@@ -15,8 +15,6 @@ public class SeedZone extends JLabel {
 	private boolean seeNpc;
 	private boolean seedOn;
 	
-//	private static int MAX_PLANT = 5;
-	
 	public SeedZone(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
