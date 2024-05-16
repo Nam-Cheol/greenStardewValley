@@ -15,9 +15,9 @@ public class TimeGauge extends JLabel {
 	private int y;
 
 	public TimeGauge(StardewValleyFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
-		this.mContext = mContext;
 	}
 
 	private void initData() {

@@ -206,8 +206,6 @@ public class Water extends JLabel {
 		this.water = water;
 	}
 	
-
-
 	public ImageIcon getWaterGaugeMax() {
 		return waterGaugeMax;
 	}

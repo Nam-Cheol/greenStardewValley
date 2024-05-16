@@ -27,6 +27,7 @@ public class Status extends JLabel {
 	private JLabel haveBerry;
 	
 	private JLabel seed;
+	private JLabel nameField;
 	
 	private Font f;
 	
@@ -58,6 +59,7 @@ public class Status extends JLabel {
 		haveBerry = new JLabel();
 		
 		seed = new JLabel();
+		nameField = new JLabel();
 		
 		f = new Font("휴먼편지체", Font.PLAIN, 35);
 	}
@@ -140,6 +142,11 @@ public class Status extends JLabel {
 		seed.setFont(f);
 		seed.setText(Integer.toString(mContext.vegetable.getMAX_PLANT()));
 		
+		mContext.add(nameField);
+		nameField.setLocation(1420, 200);
+		nameField.setSize(100, 100);
+		nameField.setFont(f);
+		
 	}
 
 	public JLabel getWallet() {
@@ -184,6 +191,10 @@ public class Status extends JLabel {
 
 	public JLabel getBerryPrice() {
 		return berryPrice;
+	}
+	
+	public JLabel getNameField() {
+		return nameField;
 	}
 	
 	public void rePrice() {
