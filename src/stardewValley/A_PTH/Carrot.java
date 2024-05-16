@@ -2,26 +2,21 @@ package stardewValley.A_PTH;
 
 import javax.swing.ImageIcon;
 
-// TODO 각 야채의 특성 및 차이점 구현
+
+//TODO 각 야채의 특성 및 차이점 구현
 public class Carrot extends Vegetable {
 
 	// 멤버 변수
 	private String name = "당근";
-	// 플레이어
-	private Player player;
-	private int x;
-	private int y;
-	private int plantLocation = 130;
-	// 성장
-	private boolean growing;
-	private ImageIcon growing1;
-	private ImageIcon growing2;
-	private ImageIcon growing3;
-	private ImageIcon lastGrowing;
+	private int growSpeed = 5000;
+	
+	private int temp;
 
 	// 생성자
-	public Carrot(Player player) {
+	public Carrot(Player player, StardewValleyFrame mContext, Farm farm) {
 		this.player = player;
+		this.mContext = mContext;
+		this.farm = farm;
 		initData();
 		setInitLayout();
 		grow();
@@ -30,7 +25,10 @@ public class Carrot extends Vegetable {
 	// 메소드
 	@Override
 	public void initData() {
+		waterGauge = 3;
 		growing = true;
+		create = false;
+		temp = mContext.choice;
 		growing1 = new ImageIcon("img/vege/Carrot_Stage_1.png");
 		growing2 = new ImageIcon("img/vege/Carrot_Stage_2.png");
 		growing3 = new ImageIcon("img/vege/Carrot_Stage_3.png");
@@ -39,8 +37,6 @@ public class Carrot extends Vegetable {
 
 	@Override
 	public void setInitLayout() {
-		x = player.getX();
-		y = player.getY();
 		setSize(100, 110);
 		setIcon(null);
 	}
@@ -52,21 +48,46 @@ public class Carrot extends Vegetable {
 			@Override
 			public void run() {
 				MAX_PLANT--;
-				for(int i = 0; i < 1; i++) {
+				setIcon(growing1);
+				while (true) {
+					mContext.farm.vegetableWaterGauge(waterGauge, temp);
 					try {
-						setIcon(growing1);
-						Thread.sleep(1000);
-						setIcon(growing2);
-						
-						Thread.sleep(1000);
-						setIcon(growing3);
-						
-						Thread.sleep(1000);
-						setIcon(lastGrowing);
-						
-						canHarvest = true;
+						Thread.sleep(growSpeed);
+						waterGauge--;
+						mContext.farm.vegetableWaterGauge(waterGauge, temp);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+					}
+					if (waterGauge == 0) {
+						mContext.farm.vegetables[temp - 1].setIcon(rotten);
+						mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+						mContext.farm.vegetableWaters[temp - 1] = null;
+						return;
+					}
+					if (waterGauge > 6) {
+						mContext.farm.vegetables[temp - 1].setIcon(rotten);
+						mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+						mContext.farm.vegetableWaters[temp - 1] = null;
+						return;
+					}
+					if (waterGauge >= 1 && waterGauge <= 5) {
+						
+						if(getIcon() == growing1) {
+							setIcon(growing2);
+							continue;
+						}
+						if(getIcon() == growing2) {
+							setIcon(growing3);
+							continue;
+						}
+						if(getIcon() == growing3) {
+							setIcon(lastGrowing);
+						}
+						if (getIcon() == lastGrowing) {
+							canHarvest = true;
+							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+							mContext.farm.vegetableWaters[temp - 1] = null;
+							return;
+						}
 					}
 				}
 			}
@@ -96,6 +117,23 @@ public class Carrot extends Vegetable {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	@Override
+	public int getPrice() {
+		return price;
+	}
+	
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+	
+	public ImageIcon getLastGrowing() {
+		return lastGrowing;
 	}
 
 } // end of class

@@ -424,11 +424,11 @@ public class StardewValleyFrame extends JFrame {
 
 		if (vegetable.getMAX_PLANT() == 0) {
 			if (turn == 1) {
-				vegetable.setMAX_PLANT(5);
+				vegetable.setMAX_PLANT(1);
 				timeGauge.setIcon(timeGauge.getTimeGauge1());
 				turn++;
 			} else if (turn == 2) {
-				vegetable.setMAX_PLANT(5);
+				vegetable.setMAX_PLANT(1);
 				timeGauge.setIcon(timeGauge.getTimeGauge2());
 				turn++;
 			} else if (turn == 3 && player.getMoney() <= 300) {
@@ -440,8 +440,11 @@ public class StardewValleyFrame extends JFrame {
 				waterMan.setIcon(null);
 				waterMan.setSeeNPC(true);
 				store.setIcon(null);
+				store.setSeeNPC(true);
 				player.setIcon(null);
 				info.setIcon(null);
+				status.removeText();
+
 				player = null;
 
 			} else if (turn == 3 && player.getMoney() >= 300) {
@@ -453,8 +456,10 @@ public class StardewValleyFrame extends JFrame {
 				waterMan.setIcon(null);
 				waterMan.setSeeNPC(true);
 				store.setIcon(null);
+				store.setSeeNPC(true);
 				player.setIcon(null);
 				info.setIcon(null);
+				status.removeText();
 				player = null;
 			}
 		}

@@ -153,4 +153,17 @@ public class Status extends JLabel {
 		berryPrice.setText(Integer.toString(store.getBerryPrice()));
 	}
 	
+	public JLabel removeText() {
+		parsnip.setText(null);
+		carrot.setText(null);
+		berry.setText(null);
+		parsnipPrice.setText(null);
+		carrotPrice.setText(null);
+		berryPrice.setText(null);
+		wallet.setText(null);
+		return removeText();
+		
+		
+	}
+	
 }

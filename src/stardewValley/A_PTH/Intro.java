@@ -1,4 +1,4 @@
-package stardewValley.A_OHJ;
+package stardewValley.A_PTH;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -43,7 +43,7 @@ public class Intro extends JFrame {
 	private JPanel jPanel;
 	private JLabel intro;
 	private StardewValleyFrame game;
-	
+
 	public Intro() {
 		initData();
 		setInitLayout();
