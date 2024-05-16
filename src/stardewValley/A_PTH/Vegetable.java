@@ -8,6 +8,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected String name = "ㅋㅋ 효정이 바보";
 	StardewValleyFrame mContext;
 	protected Player player;
+	protected Farm farm;
 	protected int x;
 	protected int y;
 	protected int plantLocation = 130;
@@ -19,10 +20,10 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected ImageIcon growing4;
 	protected ImageIcon growing5;
 	protected ImageIcon lastGrowing;
-	protected ImageIcon rottened;
+	protected ImageIcon rotten = new ImageIcon("img/vege/Rottem_Plant.png");
 	// 물
 	protected final int MAX_WATERGAGE = 4;
-	protected int waterGage;
+	protected int waterGauge;
 	protected boolean vegeGetWater;
 	// 수확
 	protected boolean canHarvest;
@@ -72,11 +73,11 @@ public class Vegetable extends JLabel implements IVegetable {
 	}
 
 	public int getWaterGage() {
-		return waterGage;
+		return waterGauge;
 	}
 
-	public void setWaterGage(int waterGage) {
-		this.waterGage = waterGage;
+	public void setWaterGage(int waterGauge) {
+		this.waterGauge = waterGauge;
 	}
 
 	public boolean isCanHarvest() {
@@ -95,12 +96,12 @@ public class Vegetable extends JLabel implements IVegetable {
 		return MAX_PLANT;
 	}
 
-	public ImageIcon getRottened() {
-		return rottened;
+	public ImageIcon getRotten() {
+		return rotten;
 	}
 
-	public void setRottened(ImageIcon rottened) {
-		this.rottened = rottened;
+	public void setRotten(ImageIcon rotten) {
+		this.rotten = rotten;
 	}
 
 	public boolean isRmRottened() {

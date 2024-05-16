@@ -22,7 +22,9 @@ public class Status extends JLabel {
 	private JLabel carrotPrice;
 	private JLabel berryPrice;
 	
+	private JLabel parsnipCurrent;
 	private JLabel carrotCurrent;
+//	private JLabel 
 	
 	private Font f;
 	

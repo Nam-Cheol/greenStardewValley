@@ -77,6 +77,7 @@ public class Player extends JLabel implements Moveable {
 	// 작물 판매
 	private boolean sellParsnip;
 	
+	// 
 	private int haveParsnip;
 	private int haveCarrot;
 	private int haveBerry;
@@ -86,7 +87,7 @@ public class Player extends JLabel implements Moveable {
 	
 	private boolean scoopWater;
 	private int sprinklingCanGage;
-	private final int MAX_CANGAGE = 5;
+	private int maxCanGauge = 5;
 
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide) {
@@ -340,13 +341,13 @@ public class Player extends JLabel implements Moveable {
 	// getter, setter
 	
 	public Vegetable createParsnip() {
-		return new Parsnip(this);
+		return new Parsnip(this, mContext, mContext.farm);
 	}
 	public Vegetable createCarrot() {
-		return new Carrot(this);
+		return new Carrot(this, mContext, mContext.farm);
 	}
 	public Vegetable createBerry() {
-		return new Strawberry(this);
+		return new Strawberry(this, mContext, mContext.farm);
 	}
 	
 	public int getX() {
@@ -518,8 +519,8 @@ public class Player extends JLabel implements Moveable {
 	public void setSprinklingCanGage(int sprinklingCanGage) {
 		this.sprinklingCanGage = sprinklingCanGage;
 	}
-	public int getMAX_CANGAGE() {
-		return MAX_CANGAGE;
+	public int getMaxCanGauge() {
+		return maxCanGauge;
 	}
 	public void amountWater() {
 		if (sprinklingCanGage == 0) {
@@ -537,8 +538,5 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 	
-	public Parsnip plantParsnip() {
-		return parsnip = new Parsnip(this);
-	}
 
 }
