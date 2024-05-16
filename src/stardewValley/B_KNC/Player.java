@@ -1,6 +1,6 @@
 package stardewValley.B_KNC;
 
-import javax.swing.ImageIcon;
+import javax.swing.ImageIcon;	
 import javax.swing.JLabel;
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
@@ -84,7 +84,7 @@ public class Player extends JLabel implements Moveable {
 	private final int MAX_CANGAGE = 5;
 
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
 		this.mContext = mContext;
 		this.store = store;
 		this.keeper = keeper;
@@ -92,7 +92,7 @@ public class Player extends JLabel implements Moveable {
 		this.guide = guide;
 		initData();
 		setInitLayout();
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide, seedZone)).start();
 	}
 
 	private void initData() {

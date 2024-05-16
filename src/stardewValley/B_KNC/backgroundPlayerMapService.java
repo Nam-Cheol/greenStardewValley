@@ -22,13 +22,15 @@ public class backgroundPlayerMapService implements Runnable {
 	private Keeper keeper;
 	private Water water;
 	private Guide guide;
+	private SeedZone seedZone;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
 		this.guide = guide;
+		this.seedZone = seedZone;
 		try {
 			image = ImageIO.read(new File("img/bg/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
@@ -64,6 +66,9 @@ public class backgroundPlayerMapService implements Runnable {
 			
 			int guideX = Math.abs(player.getX() - guide.getX());
 			int guideY = Math.abs(player.getY() - guide.getY());
+			
+			int seedZoonX = Math.abs(player.getX() - seedZone.getX());
+			int seedZoonY = Math.abs(player.getY() - seedZone.getY());
 
 			// 1. BLOCK
 
@@ -101,7 +106,10 @@ public class backgroundPlayerMapService implements Runnable {
 				guide.setIcon(guide.getGuideOn());
 				player.setCreate(true);
 				guide.setPlantOn(true);
-			} else {
+			} else if (seedZoonX < gapX && seedZoonY < gapY) {
+				seedZone.setIcon(seedZone.getSeedZoneOn());
+				seedZone.setSeedOn(true);
+			}else {
 				notWallCrash();
 				player.setSellParsnip(false);
 				seeNPC();
@@ -175,9 +183,11 @@ public class backgroundPlayerMapService implements Runnable {
 		if(water.isSeeNPC() == false) {
 			water.setIcon(water.getWater());
 		}
-		
 		if(guide.isSeeNPC() == false) {
 			guide.setIcon(guide.getGuide());
+		}
+		if (seedZone.isSeeNpc() == false) {
+			seedZone.setIcon(seedZone.getSeedZone());
 		}
 		player.setScoopWater(false);
 		guide.setPlantOn(false);

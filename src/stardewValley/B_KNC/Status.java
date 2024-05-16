@@ -203,4 +203,17 @@ public class Status extends JLabel {
 		
 		seed.setText(Integer.toString(mContext.vegetable.getMAX_PLANT()));
 	}
+	
+	public JLabel removeText() {
+		parsnip.setText(null);
+		carrot.setText(null);
+		berry.setText(null);
+		parsnipPrice.setText(null);
+		carrotPrice.setText(null);
+		berryPrice.setText(null);
+		wallet.setText(null);
+		return removeText();
+		
+		
+	}
 }
