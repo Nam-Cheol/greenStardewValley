@@ -114,5 +114,5 @@ public class IntroName extends JFrame {
 	public void setGame(StardewValleyFrame game) {
 		this.game = game;
 	}
-	
+
 }
