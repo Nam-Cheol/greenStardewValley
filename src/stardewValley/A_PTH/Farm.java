@@ -3,6 +3,8 @@ package stardewValley.A_PTH;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import stardewValley.vegetable.vegetable;
+
 public class Farm extends JLabel {
 
 	StardewValleyFrame mContext;
@@ -25,7 +27,6 @@ public class Farm extends JLabel {
 	private ImageIcon farm;
 
 	private Player player;
-	private Status status;
 
 	public Farm(StardewValleyFrame mContext, Player player) {
 		this.mContext = mContext;
@@ -92,17 +93,9 @@ public class Farm extends JLabel {
 				if (vegetables[choice - 1] instanceof Parsnip) {
 					player.setHaveParsnip(player.getHaveParsnip() + 1);
 				} else if (vegetables[choice - 1] instanceof Carrot) {
-<<<<<<< HEAD
-					player.setHaveCarrot(player.getHaveCarrot() + 1); // 창고 수량
-					
-					player.setPlayerHaveCarrot(player.getPlayerHaveCarrot() + 1); // 플레이어 작물 수량
-				
-=======
 					player.setHaveCarrot(player.getHaveCarrot() + 1);
->>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 				} else if (vegetables[choice - 1] instanceof Strawberry) {
 					player.setHaveBerry(player.getHaveBerry() + 1);
-					mContext.currentHaveBerry();
 				}
 				vegetables[choice - 1].setIcon(null);
 				vegetables[choice - 1] = null;
