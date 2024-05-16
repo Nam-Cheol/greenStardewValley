@@ -32,8 +32,8 @@ public class Keeper extends JLabel{
 	
 	private void initData() {
 		
-		x = 200;
-		y = 160;
+		x = 450;
+		y = 130;
 		
 		keeper = new ImageIcon("img/npc/keeper.png");
 		keeperOn = new ImageIcon("img/npc/keeperOn.png");

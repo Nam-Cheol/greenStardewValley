@@ -7,37 +7,32 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import stardewValley.vegetable.vegetable;
-
-//TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
-// 배경 추가해야 됨.
-//추후 컴포넌트(야채)들도 추가해야 함.
 public class StardewValleyFrame extends JFrame {
 
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
-	private Player player;
+	public Player player;
 
-	private Vegetable[] vegetables;
-	private Vegetable vegetable;
+	public int choice;
+
+	public Farm farm;
 
 	private Store store;
 	private Keeper keeper;
 	private Water waterMan;
-
-	private TimeGauge timeGauge;
-	private CarrotGauge carrotGauge;
-	private WaterGauge waterGauge;
-	private BerryGauge berryGauge;
-	private ParsnipGauge parsnipGauge;
+	private Guide guide;
 	private SeedZone seedZone;
 
 	private HelpInfo info;
 	private Status status;
+	
+	public Vegetable vegetable;
+	private TimeGauge timeGauge;
+	
 	private GameOver gameOver;
 	private GameClear gameClear;
-
+	
 	private int turn;
 
 	public StardewValleyFrame() {
@@ -47,33 +42,28 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("img/bg/backgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/bg/test.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
+		choice = 0;
+		turn = 1;
+		
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		waterMan = new Water(mContext);
+		guide = new Guide(mContext);
 		seedZone = new SeedZone(mContext);
-
-		player = new Player(mContext, store, keeper, waterMan, seedZone);
+		
+		timeGauge = new TimeGauge(mContext);
 		info = new HelpInfo(mContext);
+		player = new Player(mContext, store, keeper, waterMan, guide, seedZone);
+		farm = new Farm(mContext, player);
+		status = new Status(mContext, player, store, keeper, waterMan);
+		
 		gameOver = new GameOver(mContext);
 		gameClear = new GameClear(mContext);
-
-		timeGauge = new TimeGauge(mContext);
-		carrotGauge = new CarrotGauge(mContext);
-		waterGauge = new WaterGauge(mContext);
-		berryGauge = new BerryGauge(mContext);
-		parsnipGauge = new ParsnipGauge(mContext);
-
-		status = new Status(mContext, player, store, keeper, waterMan);
-		vegetables = new Vegetable[3];
-
-		turn = 1;
-
-		status.getParsnipPrice().setText(Integer.toString(store.getParsnipPrice()));
 
 	}
 
@@ -87,16 +77,13 @@ public class StardewValleyFrame extends JFrame {
 		add(store);
 		add(keeper);
 		add(waterMan);
+		add(seedZone);
 		add(info);
+		add(farm);
+		add(guide);
+		add(timeGauge);
 		add(gameOver);
 		add(gameClear);
-
-		add(timeGauge);
-		add(carrotGauge);
-		add(waterGauge);
-		add(berryGauge);
-		add(parsnipGauge);
-		add(seedZone);
 
 	}
 
@@ -152,80 +139,88 @@ public class StardewValleyFrame extends JFrame {
 					if (!player.isLeft()) {
 						status.rePrice();
 						player.left();
-						waterMan.setPondGage(waterMan.getPondGage() - 10L);
-						System.out.println(waterMan.getPondGage());
-//						
+						waterMan.decreaseWaterImage();
+						waterMan.minusPondGage();
+						waterMan.decreaseWaterImage();
 					}
 					break;
 				case KeyEvent.VK_RIGHT:
 					if (!player.isRight()) {
 						status.rePrice();
 						player.right();
-						waterMan.setPondGage(waterMan.getPondGage() - 10L);
-						System.out.println(waterMan.getPondGage());
+						waterMan.decreaseWaterImage();
+						waterMan.minusPondGage();
+						waterMan.decreaseWaterImage();
 					}
 					break;
 				case KeyEvent.VK_UP:
 					if (!player.isUp()) {
 						status.rePrice();
 						player.up();
-						waterMan.setPondGage(waterMan.getPondGage() - 10L);
-						System.out.println(waterMan.getPondGage());
+						waterMan.decreaseWaterImage();
+						waterMan.minusPondGage();
+						waterMan.decreaseWaterImage();
 					}
 					break;
 				case KeyEvent.VK_DOWN:
 					if (!player.isDown()) {
 						status.rePrice();
 						player.down();
-						waterMan.setPondGage(waterMan.getPondGage() - 10L);
-						System.out.println(waterMan.getPondGage());
+						waterMan.decreaseWaterImage();
+						waterMan.minusPondGage();
+						waterMan.decreaseWaterImage();
 					}
 					break;
 				case KeyEvent.VK_Q:
 					vCount();
 					if (player.isCreate()) {
-						for (int i = 0; i < 3; i++) {
-							if (vegetables[i] == null) {
-								vegetables[i] = player.createParsnip();
-								player.setIcon(player.getPlayerWater());
-								add(vegetables[i]);
-								VLocation(i);
-								break;
-							}
+						if (farm.vegetables[choice - 1] == null) {
+							farm.vegetables[choice - 1] = player.createCarrot();
+							player.setIcon(player.getPlayerWater());
+							add(farm.vegetables[choice - 1]);
+							farm.VLocation(choice);
+							farm.waterValue(choice);
+							farm.waterValueLocation(choice);
+							status.statusRepaint();
 						}
 					}
 					break;
 				case KeyEvent.VK_W:
 					vCount();
-					System.out.println(player.isCreate());
 					if (player.isCreate()) {
-						for (int i = 0; i < 3; i++) {
-							if (vegetables[i] == null) {
-								vegetables[i] = player.createCarrot();
-								player.setIcon(player.getPlayerWater());
-								add(vegetables[i]);
-								VLocation(i);
-								break;
-							}
+						if (farm.vegetables[choice - 1] == null) {
+							farm.vegetables[choice - 1] = player.createParsnip();
+							player.setIcon(player.getPlayerWater());
+							add(farm.vegetables[choice - 1]);
+							farm.VLocation(choice);
+							farm.waterValue(choice);
+							farm.waterValueLocation(choice);
+							status.statusRepaint();
 						}
 					}
 					break;
 				case KeyEvent.VK_E:
 					vCount();
 					if (player.isCreate()) {
-						for (int i = 0; i < 3; i++) {
-							if (vegetables[i] == null) {
-								vegetables[i] = player.createBerry();
-								player.setIcon(player.getPlayerWater());
-								add(vegetables[i]);
-								VLocation(i);
-								break;
-							}
+						if (farm.vegetables[choice - 1] == null) {
+							farm.vegetables[choice - 1] = player.createBerry();
+							player.setIcon(player.getPlayerWater());
+							add(farm.vegetables[choice - 1]);
+							farm.VLocation(choice);
+							farm.waterValue(choice);
+							farm.waterValueLocation(choice);
+							status.statusRepaint();
 						}
 					}
 					break;
 				case KeyEvent.VK_R:
-					harvest();
+					if (farm.vegetables[choice - 1] != null) {
+						if (farm.vegetables[choice - 1].getIcon() == farm.vegetables[choice - 1].rotten) {
+							farm.remove(choice);
+						}
+						farm.harvest(choice);
+					}
+					status.statusRepaint();
 					break;
 				case KeyEvent.VK_D:
 					if (keeper.isSaveOn()) {
@@ -237,56 +232,75 @@ public class StardewValleyFrame extends JFrame {
 						sellParsnip();
 						sellCarrot();
 						sellBerry();
-						saveProducts();
+						status.statusRepaint();
 					}
 					break;
 				case KeyEvent.VK_SPACE:
 					if (player.isCreate()) {
-						if (0 < player.getSprinklingCanGage()) {
-							player.setIcon(player.getPlayerWater());
-							player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
-							System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
-							vegetables[0].setWaterGage(vegetables[0].getWaterGage() + 1);
-							System.out.println("식물이 받은 물 : " + vegetables[0].getWaterGage());
-						} else {
-							System.out.println("연못에 가서 물을 채우세요.");
-						}
-						amountWater();
+						farm.sprinkling(choice);
+						player.amountWater();
 					}
 					break;
 				case KeyEvent.VK_A:
 					if (player.isScoopWater() == true) {
+						if(waterMan.getPondGage() < 5) {
+							return;
+						}
 						player.setIcon(player.getPlayerWater());
-						System.out.println("채우기 전" + player.getSprinklingCanGage());
-						System.out.println("연못 전 : " + waterMan.getPondGage());
 						if (player.getSprinklingCanGage() < player.getMAX_CANGAGE()) {
 							player.setSprinklingCanGage(player.getMAX_CANGAGE());
 							waterMan.setPondGage(waterMan.getPondGage() - 5);
-							System.out.println("채운 후" + player.getSprinklingCanGage());
-							System.out.println("연못 후 : " + waterMan.getPondGage());
-						} else if (waterMan.getPondGage() <= 0) {
-							player.setScoopWater(false);
-							System.out.println("우물이 말랐습니다. 다음날 ㄱㄱ");
 						} else {
-							System.out.println("물뿌리개가 이미 가득 찼어요.");
+//							return;
 						}
-						amountWater();
+						player.amountWater();
 					}
 					break;
-				case KeyEvent.VK_P:
-					Vegetable.MAX_PLANT = 5;
+				case KeyEvent.VK_M:
+					if (seedZone.isSeedOn()) {
+						plusSeed();
+						status.statusRepaint();
+						if(turn == 2) {
+//							timeGauge.setIcon(timeGauge.getTimeGauge1());
+						}
+						seedZone.setSeedOn(false);
+					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
-					sellParsnip();
-					saveProducts();
+					choice = 7;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_1.png"));
 					break;
 				case KeyEvent.VK_NUMPAD2:
-					sellCarrot();
-					saveProducts();
+					choice = 8;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_2.png"));
 					break;
 				case KeyEvent.VK_NUMPAD3:
-					sellBerry();
-					saveProducts();
+					choice = 9;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_3.png"));
+					break;
+				case KeyEvent.VK_NUMPAD4:
+					choice = 4;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_4.png"));
+					break;
+				case KeyEvent.VK_NUMPAD5:
+					choice = 5;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_5.png"));
+					break;
+				case KeyEvent.VK_NUMPAD6:
+					choice = 6;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_6.png"));
+					break;
+				case KeyEvent.VK_NUMPAD7:
+					choice = 1;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_7.png"));
+					break;
+				case KeyEvent.VK_NUMPAD8:
+					choice = 2;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_8.png"));
+					break;
+				case KeyEvent.VK_NUMPAD9:
+					choice = 3;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_9.png"));
 					break;
 				case KeyEvent.VK_F1:
 					info.setIcon(info.getHelpInfo1());
@@ -297,16 +311,8 @@ public class StardewValleyFrame extends JFrame {
 					waterMan.setIcon(null);
 					waterMan.setSeeNPC(true);
 					player.setIcon(null);
+				
 					break;
-				case KeyEvent.VK_M:
-					if (seedZone.isSeedOn()) {
-						System.out.println(vegetable.getMAX_PLANT());
-						plusSeed();
-						seedZone.setSeedOn(false);
-					}
-
-					break;
-
 				default:
 					break;
 				}
@@ -314,39 +320,6 @@ public class StardewValleyFrame extends JFrame {
 			}
 		});
 
-	}
-
-	public void VLocation(int i) {
-		int temp = 60;
-		vegetables[i].setLocation(190 + (temp * i), 690);
-	}
-
-	public void harvest() {
-		for (int i = 0; i < 3; i++) {
-
-			if (vegetables[i] != null) {
-				System.out.println("인식");
-				if (vegetables[i].isCanHarvest()) {
-					System.out.println(vegetables[i].getName() + "을 수확했다.");
-					// 작물 종류에 따라서 플레이어의 작물 보유량 증가
-					if (vegetables[i] instanceof Parsnip) {
-						player.setHaveParsnip(player.getHaveParsnip() + 1);
-						System.out.println("파스닙의 갯수 :" + player.getHaveParsnip());
-					} else if (vegetables[i] instanceof Carrot) {
-						player.setHaveCarrot(player.getHaveCarrot() + 1);
-						System.out.println("당근의 갯수 :" + player.getHaveCarrot());
-					} else if (vegetables[i] instanceof Strawberry) {
-						player.setHaveBerry(player.getHaveBerry() + 1);
-						System.out.println("딸기의 갯수 :" + player.getHaveBerry());
-					}
-					vegetables[i].setIcon(null);
-					vegetables[i] = null;
-					break;
-				} else {
-					System.out.println(vegetables[i].getName() + "은 지금은 자라는 중이다.");
-				}
-			}
-		}
 	}
 
 	public void saveCrop() {
@@ -360,39 +333,33 @@ public class StardewValleyFrame extends JFrame {
 		keeper.setBerryEach(keeper.getBerryEach() + player.getHaveBerry());
 		player.setHaveBerry(0);
 
-		saveProducts();
-	}
-
-	public void sellParsnip() {
-		if (keeper.getParsnipEach() == 0) {
-			System.out.println("보관된 파스닙이 없습니다.");
-		} else {
-			player.setMoney(player.getMoney() + (keeper.getParsnipEach() * store.getParsnipPrice()));
-			keeper.setParsnipEach(0);
-			status.getWallet().setText(Integer.toString(player.getMoney()));
-			System.out.println("플레이어가 파스닙 팔아서 창고에 남은 갯수 " + keeper.getParsnipEach());
-		}
+		status.statusRepaint();
 	}
 
 	public void sellCarrot() {
 		if (keeper.getCarrotEach() == 0) {
-			System.out.println("보관된 당근이 없습니다.");
 		} else {
 			player.setMoney(player.getMoney() + (keeper.getCarrotEach() * store.getCarrotPrice()));
 			keeper.setCarrotEach(0);
 			status.getWallet().setText(Integer.toString(player.getMoney()));
-			System.out.println("플레이어가 파스닙 팔아서 창고에 남은 갯수 " + keeper.getCarrotEach());
 		}
 	}
 
+	public void sellParsnip() {
+		if (keeper.getParsnipEach() == 0) {
+		} else {
+			player.setMoney(player.getMoney() + (keeper.getParsnipEach() * store.getParsnipPrice()));
+			keeper.setParsnipEach(0);
+			status.getWallet().setText(Integer.toString(player.getMoney()));
+		}
+	}
+	
 	public void sellBerry() {
 		if (keeper.getBerryEach() == 0) {
-			System.out.println("보관된 딸기가 없습니다.");
 		} else {
 			player.setMoney(player.getMoney() + (keeper.getBerryEach() * store.getBerryPrice()));
 			keeper.setBerryEach(0);
 			status.getWallet().setText(Integer.toString(player.getMoney()));
-			System.out.println("플레이어가 파스닙 팔아서 창고에 남은 갯수 " + keeper.getBerryEach());
 		}
 	}
 
@@ -400,28 +367,6 @@ public class StardewValleyFrame extends JFrame {
 		if (Vegetable.MAX_PLANT == 0) {
 			player.setCreate(false);
 			return;
-		}
-	}
-
-	public void saveProducts() {
-		status.getParsnip().setText(Integer.toString(keeper.getParsnipEach()));
-		status.getCarrot().setText(Integer.toString(keeper.getCarrotEach()));
-		status.getBerry().setText(Integer.toString(keeper.getBerryEach()));
-	}
-
-	public void amountWater() {
-		if (player.getSprinklingCanGage() == 0) {
-			waterGauge.setIcon(waterGauge.getWaterGauge());
-		} else if (player.getSprinklingCanGage() == 1) {
-			waterGauge.setIcon(waterGauge.getWaterGauge1());
-		} else if (player.getSprinklingCanGage() == 2) {
-			waterGauge.setIcon(waterGauge.getWaterGauge2());
-		} else if (player.getSprinklingCanGage() == 3) {
-			waterGauge.setIcon(waterGauge.getWaterGauge3());
-		} else if (player.getSprinklingCanGage() == 4) {
-			waterGauge.setIcon(waterGauge.getWaterGauge4());
-		} else if (player.getSprinklingCanGage() == 5) {
-			waterGauge.setIcon(waterGauge.getWaterGauge5());
 		}
 	}
 
@@ -443,16 +388,24 @@ public class StardewValleyFrame extends JFrame {
 				gameOver.setIcon(gameOver.getGameOver());
 				gameOver.setSize(1930, 930);
 				gameOver.setLocation(0, 0);
+				player.setIcon(null);
+				player = null;
 				keeper.setSeeNPC(true);
 				keeper.setIcon(null);
 				waterMan.setIcon(null);
 				waterMan.setSeeNPC(true);
 				store.setIcon(null);
 				store.setSeeNPC(true);
-				player.setIcon(null);
 				info.setIcon(null);
+				timeGauge.setIcon(null);
+				waterMan.removeWaterGage();
+				
+				store = null;
+				keeper = null;
+				waterMan = null;
+				guide = null;
+				seedZone = null;
 				status.removeText();
-				player = null;
 
 			} else if (turn == 3 && player.getMoney() >= 300) {
 				gameOver.setIcon(gameClear.getGameClear());
@@ -471,7 +424,11 @@ public class StardewValleyFrame extends JFrame {
 			}
 		}
 	}
-
+	
+	public Status getStatus() {
+		return status;
+	}
+	
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}
