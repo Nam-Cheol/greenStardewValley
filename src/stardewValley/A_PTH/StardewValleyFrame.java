@@ -147,26 +147,34 @@ public class StardewValleyFrame extends JFrame {
 						waterMan.decreaseWaterImage();
 						waterMan.minusPondGage();
 						waterMan.decreaseWaterImage();
-						System.out.println(waterMan.getPondGage());
-						System.out.println(player.getMaxCanGauge());
+		
 					}
 					break;
 				case KeyEvent.VK_RIGHT:
 					if (!player.isRight()) {
 						status.rePrice();
 						player.right();
+						waterMan.decreaseWaterImage();
+						waterMan.minusPondGage();
+						waterMan.decreaseWaterImage();
 					}
 					break;
 				case KeyEvent.VK_UP:
 					if (!player.isUp()) {
 						status.rePrice();
 						player.up();
+						waterMan.decreaseWaterImage();
+						waterMan.minusPondGage();
+						waterMan.decreaseWaterImage();
 					}
 					break;
 				case KeyEvent.VK_DOWN:
 					if (!player.isDown()) {
 						status.rePrice();
 						player.down();
+						waterMan.decreaseWaterImage();
+						waterMan.minusPondGage();
+						waterMan.decreaseWaterImage();
 					}
 					break;
 				case KeyEvent.VK_Q:
