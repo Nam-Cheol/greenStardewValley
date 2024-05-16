@@ -3,7 +3,6 @@ package stardewValley.A_PTH;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-
 //TODO 플레이어의 기능 추가, 포함관계여야 함
 public class Player extends JLabel implements Moveable {
 
@@ -35,19 +34,19 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown; // -> 디폴트
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
-	
+
 	private ImageIcon playerWater;
-	
+
 	// 도움말
-	
+
 	private Store store;
 	private Keeper keeper;
 	private Water water;
 	private Guide guide;
-	
+
 	private WaterGauge waterGauge;
 	private TimeGauge timeGauge;
-	
+
 	// 플레이어의 좌표
 	private int x;
 	private int y;
@@ -64,26 +63,27 @@ public class Player extends JLabel implements Moveable {
 	private boolean rightWallCrash;
 	private boolean upWallCrash;
 	private boolean downWallCrash;
-	
+
 	// 식물을 심을 수 있는 상태
 	private boolean create;
-	
+
 	// 플레이어의 돈
 	private int money;
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
-	
+
 	// 작물 판매
 	private boolean sellParsnip;
-	
+
 	private int haveParsnip;
 	private int haveCarrot;
 	private int haveBerry;
 	private int haveRotten;
-	
+
+
 	private boolean waterToParsnip;
-	
+
 	private boolean scoopWater;
 	private int sprinklingCanGage;
 	private final int MAX_CANGAGE = 5;
@@ -99,7 +99,6 @@ public class Player extends JLabel implements Moveable {
 		setInitLayout();
 		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide)).start();
 	}
-
 
 	private void initData() {
 
@@ -121,7 +120,7 @@ public class Player extends JLabel implements Moveable {
 		playerDown = new ImageIcon("img/character/PlayerStand.png");
 		playerDown1 = new ImageIcon("img/character/PlayerWalkDown.png");
 		playerDown2 = new ImageIcon("img/character/PlayerWalkDown2.png");
-		
+
 		playerWater = new ImageIcon("img/character/PlayerWater.png");
 
 		left = false;
@@ -133,20 +132,22 @@ public class Player extends JLabel implements Moveable {
 		rightWallCrash = false;
 		upWallCrash = false;
 		downWallCrash = false;
-		
+
 		create = false;
 
 		playerWay = PlayerWay.DOWN;
-		
+
 		money = 0;
 		sellParsnip = true;
-		
+
 		waterGauge = new WaterGauge(mContext);
 		timeGauge = new TimeGauge(mContext);
-		
+
 		haveParsnip = 0;
 		haveCarrot = 0;
 		haveBerry = 0;
+		
+
 	}
 
 	private void setInitLayout() {
@@ -156,11 +157,10 @@ public class Player extends JLabel implements Moveable {
 		mContext.add(waterGauge);
 		mContext.add(timeGauge);
 	}
+
 	public StardewValleyFrame getmContext() {
 		return mContext;
 	}
-
-
 
 	// TODO 움직임 구현
 	@Override
@@ -338,17 +338,19 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	// getter, setter
-	
+
 	public Vegetable createParsnip() {
 		return new Parsnip(this);
 	}
+
 	public Vegetable createCarrot() {
 		return new Carrot(this);
 	}
+
 	public Vegetable createBerry() {
 		return new Strawberry(this);
 	}
-	
+
 	public int getX() {
 		return x;
 	}
@@ -464,63 +466,80 @@ public class Player extends JLabel implements Moveable {
 	public int getMoney() {
 		return money;
 	}
+
 	public void setMoney(int money) {
 		this.money = money;
 	}
+
 	public int getHaveParsnip() {
 		return haveParsnip;
 	}
+
 	public void setHaveParsnip(int haveParsnip) {
 		this.haveParsnip = haveParsnip;
 	}
+
 	public int getHaveCarrot() {
 		return haveCarrot;
 	}
+
 	public void setHaveCarrot(int haveCarrot) {
 		this.haveCarrot = haveCarrot;
 	}
+
 	public int getHaveBerry() {
 		return haveBerry;
 	}
+
 	public void setHaveBerry(int haveBerry) {
 		this.haveBerry = haveBerry;
 	}
-	
-	
+
 	public int getHaveRotten() {
 		return haveRotten;
 	}
+
 	public void setHaveRotten(int haveRotten) {
 		this.haveRotten = haveRotten;
 	}
+
+
 	public boolean isSellParsnip() {
 		return sellParsnip;
 	}
+
 	public void setSellParsnip(boolean sellParsnip) {
 		this.sellParsnip = sellParsnip;
 	}
-	
+
 	public boolean isWaterToParsnip() {
 		return waterToParsnip;
 	}
+
 	public void setWaterToParsnip(boolean waterToParsnip) {
 		this.waterToParsnip = waterToParsnip;
 	}
+
 	public boolean isScoopWater() {
 		return scoopWater;
 	}
+
 	public void setScoopWater(boolean scoopWater) {
 		this.scoopWater = scoopWater;
 	}
+
 	public int getSprinklingCanGage() {
 		return sprinklingCanGage;
 	}
+
 	public void setSprinklingCanGage(int sprinklingCanGage) {
 		this.sprinklingCanGage = sprinklingCanGage;
 	}
+
 	public int getMAX_CANGAGE() {
 		return MAX_CANGAGE;
 	}
+
 	public void amountWater() {
 		if (sprinklingCanGage == 0) {
 			waterGauge.setIcon(waterGauge.getWaterGauge());
@@ -536,7 +555,7 @@ public class Player extends JLabel implements Moveable {
 			waterGauge.setIcon(waterGauge.getWaterGauge5());
 		}
 	}
-	
+
 	public Parsnip plantParsnip() {
 		return parsnip = new Parsnip(this);
 	}

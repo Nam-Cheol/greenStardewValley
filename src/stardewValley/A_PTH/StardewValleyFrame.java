@@ -208,7 +208,7 @@ public class StardewValleyFrame extends JFrame {
 				case KeyEvent.VK_NUMPAD1:
 					choice = 7;
 					break;
-				case KeyEvent.VK_NUMPAD2:
+				case KeyEvent.VK_1:
 					choice = 8;
 					break;
 				case KeyEvent.VK_NUMPAD3:
@@ -316,7 +316,8 @@ public class StardewValleyFrame extends JFrame {
 	public void saveCrop() {
 		System.out.println("작물 저장");
 		keeper.setParsnipEach(keeper.getParsnipEach() + player.getHaveParsnip());
-		player.setHaveParsnip(0);
+		
+		player.setHaveParsnip(0); // 플레이어 작물 초기화
 
 		keeper.setCarrotEach(keeper.getCarrotEach() + player.getHaveCarrot());
 		player.setHaveCarrot(0);
@@ -375,20 +376,7 @@ public class StardewValleyFrame extends JFrame {
 			status.getParsnip().setText(Integer.toString(player.getHaveParsnip()));
 		}
 	}
-	public void currentHaveCarrot() {
-		if(player.getHaveCarrot() == 0) {
-			System.out.println("qt");
-		} else {
-			status.getCarrot().setText(Integer.toString(player.getHaveCarrot()));
-		}
-	}
-	public void currentHaveBerry() {
-		if(player.getHaveBerry() == 0) {
-			System.out.println("qt");
-		} else {
-			status.getBerry().setText(Integer.toString(player.getHaveBerry()));
-		}
-	}
+
 	public void currentHave() {
 		status.getParsnip().setText(Integer.toString(player.getHaveParsnip()));
 		status.getCarrot().setText(Integer.toString(player.getHaveCarrot()));

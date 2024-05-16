@@ -23,6 +23,7 @@ public class Status extends JLabel {
 	private JLabel berryPrice;
 	
 	private JLabel carrotCurrent;
+	private JLabel berryCurrent;
 	
 	private Font f;
 	
@@ -49,6 +50,7 @@ public class Status extends JLabel {
 		berryPrice = new JLabel();
 		
 		carrotCurrent = new JLabel();
+		berryCurrent = new JLabel();
 		
 		f = new Font("휴먼편지체", Font.PLAIN, 40);
 	}
@@ -62,12 +64,19 @@ public class Status extends JLabel {
 		wallet.setFont(f);
 		wallet.setText(Integer.toString(player.getMoney()));
 		
-		// 플레이어 작물 보유 현황
+		// 당근 보유 현황(플레이어)
 		mContext.add(carrotCurrent);
 		carrotCurrent.setLocation(1600, 700);
 		carrotCurrent.setSize(100, 100);
 		carrotCurrent.setFont(f);
-		carrotCurrent.setText(Integer.toString(player.getHaveCarrot()));
+		carrotCurrent.setText(Integer.toString(player.getHaveCarrot())); // carrotCurrent 는 JLabel 로 그저 carrot 의 개수를 띄어줌
+		
+		// 딸기 보유 현황(플레이어)
+		mContext.add(berryCurrent);
+		berryCurrent.setLocation(1600, 810);
+		berryCurrent.setSize(100, 100);
+		berryCurrent.setFont(f);
+		berryCurrent.setText(Integer.toString(player.getHaveBerry()));
 		
 		// 파스닙의 창고 저장 개수
 		mContext.add(parsnip);
@@ -162,6 +171,15 @@ public class Status extends JLabel {
 	public void setCarrotCurrent(JLabel carrotCurrent) {
 		this.carrotCurrent = carrotCurrent;
 	}
+	
+
+	public JLabel getBerryCurrent() {
+		return berryCurrent;
+	}
+
+	public void setBerryCurrent(JLabel berryCurrent) {
+		this.berryCurrent = berryCurrent;
+	}
 
 	public void rePrice() {
 		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
@@ -170,8 +188,6 @@ public class Status extends JLabel {
 	}
 	public void currentHave() {
 		parsnip.setText(Integer.toString(player.getHaveParsnip()));
-		carrot.setText(Integer.toString(player.getHaveCarrot()));
-		berry.setText(Integer.toString(player.getHaveBerry()));
 	}
 	
 	
