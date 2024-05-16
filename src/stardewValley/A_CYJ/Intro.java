@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import stardewValley.A_OHJ.IntroName;
+import stardewValley.A_OHJ.IntroGuide;
 
 class AudioPlay extends JPanel {
 	Clip clip = null;
@@ -45,7 +45,7 @@ public class Intro extends JFrame {
 	private JPanel jPanel;
 	private JLabel intro;
 	private StardewValleyFrame game;
-	private IntroName introName;
+	private IntroGuide introName;
 
 	public Intro() {
 		initData();
@@ -81,7 +81,7 @@ public class Intro extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				introName = new IntroName();
+				introName = new IntroGuide();
 				setVisible(false);
 			}
 

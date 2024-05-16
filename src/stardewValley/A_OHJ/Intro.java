@@ -21,7 +21,7 @@ class AudioPlay extends JPanel {
 	AudioPlay() {
 
 		try {
-			clip = AudioSystem.getClip(); // 사용 가능한 쓰레드 할당
+			clip = AudioSystem.getClip();
 			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
 
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
@@ -38,12 +38,11 @@ class AudioPlay extends JPanel {
 	}
 }
 
-public class Intro extends JFrame {
+public class Intro extends JFrame implements IImagePack {
 
 	private JPanel jPanel;
 	private JLabel intro;
-	private StardewValleyFrame game;
-	private IntroName introName; // 추가
+	private IntroGuide introGuide;
 
 	public Intro() {
 		initData();
@@ -54,7 +53,7 @@ public class Intro extends JFrame {
 	private void initData() {
 		setTitle("Stardew Valley");
 		jPanel = new JPanel();
-		intro = new JLabel(new ImageIcon("img/intro/intro.png"));
+		intro = new JLabel(new ImageIcon(introBg));
 	}
 
 	private void setInitLayout() {
@@ -67,7 +66,6 @@ public class Intro extends JFrame {
 		setLayout(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
-
 	}
 
 	private void addEventListener() {
@@ -80,7 +78,7 @@ public class Intro extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				introName = new IntroName();
+				introGuide = new IntroGuide();
 				setVisible(false);
 			}
 
