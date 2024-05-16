@@ -440,6 +440,7 @@ public class StardewValleyFrame extends JFrame {
 				waterMan.setIcon(null);
 				waterMan.setSeeNPC(true);
 				store.setIcon(null);
+				store.setSeeNPC(true);
 				player.setIcon(null);
 				info.setIcon(null);
 				player = null;
@@ -453,6 +454,7 @@ public class StardewValleyFrame extends JFrame {
 				waterMan.setIcon(null);
 				waterMan.setSeeNPC(true);
 				store.setIcon(null);
+				store.setSeeNPC(true);
 				player.setIcon(null);
 				info.setIcon(null);
 				player = null;
