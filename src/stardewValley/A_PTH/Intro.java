@@ -43,6 +43,7 @@ public class Intro extends JFrame {
 	private JPanel jPanel;
 	private JLabel intro;
 	private StardewValleyFrame game;
+	private IntroName introName; // 추가
 
 	public Intro() {
 		initData();
@@ -66,6 +67,7 @@ public class Intro extends JFrame {
 		setLayout(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
+
 	}
 
 	private void addEventListener() {
@@ -78,7 +80,7 @@ public class Intro extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				game = new StardewValleyFrame();
+				introName = new IntroName();
 				setVisible(false);
 			}
 

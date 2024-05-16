@@ -27,7 +27,7 @@ public class HelpInfo extends JLabel {
 		infoY = 15;
 
 		helpInfo = new ImageIcon("img/status/questionMark1.png");
-		helpInfo1 = new ImageIcon("img/status/HelpInfoImage.png");
+		helpInfo1 = new ImageIcon("img/status/temptitle.png");
 		keyCommand = new ImageIcon("img/Status/KeyCommand.png");
 
 	}
@@ -36,6 +36,7 @@ public class HelpInfo extends JLabel {
 		this.setIcon(helpInfo);
 		this.setLocation(infoX, infoY);
 		this.setSize(50, 50);
+		
 
 	}
 

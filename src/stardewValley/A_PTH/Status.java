@@ -3,6 +3,7 @@ package stardewValley.A_PTH;
 import java.awt.Font;
 
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Status extends JLabel {
 
@@ -21,14 +22,13 @@ public class Status extends JLabel {
 	private JLabel parsnipPrice;
 	private JLabel carrotPrice;
 	private JLabel berryPrice;
-
+	
 	private JLabel haveParsnip;
 	private JLabel haveCarrot;
 	private JLabel haveBerry;
-
+	
 	private JLabel seed;
-
-//	private JLabel 
+	private JLabel nameField; // 추가
 
 	private Font f;
 
@@ -40,6 +40,7 @@ public class Status extends JLabel {
 		this.water = water;
 		initData();
 		setInitLayout();
+
 	}
 
 	private void initData() {
@@ -54,11 +55,7 @@ public class Status extends JLabel {
 		carrotPrice = new JLabel();
 		berryPrice = new JLabel();
 
-		haveCarrot = new JLabel();
-		haveParsnip = new JLabel();
-		haveBerry = new JLabel();
-
-		seed = new JLabel();
+		nameField = new JLabel(); // 추가
 
 		f = new Font("휴먼편지체", Font.PLAIN, 40);
 	}
@@ -72,44 +69,23 @@ public class Status extends JLabel {
 		wallet.setFont(f);
 		wallet.setText(Integer.toString(player.getMoney()));
 
-		// 플레이어 당근 소지 수량
-		mContext.add(haveCarrot);
-		haveCarrot.setLocation(1640, 645);
-		haveCarrot.setSize(100, 100);
-		haveCarrot.setFont(f);
-		haveCarrot.setText(Integer.toString(player.getHaveCarrot()));
-
-		// 플레이어 파스닙 소지 수량
-		mContext.add(haveParsnip);
-		haveParsnip.setLocation(1640, 740);
-		haveParsnip.setSize(100, 100);
-		haveParsnip.setFont(f);
-		haveParsnip.setText(Integer.toString(player.getHaveParsnip()));
-
-		// 플레이어 딸기 소지 수량
-		mContext.add(haveBerry);
-		haveBerry.setLocation(1640, 840);
-		haveBerry.setSize(100, 100);
-		haveBerry.setFont(f);
-		haveBerry.setText(Integer.toString(player.getHaveBerry()));
-
-		// 당근의 저장 개수
-		mContext.add(carrot);
-		carrot.setLocation(1860, 645);
-		carrot.setSize(100, 100);
-		carrot.setFont(f);
-		carrot.setText(Integer.toString(keeper.getCarrotEach()));
-
 		// 파스닙의 저장 개수
 		mContext.add(parsnip);
-		parsnip.setLocation(1860, 740);
+		parsnip.setLocation(1850, 580);
 		parsnip.setSize(100, 100);
 		parsnip.setFont(f);
 		parsnip.setText(Integer.toString(keeper.getParsnipEach()));
 
+		// 당근의 저장 개수
+		mContext.add(carrot);
+		carrot.setLocation(1850, 700);
+		carrot.setSize(100, 100);
+		carrot.setFont(f);
+		carrot.setText(Integer.toString(keeper.getCarrotEach()));
+
 		// 딸기의 저장 개수
 		mContext.add(berry);
-		berry.setLocation(1860, 840);
+		berry.setLocation(1850, 810);
 		berry.setSize(100, 100);
 		berry.setFont(f);
 		berry.setText(Integer.toString(keeper.getBerryEach()));
@@ -120,25 +96,26 @@ public class Status extends JLabel {
 		parsnipPrice.setSize(100, 100);
 		parsnipPrice.setFont(f);
 		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
+
 		// 당근의 가격
 		mContext.add(carrotPrice);
 		carrotPrice.setLocation(1780, 260);
 		carrotPrice.setSize(100, 100);
 		carrotPrice.setFont(f);
 		carrotPrice.setText(Integer.toString(store.getCarrotPrice()));
+
 		// 딸기의 가격
 		mContext.add(berryPrice);
 		berryPrice.setLocation(1780, 340);
 		berryPrice.setSize(100, 100);
 		berryPrice.setFont(f);
 		berryPrice.setText(Integer.toString(store.getBerryPrice()));
-		
-		// 씨앗 갯수
-		mContext.add(seed);
-		seed.setLocation(1820, 495);
-		seed.setSize(100, 100);
-		seed.setFont(f);
-		seed.setText(Integer.toString(mContext.vegetable.getMAX_PLANT()));
+
+		// 추가
+		mContext.add(nameField);
+		nameField.setLocation(1420, 200);
+		nameField.setSize(100, 100);
+		nameField.setFont(f);
 	}
 
 	public JLabel getWallet() {
@@ -185,52 +162,42 @@ public class Status extends JLabel {
 		return berryPrice;
 	}
 
-	public JLabel getHaveParsnip() {
-		return haveParsnip;
-	}
-
-	public void setHaveParsnip(JLabel haveParsnip) {
-		this.haveParsnip = haveParsnip;
-	}
-
-	public JLabel getHaveCarrot() {
-		return haveCarrot;
-	}
-
-	public void setHaveCarrot(JLabel haveCarrot) {
-		this.haveCarrot = haveCarrot;
-	}
-
-	public JLabel getHaveBerry() {
-		return haveBerry;
-	}
-
-	public void setHaveBerry(JLabel haveBerry) {
-		this.haveBerry = haveBerry;
-	}
-
 	public void rePrice() {
 		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
 		carrotPrice.setText(Integer.toString(store.getCarrotPrice()));
 		berryPrice.setText(Integer.toString(store.getBerryPrice()));
 	}
-
-	public void currentHave() {
-		parsnip.setText(Integer.toString(player.getHaveParsnip()));
-		carrot.setText(Integer.toString(player.getHaveCarrot()));
-		berry.setText(Integer.toString(player.getHaveBerry()));
-	}
-
 	public void statusRepaint() {
 		carrot.setText(Integer.toString(keeper.getCarrotEach()));
 		parsnip.setText(Integer.toString(keeper.getParsnipEach()));
 		berry.setText(Integer.toString(keeper.getBerryEach()));
-
+		
 		haveCarrot.setText(Integer.toString(player.getHaveCarrot()));
 		haveParsnip.setText(Integer.toString(player.getHaveParsnip()));
 		haveBerry.setText(Integer.toString(player.getHaveBerry()));
-
+		
 		seed.setText(Integer.toString(mContext.vegetable.getMAX_PLANT()));
 	}
+	public JLabel removeText() {
+		parsnip.setText(null);
+		carrot.setText(null);
+		berry.setText(null);
+		parsnipPrice.setText(null);
+		carrotPrice.setText(null);
+		berryPrice.setText(null);
+		wallet.setText(null);
+		return removeText();
+		
+		
+	}
 
+	// 추가
+	public JLabel getNameField() {
+		return nameField;
+	}
+
+	public void setName(JLabel name) {
+		this.nameField = name;
+	}
+	
 }

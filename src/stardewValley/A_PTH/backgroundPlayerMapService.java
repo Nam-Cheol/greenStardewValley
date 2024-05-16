@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-
 public class backgroundPlayerMapService implements Runnable {
 
 	private Color redColor = new Color(255, 0, 0);
@@ -23,13 +22,15 @@ public class backgroundPlayerMapService implements Runnable {
 	private Keeper keeper;
 	private Water water;
 	private Guide guide;
+	private SeedZone seedZone;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
 		this.guide = guide;
+		this.seedZone = seedZone;
 		try {
 			image = ImageIO.read(new File("img/bg/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
@@ -51,9 +52,9 @@ public class backgroundPlayerMapService implements Runnable {
 			int left = leftColor.getRGB();
 			int right = rightColor.getRGB();
 
+			int gapY = 150;
 			int gapX = 100;
-			int gapY = 100;
-
+			
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
 
@@ -62,9 +63,12 @@ public class backgroundPlayerMapService implements Runnable {
 
 			int waterX = Math.abs(player.getX() - water.getX());
 			int waterY = Math.abs(player.getY() - water.getY());
-
+			
 			int guideX = Math.abs(player.getX() - guide.getX());
 			int guideY = Math.abs(player.getY() - guide.getY());
+			
+			int seedZoonX = Math.abs(player.getX() - seedZone.getX());
+			int seedZoonY = Math.abs(player.getY() - seedZone.getY());
 
 			// 1. BLOCK
 
@@ -73,10 +77,11 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (down == BLOCK) {
 				stopDown();
 			} else if (left == BLOCK) {
+				System.out.println("나야 나");
 				stopLeft();
 			} else if (right == BLOCK) {
 				stopRight();
-
+				
 				// 2. WATER
 			} else if (up == WATER) {
 				stopUp();
@@ -86,7 +91,7 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == WATER) {
 				stopRight();
-
+				
 				// 3. NPC
 			} else if (storeX < gapX && storeY < gapY) {
 				store.setIcon(store.getSellerOn());
@@ -94,14 +99,17 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (keeperX < gapX && keeperY < gapY) {
 				keeper.setIcon(keeper.getKeeperOn());
 				keeper.setSaveOn(true);
-			} else if (waterX < gapX && waterY < gapY) {
+			} else if (waterX < gapX && waterY < gapX) {
 				water.setIcon(water.getWaterOn());
 				player.setScoopWater(true);
-			} else if (guideX < gapX && guideY < gapY) {
+			} else if (guideX < gapX && guideY < gapX) {
 				guide.setIcon(guide.getGuideOn());
 				player.setCreate(true);
 				guide.setPlantOn(true);
-			} else {
+			} else if (seedZoonX < gapX && seedZoonY < gapY) {
+				seedZone.setIcon(seedZone.getSeedZoneOn());
+				seedZone.setSeedOn(true);
+			}else {
 				notWallCrash();
 				player.setSellParsnip(false);
 				seeNPC();
@@ -144,6 +152,7 @@ public class backgroundPlayerMapService implements Runnable {
 			player.setRight(false);
 		}
 	}
+
 	public void notWallCrash() {
 		player.setUpWallCrash(false);
 		player.setDownWallCrash(false);
@@ -163,6 +172,7 @@ public class backgroundPlayerMapService implements Runnable {
 			player.setRight(false);
 		}
 	}
+
 	public void seeNPC() {
 		if(store.isSeeNPC() == false) {
 			store.setIcon(store.getSeller());
@@ -173,12 +183,14 @@ public class backgroundPlayerMapService implements Runnable {
 		if(water.isSeeNPC() == false) {
 			water.setIcon(water.getWater());
 		}
-		
 		if(guide.isSeeNPC() == false) {
 			guide.setIcon(guide.getGuide());
+		}
+		if (seedZone.isSeeNpc() == false) {
+			seedZone.setIcon(seedZone.getSeedZone());
 		}
 		player.setScoopWater(false);
 		guide.setPlantOn(false);
 	}
-
+	
 }
