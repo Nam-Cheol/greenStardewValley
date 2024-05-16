@@ -210,11 +210,9 @@ public class Water extends JLabel {
 		}
 		
 	}
-	public JLabel removeWaterGage() {
+	public void removeWaterGage() {
 			waterGauge.setIcon(null);
-					
 		
-		return removeWaterGage();
 	}
 
 	
