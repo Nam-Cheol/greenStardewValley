@@ -43,7 +43,7 @@ public class Intro extends JFrame {
 	private JPanel jPanel;
 	private JLabel intro;
 	private StardewValleyFrame game;
-
+	
 	public Intro() {
 		initData();
 		setInitLayout();

@@ -9,10 +9,13 @@ public class Parsnip extends Vegetable {
 	// 멤버 변수
 	private String name = "파스닙";
 	private int growSpeed = 5000;
+	private int temp;
 
 	// 생성자
-	public Parsnip(Player player) {
+	public Parsnip(Player player, StardewValleyFrame mContext, Farm farm) {
 		this.player = player;
+		this.mContext = mContext;
+		this.farm = farm;
 		initData();
 		setInitLayout();
 		grow();
@@ -21,36 +24,21 @@ public class Parsnip extends Vegetable {
 	// 메소드
 	@Override
 	public void initData() {
-		waterGage = 4;
+		waterGauge = 3;
 		growing = true;
 		create = false;
-		rotten = false;
+		temp = mContext.choice;
 		growing1 = new ImageIcon("img/vege/Parsnip_Stage_1.png");
 		growing2 = new ImageIcon("img/vege/Parsnip_Stage_2.png");
 		growing3 = new ImageIcon("img/vege/Parsnip_Stage_3.png");
 		growing4 = new ImageIcon("img/vege/Parsnip_Stage_4.png");
 		lastGrowing = new ImageIcon("img/vege/Parsnip_Stage_5.png");
-
-		rottenImg = new ImageIcon("img/vege/Rotten_Plant.png");
-
-		watergauge0 = new ImageIcon("img/Water_gauge_0.png");
-		watergauge1 = new ImageIcon("img/Water_gauge_1.png");
-		watergauge2 = new ImageIcon("img/Water_gauge_2.png");
-		watergauge3 = new ImageIcon("img/Water_gauge_3.png");
-		watergauge4 = new ImageIcon("img/Water_gauge_4.png");
-		watergauge5 = new ImageIcon("img/Water_gauge_5.png");
-		
-		waterGauge = new JLabel();
 	}
 
 	@Override
 	public void setInitLayout() {
-		x = player.getX();
-		y = player.getY();
 		setSize(100, 110);
 		setIcon(null);
-		
-		waterGauge.setLocation(x - 110, y - 60);
 	}
 
 	@Override
@@ -60,75 +48,201 @@ public class Parsnip extends Vegetable {
 			@Override
 			public void run() {
 				MAX_PLANT--;
-				synchronized (this) {
+				setIcon(growing1);
+				while (true) {
+					mContext.farm.vegetableWaterGauge(waterGauge, temp);
 					try {
-						setIcon(watergauge4);
-						setIcon(growing1);
-						Thread.sleep(3000);
-						setWaterGage(getWaterGage() - 1);
-//						rotten();
-						System.out.println(getWaterGage());
-						notify();
+						Thread.sleep(growSpeed);
+						waterGauge--;
+						mContext.farm.vegetableWaterGauge(waterGauge, temp);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
 					}
-
-//					if (getWaterGage() == 0 || getWaterGage() == MAX_WATERGAGE) {
+					if (waterGauge == 0) {
+						mContext.farm.vegetables[temp - 1].setIcon(rotten);
+						mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+						mContext.farm.vegetableWaters[temp - 1] = null;
+						return;
+					}
+					if (waterGauge > 6) {
+						mContext.farm.vegetables[temp - 1].setIcon(rotten);
+						mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+						mContext.farm.vegetableWaters[temp - 1] = null;
+						return;
+					}
+					if (waterGauge >= 1 && waterGauge <= 5) {
+						
+						if(getIcon() == growing1) {
+							setIcon(growing2);
+							continue;
+						}
+						if(getIcon() == growing2) {
+							setIcon(growing3);
+							continue;
+						}
+						if(getIcon() == growing3) {
+							setIcon(growing4);
+							continue;
+						}
+						if(getIcon() == growing4) {
+							setIcon(lastGrowing);
+						}
+						if (getIcon() == lastGrowing) {
+							canHarvest = true;
+							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+							mContext.farm.vegetableWaters[temp - 1] = null;
+							return;
+						}
+					}
+				}
+//				synchronized (this) {
+//					try {
+//						setIcon(growing1);
+//						Thread.sleep(3000);
+//						setWaterGage(getWaterGage() - 1);
+//						mContext.farm.vegetableWaterGauge(waterGage, temp);
+//						System.out.println(getWaterGage());
+//						notify();
+//					} catch (InterruptedException e) {
+//					}
+//					if (getWaterGage() == 0) {
+//						mContext.farm.vegetableWaterGauge(waterGage, temp);
+////						try {
+//						setIcon(null);
+//						mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//						mContext.farm.vegetableWaters[temp - 1] = null;
+//						mContext.farm.vegetables[temp - 1] = null;
+////							this.wait();
+//						System.out.println("dd");
+//						return;
+////						} catch (InterruptedException e) {
+////						}
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					if (getWaterGage() == MAX_WATERGAGE) {
+//						mContext.farm.vegetableWaterGauge(waterGage, temp);
 //						try {
-//							setIcon(rotten);
+//							setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1] = null;
 //							this.wait();
 //						} catch (InterruptedException e) {
-//							e.printStackTrace();
 //						}
 //					}
-
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					try {
+//						Thread.sleep(growSpeed);
+//						setIcon(growing2);
+//						setWaterGage(getWaterGage() - 1);
+//						mContext.farm.vegetableWaterGauge(waterGage, temp);
+//						System.out.println(getWaterGage());
+//						notify();
+//					} catch (InterruptedException e) {
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					if (getWaterGage() == 0) {
+//						try {
+//							setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1] = null;
+//							mContext.farm.vegetableWaterGauge(waterGage, temp);
+//							this.wait();
+//						} catch (InterruptedException e) {
+//						}
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
 //					if (getWaterGage() == MAX_WATERGAGE) {
 //						try {
 //							setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1] = null;
+//							mContext.farm.vegetableWaterGauge(waterGage, temp);
+//							this.wait();
+//						} catch (InterruptedException e) {
+//						}
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					try {
+//						Thread.sleep(growSpeed);
+//						setIcon(growing3);
+//						setWaterGage(getWaterGage() - 1);
+//						mContext.farm.vegetableWaterGauge(waterGage, temp);
+//						System.out.println(getWaterGage());
+//						notify();
+//					} catch (InterruptedException e) {
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					if (getWaterGage() == 0) {
+//						try {
+//							setIcon(null);
+//							mContext.farm.vegetableWaterGauge(waterGage, temp);
+//							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1] = null;
 //							this.wait();
 //						} catch (InterruptedException e) {
 //							e.printStackTrace();
 //						}
 //					}
-
-					try {
-						Thread.sleep(growSpeed);
-						setIcon(growing2);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-					}
-
-					try {
-						Thread.sleep(growSpeed);
-						setIcon(growing3);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-					}
-
-					try {
-						Thread.sleep(growSpeed);
-						setIcon(growing4);
-						setWaterGage(getWaterGage() - 1);
-						System.out.println(getWaterGage());
-						notify();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-					try {
-						Thread.sleep(growSpeed);
-						setIcon(lastGrowing);
-						canHarvest = true;
-						System.out.println(getWaterGage());
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-				}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					if (getWaterGage() == MAX_WATERGAGE) {
+//						try {
+//							setIcon(null);
+//							mContext.farm.vegetableWaterGauge(waterGage, temp);
+//							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1] = null;
+//							this.wait();
+//						} catch (InterruptedException e) {
+//							e.printStackTrace();
+//						}
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					try {
+//						Thread.sleep(growSpeed);
+//						setIcon(growing4);
+//						setWaterGage(getWaterGage() - 1);
+//						mContext.farm.vegetableWaterGauge(waterGage, temp);
+//						System.out.println(getWaterGage());
+//						notify();
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					if (getWaterGage() == 0) {
+//						try {
+//							setIcon(null);
+//							mContext.farm.vegetableWaterGauge(waterGage, temp);
+//							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1] = null;
+//							this.wait();
+//						} catch (InterruptedException e) {
+//							e.printStackTrace();
+//						}
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					if (getWaterGage() == MAX_WATERGAGE) {
+//						try {
+//							setIcon(null);
+//							mContext.farm.vegetableWaterGauge(waterGage, temp);
+//							mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//							mContext.farm.vegetableWaters[temp - 1] = null;
+//							this.wait();
+//						} catch (InterruptedException e) {
+//							e.printStackTrace();
+//						}
+//					}
+//					mContext.farm.vegetableWaterGauge(waterGage, temp);
+//					try {
+//						Thread.sleep(growSpeed);
+//						setIcon(lastGrowing);
+//						mContext.farm.vegetableWaterGauge(waterGage, temp);
+//						mContext.farm.vegetableWaters[temp - 1].setIcon(null);
+//						mContext.farm.vegetableWaters[temp - 1] = null;
+//						canHarvest = true;
+//						System.out.println(getWaterGage());
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//
+//				}
 			}
 		}).start();
 	}
@@ -174,50 +288,5 @@ public class Parsnip extends Vegetable {
 	public ImageIcon getLastGrowing() {
 		return lastGrowing;
 	}
-
-	public void rotten() {
-		if (getWaterGage() == 0 || getWaterGage() == MAX_WATERGAGE) {
-			try {
-				setIcon(rottenImg);
-				rotten = true;
-				this.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void waterGaugeP() {
-
-		if (waterGage == 1) {
-			waterGauge.setIcon(watergauge1);
-
-		} else if (waterGage == 2) {
-			waterGauge.setIcon(watergauge2);
-
-		} else if (waterGage == 3) {
-			waterGauge.setIcon(watergauge3);
-
-		} else if (waterGage == 4) {
-			waterGauge.setIcon(watergauge4);
-
-		} else if (waterGage == 5) {
-			waterGauge.setIcon(watergauge5);
-		
-		} else if (waterGage == 0) {
-			waterGauge.setIcon(watergauge0);
-		}
-	}
-	
-//	class innerClass() {
-//		protected boolean vegeGetWater;
-//		protected JLabel waterGauge;
-//		protected ImageIcon watergauge0;
-//		protected ImageIcon watergauge1;
-//		protected ImageIcon watergauge2;
-//		protected ImageIcon watergauge3;
-//		protected ImageIcon watergauge4;
-//		protected ImageIcon watergauge5;
-//	}
 
 } // end of class
