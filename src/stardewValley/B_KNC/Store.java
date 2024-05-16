@@ -28,12 +28,12 @@ public class Store extends JLabel{
 	private boolean seeNPC;
 	private boolean sellOn;
 	
-	Random random = new Random();
+	private Random random = new Random();
 	
 	public Store(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
-		initThread();
+		livePrice();
 		this.mContext = mContext;
 	}
 	
@@ -56,7 +56,7 @@ public class Store extends JLabel{
 		this.setSize(130, 200);
 	}
 	
-	private void initThread() {
+	private void livePrice() {
 //		new Thread(new Runnable() {
 		
 		Timer timer = new Timer();
@@ -65,9 +65,9 @@ public class Store extends JLabel{
 			
 			@Override
 			public void run() {
-				parsnipPrice = (int) (random.nextInt(1000)) + 500;
-				carrotPrice = (int) (random.nextInt(1000)) + 500;
-				berryPrice = (int) (random.nextInt(1000)) + 500;
+				carrotPrice = (int) (random.nextInt(1500)) + 500;
+				parsnipPrice = (int) (random.nextInt(1000)) + 800;
+				berryPrice = (int) (random.nextInt(500)) + 1000;
 				
 			}
 		};

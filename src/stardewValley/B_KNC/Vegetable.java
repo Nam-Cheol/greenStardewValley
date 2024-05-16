@@ -76,6 +76,11 @@ public class Vegetable extends JLabel implements IVegetable{
 	public void setWaterGage(int waterGage) {
 		this.waterGauge = waterGage;
 	}
+	
+
+	public static int getMAX_PLANT() {
+		return MAX_PLANT;
+	}
 
 	public static void setMAX_PLANT(int mAX_PLANT) {
 		MAX_PLANT = mAX_PLANT;
