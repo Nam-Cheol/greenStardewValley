@@ -21,7 +21,7 @@ public class Water extends JLabel {
 	private ImageIcon water;
 	private ImageIcon waterOn;
 	
-	private JLabel waterGauge;
+	public JLabel waterGauge;
 	
 	private ImageIcon waterGaugeMax;
 	private ImageIcon waterGauge4;
@@ -80,6 +80,7 @@ public class Water extends JLabel {
 		waterGauge.setSize(200, 100);
 		waterGauge.setIcon(waterGaugeMax);
 	}
+
 	public void decreaseWaterImage() {
 		if(pondGage >= 50_000) {
 			waterGauge.setIcon(waterGaugeMax);
@@ -96,8 +97,13 @@ public class Water extends JLabel {
 		}
 		
 	}
-	public void decreaseWaterImg() {
-		
+	public void removeWaterImg() {
+		setWaterGaugeEmpty(null);
+		setWaterGauge1(null);
+		setWaterGauge2(null);
+		setWaterGauge3(null);
+		setWaterGauge4(null);
+		setWaterGaugeMax(null);
 	}
 
 	public StardewValleyFrame getmContext() {
