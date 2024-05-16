@@ -14,13 +14,12 @@ public class backgroundPlayerMapService implements Runnable {
 	private Color redColor = new Color(255, 0, 0);
 	private Color greenColor = new Color(0, 255, 0);
 	private Color blueColor = new Color(0, 0, 255);
-	private Color acuaColor = new Color(0,255,255);
+	private Color acuaColor = new Color(0, 255, 255);
 
 	private final int BLOCK = redColor.getRGB();
 	private final int FARM = greenColor.getRGB();
 	private final int WATER = blueColor.getRGB();
 	private final int SEED_ZOON = acuaColor.getRGB();
-	
 
 	private BufferedImage image;
 
@@ -67,7 +66,7 @@ public class backgroundPlayerMapService implements Runnable {
 
 			int waterX = Math.abs(player.getX() - water.getX());
 			int waterY = Math.abs(player.getY() - water.getY());
-			
+
 			int seedZoonX = Math.abs(player.getX() - seedZone.getX());
 			int seedZoonY = Math.abs(player.getY() - seedZone.getY());
 
@@ -102,17 +101,6 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == FARM) {
 				stopRight();
-				
-				// 3. SEED_ZOON
-			} else if (up == SEED_ZOON) {
-				stopUp();
-			} else if (down == SEED_ZOON) {
-				stopDown();
-				
-			} else if (left == SEED_ZOON) {
-				stopLeft();
-			} else if (right == SEED_ZOON) {
-				stopRight();	
 
 				// 4. NPC
 			} else if (storeX < gap && storeY < gap) {
@@ -126,7 +114,7 @@ public class backgroundPlayerMapService implements Runnable {
 				player.setScoopWater(true);
 			} else if (seedZoonX < gap && seedZoonY < gap) {
 				seedZone.setIcon(seedZone.getSeedZoneOn());
-//				player.setScoopWater(true);
+				seedZone.setSeedOn(true);
 			} else {
 				notWallCrash();
 				player.setSellParsnip(false);
@@ -137,8 +125,8 @@ public class backgroundPlayerMapService implements Runnable {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 			}
-
 			player.setCreate(false);
+
 		}
 
 	}
@@ -192,18 +180,19 @@ public class backgroundPlayerMapService implements Runnable {
 	}
 
 	public void seeNPC() {
-		if(store.isSeeNPC() == false) {
+		if (store.isSeeNPC() == false) {
 			store.setIcon(store.getSeller());
 		}
-		if(keeper.isSeeNPC() == false) {
+		if (keeper.isSeeNPC() == false) {
 			keeper.setIcon(keeper.getKeeper());
 		}
-		if(water.isSeeNPC() == false) {
+		if (water.isSeeNPC() == false) {
 			water.setIcon(water.getWater());
 		}
-		if(seedZone.isSeeNpc()== false) {
+		if (seedZone.isSeeNpc() == false) {
 			seedZone.setIcon(seedZone.getSeedZone());
 		}
+
 	}
-	
+
 }

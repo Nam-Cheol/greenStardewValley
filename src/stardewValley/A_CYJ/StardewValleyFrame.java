@@ -299,9 +299,14 @@ public class StardewValleyFrame extends JFrame {
 					player.setIcon(null);
 					break;
 				case KeyEvent.VK_M:
-					System.out.println(vegetable.getMAX_PLANT());
-					plusSeed();
+					if (seedZone.isSeedOn()) {
+						System.out.println(vegetable.getMAX_PLANT());
+						plusSeed();
+						seedZone.setSeedOn(false);
+					}
+
 					break;
+
 				default:
 					break;
 				}
@@ -421,14 +426,17 @@ public class StardewValleyFrame extends JFrame {
 	}
 
 	public void plusSeed() {
-
 		if (vegetable.getMAX_PLANT() == 0) {
 			if (turn == 1) {
-				vegetable.setMAX_PLANT(1);
+				if (vegetable.getMAX_PLANT() == 0) {
+					vegetable.setMAX_PLANT(1);
+				}
 				timeGauge.setIcon(timeGauge.getTimeGauge1());
 				turn++;
 			} else if (turn == 2) {
-				vegetable.setMAX_PLANT(1);
+				if (vegetable.getMAX_PLANT() == 0) {
+					vegetable.setMAX_PLANT(2);
+				}
 				timeGauge.setIcon(timeGauge.getTimeGauge2());
 				turn++;
 			} else if (turn == 3 && player.getMoney() <= 300) {
@@ -444,7 +452,6 @@ public class StardewValleyFrame extends JFrame {
 				player.setIcon(null);
 				info.setIcon(null);
 				status.removeText();
-
 				player = null;
 
 			} else if (turn == 3 && player.getMoney() >= 300) {

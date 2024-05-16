@@ -82,6 +82,10 @@ public class Player extends JLabel implements Moveable {
 	private boolean scoopWater;
 	private int sprinklingCanGage;
 	private final int MAX_CANGAGE = 5;
+	
+	// 씨앗 충전 턴넘기기
+	private boolean seedOn;
+	
 
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, SeedZone seedZone) {
@@ -123,6 +127,7 @@ public class Player extends JLabel implements Moveable {
 		down = false;
 
 		create = false;
+		seedOn = false;
 
 		leftWallCrash = false;
 		rightWallCrash = false;
@@ -515,6 +520,16 @@ public class Player extends JLabel implements Moveable {
 	public void setWaterToParsnip(boolean waterToParsnip) {
 		this.waterToParsnip = waterToParsnip;
 	}
+	
+	
+
+	public boolean isSeedOn() {
+		return seedOn;
+	}
+
+	public void setSeedOn(boolean seedOn) {
+		this.seedOn = seedOn;
+	}
 
 	public void amountWater() {
 		if (sprinklingCanGage == 0) {
@@ -531,4 +546,6 @@ public class Player extends JLabel implements Moveable {
 			gauge.setIcon(gauge.getWaterGauge5());
 		}
 	}
+
+	
 }
