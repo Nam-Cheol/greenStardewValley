@@ -92,9 +92,6 @@ public class Vegetable extends JLabel implements IVegetable {
 		return MAX_WATERGAGE;
 	}
 
-	public int getMaxPlant() {
-		return MAX_PLANT;
-	}
 
 	public ImageIcon getRotten() {
 		return rotten;
@@ -110,6 +107,14 @@ public class Vegetable extends JLabel implements IVegetable {
 
 	public void setRmRottened(boolean rmRottened) {
 		this.rmRottened = rmRottened;
+	}
+
+	public static int getMAX_PLANT() {
+		return MAX_PLANT;
+	}
+
+	public static void setMAX_PLANT(int mAX_PLANT) {
+		MAX_PLANT = mAX_PLANT;
 	}
 	
 	

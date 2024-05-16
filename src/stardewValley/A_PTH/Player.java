@@ -87,7 +87,7 @@ public class Player extends JLabel implements Moveable {
 	
 	private boolean scoopWater;
 	private int sprinklingCanGage;
-	private int maxCanGauge = 5;
+	private final int MAX_CANGAGE = 5;
 
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide) {
@@ -520,7 +520,7 @@ public class Player extends JLabel implements Moveable {
 		this.sprinklingCanGage = sprinklingCanGage;
 	}
 	public int getMaxCanGauge() {
-		return maxCanGauge;
+		return MAX_CANGAGE;
 	}
 	public void amountWater() {
 		if (sprinklingCanGage == 0) {
