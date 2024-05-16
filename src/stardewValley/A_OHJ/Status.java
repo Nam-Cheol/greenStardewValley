@@ -3,7 +3,6 @@ package stardewValley.A_OHJ;
 import java.awt.Font;
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 public class Status extends JLabel {
 
