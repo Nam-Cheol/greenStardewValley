@@ -1,6 +1,6 @@
 package stardewValley.B_KNC;
 
-import javax.swing.ImageIcon;
+import javax.swing.ImageIcon;	
 import javax.swing.JLabel;
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
@@ -43,7 +43,6 @@ public class Player extends JLabel implements Moveable {
 	private Guide guide;
 
 	private WaterGauge waterGauge;
-	private TimeGauge timeGauge;
 
 	// 플레이어의 좌표
 	private int x;
@@ -84,7 +83,7 @@ public class Player extends JLabel implements Moveable {
 	private final int MAX_CANGAGE = 5;
 
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
 		this.mContext = mContext;
 		this.store = store;
 		this.keeper = keeper;
@@ -92,13 +91,13 @@ public class Player extends JLabel implements Moveable {
 		this.guide = guide;
 		initData();
 		setInitLayout();
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide, seedZone)).start();
 	}
 
 	private void initData() {
 
 		x = 600;
-		y = 600;
+		y = 400;
 
 		playerL = new ImageIcon("img/character/PlayerStandLeft.png");
 		playerL1 = new ImageIcon("img/character/PlayerWalkLeft.png");
@@ -136,7 +135,6 @@ public class Player extends JLabel implements Moveable {
 		sellParsnip = true;
 		
 		waterGauge = new WaterGauge(mContext);
-		timeGauge = new TimeGauge(mContext);
 	}
 
 	private void setInitLayout() {
@@ -144,7 +142,6 @@ public class Player extends JLabel implements Moveable {
 		this.setLocation(x, y);
 		this.setSize(100, 120);
 		mContext.add(waterGauge);
-		mContext.add(timeGauge);
 	}
 
 	// TODO 움직임 구현
@@ -327,11 +324,11 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	public Vegetable createCarrot() {
-		return new Carrot(this);
+		return new Carrot(this, mContext, mContext.farm);
 	}
 
 	public Vegetable createBerry() {
-		return new Strawberry(this);
+		return new Strawberry(this, mContext, mContext.farm);
 	}
 
 	// getter, setter

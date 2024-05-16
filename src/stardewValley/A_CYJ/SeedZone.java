@@ -13,8 +13,7 @@ public class SeedZone extends JLabel {
 	private ImageIcon seedZoneOn;
 	
 	private boolean seeNpc;
-	
-//	private static int MAX_PLANT = 5;
+	private boolean seedOn;
 	
 	public SeedZone(StardewValleyFrame mContext) {
 		initData();
@@ -30,6 +29,7 @@ public class SeedZone extends JLabel {
 		seedZone = new ImageIcon("img/npc/seedmakerTest.png");
 		seedZoneOn = new ImageIcon("img/npc/seedActive.png");
 		
+		seedOn = false;
 		seeNpc = false;
 	}
 	
@@ -86,6 +86,16 @@ public class SeedZone extends JLabel {
 	public void setSeeNpc(boolean seeNpc) {
 		this.seeNpc = seeNpc;
 	}
+
+	public boolean isSeedOn() {
+		return seedOn;
+	}
+
+	public void setSeedOn(boolean seedOn) {
+		this.seedOn = seedOn;
+	}
+	
+	
 
 
 	

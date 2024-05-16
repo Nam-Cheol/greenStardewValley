@@ -3,6 +3,8 @@ package stardewValley.B_KNC;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import stardewValley.vegetable.vegetable;
+
 public class Farm extends JLabel {
 
 	StardewValleyFrame mContext;
@@ -104,18 +106,15 @@ public class Farm extends JLabel {
 	}
 
 	public void remove(int choice) {
-
+			vegetables[choice-1].setIcon(null);
+			vegetables[choice-1] = null;
 	}
 
 	public void sprinkling(int choice) {
 		if (0 < player.getSprinklingCanGage()) {
 			player.setIcon(player.getPlayerWater());
 			player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
-			System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
 			vegetables[choice - 1].setWaterGage(vegetables[choice - 1].getWaterGage() + 1);
-			System.out.println("식물이 받은 물 : " + vegetables[choice - 1].getWaterGage());
-		} else {
-			System.out.println("연못에 가서 물을 채우세요.");
 		}
 	}
 
@@ -150,18 +149,20 @@ public class Farm extends JLabel {
 	}
 
 	public void vegetableWaterGauge(int waterGage, int choice) {
-		if (waterGage == 0) {
-			vegetableWaters[choice - 1].setIcon(vegetableWaterStatus1);
-		} else if (waterGage == 1) {
-			vegetableWaters[choice - 1].setIcon(vegetableWaterStatus2);
-		} else if (waterGage == 2) {
-			vegetableWaters[choice - 1].setIcon(vegetableWaterStatus3);
-		} else if (waterGage == 3) {
-			vegetableWaters[choice - 1].setIcon(vegetableWaterStatus4);
-		} else if (waterGage == 4) {
-			vegetableWaters[choice - 1].setIcon(vegetableWaterStatus5);
-		} else if (waterGage == 5) {
-			vegetableWaters[choice - 1].setIcon(vegetableWaterStatus6);
+		if(vegetableWaters[choice - 1] != null) {
+			if (waterGage == 0) {
+				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus1);
+			} else if (waterGage == 1) {
+				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus2);
+			} else if (waterGage == 2) {
+				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus3);
+			} else if (waterGage == 3) {
+				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus4);
+			} else if (waterGage == 4) {
+				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus5);
+			} else if (waterGage == 5) {
+				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus6);
+			}
 		}
 //		if (waterGage == 0) {
 //			vegetableWaters[choice-1].setIcon(vegetableWaterStatus1);

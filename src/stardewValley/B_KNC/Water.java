@@ -22,14 +22,22 @@ public class Water extends JLabel {
 	private ImageIcon waterOn;
 
 	private boolean seeNPC;
+	
+	private JLabel waterGauge;
+	private ImageIcon waterGaugeMax;
+	private ImageIcon waterGauge4;
+	private ImageIcon waterGauge3;
+	private ImageIcon waterGauge2;
+	private ImageIcon waterGauge1;
+	private ImageIcon waterGaugeEmpty;
 
 	// 우물에 물 전체 양
 	private long pondGage;
 
 	public Water(StardewValleyFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
-		this.mContext = mContext;
 	}
 
 	private void initData() {
@@ -39,20 +47,29 @@ public class Water extends JLabel {
 
 		water = new ImageIcon("img/npc/waterMan.png");
 		waterOn = new ImageIcon("img/npc/waterManOn.png");
-
-		parsnipEach = 0;
-		carrotEach = 0;
-		berryEach = 0;
+		
+		waterGauge = new JLabel();
+		waterGaugeEmpty = new ImageIcon("img/vege/Water_gauge_0.png");
+		waterGauge1 = new ImageIcon("img/vege/Water_gauge_1.png");
+		waterGauge2 = new ImageIcon("img/vege/Water_gauge_2.png");
+		waterGauge3 = new ImageIcon("img/vege/Water_gauge_3.png");
+		waterGauge4 = new ImageIcon("img/vege/Water_gauge_4.png");
+		waterGaugeMax = new ImageIcon("img/vege/Water_gauge_5.png");
 
 		seeNPC = false;
 
-		pondGage = 9999999999L;
+		pondGage = 50_000L;
 	}
 
 	private void setInitLayout() {
 		this.setIcon(water);
 		this.setLocation(x, y);
 		this.setSize(130, 200);
+		
+		mContext.add(waterGauge);
+		waterGauge.setLocation(925, 660);
+		waterGauge.setSize(200, 100);
+		waterGauge.setIcon(waterGaugeMax);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -158,11 +175,30 @@ public class Water extends JLabel {
 		this.pondGage = pondGage;
 	}
 
-	// TODO - 수정 필요, 연못에 물이 자동적으로 줄어들도록
 	public void minusPondGage() {
-		while (getPondGage() != 0) {
-			setPondGage(getPondGage() - 100);
+		if(pondGage < 0 ) {
+			return;
 		}
+		if(pondGage != 0) {
+			pondGage -= 100;
+		}
+	}
+	
+	public void decreaseWaterImage() {
+		if(pondGage >= 50_000) {
+			waterGauge.setIcon(waterGaugeMax);
+		} else if (pondGage >= 40_000 && pondGage < 50_000) {
+			waterGauge.setIcon(waterGauge4);
+		} else if (pondGage >= 30_000 && pondGage < 40_000) {
+			waterGauge.setIcon(waterGauge3);
+		} else if (pondGage >= 20_000 && pondGage < 30_000) {
+			waterGauge.setIcon(waterGauge2);
+		} else if (pondGage > 0  && pondGage < 20_000) {
+			waterGauge.setIcon(waterGauge1);
+		} else if (pondGage == 0) {
+			waterGauge.setIcon(waterGaugeEmpty);
+		}
+		
 	}
 
 }

@@ -7,27 +7,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-//TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
-// 배경 추가해야 됨.
-//추후 컴포넌트(야채)들도 추가해야 함.
 public class StardewValleyFrame extends JFrame {
 
 	StardewValleyFrame mContext = this;
 
 	private JLabel backgroundMap;
-	private Player player;
+	public Player player;
 
-//	private Vegetable[] vegetables;
+	public int choice;
 
-	private int choice;
-
-	private Farm farm;
+	public Farm farm;
 
 	private Store store;
 	private Keeper keeper;
 	private Water waterMan;
 	private Guide guide;
-
+	
 	private CarrotGauge carrotGauge;
 	private BerryGauge berryGauge;
 	private ParsnipGauge parsnipGauge;
@@ -47,6 +42,7 @@ public class StardewValleyFrame extends JFrame {
 		setContentPane(backgroundMap);
 		setSize(1930, 980);
 
+
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		waterMan = new Water(mContext);
@@ -60,12 +56,11 @@ public class StardewValleyFrame extends JFrame {
 		parsnipGauge = new ParsnipGauge(mContext);
 
 		status = new Status(mContext, player, store, keeper, waterMan);
-//		vegetables = new Vegetable[3];
 
 		farm = new Farm(mContext, player);
-
+		
 		choice = 0;
-
+		
 		status.getParsnipPrice().setText(Integer.toString(store.getParsnipPrice()));
 
 	}
@@ -83,7 +78,6 @@ public class StardewValleyFrame extends JFrame {
 		add(info);
 
 		add(carrotGauge);
-//		add(waterGauge);
 		add(berryGauge);
 		add(parsnipGauge);
 		add(farm);
@@ -165,39 +159,47 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_Q:
 					if (player.isCreate()) {
-						if (farm.vegetables[choice - 1] == null) {
-							farm.vegetables[choice - 1] = player.createParsnip();
+						if (farm.vegetables[choice-1] == null) {
+							farm.vegetables[choice-1] = player.createParsnip();
 							player.setIcon(player.getPlayerWater());
-							add(farm.vegetables[choice - 1]);
+							add(farm.vegetables[choice-1]);
 							farm.VLocation(choice);
+							farm.waterValue(choice);
+							farm.waterValueLocation(choice);
 						}
 					}
 					break;
 				case KeyEvent.VK_W:
 					if (player.isCreate()) {
-						if (farm.vegetables[choice - 1] == null) {
-							farm.vegetables[choice - 1] = player.createCarrot();
-							player.setIcon(player.getPlayerWater());
-							add(farm.vegetables[choice - 1]);
-							farm.VLocation(choice);
+							if (farm.vegetables[choice-1] == null) {
+								farm.vegetables[choice-1] = player.createCarrot();
+								player.setIcon(player.getPlayerWater());
+								add(farm.vegetables[choice-1]);
+								farm.VLocation(choice);
+								farm.waterValue(choice);
+								farm.waterValueLocation(choice);
 						}
 					}
 					break;
 				case KeyEvent.VK_E:
 					if (player.isCreate()) {
-						if (farm.vegetables[choice - 1] == null) {
-							farm.vegetables[choice - 1] = player.createBerry();
+						if (farm.vegetables[choice-1] == null) {
+							farm.vegetables[choice-1] = player.createBerry();
 							player.setIcon(player.getPlayerWater());
-							add(farm.vegetables[choice - 1]);
+							add(farm.vegetables[choice-1]);
 							farm.VLocation(choice);
+							farm.waterValue(choice);
+							farm.waterValueLocation(choice);
 						}
 					}
 					break;
 				case KeyEvent.VK_R:
-					farm.harvest(choice);
-					break;
-				case KeyEvent.VK_T:
-					farm.remove(choice);
+					if(farm.vegetables[choice-1] != null) {
+						if(farm.vegetables[choice-1].getIcon() == farm.vegetables[choice-1].rotten) {
+							farm.remove(choice);
+						}
+						farm.harvest(choice);
+					}
 					break;
 				case KeyEvent.VK_D:
 					if (keeper.isSaveOn()) {
@@ -214,28 +216,16 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_SPACE:
 					if (player.isCreate()) {
-						if (0 < player.getSprinklingCanGage()) {
-							player.setIcon(player.getPlayerWater());
-							player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
-							System.out.println("밭에 물 준 후에 물뿌리개 : " + player.getSprinklingCanGage());
-//							vegetables[0].setWaterGage(vegetables[0].getWaterGage() + 1);
-//							System.out.println("식물이 받은 물 : " + vegetables[0].getWaterGage());
-						} else {
-							System.out.println("연못에 가서 물을 채우세요.");
-						}
+						farm.sprinkling(choice);
 						player.amountWater();
 					}
 					break;
 				case KeyEvent.VK_A:
 					if (player.isScoopWater() == true) {
 						player.setIcon(player.getPlayerWater());
-						System.out.println("채우기 전" + player.getSprinklingCanGage());
-						System.out.println("연못 전 : " + waterMan.getPondGage());
 						if (player.getSprinklingCanGage() < player.getMAX_CANGAGE()) {
 							player.setSprinklingCanGage(player.getMAX_CANGAGE());
 							waterMan.setPondGage(waterMan.getPondGage() - 5);
-							System.out.println("채운 후" + player.getSprinklingCanGage());
-							System.out.println("연못 후 : " + waterMan.getPondGage());
 						} else {
 							System.out.println("물뿌리개가 이미 가득 찼어요.");
 						}
@@ -247,30 +237,39 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_NUMPAD1:
 					choice = 7;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_1.png"));
 					break;
 				case KeyEvent.VK_NUMPAD2:
 					choice = 8;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_2.png"));
 					break;
 				case KeyEvent.VK_NUMPAD3:
 					choice = 9;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_3.png"));
 					break;
 				case KeyEvent.VK_NUMPAD4:
 					choice = 4;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_4.png"));
 					break;
 				case KeyEvent.VK_NUMPAD5:
 					choice = 5;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_5.png"));
 					break;
 				case KeyEvent.VK_NUMPAD6:
 					choice = 6;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_6.png"));
 					break;
 				case KeyEvent.VK_NUMPAD7:
 					choice = 1;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_7.png"));
 					break;
 				case KeyEvent.VK_NUMPAD8:
 					choice = 2;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_8.png"));
 					break;
 				case KeyEvent.VK_NUMPAD9:
 					choice = 3;
+					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_9.png"));
 					break;
 				case KeyEvent.VK_F1:
 					info.setIcon(info.getHelpInfo1());
@@ -350,9 +349,18 @@ public class StardewValleyFrame extends JFrame {
 		status.getCarrot().setText(Integer.toString(keeper.getCarrotEach()));
 		status.getBerry().setText(Integer.toString(keeper.getBerryEach()));
 	}
+	
+	// 시도
+	public Status getStatus() {
+		return status;
+	}
+
+	// 시도
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}
-
 }

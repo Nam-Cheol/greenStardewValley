@@ -1,6 +1,6 @@
 package stardewValley.A_PTH;
 
-import javax.swing.ImageIcon;
+import javax.swing.ImageIcon;	
 import javax.swing.JLabel;
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
@@ -37,8 +37,11 @@ public class Player extends JLabel implements Moveable {
 
 	private ImageIcon playerWater;
 
+<<<<<<< HEAD
 	// 도움말
 
+=======
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	private Store store;
 	private Keeper keeper;
 	private Water water;
@@ -63,33 +66,51 @@ public class Player extends JLabel implements Moveable {
 	private boolean rightWallCrash;
 	private boolean upWallCrash;
 	private boolean downWallCrash;
+<<<<<<< HEAD
 
 	// 식물을 심을 수 있는 상태
 	private boolean create;
 
 	// 플레이어의 돈
 	private int money;
+=======
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
 
+<<<<<<< HEAD
 	// 작물 판매
+=======
+	private boolean create;
+
+	private int money;
+
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	private boolean sellParsnip;
 
 	private int haveParsnip;
 	private int haveCarrot;
 	private int haveBerry;
+<<<<<<< HEAD
 	private int haveRotten;
 
 
 	private boolean waterToParsnip;
 
+=======
+
+	// 파스닙에 물 줄 때
+	private boolean waterToParsnip;
+
+	// 우물에서 물 퍼낼 때
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	private boolean scoopWater;
 	private int sprinklingCanGage;
 	private final int MAX_CANGAGE = 5;
 
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide) {
+	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
 		this.mContext = mContext;
 		this.store = store;
 		this.keeper = keeper;
@@ -97,7 +118,7 @@ public class Player extends JLabel implements Moveable {
 		this.guide = guide;
 		initData();
 		setInitLayout();
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide)).start();
+		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide, seedZone)).start();
 	}
 
 	private void initData() {
@@ -128,12 +149,17 @@ public class Player extends JLabel implements Moveable {
 		up = false;
 		down = false;
 
+		create = false;
+
 		leftWallCrash = false;
 		rightWallCrash = false;
 		upWallCrash = false;
 		downWallCrash = false;
+<<<<<<< HEAD
 
 		create = false;
+=======
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 
 		playerWay = PlayerWay.DOWN;
 
@@ -142,12 +168,15 @@ public class Player extends JLabel implements Moveable {
 
 		waterGauge = new WaterGauge(mContext);
 		timeGauge = new TimeGauge(mContext);
+<<<<<<< HEAD
 
 		haveParsnip = 0;
 		haveCarrot = 0;
 		haveBerry = 0;
 		
 
+=======
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	}
 
 	private void setInitLayout() {
@@ -158,10 +187,13 @@ public class Player extends JLabel implements Moveable {
 		mContext.add(timeGauge);
 	}
 
+<<<<<<< HEAD
 	public StardewValleyFrame getmContext() {
 		return mContext;
 	}
 
+=======
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	// TODO 움직임 구현
 	@Override
 	public void left() {
@@ -337,19 +369,23 @@ public class Player extends JLabel implements Moveable {
 		}
 	}
 
+<<<<<<< HEAD
 	// getter, setter
 
+=======
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	public Vegetable createParsnip() {
-		return new Parsnip(this);
+		return new Parsnip(this, mContext, mContext.farm);
 	}
 
 	public Vegetable createCarrot() {
-		return new Carrot(this);
+		return new Carrot(this, mContext, mContext.farm);
 	}
 
 	public Vegetable createBerry() {
-		return new Strawberry(this);
+		return new Strawberry(this, mContext, mContext.farm);
 	}
+
 
 	public int getX() {
 		return x;
@@ -455,6 +491,10 @@ public class Player extends JLabel implements Moveable {
 		return playerWater;
 	}
 
+	public Parsnip plantParsnip() {
+		return parsnip = new Parsnip(this, mContext, mContext.farm);
+	}
+
 	public boolean isCreate() {
 		return create;
 	}
@@ -463,6 +503,7 @@ public class Player extends JLabel implements Moveable {
 		this.create = create;
 	}
 
+<<<<<<< HEAD
 	public int getMoney() {
 		return money;
 	}
@@ -504,6 +545,8 @@ public class Player extends JLabel implements Moveable {
 	}
 
 
+=======
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	public boolean isSellParsnip() {
 		return sellParsnip;
 	}
@@ -512,6 +555,7 @@ public class Player extends JLabel implements Moveable {
 		this.sellParsnip = sellParsnip;
 	}
 
+<<<<<<< HEAD
 	public boolean isWaterToParsnip() {
 		return waterToParsnip;
 	}
@@ -520,6 +564,41 @@ public class Player extends JLabel implements Moveable {
 		this.waterToParsnip = waterToParsnip;
 	}
 
+=======
+	public int getHaveParsnip() {
+		return haveParsnip;
+	}
+
+	public void setHaveParsnip(int haveParsnip) {
+		this.haveParsnip = haveParsnip;
+	}
+
+	public int getHaveCarrot() {
+		return haveCarrot;
+	}
+
+	public void setHaveCarrot(int haveCarrot) {
+		this.haveCarrot = haveCarrot;
+	}
+
+	public int getHaveBerry() {
+		return haveBerry;
+	}
+
+	public void setHaveBerry(int haveBerry) {
+		this.haveBerry = haveBerry;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	// 시도
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	public boolean isScoopWater() {
 		return scoopWater;
 	}
@@ -540,6 +619,17 @@ public class Player extends JLabel implements Moveable {
 		return MAX_CANGAGE;
 	}
 
+<<<<<<< HEAD
+=======
+	public boolean isWaterToParsnip() {
+		return waterToParsnip;
+	}
+
+	public void setWaterToParsnip(boolean waterToParsnip) {
+		this.waterToParsnip = waterToParsnip;
+	}
+
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 	public void amountWater() {
 		if (sprinklingCanGage == 0) {
 			waterGauge.setIcon(waterGauge.getWaterGauge());
@@ -555,9 +645,12 @@ public class Player extends JLabel implements Moveable {
 			waterGauge.setIcon(waterGauge.getWaterGauge5());
 		}
 	}
+<<<<<<< HEAD
 
 	public Parsnip plantParsnip() {
 		return parsnip = new Parsnip(this);
 	}
 
+=======
+>>>>>>> 8242d34de5620a537f2a1e53bda48b59861d8e08
 }
