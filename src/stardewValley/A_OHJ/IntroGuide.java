@@ -21,6 +21,7 @@ public class IntroGuide extends JFrame implements IImagePack {
 	private JLabel guide3;
 	private JPanel nameField;
 	private JTextField text;
+	private JButton buttonField; //
 	private StardewValleyFrame game;
 
 	public IntroGuide() {
@@ -55,8 +56,13 @@ public class IntroGuide extends JFrame implements IImagePack {
 		guide3.setLocation(485, 175);
 
 		nameField = new JPanel();
-		nameField.setSize(175, 25);
-		nameField.setLocation(680, 700);
+		nameField.setSize(180, 25);
+		nameField.setLocation(615, 690);
+
+		Icon icon5 = new ImageIcon("img/vege/Carrot.png");
+		buttonField = new JButton(icon5);//
+		buttonField.setSize(180, 100);
+		buttonField.setLocation(10, 10);
 
 		text = new JTextField(15);
 	}
@@ -66,6 +72,7 @@ public class IntroGuide extends JFrame implements IImagePack {
 		bg.add(guide2);
 		bg.add(guide3);
 		bg.add(nameField);
+		bg.add(buttonField);//
 
 		nameField.add(text);
 
@@ -79,6 +86,7 @@ public class IntroGuide extends JFrame implements IImagePack {
 		guide2.setVisible(false);
 		guide3.setVisible(false);
 		nameField.setVisible(false);
+		buttonField.setVisible(false);//
 	}
 
 	private void addEventListener() {
@@ -106,9 +114,7 @@ public class IntroGuide extends JFrame implements IImagePack {
 					guide2.setVisible(false);
 					guide3.setVisible(true);
 					nameField.setVisible(true);
-				} else if (e.getKeyCode() == KeyEvent.VK_D) {
-
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					buttonField.setVisible(true);//
 				}
 			}
 		});
@@ -122,9 +128,11 @@ public class IntroGuide extends JFrame implements IImagePack {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				game = new StardewValleyFrame();
-				game.getStatus().getNameField().setText(text.getText());
-				setVisible(false);
+				if(e.getComponent().getName().equals(buttonField)) {
+					game = new StardewValleyFrame();
+					game.getStatus().getNameField().setText(text.getText());
+					setVisible(false);
+				}
 			}
 
 			@Override
@@ -166,6 +174,15 @@ public class IntroGuide extends JFrame implements IImagePack {
 
 	public void setText(JTextField text) {
 		this.text = text;
+	}
+
+	
+	public JButton getButtonField() {
+		return buttonField;
+	}
+
+	public void setButtonField(JButton buttonField) {
+		this.buttonField = buttonField;
 	}
 
 	public StardewValleyFrame getGame() {

@@ -15,6 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import stardewValley.A_OHJ.IImagePack;
+import stardewValley.A_OHJ.IntroGuide;
+
 class AudioPlay extends JPanel {
 	Clip clip = null;
 
@@ -38,12 +41,11 @@ class AudioPlay extends JPanel {
 	}
 }
 
-public class Intro extends JFrame {
+public class Intro extends JFrame implements IImagePack {
 
 	private JPanel jPanel;
 	private JLabel intro;
-	private StardewValleyFrame game;
-	private IntroName introName;
+	private IntroGuide introGuide;
 
 	public Intro() {
 		initData();
@@ -54,7 +56,7 @@ public class Intro extends JFrame {
 	private void initData() {
 		setTitle("Stardew Valley");
 		jPanel = new JPanel();
-		intro = new JLabel(new ImageIcon("img/intro/intro.png"));
+		intro = new JLabel(new ImageIcon(introBg));
 	}
 
 	private void setInitLayout() {
@@ -79,7 +81,7 @@ public class Intro extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				introName = new IntroName();
+				introGuide = new IntroGuide();
 				setVisible(false);
 			}
 

@@ -6,6 +6,12 @@ import javax.swing.JLabel;
 public class HelpInfo extends JLabel {
 
 	StardewValleyFrame mContext;
+	
+	private Player player;
+	
+	private Keeper keeper;
+	private Store store;
+	private Water waterMan;
 
 	private ImageIcon questionMark;
 	private ImageIcon helpInfo1;
@@ -57,5 +63,23 @@ public class HelpInfo extends JLabel {
 	public ImageIcon getKeepInfo() {
 		return keepInfo;
 	}
+//	public void setVisibleTrue() {
+//		setIcon(questionMark);
+//		setSize(50, 50);
+//		setLocation(1200, 15);
+//		
+//		keeper.setIcon(keeper.getKeeper());
+//		keeper.setSeeNPC(false);
+//
+//		store.setIcon(store.getSeller());
+//		store.setSeeNPC(false);
+//
+//		waterMan.setIcon(waterMan.getWater());
+//		waterMan.setSeeNPC(false);
+//
+//		waterMan.waterGauge.setVisible(true);
+//
+//		player.setIcon(player.getPlayerDown());
+//	}
 
 }
