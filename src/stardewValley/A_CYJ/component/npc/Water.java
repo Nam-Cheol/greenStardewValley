@@ -198,7 +198,7 @@ public class Water extends JLabel {
 			waterGauge.setIcon(waterGauge2);
 		} else if (pondGage > 0  && pondGage < 20_000) {
 			waterGauge.setIcon(waterGauge1);
-		} else if (pondGage == 0) {
+		} else if (pondGage <= 0) {
 			waterGauge.setIcon(waterGaugeEmpty);
 		}
 		
