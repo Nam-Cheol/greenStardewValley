@@ -51,17 +51,24 @@ public class HelpInfo extends JLabel {
 		mContext.info.setSize(955, 630);
 		mContext.info.setLocation(200, 200);
 
-		mContext.keeper.setSeeNPC(true);
 		mContext.keeper.setIcon(null);
+		mContext.keeper.setSeeNPC(true);
 
 		mContext.waterMan.setIcon(null);
 		mContext.waterMan.setSeeNPC(true);
 
 		mContext.store.setIcon(null);
 		mContext.store.setSeeNPC(true);
+		
+		mContext.guide.setIcon(null);
+		mContext.guide.setSeeNPC(true);
 
 		mContext.waterMan.waterGauge.setVisible(false);
 		mContext.player.setIcon(null);
+		mContext.player.setUp(true);
+		mContext.player.setDown(true);
+		mContext.player.setLeft(true);
+		mContext.player.setRight(true);
 	}
 	
 	public void setVisibleTrue() {
@@ -77,10 +84,18 @@ public class HelpInfo extends JLabel {
 
 		mContext.waterMan.setIcon(mContext.waterMan.getWater());
 		mContext.waterMan.setSeeNPC(false);
+		
+		mContext.guide.setIcon(mContext.guide.getGuide());
+		mContext.guide.setSeeNPC(false);
 
 		mContext.waterMan.waterGauge.setVisible(true);
 
 		mContext.player.setIcon(mContext.player.getPlayerDown());
+		
+		mContext.player.setUp(false);
+		mContext.player.setDown(false);
+		mContext.player.setLeft(false);
+		mContext.player.setRight(false);
 	}
 
 	public ImageIcon getQuestionMark() {

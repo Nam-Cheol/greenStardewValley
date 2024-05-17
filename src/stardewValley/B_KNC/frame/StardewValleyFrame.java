@@ -40,14 +40,11 @@ public class StardewValleyFrame extends JFrame {
 
 	public HelpInfo info;
 	public Status status;
-	
-	public Vegetable vegetable;
+
 	public TimeGauge timeGauge;
-	
+
 	public GameOver gameOver;
 	public GameClear gameClear;
-	
-	public int turn;
 
 	public StardewValleyFrame() {
 		initData();
@@ -62,20 +59,20 @@ public class StardewValleyFrame extends JFrame {
 		setSize(1930, 980);
 
 		choice = 0;
-		turn = 1;
 		
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		waterMan = new Water(mContext);
 		guide = new Guide(mContext);
 		seedZone = new SeedZone(mContext);
-		
-		timeGauge = new TimeGauge(mContext);
+
 		info = new HelpInfo(mContext);
-		player = new Player(mContext, store, keeper, waterMan, guide, seedZone);
-		farm = new Farm(mContext, player);
-		status = new Status(mContext, player, store, keeper, waterMan);
-		
+		timeGauge = new TimeGauge(mContext);
+		farm = new Farm(mContext);
+
+		player = new Player(mContext);
+
+		status = new Status(mContext);
 		gameOver = new GameOver(mContext);
 		gameClear = new GameClear(mContext);
 
@@ -88,14 +85,17 @@ public class StardewValleyFrame extends JFrame {
 		setVisible(true);
 
 		add(player);
+
 		add(store);
 		add(keeper);
 		add(waterMan);
 		add(seedZone);
-		add(info);
-		add(farm);
 		add(guide);
+
+		add(farm);
+		add(info);
 		add(timeGauge);
+
 		add(gameOver);
 		add(gameClear);
 
@@ -185,7 +185,10 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_Q:
-					vCount();
+					if (choice <= 0) {
+						return;
+					}
+					player.stopPlant();
 					if (player.isCreate()) {
 						if (farm.vegetables[choice - 1] == null) {
 							farm.vegetables[choice - 1] = player.createCarrot();
@@ -199,7 +202,10 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_W:
-					vCount();
+					if (choice <= 0) {
+						return;
+					}
+					player.stopPlant();
 					if (player.isCreate()) {
 						if (farm.vegetables[choice - 1] == null) {
 							farm.vegetables[choice - 1] = player.createParsnip();
@@ -213,7 +219,10 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_E:
-					vCount();
+					if (choice <= 0) {
+						return;
+					}
+					player.stopPlant();
 					if (player.isCreate()) {
 						if (farm.vegetables[choice - 1] == null) {
 							farm.vegetables[choice - 1] = player.createBerry();
@@ -227,6 +236,9 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_R:
+					if (choice <= 0) {
+						return;
+					}
 					if (farm.vegetables[choice - 1] != null) {
 						if (farm.vegetables[choice - 1].getIcon() == farm.vegetables[choice - 1].rotten) {
 							farm.remove(choice);
@@ -237,14 +249,12 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_D:
 					if (keeper.isSaveOn()) {
-						saveCrop();
+						player.saveCrop();
 					}
 					break;
 				case KeyEvent.VK_F:
 					if (store.isSellOn()) {
-						sellParsnip();
-						sellCarrot();
-						sellBerry();
+						player.sellVegetable();
 						status.statusRepaint();
 					}
 					break;
@@ -256,27 +266,22 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_A:
 					if (player.isScoopWater() == true) {
-						if(waterMan.getPondGage() < 5) {
+						if (waterMan.getPondGage() < 5) {
 							return;
 						}
 						player.setIcon(player.getPlayerWater());
 						if (player.getSprinklingCanGage() < player.getMAX_CANGAGE()) {
 							player.setSprinklingCanGage(player.getMAX_CANGAGE());
 							waterMan.setPondGage(waterMan.getPondGage() - 5);
-						} else {
-//							return;
 						}
 						player.amountWater();
 					}
 					break;
 				case KeyEvent.VK_M:
 					if (seedZone.isSeedOn()) {
-						plusSeed();
+						player.plusSeed();
+						System.out.println("확인");
 						status.statusRepaint();
-						if(turn == 2) {
-//							timeGauge.setIcon(timeGauge.getTimeGauge1());
-						}
-						seedZone.setSeedOn(false);
 					}
 					break;
 				case KeyEvent.VK_NUMPAD1:
@@ -336,78 +341,4 @@ public class StardewValleyFrame extends JFrame {
 
 	}
 
-	public void saveCrop() {
-		System.out.println("작물 저장");
-		keeper.setParsnipEach(keeper.getParsnipEach() + player.getHaveParsnip());
-		player.setHaveParsnip(0);
-
-		keeper.setCarrotEach(keeper.getCarrotEach() + player.getHaveCarrot());
-		player.setHaveCarrot(0);
-
-		keeper.setBerryEach(keeper.getBerryEach() + player.getHaveBerry());
-		player.setHaveBerry(0);
-
-		status.statusRepaint();
-	}
-
-	public void sellCarrot() {
-		if (keeper.getCarrotEach() == 0) {
-		} else {
-			player.setMoney(player.getMoney() + (keeper.getCarrotEach() * store.getCarrotPrice()));
-			keeper.setCarrotEach(0);
-			status.getWallet().setText(Integer.toString(player.getMoney()));
-		}
-	}
-
-	public void sellParsnip() {
-		if (keeper.getParsnipEach() == 0) {
-		} else {
-			player.setMoney(player.getMoney() + (keeper.getParsnipEach() * store.getParsnipPrice()));
-			keeper.setParsnipEach(0);
-			status.getWallet().setText(Integer.toString(player.getMoney()));
-		}
-	}
-	
-	public void sellBerry() {
-		if (keeper.getBerryEach() == 0) {
-		} else {
-			player.setMoney(player.getMoney() + (keeper.getBerryEach() * store.getBerryPrice()));
-			keeper.setBerryEach(0);
-			status.getWallet().setText(Integer.toString(player.getMoney()));
-		}
-	}
-
-	public void vCount() {
-		if (Vegetable.MAX_PLANT == 0) {
-			player.setCreate(false);
-			return;
-		}
-	}
-
-	public void plusSeed() {
-		if (vegetable.getMAX_PLANT() == 0) {
-			if (turn == 10) {
-				if (vegetable.getMAX_PLANT() == 0) {
-					vegetable.setMAX_PLANT(1);
-				}
-				timeGauge.setIcon(timeGauge.getTimeGauge1());
-				turn++;
-			} else if (turn == 20) {
-				if (vegetable.getMAX_PLANT() == 0) {
-					vegetable.setMAX_PLANT(1);
-				}
-				timeGauge.setIcon(timeGauge.getTimeGauge2());
-				turn++;
-			} else if (turn == 1 && player.getMoney() <= 300) {
-				gameOver.gameOver();
-
-			} else if (turn == 1 && player.getMoney() >= 300) {
-				gameClear.gameClear();
-			}
-		}
-	}
-	
-	public static void main(String[] args) {
-		new StardewValleyFrame();
-	}
 }

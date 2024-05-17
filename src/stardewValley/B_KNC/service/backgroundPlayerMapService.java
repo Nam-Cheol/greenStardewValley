@@ -13,6 +13,7 @@ import stardewValley.B_KNC.component.npc.SeedZone;
 import stardewValley.B_KNC.component.npc.Store;
 import stardewValley.B_KNC.component.npc.Water;
 import stardewValley.B_KNC.component.player.Player;
+import stardewValley.B_KNC.frame.StardewValleyFrame;
 import stardewValley.B_KNC.state.PlayerWay;
 
 public class backgroundPlayerMapService implements Runnable {
@@ -22,23 +23,16 @@ public class backgroundPlayerMapService implements Runnable {
 
 	private final int BLOCK = redColor.getRGB();
 	private final int WATER = blueColor.getRGB();
+	
+	StardewValleyFrame mContext;
 
 	private BufferedImage image;
 
 	private Player player;
-	private Store store;
-	private Keeper keeper;
-	private Water water;
-	private Guide guide;
-	private SeedZone seedZone;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
+	public backgroundPlayerMapService(StardewValleyFrame mContext, Player player) {
+		this.mContext = mContext;
 		this.player = player;
-		this.store = store;
-		this.keeper = keeper;
-		this.water = water;
-		this.guide = guide;
-		this.seedZone = seedZone;
 		try {
 			image = ImageIO.read(new File("img/bg/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
@@ -63,20 +57,20 @@ public class backgroundPlayerMapService implements Runnable {
 			int gapY = 100;
 			int gapX = 50;
 			
-			int storeX = Math.abs(player.getX() - store.getX());
-			int storeY = Math.abs(player.getY() - store.getY());
+			int storeX = Math.abs(player.getX() - mContext.store.getX());
+			int storeY = Math.abs(player.getY() - mContext.store.getY());
 
-			int keeperX = Math.abs(player.getX()+30 - keeper.getX());
-			int keeperY = Math.abs(player.getY()-100 - keeper.getY());
+			int keeperX = Math.abs(player.getX()+30 - mContext.keeper.getX());
+			int keeperY = Math.abs(player.getY()-100 - mContext.keeper.getY());
 
-			int waterX = Math.abs(player.getX() - water.getX()-50);
-			int waterY = Math.abs(player.getY() - water.getY()-50);
+			int waterX = Math.abs(player.getX() - mContext.waterMan.getX()-50);
+			int waterY = Math.abs(player.getY() - mContext.waterMan.getY()-50);
 			
-			int guideX = Math.abs(player.getX() - guide.getX());
-			int guideY = Math.abs(player.getY() - guide.getY());
+			int guideX = Math.abs(player.getX() - mContext.guide.getX());
+			int guideY = Math.abs(player.getY() - mContext.guide.getY());
 			
-			int seedZoonX = Math.abs(player.getX()-40 - seedZone.getX());
-			int seedZoonY = Math.abs(player.getY()-70 - seedZone.getY());
+			int seedZoonX = Math.abs(player.getX()-40 - mContext.seedZone.getX());
+			int seedZoonY = Math.abs(player.getY()-70 - mContext.seedZone.getY());
 
 			// 1. BLOCK
 
@@ -102,24 +96,23 @@ public class backgroundPlayerMapService implements Runnable {
 				
 				// 3. NPC
 			} else if (storeX < 80 && storeY < 170) {
-				store.setIcon(store.getSellerOn());
-				store.setSellOn(true);
+				mContext.store.setIcon(mContext.store.getSellerOn());
+				mContext.store.setSellOn(true);
 			} else if (keeperX < 100 && keeperY < 60) {
-				keeper.setIcon(keeper.getKeeperOn());
-				keeper.setSaveOn(true);
+				mContext.keeper.setIcon(mContext.keeper.getKeeperOn());
+				mContext.keeper.setSaveOn(true);
 			} else if (waterX < 100 && waterY < 100) {
-				water.setIcon(water.getWaterOn());
+				mContext.waterMan.setIcon(mContext.waterMan.getWaterOn());
 				player.setScoopWater(true);
 			} else if (guideX < 80 && guideY < 100) {
-				guide.setIcon(guide.getGuideOn());
+				mContext.guide.setIcon(mContext.guide.getGuideOn());
 				player.setCreate(true);
-				guide.setPlantOn(true);
+				mContext.guide.setPlantOn(true);
 			} else if (seedZoonX < 100 && seedZoonY < 50) {
-				seedZone.setIcon(seedZone.getSeedZoneOn());
-				seedZone.setSeedOn(true);
+				mContext.seedZone.setIcon(mContext.seedZone.getSeedZoneOn());
+				mContext.seedZone.setSeedOn(true);
 			}else {
 				notWallCrash();
-				player.setSellParsnip(false);
 				seeNPC();
 			}
 
@@ -181,23 +174,24 @@ public class backgroundPlayerMapService implements Runnable {
 	}
 
 	public void seeNPC() {
-		if(store.isSeeNPC() == false) {
-			store.setIcon(store.getSeller());
+		if(mContext.store.isSeeNPC() == false) {
+			mContext.store.setIcon(mContext.store.getSeller());
 		}
-		if(keeper.isSeeNPC() == false) {
-			keeper.setIcon(keeper.getKeeper());
+		if(mContext.keeper.isSeeNPC() == false) {
+			mContext.keeper.setIcon(mContext.keeper.getKeeper());
 		}
-		if(water.isSeeNPC() == false) {
-			water.setIcon(water.getWater());
+		if(mContext.waterMan.isSeeNPC() == false) {
+			mContext.waterMan.setIcon(mContext.waterMan.getWater());
 		}
-		if(guide.isSeeNPC() == false) {
-			guide.setIcon(guide.getGuide());
+		if(mContext.guide.isSeeNPC() == false) {
+			mContext.guide.setIcon(mContext.guide.getGuide());
 		}
-		if (seedZone.isSeeNpc() == false) {
-			seedZone.setIcon(seedZone.getSeedZone());
+		if (mContext.seedZone.isSeeNpc() == false) {
+			mContext.seedZone.setIcon(mContext.seedZone.getSeedZone());
 		}
 		player.setScoopWater(false);
-		guide.setPlantOn(false);
+		mContext.guide.setPlantOn(false);
+		mContext.seedZone.setSeedOn(false);
 	}
 	
 }
