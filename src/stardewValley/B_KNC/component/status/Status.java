@@ -8,16 +8,12 @@ import stardewValley.B_KNC.component.npc.Keeper;
 import stardewValley.B_KNC.component.npc.Store;
 import stardewValley.B_KNC.component.npc.Water;
 import stardewValley.B_KNC.component.player.Player;
+import stardewValley.B_KNC.component.vegetable.Vegetable;
 import stardewValley.B_KNC.frame.StardewValleyFrame;
 
 public class Status extends JLabel {
 
 	StardewValleyFrame mContext;
-	
-	private Player player;
-	private Store store;
-	private Keeper keeper;
-	private Water water;
 	
 	private JLabel wallet;
 	private JLabel parsnip;
@@ -37,12 +33,8 @@ public class Status extends JLabel {
 	
 	private Font f;
 	
-	public Status(StardewValleyFrame mContext, Player player, Store store, Keeper keeper, Water water) {
+	public Status(StardewValleyFrame mContext) {
 		this.mContext = mContext;
-		this.player = player;
-		this.store = store;
-		this.keeper = keeper;
-		this.water = water;
 		initData();
 		setInitLayout();
 		
@@ -77,76 +69,76 @@ public class Status extends JLabel {
 		wallet.setLocation(1400, 280);
 		wallet.setSize(400,100);
 		wallet.setFont(f);
-		wallet.setText(Integer.toString(player.getMoney()));
+		wallet.setText(Integer.toString(mContext.player.getMoney()));
 		// 당근의 가격
 		mContext.add(carrotPrice);
 		carrotPrice.setLocation(1780, 195);
 		carrotPrice.setSize(100,100);
 		carrotPrice.setFont(f);
-		carrotPrice.setText(Integer.toString(store.getCarrotPrice()));
+		carrotPrice.setText(Integer.toString(mContext.store.getCarrotPrice()));
 		
 		// 파스닙의 가격
 		mContext.add(parsnipPrice);
 		parsnipPrice.setLocation(1780, 265);
 		parsnipPrice.setSize(100,100);
 		parsnipPrice.setFont(f);
-		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
+		parsnipPrice.setText(Integer.toString(mContext.store.getParsnipPrice()));
 		
 		// 딸기의 가격
 		mContext.add(berryPrice);
 		berryPrice.setLocation(1780, 340);
 		berryPrice.setSize(100,100);
 		berryPrice.setFont(f);
-		berryPrice.setText(Integer.toString(store.getBerryPrice()));
+		berryPrice.setText(Integer.toString(mContext.store.getBerryPrice()));
 		
 		// 당근의 저장 개수
 		mContext.add(carrot);
 		carrot.setLocation(1860, 645);
 		carrot.setSize(100,100);
 		carrot.setFont(f);
-		carrot.setText(Integer.toString(keeper.getCarrotEach()));
+		carrot.setText(Integer.toString(mContext.keeper.getCarrotEach()));
 		
 		// 파스닙의 저장 개수
 		mContext.add(parsnip);
 		parsnip.setLocation(1860, 740);
 		parsnip.setSize(100,100);
 		parsnip.setFont(f);
-		parsnip.setText(Integer.toString(keeper.getParsnipEach()));
+		parsnip.setText(Integer.toString(mContext.keeper.getParsnipEach()));
 		
 		// 딸기의 저장 개수
 		mContext.add(berry);
 		berry.setLocation(1860, 840);
 		berry.setSize(100,100);
 		berry.setFont(f);
-		berry.setText(Integer.toString(keeper.getBerryEach()));
+		berry.setText(Integer.toString(mContext.keeper.getBerryEach()));
 		
 		// 플레이어 당근 소지 수량
 		mContext.add(haveCarrot);
 		haveCarrot.setLocation(1640, 645);
 		haveCarrot.setSize(100, 100);
 		haveCarrot.setFont(f);
-		haveCarrot.setText(Integer.toString(player.getHaveCarrot()));
+		haveCarrot.setText(Integer.toString(mContext.player.getHaveCarrot()));
 		
 		// 플레이어 파스닙 소지 수량
 		mContext.add(haveParsnip);
 		haveParsnip.setLocation(1640, 740);
 		haveParsnip.setSize(100, 100);
 		haveParsnip.setFont(f);
-		haveParsnip.setText(Integer.toString(player.getHaveParsnip()));
+		haveParsnip.setText(Integer.toString(mContext.player.getHaveParsnip()));
 		
 		// 플레이어 딸기 소지 수량
 		mContext.add(haveBerry);
 		haveBerry.setLocation(1640, 840);
 		haveBerry.setSize(100, 100);
 		haveBerry.setFont(f);
-		haveBerry.setText(Integer.toString(player.getHaveBerry()));
+		haveBerry.setText(Integer.toString(mContext.player.getHaveBerry()));
 		
 		// 씨앗 갯수
 		mContext.add(seed);
 		seed.setLocation(1820, 495);
 		seed.setSize(100, 100);
 		seed.setFont(f);
-		seed.setText(Integer.toString(mContext.vegetable.getMAX_PLANT()));
+		seed.setText(Integer.toString(Vegetable.getMAX_PLANT()));
 		
 		mContext.add(nameField);
 		nameField.setLocation(1420, 200);
@@ -204,21 +196,21 @@ public class Status extends JLabel {
 	}
 	
 	public void rePrice() {
-		parsnipPrice.setText(Integer.toString(store.getParsnipPrice()));
-		carrotPrice.setText(Integer.toString(store.getCarrotPrice()));
-		berryPrice.setText(Integer.toString(store.getBerryPrice()));
+		parsnipPrice.setText(Integer.toString(mContext.store.getParsnipPrice()));
+		carrotPrice.setText(Integer.toString(mContext.store.getCarrotPrice()));
+		berryPrice.setText(Integer.toString(mContext.store.getBerryPrice()));
 	}
 	
 	public void statusRepaint() {
-		carrot.setText(Integer.toString(keeper.getCarrotEach()));
-		parsnip.setText(Integer.toString(keeper.getParsnipEach()));
-		berry.setText(Integer.toString(keeper.getBerryEach()));
+		carrot.setText(Integer.toString(mContext.keeper.getCarrotEach()));
+		parsnip.setText(Integer.toString(mContext.keeper.getParsnipEach()));
+		berry.setText(Integer.toString(mContext.keeper.getBerryEach()));
 		
-		haveCarrot.setText(Integer.toString(player.getHaveCarrot()));
-		haveParsnip.setText(Integer.toString(player.getHaveParsnip()));
-		haveBerry.setText(Integer.toString(player.getHaveBerry()));
+		haveCarrot.setText(Integer.toString(mContext.player.getHaveCarrot()));
+		haveParsnip.setText(Integer.toString(mContext.player.getHaveParsnip()));
+		haveBerry.setText(Integer.toString(mContext.player.getHaveBerry()));
 		
-		seed.setText(Integer.toString(mContext.vegetable.getMAX_PLANT()));
+		seed.setText(Integer.toString(Vegetable.getMAX_PLANT()));
 	}
 	
 	public void removeText() {

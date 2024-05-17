@@ -67,7 +67,7 @@ public class Carrot extends Vegetable {
 						mContext.farm.vegetableWaters[temp - 1] = null;
 						return;
 					}
-					if (waterGauge > 6) {
+					if (waterGauge > 7) {
 						mContext.farm.vegetables[temp - 1].setIcon(rotten);
 						mContext.farm.vegetableWaters[temp - 1].setIcon(null);
 						mContext.farm.vegetableWaters[temp - 1] = null;

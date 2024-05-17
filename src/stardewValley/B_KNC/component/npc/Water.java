@@ -34,7 +34,7 @@ public class Water extends JLabel {
 	private ImageIcon waterGaugeEmpty;
 
 	// 우물에 물 전체 양
-	private long pondGage;
+	private int pondGage;
 
 	public Water(StardewValleyFrame mContext) {
 		this.mContext = mContext;
@@ -60,7 +60,7 @@ public class Water extends JLabel {
 
 		seeNPC = false;
 
-		pondGage = 50_000L;
+		pondGage = 50_000;
 	}
 
 	private void setInitLayout() {
@@ -169,11 +169,11 @@ public class Water extends JLabel {
 	}
 
 	// 시도
-	public long getPondGage() {
+	public int getPondGage() {
 		return pondGage;
 	}
 
-	public void setPondGage(long pondGage) {
+	public void setPondGage(int pondGage) {
 		this.pondGage = pondGage;
 	}
 
