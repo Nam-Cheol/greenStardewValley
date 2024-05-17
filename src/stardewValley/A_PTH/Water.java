@@ -3,6 +3,7 @@ package stardewValley.A_PTH;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+
 public class Water extends JLabel {
 
 	StardewValleyFrame mContext;
@@ -20,54 +21,45 @@ public class Water extends JLabel {
 
 	private ImageIcon water;
 	private ImageIcon waterOn;
+
+	private boolean seeNPC;
 	
 	public JLabel waterGauge;
-	
 	private ImageIcon waterGaugeMax;
 	private ImageIcon waterGauge4;
 	private ImageIcon waterGauge3;
 	private ImageIcon waterGauge2;
 	private ImageIcon waterGauge1;
 	private ImageIcon waterGaugeEmpty;
-	
-	private boolean seeNPC;
-	
-	private long pondGage;
+
+	// 우물에 물 전체 양
+	private int pondGage;
 
 	public Water(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 		initData();
 		setInitLayout();
-		
 	}
 
 	private void initData() {
 
 		x = 750;
-		y = 560;
+		y = 500;
 
 		water = new ImageIcon("img/npc/waterMan.png");
 		waterOn = new ImageIcon("img/npc/waterManOn.png");
 		
 		waterGauge = new JLabel();
-		
 		waterGaugeEmpty = new ImageIcon("img/vege/Water_gauge_0.png");
 		waterGauge1 = new ImageIcon("img/vege/Water_gauge_1.png");
 		waterGauge2 = new ImageIcon("img/vege/Water_gauge_2.png");
 		waterGauge3 = new ImageIcon("img/vege/Water_gauge_3.png");
 		waterGauge4 = new ImageIcon("img/vege/Water_gauge_4.png");
 		waterGaugeMax = new ImageIcon("img/vege/Water_gauge_5.png");
-		
-		
-		
-		parsnipEach = 0;
-		carrotEach = 0;
-		berryEach = 0;
-		
-		seeNPC = false;
-		
-		pondGage = 50_000L;
 
+		seeNPC = false;
+
+		pondGage = 50_000;
 	}
 
 	private void setInitLayout() {
@@ -79,31 +71,6 @@ public class Water extends JLabel {
 		waterGauge.setLocation(925, 660);
 		waterGauge.setSize(200, 100);
 		waterGauge.setIcon(waterGaugeMax);
-	}
-
-	public void decreaseWaterImage() {
-		if(pondGage >= 50_000) {
-			waterGauge.setIcon(waterGaugeMax);
-		} else if (pondGage >= 40_000 && pondGage < 50_000) {
-			waterGauge.setIcon(waterGauge4);
-		} else if (pondGage >= 30_000 && pondGage < 40_000) {
-			waterGauge.setIcon(waterGauge3);
-		} else if (pondGage >= 20_000 && pondGage < 30_000) {
-			waterGauge.setIcon(waterGauge2);
-		} else if (pondGage > 0  && pondGage < 20_000) {
-			waterGauge.setIcon(waterGauge1);
-		} else if (pondGage == 0) {
-			waterGauge.setIcon(waterGaugeEmpty);
-		}
-		
-	}
-	public void removeWaterImg() {
-		setWaterGaugeEmpty(null);
-		setWaterGauge1(null);
-		setWaterGauge2(null);
-		setWaterGauge3(null);
-		setWaterGauge4(null);
-		setWaterGaugeMax(null);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -184,6 +151,14 @@ public class Water extends JLabel {
 		return water;
 	}
 
+	public void setWater(ImageIcon water) {
+		this.water = water;
+	}
+
+	public ImageIcon getWaterOn() {
+		return waterOn;
+	}
+
 	public boolean isSeeNPC() {
 		return seeNPC;
 	}
@@ -192,72 +167,13 @@ public class Water extends JLabel {
 		this.seeNPC = seeNPC;
 	}
 
-	public ImageIcon getWaterOn() {
-		return waterOn;
-	}
-
-	public void setWaterOn(ImageIcon waterOn) {
-		this.waterOn = waterOn;
-	}
-
-	public long getPondGage() {
+	// 시도
+	public int getPondGage() {
 		return pondGage;
 	}
 
-	public void setPondGage(long pondGage) {
+	public void setPondGage(int pondGage) {
 		this.pondGage = pondGage;
-	}
-
-	public void setWater(ImageIcon water) {
-		this.water = water;
-	}
-	
-	public ImageIcon getWaterGaugeMax() {
-		return waterGaugeMax;
-	}
-
-	public void setWaterGaugeMax(ImageIcon waterGaugeMax) {
-		this.waterGaugeMax = waterGaugeMax;
-	}
-
-	public ImageIcon getWaterGauge4() {
-		return waterGauge4;
-	}
-
-	public void setWaterGauge4(ImageIcon waterGauge4) {
-		this.waterGauge4 = waterGauge4;
-	}
-
-	public ImageIcon getWaterGauge3() {
-		return waterGauge3;
-	}
-
-	public void setWaterGauge3(ImageIcon waterGauge3) {
-		this.waterGauge3 = waterGauge3;
-	}
-
-	public ImageIcon getWaterGauge2() {
-		return waterGauge2;
-	}
-
-	public void setWaterGauge2(ImageIcon waterGauge2) {
-		this.waterGauge2 = waterGauge2;
-	}
-
-	public ImageIcon getWaterGauge1() {
-		return waterGauge1;
-	}
-
-	public void setWaterGauge1(ImageIcon waterGauge1) {
-		this.waterGauge1 = waterGauge1;
-	}
-
-	public ImageIcon getWaterGaugeEmpty() {
-		return waterGaugeEmpty;
-	}
-
-	public void setWaterGaugeEmpty(ImageIcon waterGaugeEmpty) {
-		this.waterGaugeEmpty = waterGaugeEmpty;
 	}
 
 	public void minusPondGage() {
@@ -269,5 +185,26 @@ public class Water extends JLabel {
 		}
 	}
 	
+	public void decreaseWaterImage() {
+		if(pondGage >= 50_000) {
+			waterGauge.setIcon(waterGaugeMax);
+		} else if (pondGage >= 40_000 && pondGage < 50_000) {
+			waterGauge.setIcon(waterGauge4);
+		} else if (pondGage >= 30_000 && pondGage < 40_000) {
+			waterGauge.setIcon(waterGauge3);
+		} else if (pondGage >= 20_000 && pondGage < 30_000) {
+			waterGauge.setIcon(waterGauge2);
+		} else if (pondGage > 0  && pondGage < 20_000) {
+			waterGauge.setIcon(waterGauge1);
+		} else if (pondGage == 0) {
+			waterGauge.setIcon(waterGaugeEmpty);
+		}
+		
+	}
 	
+	public void removeWaterGage() {
+		waterGauge.setIcon(null);
+	
+}
+
 }

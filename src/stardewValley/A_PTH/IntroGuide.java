@@ -2,12 +2,7 @@ package stardewValley.A_PTH;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,25 +10,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
 public class IntroGuide extends JFrame implements IImagePack {
-	
 
 	private JLabel bg;
 	private JLabel guide1;
 	private JLabel guide2;
 	private JLabel guide3;
-	private JLabel enterName;
 	private JPanel nameField;
 	private JTextField text;
 	private JButton startButton;
 	private JButton guide1Button;
 	private JButton guide2Button;
 	private JButton guide3Button;
-	public StardewValleyFrame game;
-	public Status status;
-	
+	private StardewValleyFrame game;
+
 	public IntroGuide() {
-		
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -59,10 +51,6 @@ public class IntroGuide extends JFrame implements IImagePack {
 		guide3 = new JLabel(new ImageIcon(HelpGuide));
 		guide3.setSize(960, 630);
 		guide3.setLocation(485, 120);
-		
-		enterName = new JLabel(new ImageIcon(EnterName));
-		enterName.setSize(100, 110);
-		enterName.setLocation(300, 600);
 
 		nameField = new JPanel();
 		nameField.setSize(180, 25);
@@ -83,7 +71,7 @@ public class IntroGuide extends JFrame implements IImagePack {
 		guide3Button = new JButton(new ImageIcon(Guide3ButtonImg));//
 		guide3Button.setSize(120, 83);
 		guide3Button.setLocation(885, 780);
-		
+
 		text = new JTextField(10);
 	}
 
@@ -91,7 +79,6 @@ public class IntroGuide extends JFrame implements IImagePack {
 		bg.add(guide1);
 		bg.add(guide2);
 		bg.add(guide3);
-		bg.add(enterName);
 		bg.add(nameField);
 
 		bg.add(startButton);
@@ -110,7 +97,6 @@ public class IntroGuide extends JFrame implements IImagePack {
 		guide1.setVisible(true);
 		guide2.setVisible(false);
 		guide3.setVisible(false);
-		enterName.setVisible(false);
 		nameField.setVisible(false);
 		startButton.setVisible(false);
 		guide1Button.setVisible(true);
@@ -121,14 +107,12 @@ public class IntroGuide extends JFrame implements IImagePack {
 	private void addEventListener() {
 
 		startButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-					game = new StardewValleyFrame();
-					game.getStatus().getNameField().setText(text.getText());
-					setVisible(false);
-					
+				game = new StardewValleyFrame();
+				game.status.getNameField().setText(text.getText());
+				setVisible(false);
 			}
 		});
 
@@ -168,11 +152,6 @@ public class IntroGuide extends JFrame implements IImagePack {
 			}
 		});
 
-	}
-
-	protected Status getStatus() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

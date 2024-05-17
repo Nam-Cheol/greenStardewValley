@@ -9,31 +9,17 @@ import javax.imageio.ImageIO;
 
 public class backgroundPlayerMapService implements Runnable {
 
-	private Color redColor = new Color(255, 0, 0);
-	private Color blueColor = new Color(0, 0, 255);
-
-	private final int BLOCK = redColor.getRGB();
-	private final int WATER = blueColor.getRGB();
-
 	private BufferedImage image;
-
 	private Player player;
-	private Store store;
-	private Keeper keeper;
-	private Water water;
-	private Guide guide;
-	private SeedZone seedZone;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
+	public backgroundPlayerMapService(Player player) {
 		this.player = player;
-		this.store = store;
-		this.keeper = keeper;
-		this.water = water;
-		this.guide = guide;
-		this.seedZone = seedZone;
+
 		try {
 			image = ImageIO.read(new File("img/bg/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -47,150 +33,56 @@ public class backgroundPlayerMapService implements Runnable {
 			Color leftColor = new Color(image.getRGB(player.getX() - 15, player.getY() + 50));
 			Color rightColor = new Color(image.getRGB(player.getX() + 115, player.getY() + 70));
 
-			int up = upColor.getRGB();
-			int down = downColor.getRGB();
-			int left = leftColor.getRGB();
-			int right = rightColor.getRGB();
+			// Player Wall Crash
 
-			int gapY = 150;
-			int gapX = 100;
-			
-			int storeX = Math.abs(player.getX() - store.getX());
-			int storeY = Math.abs(player.getY() - store.getY());
+			if (upColor.getRed() == 255 && upColor.getGreen() == 0 && upColor.getBlue() == 0) {
+				player.setUpWallCrash(true);
+				player.setUp(false);
 
-			int keeperX = Math.abs(player.getX() - keeper.getX());
-			int keeperY = Math.abs(player.getY() - keeper.getY());
+			} else if (downColor.getRed() == 255 && downColor.getGreen() == 0 && downColor.getBlue() == 0) {
+				player.setDownWallCrash(true);
+				player.setDown(false);
 
-			int waterX = Math.abs(player.getX() - water.getX());
-			int waterY = Math.abs(player.getY() - water.getY());
-			
-			int guideX = Math.abs(player.getX() - guide.getX());
-			int guideY = Math.abs(player.getY() - guide.getY());
-			
-			int seedZoonX = Math.abs(player.getX() - seedZone.getX());
-			int seedZoonY = Math.abs(player.getY() - seedZone.getY());
+			} else if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) {
+				player.setLeftWallCrash(true);
+				player.setLeft(false);
 
-			// 1. BLOCK
+			} else if (rightColor.getRed() == 255 && rightColor.getGreen() == 0 && rightColor.getBlue() == 0) {
+				player.setRightWallCrash(true);
+				player.setRight(false);
 
-			if (up == BLOCK) {
-				stopUp();
-			} else if (down == BLOCK) {
-				stopDown();
-			} else if (left == BLOCK) {
-				System.out.println("나야 나");
-				stopLeft();
-			} else if (right == BLOCK) {
-				stopRight();
+			} else if (upColor.getRed() == 0 && upColor.getGreen() == 0 && upColor.getBlue() == 255) {
+				player.setUpWallCrash(true);
+				player.setUp(false);
 				
-				// 2. WATER
-			} else if (up == WATER) {
-				stopUp();
-			} else if (down == WATER) {
-				stopDown();
-			} else if (left == WATER) {
-				stopLeft();
-			} else if (right == WATER) {
-				stopRight();
+			} else if (downColor.getRed() == 0 && downColor.getGreen() == 0 && downColor.getBlue() == 255) {
+				player.setDownWallCrash(true);
+				player.setDown(false);
 				
-				// 3. NPC
-			} else if (storeX < gapX && storeY < gapY) {
-				store.setIcon(store.getSellerOn());
-				store.setSellOn(true);
-			} else if (keeperX < gapX && keeperY < gapY) {
-				keeper.setIcon(keeper.getKeeperOn());
-				keeper.setSaveOn(true);
-			} else if (waterX < gapX && waterY < gapX) {
-				water.setIcon(water.getWaterOn());
-				player.setScoopWater(true);
-			} else if (guideX < gapX && guideY < gapX) {
-				guide.setIcon(guide.getGuideOn());
-				player.setCreate(true);
-				guide.setPlantOn(true);
-			} else if (seedZoonX < gapX && seedZoonY < gapY) {
-				seedZone.setIcon(seedZone.getSeedZoneOn());
-				seedZone.setSeedOn(true);
-			}else {
-				notWallCrash();
-				player.setSellParsnip(false);
-				seeNPC();
+			} else if (leftColor.getRed() == 0 && leftColor.getGreen() == 0 && leftColor.getBlue() == 255) {
+				player.setLeftWallCrash(true);
+				player.setLeft(false);
+				
+			} else if (rightColor.getRed() == 0 && rightColor.getGreen() == 0 && rightColor.getBlue() == 255) {
+				player.setRightWallCrash(true);
+				player.setRight(false);
+				
+			} else {
+				player.setUpWallCrash(false);
+				player.setDownWallCrash(false);
+				player.setLeftWallCrash(false);
+				player.setRightWallCrash(false);
 			}
 
 			try {
-				Thread.sleep(10);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
-			player.setCreate(false);
 		}
 
 	}
 
-	public void stopUp() {
-		if (player.playerWay == PlayerWay.UP) {
-			player.setUpWallCrash(true);
-			player.setUp(false);
-		}
-	}
-
-	public void stopDown() {
-		if (player.playerWay == PlayerWay.DOWN) {
-			player.setDownWallCrash(true);
-			player.setDown(false);
-		}
-	}
-
-	public void stopLeft() {
-		if (player.playerWay == PlayerWay.LEFT) {
-			player.setLeftWallCrash(true);
-			player.setLeft(false);
-		}
-	}
-
-	public void stopRight() {
-		if (player.playerWay == PlayerWay.RIGHT) {
-			player.setRightWallCrash(true);
-			player.setRight(false);
-		}
-	}
-
-	public void notWallCrash() {
-		player.setUpWallCrash(false);
-		player.setDownWallCrash(false);
-		player.setLeftWallCrash(false);
-		player.setRightWallCrash(false);
-	}
-
-	public void stopMove() {
-
-		if (player.isUp()) {
-			player.setUp(false);
-		} else if (player.isDown()) {
-			player.setDown(false);
-		} else if (player.isLeft()) {
-			player.setLeft(false);
-		} else if (player.isRight()) {
-			player.setRight(false);
-		}
-	}
-
-	public void seeNPC() {
-		if(store.isSeeNPC() == false) {
-			store.setIcon(store.getSeller());
-		}
-		if(keeper.isSeeNPC() == false) {
-			keeper.setIcon(keeper.getKeeper());
-		}
-		if(water.isSeeNPC() == false) {
-			water.setIcon(water.getWater());
-		}
-		if(guide.isSeeNPC() == false) {
-			guide.setIcon(guide.getGuide());
-		}
-		if (seedZone.isSeeNpc() == false) {
-			seedZone.setIcon(seedZone.getSeedZone());
-		}
-		player.setScoopWater(false);
-		guide.setPlantOn(false);
-	}
-	
 }

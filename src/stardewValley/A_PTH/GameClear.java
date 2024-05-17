@@ -3,13 +3,14 @@ package stardewValley.A_PTH;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+
 public class GameClear extends JLabel {
 	StardewValleyFrame mContext;
 
 	private ImageIcon gameClear;
 
 	private int gameClearX;
-	private int gameCleary;
+	private int gameClearY;
 
 	public GameClear(StardewValleyFrame mContext) {
 		initData();
@@ -19,7 +20,7 @@ public class GameClear extends JLabel {
 
 	public void initData() {
 		gameClearX = 1930;
-		gameCleary = 980;
+		gameClearY = 980;
 
 		gameClear = new ImageIcon("img/Status/gameClear.png");
 
@@ -27,7 +28,7 @@ public class GameClear extends JLabel {
 
 	public void setInitLayout() {
 		this.setIcon(gameClear);
-		this.setLocation(gameClearX, gameCleary);
+		this.setLocation(gameClearX, gameClearY);
 		this.setSize(1980, 980);
 	}
 
@@ -55,12 +56,41 @@ public class GameClear extends JLabel {
 		this.gameClearX = gameClearX;
 	}
 
-	public int getGameCleary() {
-		return gameCleary;
+	public int getGameClearY() {
+		return gameClearY;
 	}
 
-	public void setGameCleary(int gameCleary) {
-		this.gameCleary = gameCleary;
+	public void setGameClearY(int gameCleary) {
+		this.gameClearY = gameCleary;
+	}
+	
+	public void gameClear() {
+		setIcon(gameClear);
+		setSize(1930, 930);
+		setLocation(0, 0);
+		mContext.player.setIcon(null);
+		mContext.player.getWaterGauge().setIcon(null);
+		mContext.player = null;
+		mContext.guide.setIcon(null);
+		mContext.guide.setSeeNPC(true);
+		mContext.seedZone.setIcon(null);
+		mContext.seedZone.setSeedZoneOn(null);
+		mContext.keeper.setIcon(null);
+        mContext.keeper.setSeeNPC(true);
+        mContext.waterMan.setIcon(null);
+        mContext.waterMan.setSeeNPC(true);
+        
+        mContext.store.setIcon(null);
+        mContext.store.setSeeNPC(true);
+        mContext.info.setIcon(null);
+        mContext.timeGauge.setIcon(null);
+        mContext.waterMan.removeWaterGage();
+        mContext.status.removeText();
+        mContext.store = null;
+        mContext.keeper = null;
+        mContext.waterMan = null;
+        mContext.guide = null;
+        mContext.seedZone = null;
 	}
 
 }
