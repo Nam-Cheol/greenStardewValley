@@ -40,6 +40,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected int price;
 
 	protected static int MAX_PLANT = 1;
+	protected static int seed = 1;
 
 	@Override
 	public void initData() {
@@ -81,6 +82,14 @@ public class Vegetable extends JLabel implements IVegetable {
 		this.waterGauge = waterGage;
 	}
 
+	public static int getSeed() {
+		return seed;
+	}
+
+	public static void setSeed(int seed) {
+		Vegetable.seed = seed;
+	}
+
 	public static int getMAX_PLANT() {
 		return MAX_PLANT;
 	}
@@ -88,5 +97,6 @@ public class Vegetable extends JLabel implements IVegetable {
 	public static void setMAX_PLANT(int mAX_PLANT) {
 		MAX_PLANT = mAX_PLANT;
 	}
+
 	
 }
