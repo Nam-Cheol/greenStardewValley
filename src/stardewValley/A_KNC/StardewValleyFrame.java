@@ -7,7 +7,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-//import stardewValley.A_CYJ.SeedZone;
+import stardewValley.A_KNC.component.info.HelpInfo;
+import stardewValley.A_KNC.component.npc.Keeper;
+import stardewValley.A_KNC.component.npc.Store;
+import stardewValley.A_KNC.component.npc.Water;
+import stardewValley.A_KNC.component.player.Player;
+import stardewValley.A_KNC.component.status.BerryGauge;
+import stardewValley.A_KNC.component.status.CarrotGauge;
+import stardewValley.A_KNC.component.status.ParsnipGauge;
+import stardewValley.A_KNC.component.status.Status;
+import stardewValley.A_KNC.component.vegetable.Carrot;
+import stardewValley.A_KNC.component.vegetable.Parsnip;
+import stardewValley.A_KNC.component.vegetable.Strawberry;
+import stardewValley.A_KNC.component.vegetable.Vegetable;
 
 //TODO 생성자가 호출될 때 플레이어가 생성되어야 함.
 // 배경 추가해야 됨.
