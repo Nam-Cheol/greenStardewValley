@@ -308,6 +308,7 @@ public class StardewValleyFrame extends JFrame {
 					waterMan.setSeeNPC(true);
 					player.setIcon(null);
 					break;
+				case KeyEvent.VK_F3:
 				default:
 					break;
 				}
