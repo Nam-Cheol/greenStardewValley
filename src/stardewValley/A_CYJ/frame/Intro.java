@@ -1,4 +1,4 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ.frame;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,34 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class AudioPlay extends JPanel {
-	Clip clip = null;
-
-//	AudioPlay() {
-//
-//		try {
-//			clip = AudioSystem.getClip();
-//			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
-//
-//			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-//			clip.open(audioInputStream);
-//			clip.start();
-//		} catch (LineUnavailableException e) {
-//			e.printStackTrace();
-//		} catch (UnsupportedAudioFileException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
-}
+import stardewValley.B_KNC.interfaces.IImagePack;
 
 public class Intro extends JFrame implements IImagePack {
 
 	private JPanel jPanel;
 	private JLabel intro;
-	private IntroGuide introGuide;
 
 	public Intro() {
 		initData();
@@ -73,28 +51,24 @@ public class Intro extends JFrame implements IImagePack {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				introGuide = new IntroGuide();
+				new IntroGuide();
 				setVisible(false);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-
 			}
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 			}
 		});
 	}
@@ -103,4 +77,27 @@ public class Intro extends JFrame implements IImagePack {
 		new Intro();
 	}
 
+}
+
+class AudioPlay extends JPanel {
+	Clip clip = null;
+
+	AudioPlay() {
+
+		try {
+			clip = AudioSystem.getClip();
+			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
+
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+			clip.open(audioInputStream);
+			clip.start();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 }

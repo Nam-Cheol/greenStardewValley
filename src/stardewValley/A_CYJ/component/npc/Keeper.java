@@ -1,52 +1,55 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ.component.npc;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Keeper extends JLabel {
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
+
+
+public class Keeper extends JLabel{
 
 	StardewValleyFrame mContext;
-
+	
 	private int x;
 	private int y;
-
+	
 	private int parsnipPrice;
 	private int carrotPrice;
 	private int berryPrice;
-
+	
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
-
+	
 	private ImageIcon keeper;
 	private ImageIcon keeperOn;
 	
 	private boolean saveOn;
 	private boolean seeNPC;
-
+	
 	public Keeper(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
 		this.mContext = mContext;
 	}
-
+	
 	private void initData() {
-
+		
 		x = 450;
 		y = 130;
-
+		
 		keeper = new ImageIcon("img/npc/keeper.png");
 		keeperOn = new ImageIcon("img/npc/keeperOn.png");
-
+		
 		parsnipEach = 0;
 		carrotEach = 0;
 		berryEach = 0;
 		
 		seeNPC = false;
 		saveOn = false;
-
 	}
-
+	
 	private void setInitLayout() {
 		this.setIcon(keeper);
 		this.setLocation(x, y);
@@ -58,7 +61,7 @@ public class Keeper extends JLabel {
 	}
 
 	// getter, setter
-
+	
 	public void setmContext(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 	}
@@ -131,16 +134,8 @@ public class Keeper extends JLabel {
 		return keeper;
 	}
 
-	public void setKeeper(ImageIcon keeper) {
-		this.keeper = keeper;
-	}
-
 	public ImageIcon getKeeperOn() {
 		return keeperOn;
-	}
-
-	public void setKeeperOn(ImageIcon keeperOn) {
-		this.keeperOn = keeperOn;
 	}
 
 	public boolean isSeeNPC() {
@@ -158,6 +153,7 @@ public class Keeper extends JLabel {
 	public void setSaveOn(boolean saveOn) {
 		this.saveOn = saveOn;
 	}
+	
 	
 	
 }

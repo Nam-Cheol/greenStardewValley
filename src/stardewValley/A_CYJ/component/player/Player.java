@@ -1,7 +1,18 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ.component.player;
 
-import javax.swing.ImageIcon;	
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.A_CYJ.component.status.WaterGauge;
+import stardewValley.A_CYJ.component.vegetable.Carrot;
+import stardewValley.A_CYJ.component.vegetable.Parsnip;
+import stardewValley.A_CYJ.component.vegetable.Strawberry;
+import stardewValley.A_CYJ.component.vegetable.Vegetable;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.interfaces.Moveable;
+import stardewValley.A_CYJ.service.backgroundPlayerMapService;
+import stardewValley.A_CYJ.state.PlayerWay;
+
 
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
@@ -56,6 +67,9 @@ public class Player extends JLabel implements Moveable {
 	// 작물을 심을 수 있는 상태
 	private boolean create;
 
+	// 작물을 팔 수 있는 상태
+	private boolean sellParsnip;
+	
 	// 플레이어의 소지 금액
 	private int money;
 
@@ -77,7 +91,7 @@ public class Player extends JLabel implements Moveable {
 		this.mContext = mContext;
 		initData();
 		setInitLayout();
-		new Thread(new stardewValley.A_PTH.backgroundPlayerMapService(this)).start();
+		new Thread(new backgroundPlayerMapService(this.mContext, this)).start();
 	}
 
 	private void initData() {
@@ -411,6 +425,10 @@ public class Player extends JLabel implements Moveable {
 		return playerWater;
 	}
 
+//	public Parsnip plantParsnip() {
+//		return new Parsnip(this, mContext, mContext.farm);
+//	}
+
 	public boolean isCreate() {
 		return create;
 	}
@@ -491,13 +509,13 @@ public class Player extends JLabel implements Moveable {
 		if (Vegetable.getMAX_PLANT() == 0) {
 			if (turn == 1) {
 				if (Vegetable.getMAX_PLANT() == 0) {
-					Vegetable.setMAX_PLANT(1);
+					Vegetable.setMAX_PLANT(30);
 				}
 				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge1());
 				turn++;
 			} else if (turn == 2) {
 				if (Vegetable.getMAX_PLANT() == 0) {
-					Vegetable.setMAX_PLANT(1);
+					Vegetable.setMAX_PLANT(30);
 				}
 				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge2());
 				turn++;

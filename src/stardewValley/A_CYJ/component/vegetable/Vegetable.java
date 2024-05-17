@@ -1,12 +1,14 @@
-package stardewValley.B_KNC.component.vegetable;
+package stardewValley.A_CYJ.component.vegetable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import stardewValley.B_KNC.component.npc.Farm;
-import stardewValley.B_KNC.component.player.Player;
-import stardewValley.B_KNC.frame.StardewValleyFrame;
-import stardewValley.B_KNC.interfaces.IVegetable;
+import stardewValley.A_CYJ.component.npc.Farm;
+import stardewValley.A_CYJ.component.player.Player;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.interfaces.IVegetable;
+
+
 
 public class Vegetable extends JLabel implements IVegetable {
 
@@ -40,7 +42,6 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected int price;
 
 	protected static int MAX_PLANT = 30;
-	protected static int seed = 30;
 
 	@Override
 	public void initData() {
@@ -82,14 +83,6 @@ public class Vegetable extends JLabel implements IVegetable {
 		this.waterGauge = waterGage;
 	}
 
-	public static int getSeed() {
-		return seed;
-	}
-
-	public static void setSeed(int seed) {
-		Vegetable.seed = seed;
-	}
-
 	public static int getMAX_PLANT() {
 		return MAX_PLANT;
 	}
@@ -97,6 +90,5 @@ public class Vegetable extends JLabel implements IVegetable {
 	public static void setMAX_PLANT(int mAX_PLANT) {
 		MAX_PLANT = mAX_PLANT;
 	}
-
 	
 }

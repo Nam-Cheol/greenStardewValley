@@ -1,15 +1,12 @@
-package stardewValley.B_KNC.component.status;
+package stardewValley.A_CYJ.component.status;
 
 import java.awt.Font;
 
 import javax.swing.JLabel;
 
-import stardewValley.B_KNC.component.npc.Keeper;
-import stardewValley.B_KNC.component.npc.Store;
-import stardewValley.B_KNC.component.npc.Water;
-import stardewValley.B_KNC.component.player.Player;
-import stardewValley.B_KNC.component.vegetable.Vegetable;
-import stardewValley.B_KNC.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.component.vegetable.Vegetable;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
 
 public class Status extends JLabel {
 
@@ -138,7 +135,7 @@ public class Status extends JLabel {
 		seed.setLocation(1820, 495);
 		seed.setSize(100, 100);
 		seed.setFont(f);
-		seed.setText(Integer.toString(Vegetable.getSeed()));
+		seed.setText(Integer.toString(Vegetable.getMAX_PLANT()));
 		
 		mContext.add(nameField);
 		nameField.setLocation(1420, 200);
@@ -210,7 +207,7 @@ public class Status extends JLabel {
 		haveParsnip.setText(Integer.toString(mContext.player.getHaveParsnip()));
 		haveBerry.setText(Integer.toString(mContext.player.getHaveBerry()));
 		
-		seed.setText(Integer.toString(Vegetable.getSeed()));
+		seed.setText(Integer.toString(Vegetable.getMAX_PLANT()));
 	}
 	
 	public void removeText() {

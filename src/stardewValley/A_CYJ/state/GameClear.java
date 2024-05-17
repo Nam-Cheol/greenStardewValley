@@ -1,34 +1,36 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ.state;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
-public class GameOver extends JLabel {
+
+public class GameClear extends JLabel {
 	StardewValleyFrame mContext;
-	
-	private ImageIcon gameOver;
-	
-	private int gameOverX;
-	private int gameOverY;
-	
-	public GameOver(StardewValleyFrame mContext) {
-		this.mContext = mContext;
+
+	private ImageIcon gameClear;
+
+	private int gameClearX;
+	private int gameClearY;
+
+	public GameClear(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
+		this.mContext = mContext;
 	}
-	
+
 	public void initData() {
-		gameOverX = 1930;
-		gameOverY = 980;
-		
-		gameOver = new ImageIcon("img/Status/gameOver.png");
-		
+		gameClearX = 1930;
+		gameClearY = 980;
+
+		gameClear = new ImageIcon("img/Status/gameClear.png");
+
 	}
-	
+
 	public void setInitLayout() {
-		this.setIcon(gameOver);
-		this.setLocation(gameOverX, gameOverY);
+		this.setIcon(gameClear);
+		this.setLocation(gameClearX, gameClearY);
 		this.setSize(1980, 980);
 	}
 
@@ -40,32 +42,32 @@ public class GameOver extends JLabel {
 		this.mContext = mContext;
 	}
 
-	public ImageIcon getGameOver() {
-		return gameOver;
+	public ImageIcon getGameClear() {
+		return gameClear;
 	}
 
-	public void setGameOver(ImageIcon gameOver) {
-		this.gameOver = gameOver;
+	public void setGameClear(ImageIcon gameClear) {
+		this.gameClear = gameClear;
 	}
 
-	public int getGameOverX() {
-		return gameOverX;
+	public int getGameClearX() {
+		return gameClearX;
 	}
 
-	public void setGameOverX(int gameOverX) {
-		this.gameOverX = gameOverX;
+	public void setGameClearX(int gameClearX) {
+		this.gameClearX = gameClearX;
 	}
 
-	public int getGameOvery() {
-		return gameOverY;
+	public int getGameClearY() {
+		return gameClearY;
 	}
 
-	public void setGameOvery(int gameOvery) {
-		this.gameOverY = gameOvery;
+	public void setGameClearY(int gameCleary) {
+		this.gameClearY = gameCleary;
 	}
 	
-	public void gameOver() {
-		setIcon(gameOver);
+	public void gameClear() {
+		setIcon(gameClear);
 		setSize(1930, 930);
 		setLocation(0, 0);
 		mContext.player.setIcon(null);
@@ -92,6 +94,5 @@ public class GameOver extends JLabel {
         mContext.guide = null;
         mContext.seedZone = null;
 	}
-	
-	
+
 }

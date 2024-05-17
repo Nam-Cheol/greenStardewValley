@@ -85,6 +85,9 @@ public class Player extends JLabel implements Moveable {
 
 	// 플레이어의 턴
 	private int turn;
+	private int firstTurn = 1;
+	private int middleTurn = 2;
+	private int lastTurn = 3;
 	
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext) {
@@ -502,23 +505,23 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	public void plusSeed() {
-		if (Vegetable.getMAX_PLANT() == 0) {
-			if (turn == 1) {
-				if (Vegetable.getMAX_PLANT() == 0) {
-					Vegetable.setMAX_PLANT(1);
+		if (Vegetable.getSeed() == 0) {
+			if (turn == firstTurn) {
+				if (Vegetable.getSeed() == 0) {
+					Vegetable.setSeed(Vegetable.getMAX_PLANT());
 				}
 				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge1());
 				turn++;
-			} else if (turn == 2) {
-				if (Vegetable.getMAX_PLANT() == 0) {
-					Vegetable.setMAX_PLANT(1);
+			} else if (turn == middleTurn) {
+				if (Vegetable.getSeed() == 0) {
+					Vegetable.setSeed(Vegetable.getMAX_PLANT());
 				}
 				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge2());
 				turn++;
-			} else if (turn == 3 && money <= 300) {
+			} else if (turn == lastTurn && money <= mContext.victoryMoney) {
 				mContext.gameOver.gameOver();
 
-			} else if (turn == 3 && money >= 300) {
+			} else if (turn == lastTurn && money >= mContext.victoryMoney) {
 				mContext.gameClear.gameClear();
 			}
 		}
@@ -562,7 +565,7 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	public void stopPlant() {
-		if (Vegetable.getMAX_PLANT() == 0) {
+		if (Vegetable.getSeed() == 0) {
 			create = false;
 			return;
 		}

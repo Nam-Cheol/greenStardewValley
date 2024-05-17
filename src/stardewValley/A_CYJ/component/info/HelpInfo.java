@@ -1,22 +1,18 @@
-package stardewValley.B_KNC.component.info;
+package stardewValley.A_CYJ.component.info;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import stardewValley.B_KNC.component.npc.Keeper;
-import stardewValley.B_KNC.component.npc.Store;
-import stardewValley.B_KNC.component.npc.Water;
-import stardewValley.B_KNC.component.player.Player;
-import stardewValley.B_KNC.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
 public class HelpInfo extends JLabel {
 
 	StardewValleyFrame mContext;
 
-	public ImageIcon questionMark;
-	public ImageIcon helpInfo;
-	public ImageIcon keyCommand;
-	public ImageIcon keepInfo;
+	private ImageIcon questionMark;
+	private ImageIcon helpInfo;
+	private ImageIcon keyCommand;
+	private ImageIcon keepInfo;
 
 	private int infoX;
 	private int infoY;
@@ -92,6 +88,26 @@ public class HelpInfo extends JLabel {
 
 		mContext.player.setIcon(mContext.player.getPlayerDown());
 		
+		mContext.player.setUp(false);
+		mContext.player.setDown(false);
+		mContext.player.setLeft(false);
+		mContext.player.setRight(false);
+	}
+
+	public ImageIcon getQuestionMark() {
+		return questionMark;
+	}
+
+	public ImageIcon getHelpInfo() {
+		return helpInfo;
+	}
+
+	public ImageIcon getKeyCommand() {
+		return keyCommand;
+	}
+
+	public ImageIcon getKeepInfo() {
+		return keepInfo;
 	}
 
 }

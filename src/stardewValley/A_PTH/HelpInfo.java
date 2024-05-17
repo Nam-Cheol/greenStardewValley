@@ -17,6 +17,7 @@ public class HelpInfo extends JLabel {
 	private ImageIcon helpInfo1;
 	private ImageIcon keyCommand;
 	private ImageIcon keepInfo;
+	private ImageIcon helpCommand;
 
 
 	private int infoX;
@@ -38,7 +39,7 @@ public class HelpInfo extends JLabel {
 		helpInfo1 = new ImageIcon("img/Status/MainR.png");
 		keyCommand = new ImageIcon("img/Status/KeyCommand.png");
 		keepInfo = new ImageIcon("img/Status/tempD.png");
-
+		helpCommand = new ImageIcon("img/Status/helpCommand.png");
 	}
 
 	public void setInitLayout() {
@@ -64,7 +65,9 @@ public class HelpInfo extends JLabel {
 	public ImageIcon getKeepInfo() {
 		return keepInfo;
 	}
-
+	public ImageIcon getHelpCommand() {
+		return helpCommand;
+	}
 	public void setVisibleTrue() {
 		setIcon(questionMark);
 		setSize(50, 50);
@@ -90,7 +93,13 @@ public class HelpInfo extends JLabel {
 			setIcon(keyCommand);
 		} else if (temp == 3) {
 			setIcon(keepInfo);
-		
+		} else if (temp == 4) {
+			setIcon(helpCommand);
+			setSize(1930, 980);
+			setLocation(0, 0);
+			mContext.waterMan.waterGauge.setVisible(false);
+			return;
+		}
 		
 		setSize(955, 630);
 		setLocation(200, 200);
@@ -107,7 +116,7 @@ public class HelpInfo extends JLabel {
 		mContext.store.setSeeNPC(true);
 		
 		mContext.player.setIcon(null);
-	}
+	
 
 	
 	

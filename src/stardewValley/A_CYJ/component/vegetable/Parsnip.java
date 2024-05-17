@@ -1,22 +1,23 @@
-package stardewValley.B_KNC.component.vegetable;
+package stardewValley.A_CYJ.component.vegetable;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
-import stardewValley.B_KNC.component.npc.Farm;
-import stardewValley.B_KNC.component.player.Player;
-import stardewValley.B_KNC.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.component.npc.Farm;
+import stardewValley.A_CYJ.component.player.Player;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
+
 
 // TODO 각 야채의 특성 및 차이점 구현
-public class Strawberry extends Vegetable {
+public class Parsnip extends Vegetable {
 
 	// 멤버 변수
-	private String name = "딸기";
+	private String name = "파스닙";
 	private int growSpeed = 5000;
 	private int temp;
 
 	// 생성자
-	public Strawberry(Player player, StardewValleyFrame mContext, Farm farm) {
+	public Parsnip(Player player, StardewValleyFrame mContext, Farm farm) {
 		this.player = player;
 		this.mContext = mContext;
 		this.farm = farm;
@@ -32,12 +33,11 @@ public class Strawberry extends Vegetable {
 		growing = true;
 		create = false;
 		temp = mContext.choice;
-		growing1 = new ImageIcon("img/vege/Strawberry_Stage_1.png");
-		growing2 = new ImageIcon("img/vege/Strawberry_Stage_2.png");
-		growing3 = new ImageIcon("img/vege/Strawberry_Stage_3.png");
-		growing4 = new ImageIcon("img/vege/Strawberry_Stage_4.png");
-		growing5 = new ImageIcon("img/vege/Strawberry_Stage_5.png");
-		lastGrowing = new ImageIcon("img/vege/Strawberry_Stage_6.png");
+		growing1 = new ImageIcon("img/vege/Parsnip_Stage_1.png");
+		growing2 = new ImageIcon("img/vege/Parsnip_Stage_2.png");
+		growing3 = new ImageIcon("img/vege/Parsnip_Stage_3.png");
+		growing4 = new ImageIcon("img/vege/Parsnip_Stage_4.png");
+		lastGrowing = new ImageIcon("img/vege/Parsnip_Stage_5.png");
 	}
 
 	@Override
@@ -49,10 +49,10 @@ public class Strawberry extends Vegetable {
 	@Override
 	public void grow() {
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				seed--;
+				MAX_PLANT--;
 				setIcon(growing1);
 				while (true) {
 					mContext.farm.vegetableWaterGauge(waterGauge, temp);
@@ -89,10 +89,6 @@ public class Strawberry extends Vegetable {
 							continue;
 						}
 						if(getIcon() == growing4) {
-							setIcon(growing5);
-							continue;
-						}
-						if(getIcon() == growing5) {
 							setIcon(lastGrowing);
 						}
 						if (getIcon() == lastGrowing) {
@@ -115,38 +111,9 @@ public class Strawberry extends Vegetable {
 	public void sprinkling() {
 	}
 
-	// getter, setter
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-	
 	@Override
 	public int getPrice() {
 		return price;
 	}
 	
-	public boolean isCreate() {
-		return create;
-	}
-
-	public void setCreate(boolean create) {
-		this.create = create;
-	}
-	
-	public ImageIcon getLastGrowing() {
-		return lastGrowing;
-	}
-
 } // end of class

@@ -1,9 +1,11 @@
-package stardewValley.B_KNC.component.npc;
+package stardewValley.A_CYJ.component.npc;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import stardewValley.B_KNC.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
+
 
 public class Guide extends JLabel {
 
@@ -14,7 +16,6 @@ public class Guide extends JLabel {
 	
 	private ImageIcon guide;
 	private ImageIcon guideOn;
-	public ImageIcon defalutGuide;
 	
 	private boolean seeNPC;
 	private boolean plantOn;
@@ -31,7 +32,6 @@ public class Guide extends JLabel {
 		
 		guide = new ImageIcon("img/npc/scarecrow.png");
 		guideOn = new ImageIcon("img/npc/scarecrowOn.png");
-		defalutGuide = new ImageIcon("img/npc/scarecrowOn.png");
 		
 		seeNPC = false;
 		plantOn = false;

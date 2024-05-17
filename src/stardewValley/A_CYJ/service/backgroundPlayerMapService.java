@@ -1,4 +1,4 @@
-package stardewValley.B_KNC.service;
+package stardewValley.A_CYJ.service;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -7,14 +7,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import stardewValley.B_KNC.component.npc.Guide;
-import stardewValley.B_KNC.component.npc.Keeper;
-import stardewValley.B_KNC.component.npc.SeedZone;
-import stardewValley.B_KNC.component.npc.Store;
-import stardewValley.B_KNC.component.npc.Water;
-import stardewValley.B_KNC.component.player.Player;
-import stardewValley.B_KNC.frame.StardewValleyFrame;
-import stardewValley.B_KNC.state.PlayerWay;
+import stardewValley.A_CYJ.component.player.Player;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.state.PlayerWay;
+
 
 public class backgroundPlayerMapService implements Runnable {
 
@@ -63,7 +59,7 @@ public class backgroundPlayerMapService implements Runnable {
 			int keeperX = Math.abs(player.getX()+30 - mContext.keeper.getX());
 			int keeperY = Math.abs(player.getY()-100 - mContext.keeper.getY());
 
-			int waterX = Math.abs(player.getX()+45 - mContext.waterMan.getX()-50);
+			int waterX = Math.abs(player.getX() - mContext.waterMan.getX()-50);
 			int waterY = Math.abs(player.getY() - mContext.waterMan.getY()-50);
 			
 			int guideX = Math.abs(player.getX() - mContext.guide.getX());
@@ -114,8 +110,6 @@ public class backgroundPlayerMapService implements Runnable {
 			}else {
 				notWallCrash();
 				seeNPC();
-				mContext.choice = 0;
-				mContext.guide.setGuideOn(mContext.guide.defalutGuide);
 			}
 
 			try {

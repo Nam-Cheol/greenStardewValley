@@ -1,4 +1,4 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ.frame;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -6,6 +6,20 @@ import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import stardewValley.A_CYJ.component.info.HelpInfo;
+import stardewValley.A_CYJ.component.npc.Farm;
+import stardewValley.A_CYJ.component.npc.Guide;
+import stardewValley.A_CYJ.component.npc.Keeper;
+import stardewValley.A_CYJ.component.npc.SeedZone;
+import stardewValley.A_CYJ.component.npc.Store;
+import stardewValley.A_CYJ.component.npc.Water;
+import stardewValley.A_CYJ.component.player.Player;
+import stardewValley.A_CYJ.component.status.Status;
+import stardewValley.A_CYJ.component.status.TimeGauge;
+import stardewValley.A_CYJ.state.GameClear;
+import stardewValley.A_CYJ.state.GameOver;
+
 
 
 public class StardewValleyFrame extends JFrame {
@@ -267,6 +281,7 @@ public class StardewValleyFrame extends JFrame {
 				case KeyEvent.VK_M:
 					if (seedZone.isSeedOn()) {
 						player.plusSeed();
+						System.out.println("확인");
 						status.statusRepaint();
 					}
 					break;
@@ -307,16 +322,16 @@ public class StardewValleyFrame extends JFrame {
 					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_9.png"));
 					break;
 				case KeyEvent.VK_F1:
-					info.setIcon(info.getHelpInfo1());
-					info.setVisibleFalse(1);
+					info.setIcon(info.getHelpInfo());
+					info.setVisibleFalse();
 					break;
 				case KeyEvent.VK_F2:
 					info.setIcon(info.getKeyCommand());
-					info.setVisibleFalse(2);
+					info.setVisibleFalse();
 					break;
 				case KeyEvent.VK_F3:
 					info.setIcon(info.getKeepInfo());
-					info.setVisibleFalse(3);
+					info.setVisibleFalse();
 					break;
 				default:
 					break;
@@ -327,8 +342,4 @@ public class StardewValleyFrame extends JFrame {
 
 	}
 
-	public static void main(String[] args) {
-		new StardewValleyFrame();
-	}
-	
 }

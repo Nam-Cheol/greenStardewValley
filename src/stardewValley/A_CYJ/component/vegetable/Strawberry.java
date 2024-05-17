@@ -1,11 +1,12 @@
-package stardewValley.B_KNC.component.vegetable;
+package stardewValley.A_CYJ.component.vegetable;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
-import stardewValley.B_KNC.component.npc.Farm;
-import stardewValley.B_KNC.component.player.Player;
-import stardewValley.B_KNC.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.component.npc.Farm;
+import stardewValley.A_CYJ.component.player.Player;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
+
 
 // TODO 각 야채의 특성 및 차이점 구현
 public class Strawberry extends Vegetable {
@@ -52,7 +53,7 @@ public class Strawberry extends Vegetable {
 			
 			@Override
 			public void run() {
-				seed--;
+				MAX_PLANT--;
 				setIcon(growing1);
 				while (true) {
 					mContext.farm.vegetableWaterGauge(waterGauge, temp);

@@ -1,8 +1,9 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ.state;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
 public class GameOver extends JLabel {
 	StardewValleyFrame mContext;

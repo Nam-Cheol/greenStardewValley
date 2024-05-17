@@ -1,4 +1,4 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ.frame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import stardewValley.B_KNC.interfaces.IImagePack;
 
 public class IntroGuide extends JFrame implements IImagePack {
 
