@@ -26,13 +26,13 @@ public class StardewValleyFrame extends JFrame {
 
 	private HelpInfo info;
 	private Status status;
-	
+
 	public Vegetable vegetable;
 	private TimeGauge timeGauge;
-	
+
 	private GameOver gameOver;
 	private GameClear gameClear;
-	
+
 	private int turn;
 
 	public StardewValleyFrame() {
@@ -49,19 +49,19 @@ public class StardewValleyFrame extends JFrame {
 
 		choice = 0;
 		turn = 1;
-		
+
 		store = new Store(mContext);
 		keeper = new Keeper(mContext);
 		waterMan = new Water(mContext);
 		guide = new Guide(mContext);
 		seedZone = new SeedZone(mContext);
-		
+
 		timeGauge = new TimeGauge(mContext);
 		info = new HelpInfo(mContext);
 		player = new Player(mContext, store, keeper, waterMan, guide, seedZone);
 		farm = new Farm(mContext, player);
 		status = new Status(mContext, player, store, keeper, waterMan);
-		
+
 		gameOver = new GameOver(mContext);
 		gameClear = new GameClear(mContext);
 
@@ -117,58 +117,13 @@ public class StardewValleyFrame extends JFrame {
 					player.setIcon(player.getPlayerDown());
 					break;
 				case KeyEvent.VK_F1:
-					info.setIcon(info.getQuestionMark());
-					info.setSize(50, 50);
-					info.setLocation(1200, 15);
-					
-					keeper.setIcon(keeper.getKeeper());
-					keeper.setSeeNPC(false);
-					
-					store.setIcon(store.getSeller());
-					store.setSeeNPC(false);
-					
-					waterMan.setIcon(waterMan.getWater());
-					waterMan.setSeeNPC(false);
-					
-					waterMan.waterGauge.setVisible(true);
-					
-					player.setIcon(player.getPlayerDown());
+//					info.setVisibleTrue();
 					break;
 				case KeyEvent.VK_F2:
-					info.setIcon(info.getQuestionMark());
-					info.setSize(50, 50);
-					info.setLocation(1200, 15);
-					
-					keeper.setIcon(keeper.getKeeper());
-					keeper.setSeeNPC(false);
-					
-					store.setIcon(store.getSeller());
-					store.setSeeNPC(false);
-					
-					waterMan.setIcon(waterMan.getWater());
-					waterMan.setSeeNPC(false);
-					
-					waterMan.waterGauge.setVisible(true);
-					
-					player.setIcon(player.getPlayerDown());
+					setVisibleTrue();
 					break;
 				case KeyEvent.VK_F3:
-					info.setIcon(info.getQuestionMark());
-					info.setSize(50, 50);
-					info.setLocation(1200, 15);
-					
-					keeper.setIcon(keeper.getKeeper());
-					keeper.setSeeNPC(false);
-					
-					store.setIcon(store.getSeller());
-					store.setSeeNPC(false);
-					
-					waterMan.setIcon(waterMan.getWater());
-					waterMan.setSeeNPC(false);
-					
-					waterMan.waterGauge.setVisible(true);
-					
-					player.setIcon(player.getPlayerDown());
+					setVisibleTrue();
 					break;
 				default:
 					break;
@@ -287,7 +242,7 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_A:
 					if (player.isScoopWater() == true) {
-						if(waterMan.getPondGage() < 5) {
+						if (waterMan.getPondGage() < 5) {
 							return;
 						}
 						player.setIcon(player.getPlayerWater());
@@ -304,7 +259,7 @@ public class StardewValleyFrame extends JFrame {
 					if (seedZone.isSeedOn()) {
 						plusSeed();
 						status.statusRepaint();
-						if(turn == 2) {
+						if (turn == 2) {
 //							timeGauge.setIcon(timeGauge.getTimeGauge1());
 						}
 						seedZone.setSeedOn(false);
@@ -348,56 +303,21 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_F1:
 					info.setIcon(info.getHelpInfo1());
-					info.setSize(955, 630);
-					info.setLocation(200, 200);
-					
-					keeper.setSeeNPC(true);
-					keeper.setIcon(null);
-					
-					waterMan.setIcon(null);
-					waterMan.setSeeNPC(true);
-					
-					store.setIcon(null);
-					store.setSeller(null);
-					
-					waterMan.waterGauge.setVisible(false);
-					player.setIcon(null);
+
+					setVisibleFalse();
+
 					break;
 				case KeyEvent.VK_F2:
 					info.setIcon(info.getKeyCommand());
-					info.setSize(955, 630);
-					info.setLocation(200, 200);
-					
-					keeper.setSeeNPC(true);
-					keeper.setIcon(null);
-					
-					waterMan.setIcon(null);
-					waterMan.setSeeNPC(true);
-					
-					store.setIcon(null);
-					store.setSeller(null);
-					
-					waterMan.waterGauge.setVisible(false);
-					player.setIcon(null);
+
+					setVisibleFalse();
+
 					break;
 				case KeyEvent.VK_F3:
 					info.setIcon(info.getKeepInfo());
-					info.setSize(955, 630);
-					info.setLocation(200, 200);
-					
-					keeper.setSeeNPC(true);
-					keeper.setIcon(null);
-					
-					waterMan.setIcon(null);
-					waterMan.setSeeNPC(true);
-					
-					store.setIcon(null);
-					store.setSeller(null);
-					
-					waterMan.waterGauge.setVisible(false);
-					player.setIcon(null);
+
+					setVisibleFalse();
 					break;
-				case KeyEvent.VK_F3:
 				default:
 					break;
 				}
@@ -438,7 +358,7 @@ public class StardewValleyFrame extends JFrame {
 			status.getWallet().setText(Integer.toString(player.getMoney()));
 		}
 	}
-	
+
 	public void sellBerry() {
 		if (keeper.getBerryEach() == 0) {
 		} else {
@@ -477,11 +397,12 @@ public class StardewValleyFrame extends JFrame {
 				keeper.setIcon(null);
 				waterMan.setIcon(null);
 				waterMan.setSeeNPC(true);
+				waterMan.waterGauge.setVisible(false);
 				store.setIcon(null);
 				store.setSeeNPC(true);
 				player.setIcon(null);
 				info.setIcon(null);
-				
+
 				store = null;
 				keeper = null;
 				waterMan = null;
@@ -507,11 +428,47 @@ public class StardewValleyFrame extends JFrame {
 			}
 		}
 	}
-	
+
+	public void setVisibleFalse() {
+		info.setSize(955, 630);
+		info.setLocation(200, 200);
+
+		keeper.setSeeNPC(true);
+		keeper.setIcon(null);
+
+		waterMan.setIcon(null);
+		waterMan.setSeeNPC(true);
+
+		store.setIcon(null);
+		store.setSeeNPC(true);
+
+		waterMan.waterGauge.setVisible(false);
+		player.setIcon(null);
+	}
+
+	public void setVisibleTrue() {
+		info.setIcon(info.getQuestionMark());
+		info.setSize(50, 50);
+		info.setLocation(1200, 15);
+
+		keeper.setIcon(keeper.getKeeper());
+		keeper.setSeeNPC(false);
+
+		store.setIcon(store.getSeller());
+		store.setSeeNPC(false);
+
+		waterMan.setIcon(waterMan.getWater());
+		waterMan.setSeeNPC(false);
+
+		waterMan.waterGauge.setVisible(true);
+
+		player.setIcon(player.getPlayerDown());
+	}
+
 	public Status getStatus() {
 		return status;
 	}
-	
+
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}
