@@ -70,9 +70,6 @@ public class Player extends JLabel implements Moveable {
 	// 작물을 심을 수 있는 상태
 	private boolean create;
 
-	// 작물을 팔 수 있는 상태
-	private boolean sellParsnip;
-	
 	// 플레이어의 소지 금액
 	private int money;
 
@@ -427,10 +424,6 @@ public class Player extends JLabel implements Moveable {
 	public ImageIcon getPlayerWater() {
 		return playerWater;
 	}
-
-//	public Parsnip plantParsnip() {
-//		return new Parsnip(this, mContext, mContext.farm);
-//	}
 
 	public boolean isCreate() {
 		return create;
