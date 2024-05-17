@@ -18,9 +18,9 @@ public class StardewValleyFrame extends JFrame {
 
 	public Farm farm;
 
-	private Store store;
-	private Keeper keeper;
-	private Water waterMan;
+	public Store store;
+	public Keeper keeper;
+	public  Water waterMan;
 	private Guide guide;
 	private SeedZone seedZone;
 
@@ -34,6 +34,8 @@ public class StardewValleyFrame extends JFrame {
 	private GameClear gameClear;
 
 	private int turn;
+	public IntroGuide intro;
+	public StardewValleyFrame game;
 
 	public StardewValleyFrame() {
 		initData();
@@ -117,13 +119,13 @@ public class StardewValleyFrame extends JFrame {
 					player.setIcon(player.getPlayerDown());
 					break;
 				case KeyEvent.VK_F1:
-//					info.setVisibleTrue();
+					info.setVisibleTrue();
 					break;
 				case KeyEvent.VK_F2:
-					setVisibleTrue();
+					info.setVisibleTrue();
 					break;
 				case KeyEvent.VK_F3:
-					setVisibleTrue();
+					info.setVisibleTrue();
 					break;
 				default:
 					break;
@@ -302,22 +304,18 @@ public class StardewValleyFrame extends JFrame {
 					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_9.png"));
 					break;
 				case KeyEvent.VK_F1:
-					info.setIcon(info.getHelpInfo1());
-
-					setVisibleFalse();
-
+					info.setVisibleFalse(1);
+					
 					break;
 				case KeyEvent.VK_F2:
-					info.setIcon(info.getKeyCommand());
-
-					setVisibleFalse();
+					info.setVisibleFalse(2);
 
 					break;
 				case KeyEvent.VK_F3:
-					info.setIcon(info.getKeepInfo());
-
-					setVisibleFalse();
+					info.setVisibleFalse(3);
+					
 					break;
+
 				default:
 					break;
 				}
@@ -429,47 +427,13 @@ public class StardewValleyFrame extends JFrame {
 		}
 	}
 
-	public void setVisibleFalse() {
-		info.setSize(955, 630);
-		info.setLocation(200, 200);
 
-		keeper.setSeeNPC(true);
-		keeper.setIcon(null);
-
-		waterMan.setIcon(null);
-		waterMan.setSeeNPC(true);
-
-		store.setIcon(null);
-		store.setSeeNPC(true);
-
-		waterMan.waterGauge.setVisible(false);
-		player.setIcon(null);
-	}
-
-	public void setVisibleTrue() {
-		info.setIcon(info.getQuestionMark());
-		info.setSize(50, 50);
-		info.setLocation(1200, 15);
-
-		keeper.setIcon(keeper.getKeeper());
-		keeper.setSeeNPC(false);
-
-		store.setIcon(store.getSeller());
-		store.setSeeNPC(false);
-
-		waterMan.setIcon(waterMan.getWater());
-		waterMan.setSeeNPC(false);
-
-		waterMan.waterGauge.setVisible(true);
-
-		player.setIcon(player.getPlayerDown());
-	}
 
 	public Status getStatus() {
 		return status;
 	}
 
 	public static void main(String[] args) {
-		new StardewValleyFrame();
+		 new StardewValleyFrame();
 	}
 }

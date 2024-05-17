@@ -18,6 +18,7 @@ public class HelpInfo extends JLabel {
 	private ImageIcon keyCommand;
 	private ImageIcon keepInfo;
 
+
 	private int infoX;
 	private int infoY;
 
@@ -63,6 +64,53 @@ public class HelpInfo extends JLabel {
 	public ImageIcon getKeepInfo() {
 		return keepInfo;
 	}
+
+	public void setVisibleTrue() {
+		setIcon(questionMark);
+		setSize(50, 50);
+		setLocation(1200, 15);
+		
+		mContext.keeper.setIcon(mContext.keeper.getKeeper());
+		mContext.keeper.setSeeNPC(false);
+
+		mContext.store.setIcon(mContext.store.getSeller());
+		mContext.store.setSeeNPC(false);
+
+		mContext.waterMan.setIcon(mContext.waterMan.getWater());
+		mContext.waterMan.setSeeNPC(false);
+
+		mContext.waterMan.waterGauge.setVisible(true);
+
+		mContext.player.setIcon(mContext.player.getPlayerDown());
+	}
+	public void setVisibleFalse(int temp) {
+		if(temp == 1) {
+			setIcon(helpInfo1);
+		} else if (temp == 2){
+			setIcon(keyCommand);
+		} else if (temp == 3) {
+			setIcon(keepInfo);
+		
+		
+		setSize(955, 630);
+		setLocation(200, 200);
+		
+		mContext.keeper.setIcon(null);
+		mContext.keeper.setSeeNPC(true);
+		
+		mContext.waterMan.setIcon(null);
+		mContext.waterMan.setSeeNPC(true);
+		
+		mContext.waterMan.waterGauge.setVisible(false);
+		
+		mContext.store.setIcon(null);
+		mContext.store.setSeeNPC(true);
+		
+		mContext.player.setIcon(null);
+	}
+
+	
+	
 //	public void setVisibleTrue() {
 //		setIcon(questionMark);
 //		setSize(50, 50);
@@ -81,5 +129,5 @@ public class HelpInfo extends JLabel {
 //
 //		player.setIcon(player.getPlayerDown());
 //	}
-
+	}
 }
