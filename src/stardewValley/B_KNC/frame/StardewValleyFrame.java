@@ -280,7 +280,10 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_M:
-					if (seedZone.isSeedOn() || waterMan.getPondGage() <= 0) {
+					if(waterMan.getPondGage() <= 0) {
+						gameOver.gameOver();
+					}
+					if (seedZone.isSeedOn()) {
 						player.plusSeed();
 						status.statusRepaint();
 					}
