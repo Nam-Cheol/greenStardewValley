@@ -17,7 +17,6 @@ import stardewValley.B_KNC.component.npc.Water;
 import stardewValley.B_KNC.component.player.Player;
 import stardewValley.B_KNC.component.status.Status;
 import stardewValley.B_KNC.component.status.TimeGauge;
-import stardewValley.B_KNC.component.vegetable.Vegetable;
 import stardewValley.B_KNC.state.GameClear;
 import stardewValley.B_KNC.state.GameOver;
 
@@ -280,7 +279,10 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_M:
-					if (seedZone.isSeedOn() || waterMan.getPondGage() <= 0) {
+					if(waterMan.getPondGage() <= 0) {
+						gameOver.gameOver();
+					}
+					if (seedZone.isSeedOn()) {
 						player.plusSeed();
 						status.statusRepaint();
 					}
