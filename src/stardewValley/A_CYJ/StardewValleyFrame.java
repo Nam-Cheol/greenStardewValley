@@ -380,7 +380,7 @@ public class StardewValleyFrame extends JFrame {
 				turn++;
 			} else if (turn == 2) {
 				if (vegetable.getMAX_PLANT() == 0) {
-					vegetable.setMAX_PLANT(2);
+					vegetable.setMAX_PLANT(1);
 				}
 				timeGauge.setIcon(timeGauge.getTimeGauge2());
 				turn++;
@@ -389,6 +389,8 @@ public class StardewValleyFrame extends JFrame {
 				gameOver.setSize(1930, 930);
 				gameOver.setLocation(0, 0);
 				player.setIcon(null);
+				player.getWaterGauge().setIcon(null);
+				
 	            player = null;
 	            guide.setIcon(null);
 	            guide.setSeeNPC(true);
@@ -398,6 +400,7 @@ public class StardewValleyFrame extends JFrame {
 	            keeper.setSeeNPC(true);
 	            waterMan.setIcon(null);
 	            waterMan.setSeeNPC(true);
+	            
 	            
 	            store.setIcon(null);
 	            store.setSeeNPC(true);
@@ -414,18 +417,34 @@ public class StardewValleyFrame extends JFrame {
 				
 
 			} else if (turn == 3 && player.getMoney() >= 300) {
-				gameOver.setIcon(gameClear.getGameClear());
+				gameOver.setIcon(gameOver.getGameOver());
 				gameOver.setSize(1930, 930);
 				gameOver.setLocation(0, 0);
-				keeper.setSeeNPC(true);
-				keeper.setIcon(null);
-				waterMan.setIcon(null);
-				waterMan.setSeeNPC(true);
-				store.setIcon(null);
-				store.setSeeNPC(true);
 				player.setIcon(null);
-				info.setIcon(null);
-				player = null;
+				player.getWaterGauge().setIcon(null);
+				
+	            player = null;
+	            guide.setIcon(null);
+	            guide.setSeeNPC(true);
+	            seedZone.setIcon(null);
+	            seedZone.setSeedZoneOn(null);
+	            keeper.setIcon(null);
+	            keeper.setSeeNPC(true);
+	            waterMan.setIcon(null);
+	            waterMan.setSeeNPC(true);
+	            
+	            
+	            store.setIcon(null);
+	            store.setSeeNPC(true);
+	            info.setIcon(null);
+	            timeGauge.setIcon(null);
+	            waterMan.removeWaterGage();
+	            status.removeText();
+	            store = null;
+	            keeper = null;
+	            waterMan = null;
+	            guide = null;
+	            seedZone = null;
 			}
 		}
 	}

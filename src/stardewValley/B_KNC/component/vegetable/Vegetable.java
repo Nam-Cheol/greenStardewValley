@@ -1,7 +1,12 @@
-package stardewValley.A_CYJ;
+package stardewValley.B_KNC.component.vegetable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.B_KNC.component.npc.Farm;
+import stardewValley.B_KNC.component.player.Player;
+import stardewValley.B_KNC.frame.StardewValleyFrame;
+import stardewValley.B_KNC.interfaces.IVegetable;
 
 public class Vegetable extends JLabel implements IVegetable {
 
@@ -22,7 +27,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected ImageIcon growing4;
 	protected ImageIcon growing5;
 	protected ImageIcon lastGrowing;
-	protected ImageIcon rotten = new ImageIcon("img/vege/Rotten_Plant.png");
+	public ImageIcon rotten = new ImageIcon("img/vege/Rotten_Plant.png");
 	// 물
 	protected final int MAX_WATERGAGE = 4;
 	protected int waterGauge;
@@ -34,7 +39,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	// 작물 가격
 	protected int price;
 
-	protected static int MAX_PLANT = 1;
+	public static int MAX_PLANT = 1;
 
 	@Override
 	public void initData() {

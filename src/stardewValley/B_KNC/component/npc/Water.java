@@ -1,7 +1,9 @@
-package stardewValley.A_CYJ;
+package stardewValley.B_KNC.component.npc;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.B_KNC.frame.StardewValleyFrame;
 
 public class Water extends JLabel {
 
@@ -20,12 +22,10 @@ public class Water extends JLabel {
 
 	private ImageIcon water;
 	private ImageIcon waterOn;
-	
-	public JLabel waterGauge;
 
 	private boolean seeNPC;
 	
-	
+	public JLabel waterGauge;
 	private ImageIcon waterGaugeMax;
 	private ImageIcon waterGauge4;
 	private ImageIcon waterGauge3;
@@ -184,18 +184,8 @@ public class Water extends JLabel {
 		if(pondGage != 0) {
 			pondGage -= 100;
 		}
-		
 	}
 	
-	
-	public JLabel getWaterGauge() {
-		return waterGauge;
-	}
-
-	public void setWaterGauge(JLabel waterGauge) {
-		this.waterGauge = waterGauge;
-	}
-
 	public void decreaseWaterImage() {
 		if(pondGage >= 50_000) {
 			waterGauge.setIcon(waterGaugeMax);
@@ -212,11 +202,10 @@ public class Water extends JLabel {
 		}
 		
 	}
-	public void removeWaterGage() {
-			waterGauge.setIcon(null);
-		
-	}
-
 	
+	public void removeWaterGage() {
+		waterGauge.setIcon(null);
+	
+}
 
 }
