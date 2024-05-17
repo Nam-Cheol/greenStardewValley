@@ -1,5 +1,7 @@
 package stardewValley.A_OHJ;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -21,7 +23,10 @@ public class IntroGuide extends JFrame implements IImagePack {
 	private JLabel guide3;
 	private JPanel nameField;
 	private JTextField text;
-	private JButton buttonField; //
+	private JButton startButton;
+	private JButton guide1Button;
+	private JButton guide2Button;
+	private JButton guide3Button;
 	private StardewValleyFrame game;
 
 	public IntroGuide() {
@@ -35,36 +40,43 @@ public class IntroGuide extends JFrame implements IImagePack {
 		setSize(1930, 980);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Icon icon1 = new ImageIcon(introGuideBg);
-		bg = new JLabel(icon1);
+		bg = new JLabel(new ImageIcon(introGuideBg));
 		bg.setSize(1930, 980);
 		bg.setLocation(0, 0);
 
-		Icon icon2 = new ImageIcon(WelcomeGuide);
-		guide1 = new JLabel(icon2);
+		guide1 = new JLabel(new ImageIcon(WelcomeGuide));
 		guide1.setSize(960, 630);
-		guide1.setLocation(485, 175);
+		guide1.setLocation(485, 120);
 
-		Icon icon3 = new ImageIcon(KeyGuide);
-		guide2 = new JLabel(icon3);
+		guide2 = new JLabel(new ImageIcon(KeyGuide));
 		guide2.setSize(960, 630);
-		guide2.setLocation(485, 175);
+		guide2.setLocation(485, 120);
 
-		Icon icon4 = new ImageIcon(HelpGuide);
-		guide3 = new JLabel(icon4);
+		guide3 = new JLabel(new ImageIcon(HelpGuide));
 		guide3.setSize(960, 630);
-		guide3.setLocation(485, 175);
+		guide3.setLocation(485, 120);
 
 		nameField = new JPanel();
 		nameField.setSize(180, 25);
-		nameField.setLocation(615, 690);
+		nameField.setLocation(620, 630);
 
-		Icon icon5 = new ImageIcon("img/vege/Carrot.png");
-		buttonField = new JButton(icon5);//
-		buttonField.setSize(180, 100);
-		buttonField.setLocation(10, 10);
+		startButton = new JButton(new ImageIcon(StartButtonImg));//
+		startButton.setSize(120, 83);
+		startButton.setLocation(1335, 780);
 
-		text = new JTextField(15);
+		guide1Button = new JButton(new ImageIcon(Guide1ButtonImg));//
+		guide1Button.setSize(120, 83);
+		guide1Button.setLocation(485, 780);
+
+		guide2Button = new JButton(new ImageIcon(Guide2ButtonImg));//
+		guide2Button.setSize(120, 83);
+		guide2Button.setLocation(685, 780);
+
+		guide3Button = new JButton(new ImageIcon(Guide3ButtonImg));//
+		guide3Button.setSize(120, 83);
+		guide3Button.setLocation(885, 780);
+
+		text = new JTextField(10);
 	}
 
 	public void setInitLayout() {
@@ -72,7 +84,11 @@ public class IntroGuide extends JFrame implements IImagePack {
 		bg.add(guide2);
 		bg.add(guide3);
 		bg.add(nameField);
-		bg.add(buttonField);//
+
+		bg.add(startButton);
+		bg.add(guide1Button);
+		bg.add(guide2Button);
+		bg.add(guide3Button);
 
 		nameField.add(text);
 
@@ -86,111 +102,60 @@ public class IntroGuide extends JFrame implements IImagePack {
 		guide2.setVisible(false);
 		guide3.setVisible(false);
 		nameField.setVisible(false);
-		buttonField.setVisible(false);//
+		startButton.setVisible(false);
+		guide1Button.setVisible(true);
+		guide2Button.setVisible(true);
+		guide3Button.setVisible(true);
 	}
 
 	private void addEventListener() {
-		addKeyListener(new KeyListener() {
+
+		startButton.addActionListener(new ActionListener() {
 
 			@Override
-			public void keyTyped(KeyEvent e) {
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_A) {
-					guide1.setVisible(false);
-					guide2.setVisible(true);
-					guide3.setVisible(false);
-					nameField.setVisible(false);
-				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					guide1.setVisible(false);
-					guide2.setVisible(false);
-					guide3.setVisible(true);
-					nameField.setVisible(true);
-					buttonField.setVisible(true);//
-				}
+			public void actionPerformed(ActionEvent e) {
+				game = new StardewValleyFrame();
+				game.getStatus().getNameField().setText(text.getText());
+				setVisible(false);
 			}
 		});
 
-		addMouseListener(new MouseListener() {
+		guide1Button.addActionListener(new ActionListener() {
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if(e.getComponent().getName().equals(buttonField)) {
-					game = new StardewValleyFrame();
-					game.getStatus().getNameField().setText(text.getText());
-					setVisible(false);
-				}
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
+			public void actionPerformed(ActionEvent e) {
+				guide1.setVisible(true);
+				guide2.setVisible(false);
+				guide3.setVisible(false);
+				nameField.setVisible(false);
+				startButton.setVisible(false);
 			}
 		});
-	}
 
-	public JLabel getBg() {
-		return bg;
-	}
+		guide2Button.addActionListener(new ActionListener() {
 
-	public void setBg(JLabel bg) {
-		this.bg = bg;
-	}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guide1.setVisible(false);
+				guide2.setVisible(true);
+				guide3.setVisible(false);
+				nameField.setVisible(false);
+				startButton.setVisible(false);
+			}
+		});
 
-	public JPanel getNameField() {
-		return nameField;
-	}
+		guide3Button.addActionListener(new ActionListener() {
 
-	public void setNameField(JPanel nameField) {
-		this.nameField = nameField;
-	}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				guide1.setVisible(false);
+				guide2.setVisible(false);
+				guide3.setVisible(true);
+				nameField.setVisible(true);
+				startButton.setVisible(true);
+			}
+		});
 
-	public JTextField getText() {
-		return text;
-	}
-
-	public void setText(JTextField text) {
-		this.text = text;
-	}
-
-	
-	public JButton getButtonField() {
-		return buttonField;
-	}
-
-	public void setButtonField(JButton buttonField) {
-		this.buttonField = buttonField;
-	}
-
-	public StardewValleyFrame getGame() {
-		return game;
-	}
-
-	public void setGame(StardewValleyFrame game) {
-		this.game = game;
 	}
 
 }
