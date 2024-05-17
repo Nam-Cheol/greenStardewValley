@@ -280,7 +280,6 @@ public class StardewValleyFrame extends JFrame {
 				case KeyEvent.VK_M:
 					if (seedZone.isSeedOn()) {
 						player.plusSeed();
-						System.out.println("확인");
 						status.statusRepaint();
 					}
 					break;
@@ -341,4 +340,8 @@ public class StardewValleyFrame extends JFrame {
 
 	}
 
+	public static void main(String[] args) {
+		new StardewValleyFrame();
+	}
+	
 }

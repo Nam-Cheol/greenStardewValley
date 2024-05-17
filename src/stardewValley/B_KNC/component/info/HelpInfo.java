@@ -92,10 +92,6 @@ public class HelpInfo extends JLabel {
 
 		mContext.player.setIcon(mContext.player.getPlayerDown());
 		
-		mContext.player.setUp(false);
-		mContext.player.setDown(false);
-		mContext.player.setLeft(false);
-		mContext.player.setRight(false);
 	}
 
 	public ImageIcon getQuestionMark() {
