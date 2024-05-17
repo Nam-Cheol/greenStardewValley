@@ -25,7 +25,7 @@ public class Water extends JLabel {
 
 	private boolean seeNPC;
 	
-	private JLabel waterGauge;
+	public JLabel waterGauge;
 	private ImageIcon waterGaugeMax;
 	private ImageIcon waterGauge4;
 	private ImageIcon waterGauge3;

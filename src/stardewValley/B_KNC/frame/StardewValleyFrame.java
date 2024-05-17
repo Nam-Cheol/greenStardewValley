@@ -131,14 +131,13 @@ public class StardewValleyFrame extends JFrame {
 					player.setIcon(player.getPlayerDown());
 					break;
 				case KeyEvent.VK_F1:
-					info.setIcon(info.getHelpInfo());
-					info.setSize(50, 50);
-					info.setLocation(1200, 15);
-					keeper.setIcon(keeper.getKeeper());
-					keeper.setSeeNPC(false);
-					waterMan.setIcon(waterMan.getWater());
-					waterMan.setSeeNPC(false);
-					player.setIcon(player.getPlayerDown());
+					info.setVisibleTrue();
+					break;
+				case KeyEvent.VK_F2:
+					info.setVisibleTrue();
+					break;
+				case KeyEvent.VK_F3:
+					info.setVisibleTrue();
 					break;
 				default:
 					break;
@@ -317,14 +316,16 @@ public class StardewValleyFrame extends JFrame {
 					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_9.png"));
 					break;
 				case KeyEvent.VK_F1:
-					info.setIcon(info.getHelpInfo1());
-					info.setSize(800, 520);
-					info.setLocation(200, 200);
-					keeper.setSeeNPC(true);
-					keeper.setIcon(null);
-					waterMan.setIcon(null);
-					waterMan.setSeeNPC(true);
-					player.setIcon(null);
+					info.setIcon(info.getHelpInfo());
+					info.setVisibleFalse();
+					break;
+				case KeyEvent.VK_F2:
+					info.setIcon(info.getKeyCommand());
+					info.setVisibleFalse();
+					break;
+				case KeyEvent.VK_F3:
+					info.setIcon(info.getKeepInfo());
+					info.setVisibleFalse();
 					break;
 				default:
 					break;
