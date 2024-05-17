@@ -315,8 +315,7 @@ public class StardewValleyFrame extends JFrame {
 					info.setVisibleFalse(3);
 					
 					break;
-				case KeyEvent.VK_F4:
-					
+
 				default:
 					break;
 				}
