@@ -265,7 +265,7 @@ public class Water extends JLabel {
 			return;
 		}
 		if(pondGage != 0) {
-			pondGage -= 10000;
+			pondGage -= 100;
 		}
 	}
 	

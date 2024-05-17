@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 
 public class IntroGuide extends JFrame implements IImagePack {
 	
-	StardewValleyFrame mContext;
 
 	private JLabel bg;
 	private JLabel guide1;
@@ -31,8 +30,10 @@ public class IntroGuide extends JFrame implements IImagePack {
 	private JButton guide2Button;
 	private JButton guide3Button;
 	public StardewValleyFrame game;
-
+	public Status status;
+	
 	public IntroGuide() {
+		
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -82,7 +83,7 @@ public class IntroGuide extends JFrame implements IImagePack {
 		guide3Button = new JButton(new ImageIcon(Guide3ButtonImg));//
 		guide3Button.setSize(120, 83);
 		guide3Button.setLocation(885, 780);
-
+		
 		text = new JTextField(10);
 	}
 
@@ -123,13 +124,11 @@ public class IntroGuide extends JFrame implements IImagePack {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(mContext.game.getStatus().getNameField().getText() != null) {
-					mContext.game.getStatus().getNameField().setText(text.getText());
-					mContext.game = new StardewValleyFrame();
-//					setVisible(false);
+				
+					game = new StardewValleyFrame();
+					game.getStatus().getNameField().setText(text.getText());
+					setVisible(false);
 					
-				}
-				enterName.setVisible(true);
 			}
 		});
 
