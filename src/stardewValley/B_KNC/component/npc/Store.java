@@ -30,6 +30,8 @@ public class Store extends JLabel{
 	private boolean seeNPC;
 	private boolean sellOn;
 	
+	private int priceTime = 10000;
+	
 	private Random random = new Random();
 	
 	public Store(StardewValleyFrame mContext) {
@@ -73,7 +75,7 @@ public class Store extends JLabel{
 				
 			}
 		};
-		timer.scheduleAtFixedRate(task, 0, 1000);
+		timer.scheduleAtFixedRate(task, 0, priceTime);
 	}
 
 	public StardewValleyFrame getmContext() {
