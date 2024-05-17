@@ -1,19 +1,25 @@
-package stardewValley.A_CYJ;
+package stardewValley.A_CYJ.component.player;
 
-import javax.swing.ImageIcon;	
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.A_CYJ.component.status.WaterGauge;
+import stardewValley.A_CYJ.component.vegetable.Carrot;
+import stardewValley.A_CYJ.component.vegetable.Parsnip;
+import stardewValley.A_CYJ.component.vegetable.Strawberry;
+import stardewValley.A_CYJ.component.vegetable.Vegetable;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.interfaces.Moveable;
+import stardewValley.A_CYJ.service.backgroundPlayerMapService;
+import stardewValley.A_CYJ.state.PlayerWay;
+
+
 
 //TODO 플레이어의 기능 추가, 포함관계여야 함
 public class Player extends JLabel implements Moveable {
 
 	// TODO player 의 속성
-
-	Parsnip parsnip;
-	Carrot carrot;
-	Strawberry berry;
 	StardewValleyFrame mContext;
-
-	// 플레이어의 이미지
 
 	// 플레이어 왼쪽 이미지
 	private ImageIcon playerL;
@@ -34,13 +40,7 @@ public class Player extends JLabel implements Moveable {
 	private ImageIcon playerDown; // -> 디폴트
 	private ImageIcon playerDown1;
 	private ImageIcon playerDown2;
-
 	private ImageIcon playerWater;
-
-	private Store store;
-	private Keeper keeper;
-	private Water water;
-	private Guide guide;
 
 	private WaterGauge waterGauge;
 
@@ -53,7 +53,7 @@ public class Player extends JLabel implements Moveable {
 	private boolean right;
 	private boolean up;
 	private boolean down;
-	PlayerWay playerWay;
+	public PlayerWay playerWay;
 
 	// 벽에 충돌 상태
 	private boolean leftWallCrash;
@@ -63,41 +63,39 @@ public class Player extends JLabel implements Moveable {
 
 	// 플레이어 속도 상태
 	private final int SPEED = 20;
-
+	
+	// 작물을 심을 수 있는 상태
 	private boolean create;
 
+	// 작물을 팔 수 있는 상태
+	private boolean sellParsnip;
+	
+	// 플레이어의 소지 금액
 	private int money;
 
-	private boolean sellParsnip;
-
+	// 플레이어 소지 수량
 	private int haveParsnip;
 	private int haveCarrot;
 	private int haveBerry;
 
-	// 파스닙에 물 줄 때
-	private boolean waterToParsnip;
-
 	// 우물에서 물 퍼낼 때
-	private boolean scoopWater;
 	private int sprinklingCanGage;
 	private final int MAX_CANGAGE = 5;
+	private boolean scoopWater;
 
+	// 플레이어의 턴
+	private int turn;
+	
 	// TODO 생성자 및 데이터 구축
-	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
+	public Player(StardewValleyFrame mContext) {
 		this.mContext = mContext;
-		this.store = store;
-		this.keeper = keeper;
-		this.water = water;
-		this.guide = guide;
 		initData();
 		setInitLayout();
-		new Thread(new backgroundPlayerMapService(this, store, keeper, water, guide, seedZone)).start();
+		new Thread(new backgroundPlayerMapService(this.mContext, this)).start();
 	}
 
 	private void initData() {
 
-		x = 600;
-		y = 600;
 
 		playerL = new ImageIcon("img/character/PlayerStandLeft.png");
 		playerL1 = new ImageIcon("img/character/PlayerWalkLeft.png");
@@ -114,25 +112,27 @@ public class Player extends JLabel implements Moveable {
 		playerDown = new ImageIcon("img/character/PlayerStand.png");
 		playerDown1 = new ImageIcon("img/character/PlayerWalkDown.png");
 		playerDown2 = new ImageIcon("img/character/PlayerWalkDown2.png");
-
 		playerWater = new ImageIcon("img/character/PlayerWater.png");
+		
+		x = 600;
+		y = 400;
 
 		left = false;
 		right = false;
 		up = false;
 		down = false;
-
-		create = false;
-
 		leftWallCrash = false;
 		rightWallCrash = false;
 		upWallCrash = false;
 		downWallCrash = false;
 
+		create = false;
+		
 		playerWay = PlayerWay.DOWN;
 
 		money = 0;
-		sellParsnip = true;
+		
+		turn = 1;
 		
 		waterGauge = new WaterGauge(mContext);
 	}
@@ -337,16 +337,8 @@ public class Player extends JLabel implements Moveable {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	public boolean isLeft() {
@@ -413,10 +405,6 @@ public class Player extends JLabel implements Moveable {
 		this.downWallCrash = downWallCrash;
 	}
 
-	public int getSPEED() {
-		return SPEED;
-	}
-
 	public ImageIcon getPlayerL() {
 		return playerL;
 	}
@@ -437,9 +425,9 @@ public class Player extends JLabel implements Moveable {
 		return playerWater;
 	}
 
-	public Parsnip plantParsnip() {
-		return parsnip = new Parsnip(this, mContext, mContext.farm);
-	}
+//	public Parsnip plantParsnip() {
+//		return new Parsnip(this, mContext, mContext.farm);
+//	}
 
 	public boolean isCreate() {
 		return create;
@@ -447,14 +435,6 @@ public class Player extends JLabel implements Moveable {
 
 	public void setCreate(boolean create) {
 		this.create = create;
-	}
-
-	public boolean isSellParsnip() {
-		return sellParsnip;
-	}
-
-	public void setSellParsnip(boolean sellParsnip) {
-		this.sellParsnip = sellParsnip;
 	}
 
 	public int getHaveParsnip() {
@@ -489,7 +469,6 @@ public class Player extends JLabel implements Moveable {
 		this.money = money;
 	}
 
-	// 시도
 	public boolean isScoopWater() {
 		return scoopWater;
 	}
@@ -510,16 +489,6 @@ public class Player extends JLabel implements Moveable {
 		return MAX_CANGAGE;
 	}
 
-	public boolean isWaterToParsnip() {
-		return waterToParsnip;
-	}
-
-	public void setWaterToParsnip(boolean waterToParsnip) {
-		this.waterToParsnip = waterToParsnip;
-	}
-	
-	
-
 	public WaterGauge getWaterGauge() {
 		return waterGauge;
 	}
@@ -528,6 +497,36 @@ public class Player extends JLabel implements Moveable {
 		this.waterGauge = waterGauge;
 	}
 	
+	public int getTurn() {
+		return turn;
+	}
+
+	public void setTurn(int turn) {
+		this.turn = turn;
+	}
+	
+	public void plusSeed() {
+		if (Vegetable.getMAX_PLANT() == 0) {
+			if (turn == 1) {
+				if (Vegetable.getMAX_PLANT() == 0) {
+					Vegetable.setMAX_PLANT(1);
+				}
+				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge1());
+				turn++;
+			} else if (turn == 2) {
+				if (Vegetable.getMAX_PLANT() == 0) {
+					Vegetable.setMAX_PLANT(1);
+				}
+				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge2());
+				turn++;
+			} else if (turn == 3 && money <= 300) {
+				mContext.gameOver.gameOver();
+
+			} else if (turn == 3 && money >= 300) {
+				mContext.gameClear.gameClear();
+			}
+		}
+	}
 
 	public void amountWater() {
 		if (sprinklingCanGage == 0) {
@@ -543,5 +542,47 @@ public class Player extends JLabel implements Moveable {
 		} else if (sprinklingCanGage == 5) {
 			waterGauge.setIcon(waterGauge.getWaterGauge5());
 		}
+	}
+	
+	public void sellVegetable() {
+		if (mContext.keeper.getCarrotEach() == 0) {
+		} else {
+			money += (mContext.keeper.getCarrotEach() * mContext.store.getCarrotPrice());
+			mContext.keeper.setCarrotEach(0);
+			mContext.status.getWallet().setText(Integer.toString(money));
+		}
+		if (mContext.keeper.getParsnipEach() == 0) {
+		} else {
+			money += (mContext.keeper.getParsnipEach() * mContext.store.getParsnipPrice());
+			mContext.keeper.setParsnipEach(0);
+			mContext.status.getWallet().setText(Integer.toString(money));
+		}
+		if (mContext.keeper.getBerryEach() == 0) {
+		} else {
+			money += (mContext.keeper.getBerryEach() * mContext.store.getBerryPrice());
+			mContext.keeper.setBerryEach(0);
+			mContext.status.getWallet().setText(Integer.toString(money));
+		}
+	}
+	
+	public void stopPlant() {
+		if (Vegetable.getMAX_PLANT() == 0) {
+			create = false;
+			return;
+		}
+	}
+
+	public void saveCrop() {
+		System.out.println("작물 저장");
+		mContext.keeper.setParsnipEach(mContext.keeper.getParsnipEach() + haveParsnip);
+		haveParsnip = 0;
+		
+		mContext.keeper.setCarrotEach(mContext.keeper.getCarrotEach() + haveCarrot);
+		haveCarrot = 0;
+
+		mContext.keeper.setBerryEach(mContext.keeper.getBerryEach() + haveBerry);
+		haveBerry = 0;		
+
+		mContext.status.statusRepaint();
 	}
 }

@@ -1,7 +1,14 @@
-package stardewValley.A_CYJ;
+package stardewValley.A_CYJ.component.vegetable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.A_CYJ.component.npc.Farm;
+import stardewValley.A_CYJ.component.player.Player;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+import stardewValley.A_CYJ.interfaces.IVegetable;
+
+
 
 public class Vegetable extends JLabel implements IVegetable {
 
@@ -22,7 +29,7 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected ImageIcon growing4;
 	protected ImageIcon growing5;
 	protected ImageIcon lastGrowing;
-	protected ImageIcon rotten = new ImageIcon("img/vege/Rotten_Plant.png");
+	public ImageIcon rotten = new ImageIcon("img/vege/Rotten_Plant.png");
 	// 물
 	protected final int MAX_WATERGAGE = 4;
 	protected int waterGauge;
@@ -77,14 +84,11 @@ public class Vegetable extends JLabel implements IVegetable {
 	}
 
 	public static int getMAX_PLANT() {
-		if (MAX_PLANT < 0) {
-
-		}
 		return MAX_PLANT;
 	}
 
 	public static void setMAX_PLANT(int mAX_PLANT) {
 		MAX_PLANT = mAX_PLANT;
 	}
-
+	
 }

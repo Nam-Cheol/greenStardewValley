@@ -1,13 +1,13 @@
-package stardewValley.A_CYJ;
-
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+package stardewValley.A_CYJ.component.npc;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Store extends JLabel{
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
+
+
+public class Keeper extends JLabel{
 
 	StardewValleyFrame mContext;
 	
@@ -22,56 +22,38 @@ public class Store extends JLabel{
 	private int carrotEach;
 	private int berryEach;
 	
-	private ImageIcon seller;
-	private ImageIcon sellerOn;
+	private ImageIcon keeper;
+	private ImageIcon keeperOn;
 	
+	private boolean saveOn;
 	private boolean seeNPC;
-	private boolean sellOn;
 	
-	private Random random = new Random();
-	
-	public Store(StardewValleyFrame mContext) {
+	public Keeper(StardewValleyFrame mContext) {
 		initData();
 		setInitLayout();
-		livePrice();
 		this.mContext = mContext;
 	}
 	
 	private void initData() {
 		
-		x = 1000;
-		y = 200;
+		x = 450;
+		y = 130;
 		
-		seller = new ImageIcon("img/npc/seller.png");
-		sellerOn = new ImageIcon("img/npc/sellerOn.png");
+		keeper = new ImageIcon("img/npc/keeper.png");
+		keeperOn = new ImageIcon("img/npc/keeperOn.png");
+		
+		parsnipEach = 0;
+		carrotEach = 0;
+		berryEach = 0;
 		
 		seeNPC = false;
-		sellOn = false;
-		
+		saveOn = false;
 	}
 	
 	private void setInitLayout() {
-		this.setIcon(seller);
+		this.setIcon(keeper);
 		this.setLocation(x, y);
 		this.setSize(130, 200);
-	}
-	
-	private void livePrice() {
-//		new Thread(new Runnable() {
-		
-		Timer timer = new Timer();
-		
-		TimerTask task = new TimerTask() {
-			
-			@Override
-			public void run() {
-				carrotPrice = (int) (random.nextInt(1500)) + 500;
-				parsnipPrice = (int) (random.nextInt(1000)) + 800;
-				berryPrice = (int) (random.nextInt(500)) + 1000;
-				
-			}
-		};
-		timer.scheduleAtFixedRate(task, 0, 1000);
 	}
 
 	public StardewValleyFrame getmContext() {
@@ -147,15 +129,15 @@ public class Store extends JLabel{
 	public void setBerryEach(int berryEach) {
 		this.berryEach = berryEach;
 	}
-	
-	public ImageIcon getSeller() {
-		return seller;
+
+	public ImageIcon getKeeper() {
+		return keeper;
 	}
 
-	public ImageIcon getSellerOn() {
-		return sellerOn;
+	public ImageIcon getKeeperOn() {
+		return keeperOn;
 	}
-	
+
 	public boolean isSeeNPC() {
 		return seeNPC;
 	}
@@ -164,12 +146,14 @@ public class Store extends JLabel{
 		this.seeNPC = seeNPC;
 	}
 
-	public boolean isSellOn() {
-		return sellOn;
+	public boolean isSaveOn() {
+		return saveOn;
 	}
 
-	public void setSellOn(boolean sellOn) {
-		this.sellOn = sellOn;
+	public void setSaveOn(boolean saveOn) {
+		this.saveOn = saveOn;
 	}
+	
+	
 	
 }

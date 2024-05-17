@@ -1,4 +1,4 @@
-package stardewValley.A_CYJ;
+package stardewValley.A_CYJ.frame;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,37 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import stardewValley.A_OHJ.IntroGuide;
+import stardewValley.B_KNC.interfaces.IImagePack;
 
-class AudioPlay extends JPanel {
-	Clip clip = null;
-
-	AudioPlay() {
-
-		try {
-			clip = AudioSystem.getClip(); // 사용 가능한 쓰레드 할당
-			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
-
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-			clip.open(audioInputStream);
-			clip.start();
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-}
-
-public class Intro extends JFrame {
+public class Intro extends JFrame implements IImagePack {
 
 	private JPanel jPanel;
 	private JLabel intro;
-	private StardewValleyFrame game;
-	private IntroGuide introName;
 
 	public Intro() {
 		initData();
@@ -56,7 +31,7 @@ public class Intro extends JFrame {
 	private void initData() {
 		setTitle("Stardew Valley");
 		jPanel = new JPanel();
-		intro = new JLabel(new ImageIcon("img/intro/intro.png"));
+		intro = new JLabel(new ImageIcon(introBg));
 	}
 
 	private void setInitLayout() {
@@ -76,28 +51,24 @@ public class Intro extends JFrame {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				introName = new IntroGuide();
+				new IntroGuide();
 				setVisible(false);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-
 			}
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 			}
 		});
 	}
@@ -106,4 +77,27 @@ public class Intro extends JFrame {
 		new Intro();
 	}
 
+}
+
+class AudioPlay extends JPanel {
+	Clip clip = null;
+
+	AudioPlay() {
+
+		try {
+			clip = AudioSystem.getClip();
+			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
+
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+			clip.open(audioInputStream);
+			clip.start();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 }

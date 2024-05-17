@@ -1,7 +1,12 @@
-package stardewValley.A_CYJ;
+package stardewValley.A_CYJ.component.vegetable;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+
+import stardewValley.A_CYJ.component.npc.Farm;
+import stardewValley.A_CYJ.component.player.Player;
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
+
 
 // TODO 각 야채의 특성 및 차이점 구현
 public class Parsnip extends Vegetable {

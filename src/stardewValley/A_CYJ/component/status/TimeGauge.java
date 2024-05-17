@@ -1,7 +1,10 @@
-package stardewValley.A_CYJ;
+package stardewValley.A_CYJ.component.status;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
 
 public class TimeGauge extends JLabel {
 
