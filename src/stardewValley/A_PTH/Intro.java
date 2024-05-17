@@ -18,24 +18,24 @@ import javax.swing.JPanel;
 class AudioPlay extends JPanel {
 	Clip clip = null;
 
-	AudioPlay() {
-
-		try {
-			clip = AudioSystem.getClip();
-			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
-
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-			clip.open(audioInputStream);
-			clip.start();
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
+//	AudioPlay() {
+//
+//		try {
+//			clip = AudioSystem.getClip();
+//			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
+//
+//			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+//			clip.open(audioInputStream);
+//			clip.start();
+//		} catch (LineUnavailableException e) {
+//			e.printStackTrace();
+//		} catch (UnsupportedAudioFileException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 }
 
 public class Intro extends JFrame implements IImagePack {

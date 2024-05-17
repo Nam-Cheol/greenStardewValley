@@ -80,7 +80,7 @@ public class Player extends JLabel implements Moveable {
 	// 우물에서 물 퍼낼 때
 	private boolean scoopWater;
 	private int sprinklingCanGage;
-	private final int MAX_CANGAGE = 5;
+	private final int MAX_CANGAGE = 30;
 
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide, SeedZone seedZone) {
