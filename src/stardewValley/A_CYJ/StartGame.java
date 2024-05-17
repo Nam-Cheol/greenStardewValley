@@ -1,6 +1,6 @@
 package stardewValley.A_CYJ;
 
-import stardewValley.B_KNC.frame.Intro;
+import stardewValley.A_CYJ.frame.Intro;
 
 public class StartGame {
 
