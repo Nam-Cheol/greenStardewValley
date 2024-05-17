@@ -7,19 +7,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import stardewValley.vegetable.vegetable;
-
 public class backgroundPlayerMapService implements Runnable {
 
 	private Color redColor = new Color(255, 0, 0);
-	private Color greenColor = new Color(0, 255, 0);
 	private Color blueColor = new Color(0, 0, 255);
-	private Color acuaColor = new Color(0, 255, 255);
 
 	private final int BLOCK = redColor.getRGB();
-	private final int FARM = greenColor.getRGB();
 	private final int WATER = blueColor.getRGB();
-	private final int SEED_ZOON = acuaColor.getRGB();
 
 	private BufferedImage image;
 
@@ -27,16 +21,19 @@ public class backgroundPlayerMapService implements Runnable {
 	private Store store;
 	private Keeper keeper;
 	private Water water;
+	private Guide guide;
 	private SeedZone seedZone;
 
-	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, SeedZone seedZone) {
+	public backgroundPlayerMapService(Player player, Store store, Keeper keeper, Water water, Guide guide,
+			SeedZone seedZone) {
 		this.player = player;
 		this.store = store;
 		this.keeper = keeper;
 		this.water = water;
+		this.guide = guide;
 		this.seedZone = seedZone;
 		try {
-			image = ImageIO.read(new File("img/bg/ColorFrameTest.png"));
+			image = ImageIO.read(new File("img/bg/StardewValleyMapColorFrame3.png"));
 		} catch (IOException e) {
 		}
 	}
@@ -56,7 +53,8 @@ public class backgroundPlayerMapService implements Runnable {
 			int left = leftColor.getRGB();
 			int right = rightColor.getRGB();
 
-			int gap = 150;
+			int gapY = 150;
+			int gapX = 100;
 
 			int storeX = Math.abs(player.getX() - store.getX());
 			int storeY = Math.abs(player.getY() - store.getY());
@@ -66,6 +64,9 @@ public class backgroundPlayerMapService implements Runnable {
 
 			int waterX = Math.abs(player.getX() - water.getX());
 			int waterY = Math.abs(player.getY() - water.getY());
+
+			int guideX = Math.abs(player.getX() - guide.getX());
+			int guideY = Math.abs(player.getY() - guide.getY());
 
 			int seedZoonX = Math.abs(player.getX() - seedZone.getX());
 			int seedZoonY = Math.abs(player.getY() - seedZone.getY());
@@ -81,6 +82,7 @@ public class backgroundPlayerMapService implements Runnable {
 				stopLeft();
 			} else if (right == BLOCK) {
 				stopRight();
+
 				// 2. WATER
 			} else if (up == WATER) {
 				stopUp();
@@ -91,28 +93,21 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (right == WATER) {
 				stopRight();
 
-				// 3. FARM
-			} else if (up == FARM) {
-				stopUp();
-			} else if (down == FARM) {
-				stopDown();
-				player.setCreate(true);
-			} else if (left == FARM) {
-				stopLeft();
-			} else if (right == FARM) {
-				stopRight();
-
-				// 4. NPC
-			} else if (storeX < gap && storeY < gap) {
+				// 3. NPC
+			} else if (storeX < gapX && storeY < gapY) {
 				store.setIcon(store.getSellerOn());
 				store.setSellOn(true);
-			} else if (keeperX < gap && keeperY < gap) {
+			} else if (keeperX < gapX && keeperY < gapY) {
 				keeper.setIcon(keeper.getKeeperOn());
 				keeper.setSaveOn(true);
-			} else if (waterX < gap && waterY < gap) {
+			} else if (waterX < gapX && waterY < gapX) {
 				water.setIcon(water.getWaterOn());
 				player.setScoopWater(true);
-			} else if (seedZoonX < gap && seedZoonY < gap) {
+			} else if (guideX < gapX && guideY < gapX) {
+				guide.setIcon(guide.getGuideOn());
+				player.setCreate(true);
+				guide.setPlantOn(true);
+			} else if (seedZoonX < gapX && seedZoonY < gapY) {
 				seedZone.setIcon(seedZone.getSeedZoneOn());
 				seedZone.setSeedOn(true);
 			} else {
@@ -125,8 +120,8 @@ public class backgroundPlayerMapService implements Runnable {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 			}
-			player.setCreate(false);
 
+			player.setCreate(false);
 		}
 
 	}
@@ -189,10 +184,14 @@ public class backgroundPlayerMapService implements Runnable {
 		if (water.isSeeNPC() == false) {
 			water.setIcon(water.getWater());
 		}
+		if (guide.isSeeNPC() == false) {
+			guide.setIcon(guide.getGuide());
+		}
 		if (seedZone.isSeeNpc() == false) {
 			seedZone.setIcon(seedZone.getSeedZone());
 		}
-
+		player.setScoopWater(false);
+		guide.setPlantOn(false);
 	}
 
 }

@@ -43,7 +43,6 @@ public class Player extends JLabel implements Moveable {
 	private Guide guide;
 
 	private WaterGauge waterGauge;
-	private TimeGauge timeGauge;
 
 	// 플레이어의 좌표
 	private int x;
@@ -98,7 +97,7 @@ public class Player extends JLabel implements Moveable {
 	private void initData() {
 
 		x = 600;
-		y = 600;
+		y = 400;
 
 		playerL = new ImageIcon("img/character/PlayerStandLeft.png");
 		playerL1 = new ImageIcon("img/character/PlayerWalkLeft.png");
@@ -136,7 +135,6 @@ public class Player extends JLabel implements Moveable {
 		sellParsnip = true;
 		
 		waterGauge = new WaterGauge(mContext);
-		timeGauge = new TimeGauge(mContext);
 	}
 
 	private void setInitLayout() {
@@ -144,7 +142,6 @@ public class Player extends JLabel implements Moveable {
 		this.setLocation(x, y);
 		this.setSize(100, 120);
 		mContext.add(waterGauge);
-		mContext.add(timeGauge);
 	}
 
 	// TODO 움직임 구현

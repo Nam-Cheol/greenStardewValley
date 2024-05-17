@@ -1,4 +1,4 @@
-package stardewValley.A_PTH;
+package stardewValley.A_CYJ;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
