@@ -14,6 +14,7 @@ public class Guide extends JLabel {
 	
 	private ImageIcon guide;
 	private ImageIcon guideOn;
+	public ImageIcon defalutGuide;
 	
 	private boolean seeNPC;
 	private boolean plantOn;
@@ -30,6 +31,7 @@ public class Guide extends JLabel {
 		
 		guide = new ImageIcon("img/npc/scarecrow.png");
 		guideOn = new ImageIcon("img/npc/scarecrowOn.png");
+		defalutGuide = new ImageIcon("img/npc/scarecrowOn.png");
 		
 		seeNPC = false;
 		plantOn = false;

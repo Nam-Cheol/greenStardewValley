@@ -63,7 +63,7 @@ public class backgroundPlayerMapService implements Runnable {
 			int keeperX = Math.abs(player.getX()+30 - mContext.keeper.getX());
 			int keeperY = Math.abs(player.getY()-100 - mContext.keeper.getY());
 
-			int waterX = Math.abs(player.getX() - mContext.waterMan.getX()-50);
+			int waterX = Math.abs(player.getX()+45 - mContext.waterMan.getX()-50);
 			int waterY = Math.abs(player.getY() - mContext.waterMan.getY()-50);
 			
 			int guideX = Math.abs(player.getX() - mContext.guide.getX());
@@ -114,6 +114,8 @@ public class backgroundPlayerMapService implements Runnable {
 			}else {
 				notWallCrash();
 				seeNPC();
+				mContext.choice = 0;
+				mContext.guide.setGuideOn(mContext.guide.defalutGuide);
 			}
 
 			try {

@@ -52,7 +52,7 @@ public class Strawberry extends Vegetable {
 			
 			@Override
 			public void run() {
-				MAX_PLANT--;
+				seed--;
 				setIcon(growing1);
 				while (true) {
 					mContext.farm.vegetableWaterGauge(waterGauge, temp);

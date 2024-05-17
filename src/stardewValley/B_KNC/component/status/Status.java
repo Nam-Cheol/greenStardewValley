@@ -138,7 +138,7 @@ public class Status extends JLabel {
 		seed.setLocation(1820, 495);
 		seed.setSize(100, 100);
 		seed.setFont(f);
-		seed.setText(Integer.toString(Vegetable.getMAX_PLANT()));
+		seed.setText(Integer.toString(Vegetable.getSeed()));
 		
 		mContext.add(nameField);
 		nameField.setLocation(1420, 200);
@@ -210,7 +210,7 @@ public class Status extends JLabel {
 		haveParsnip.setText(Integer.toString(mContext.player.getHaveParsnip()));
 		haveBerry.setText(Integer.toString(mContext.player.getHaveBerry()));
 		
-		seed.setText(Integer.toString(Vegetable.getMAX_PLANT()));
+		seed.setText(Integer.toString(Vegetable.getSeed()));
 	}
 	
 	public void removeText() {

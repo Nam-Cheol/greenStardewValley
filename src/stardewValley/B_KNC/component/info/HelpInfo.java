@@ -13,10 +13,10 @@ public class HelpInfo extends JLabel {
 
 	StardewValleyFrame mContext;
 
-	private ImageIcon questionMark;
-	private ImageIcon helpInfo;
-	private ImageIcon keyCommand;
-	private ImageIcon keepInfo;
+	public ImageIcon questionMark;
+	public ImageIcon helpInfo;
+	public ImageIcon keyCommand;
+	public ImageIcon keepInfo;
 
 	private int infoX;
 	private int infoY;
@@ -92,22 +92,6 @@ public class HelpInfo extends JLabel {
 
 		mContext.player.setIcon(mContext.player.getPlayerDown());
 		
-	}
-
-	public ImageIcon getQuestionMark() {
-		return questionMark;
-	}
-
-	public ImageIcon getHelpInfo() {
-		return helpInfo;
-	}
-
-	public ImageIcon getKeyCommand() {
-		return keyCommand;
-	}
-
-	public ImageIcon getKeepInfo() {
-		return keepInfo;
 	}
 
 }

@@ -34,7 +34,7 @@ public class Water extends JLabel {
 	private ImageIcon waterGaugeEmpty;
 
 	// 우물에 물 전체 양
-	private int pondGage;
+	private int pondGage = 80_000;
 
 	public Water(StardewValleyFrame mContext) {
 		this.mContext = mContext;
@@ -59,8 +59,7 @@ public class Water extends JLabel {
 		waterGaugeMax = new ImageIcon("img/vege/Water_gauge_5.png");
 
 		seeNPC = false;
-
-		pondGage = 50_000;
+		
 	}
 
 	private void setInitLayout() {
@@ -182,22 +181,22 @@ public class Water extends JLabel {
 			return;
 		}
 		if(pondGage != 0) {
-			pondGage -= 100;
+			pondGage -= 1000;
 		}
 	}
 	
 	public void decreaseWaterImage() {
-		if(pondGage >= 50_000) {
+		if(pondGage >= 80_000) {
 			waterGauge.setIcon(waterGaugeMax);
-		} else if (pondGage >= 40_000 && pondGage < 50_000) {
+		} else if (pondGage >= 60_000 && pondGage < 80_000) {
 			waterGauge.setIcon(waterGauge4);
-		} else if (pondGage >= 30_000 && pondGage < 40_000) {
+		} else if (pondGage >= 40_000 && pondGage < 60_000) {
 			waterGauge.setIcon(waterGauge3);
-		} else if (pondGage >= 20_000 && pondGage < 30_000) {
+		} else if (pondGage >= 20_000 && pondGage < 40_000) {
 			waterGauge.setIcon(waterGauge2);
 		} else if (pondGage > 0  && pondGage < 20_000) {
 			waterGauge.setIcon(waterGauge1);
-		} else if (pondGage == 0) {
+		} else if (pondGage <= 0) {
 			waterGauge.setIcon(waterGaugeEmpty);
 		}
 		
