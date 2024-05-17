@@ -1,7 +1,11 @@
-package stardewValley.A_CYJ;
+package stardewValley.A_CYJ.component.npc;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
+
 
 public class Guide extends JLabel {
 

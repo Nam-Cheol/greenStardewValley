@@ -1,4 +1,4 @@
-package stardewValley.A_CYJ;
+package stardewValley.A_CYJ.interfaces;
 
 public interface Moveable {
 

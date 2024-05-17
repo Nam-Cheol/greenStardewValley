@@ -1,7 +1,10 @@
-package stardewValley.A_CYJ;
+package stardewValley.A_CYJ.component.npc;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.A_CYJ.frame.StardewValleyFrame;
+
 
 public class Water extends JLabel {
 
@@ -20,12 +23,10 @@ public class Water extends JLabel {
 
 	private ImageIcon water;
 	private ImageIcon waterOn;
-	
-	public JLabel waterGauge;
 
 	private boolean seeNPC;
 	
-	
+	public JLabel waterGauge;
 	private ImageIcon waterGaugeMax;
 	private ImageIcon waterGauge4;
 	private ImageIcon waterGauge3;
@@ -34,7 +35,7 @@ public class Water extends JLabel {
 	private ImageIcon waterGaugeEmpty;
 
 	// 우물에 물 전체 양
-	private long pondGage;
+	private int pondGage;
 
 	public Water(StardewValleyFrame mContext) {
 		this.mContext = mContext;
@@ -60,7 +61,7 @@ public class Water extends JLabel {
 
 		seeNPC = false;
 
-		pondGage = 50_000L;
+		pondGage = 50_000;
 	}
 
 	private void setInitLayout() {
@@ -169,11 +170,11 @@ public class Water extends JLabel {
 	}
 
 	// 시도
-	public long getPondGage() {
+	public int getPondGage() {
 		return pondGage;
 	}
 
-	public void setPondGage(long pondGage) {
+	public void setPondGage(int pondGage) {
 		this.pondGage = pondGage;
 	}
 
@@ -184,18 +185,8 @@ public class Water extends JLabel {
 		if(pondGage != 0) {
 			pondGage -= 100;
 		}
-		
 	}
 	
-	
-	public JLabel getWaterGauge() {
-		return waterGauge;
-	}
-
-	public void setWaterGauge(JLabel waterGauge) {
-		this.waterGauge = waterGauge;
-	}
-
 	public void decreaseWaterImage() {
 		if(pondGage >= 50_000) {
 			waterGauge.setIcon(waterGaugeMax);
@@ -212,11 +203,10 @@ public class Water extends JLabel {
 		}
 		
 	}
-	public void removeWaterGage() {
-			waterGauge.setIcon(null);
-		
-	}
-
 	
+	public void removeWaterGage() {
+		waterGauge.setIcon(null);
+	
+}
 
 }
