@@ -17,6 +17,7 @@ public class HelpInfo extends JLabel {
 	private ImageIcon helpInfo1;
 	private ImageIcon keyCommand;
 	private ImageIcon keepInfo;
+	private ImageIcon helpCommand; //
 
 	private int infoX;
 	private int infoY;
@@ -38,6 +39,7 @@ public class HelpInfo extends JLabel {
 		keyCommand = new ImageIcon("img/Status/KeyCommand.png");
 		keepInfo = new ImageIcon("img/Status/tempD.png");
 
+		helpCommand = new ImageIcon("img/Status/HelpCommand.png");//
 	}
 
 	public void setInitLayout() {
@@ -63,6 +65,16 @@ public class HelpInfo extends JLabel {
 	public ImageIcon getKeepInfo() {
 		return keepInfo;
 	}
+
+	public ImageIcon getHelpCommand() {
+		return helpCommand;
+	}
+
+	public void setHelpCommand(ImageIcon helpCommand) {
+		this.helpCommand = helpCommand;
+	}
+	
+	
 //	public void setVisibleTrue() {
 //		setIcon(questionMark);
 //		setSize(50, 50);

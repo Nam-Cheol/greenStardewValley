@@ -318,6 +318,10 @@ public class StardewValleyFrame extends JFrame {
 
 					setVisibleFalse();
 					break;
+				case KeyEvent.VK_F4:
+					info.setIcon(info.getHelpCommand());
+					setVisibleFalse();
+					break;
 				default:
 					break;
 				}
