@@ -509,13 +509,13 @@ public class Player extends JLabel implements Moveable {
 		if (Vegetable.getMAX_PLANT() == 0) {
 			if (turn == 1) {
 				if (Vegetable.getMAX_PLANT() == 0) {
-					Vegetable.setMAX_PLANT(30);
+					Vegetable.setMAX_PLANT(1);
 				}
 				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge1());
 				turn++;
 			} else if (turn == 2) {
 				if (Vegetable.getMAX_PLANT() == 0) {
-					Vegetable.setMAX_PLANT(30);
+					Vegetable.setMAX_PLANT(1);
 				}
 				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge2());
 				turn++;
