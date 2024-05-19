@@ -23,10 +23,6 @@ public class StardewValleyFrame extends JFrame {
 	private Water waterMan;
 	private Guide guide;
 	
-	private CarrotGauge carrotGauge;
-	private BerryGauge berryGauge;
-	private ParsnipGauge parsnipGauge;
-
 	private HelpInfo info;
 	private Status status;
 
@@ -51,10 +47,6 @@ public class StardewValleyFrame extends JFrame {
 		player = new Player(mContext, store, keeper, waterMan, guide);
 		info = new HelpInfo(mContext);
 
-		carrotGauge = new CarrotGauge(mContext);
-		berryGauge = new BerryGauge(mContext);
-		parsnipGauge = new ParsnipGauge(mContext);
-
 		status = new Status(mContext, player, store, keeper, waterMan);
 
 		farm = new Farm(mContext, player);
@@ -77,9 +69,6 @@ public class StardewValleyFrame extends JFrame {
 		add(waterMan);
 		add(info);
 
-		add(carrotGauge);
-		add(berryGauge);
-		add(parsnipGauge);
 		add(farm);
 		add(guide);
 
@@ -363,4 +352,17 @@ public class StardewValleyFrame extends JFrame {
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}
+
+	
+	/////
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
+	/////
+	
 }

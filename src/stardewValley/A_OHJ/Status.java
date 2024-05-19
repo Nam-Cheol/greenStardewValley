@@ -107,8 +107,8 @@ public class Status extends JLabel {
 
 		// 추가
 		mContext.add(nameField);
-		nameField.setLocation(1420, 200);
-		nameField.setSize(100, 100);
+		nameField.setLocation(1400, 200);
+		nameField.setSize(150, 100);
 		nameField.setFont(f);
 	}
 
