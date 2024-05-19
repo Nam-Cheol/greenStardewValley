@@ -14,6 +14,7 @@ public class Player extends JLabel implements Moveable {
 	StardewValleyFrame mContext;
 
 	// 플레이어의 이미지
+	private ImageIcon playerStand;
 
 	// 플레이어 왼쪽 이미지
 	private ImageIcon playerL;
@@ -82,6 +83,7 @@ public class Player extends JLabel implements Moveable {
 	private boolean scoopWater;
 	private int sprinklingCanGage;
 	private final int MAX_CANGAGE = 5;
+	private ImageIcon par = new ImageIcon("img/vege/Parsnip.png");//
 
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext, Store store, Keeper keeper, Water water, Guide guide) {
@@ -100,23 +102,23 @@ public class Player extends JLabel implements Moveable {
 		x = 600;
 		y = 600;
 
-		playerL = new ImageIcon("img/character/PlayerStandLeft.png");
-		playerL1 = new ImageIcon("img/character/PlayerWalkLeft.png");
-		playerL2 = new ImageIcon("img/character/PlayerWalkLeft2.png");
+		playerL = new ImageIcon();
+		playerL1 = new ImageIcon();
+		playerL2 = new ImageIcon();
 
-		playerR = new ImageIcon("img/character/PlayerStandRight.png");
-		playerR1 = new ImageIcon("img/character/PlayerWalkRight.png");
-		playerR2 = new ImageIcon("img/character/PlayerWalkRight2.png");
+		playerR = new ImageIcon();
+		playerR1 = new ImageIcon();
+		playerR2 = new ImageIcon();
 
-		playerUp = new ImageIcon("img/character/PlayerStandUp.png");
-		playerUp1 = new ImageIcon("img/character/PlayerWalkUp.png");
-		playerUp2 = new ImageIcon("img/character/PlayerWalkUp2.png");
+		playerUp = new ImageIcon();
+		playerUp1 = new ImageIcon();
+		playerUp2 = new ImageIcon();
 
-		playerDown = new ImageIcon("img/character/PlayerStand.png");
-		playerDown1 = new ImageIcon("img/character/PlayerWalkDown.png");
-		playerDown2 = new ImageIcon("img/character/PlayerWalkDown2.png");
+		playerDown = new ImageIcon();
+		playerDown1 = new ImageIcon();
+		playerDown2 = new ImageIcon();
 
-		playerWater = new ImageIcon("img/character/PlayerWater.png");
+		playerWater = new ImageIcon();
 
 		left = false;
 		right = false;
@@ -134,13 +136,13 @@ public class Player extends JLabel implements Moveable {
 
 		money = 0;
 		sellParsnip = true;
-		
+
 		waterGauge = new WaterGauge(mContext);
 		timeGauge = new TimeGauge(mContext);
 	}
 
 	private void setInitLayout() {
-		this.setIcon(playerDown);
+//		this.setIcon(playerDown);
 		this.setLocation(x, y);
 		this.setSize(100, 120);
 		mContext.add(waterGauge);
@@ -535,5 +537,114 @@ public class Player extends JLabel implements Moveable {
 		} else if (sprinklingCanGage == 5) {
 			waterGauge.setIcon(waterGauge.getWaterGauge5());
 		}
+	}
+
+	///////
+	public ImageIcon getPlayerL1() {
+		return playerL1;
+	}
+
+	public void setPlayerL1(ImageIcon playerL1) {
+		this.playerL1 = playerL1;
+	}
+
+	public ImageIcon getPlayerL2() {
+		return playerL2;
+	}
+
+	public void setPlayerL2(ImageIcon playerL2) {
+		this.playerL2 = playerL2;
+	}
+
+	public void setPlayerL(ImageIcon playerL) {
+		this.playerL = playerL;
+	}
+
+	public void setParsnip(Parsnip parsnip) {
+		this.parsnip = parsnip;
+	}
+
+	public void setCarrot(Carrot carrot) {
+		this.carrot = carrot;
+	}
+
+	public void setBerry(Strawberry berry) {
+		this.berry = berry;
+	}
+
+	public void setmContext(StardewValleyFrame mContext) {
+		this.mContext = mContext;
+	}
+
+	public void setPlayerR(ImageIcon playerR) {
+		this.playerR = playerR;
+	}
+
+	public void setPlayerR1(ImageIcon playerR1) {
+		this.playerR1 = playerR1;
+	}
+
+	public void setPlayerR2(ImageIcon playerR2) {
+		this.playerR2 = playerR2;
+	}
+
+	public void setPlayerUp(ImageIcon playerUp) {
+		this.playerUp = playerUp;
+	}
+
+	public void setPlayerUp1(ImageIcon playerUp1) {
+		this.playerUp1 = playerUp1;
+	}
+
+	public void setPlayerUp2(ImageIcon playerUp2) {
+		this.playerUp2 = playerUp2;
+	}
+
+	public void setPlayerDown(ImageIcon playerDown) {
+		this.playerDown = playerDown;
+	}
+
+	public void setPlayerDown1(ImageIcon playerDown1) {
+		this.playerDown1 = playerDown1;
+	}
+
+	public void setPlayerDown2(ImageIcon playerDown2) {
+		this.playerDown2 = playerDown2;
+	}
+
+	public void setPlayerWater(ImageIcon playerWater) {
+		this.playerWater = playerWater;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public void setKeeper(Keeper keeper) {
+		this.keeper = keeper;
+	}
+
+	public void setWater(Water water) {
+		this.water = water;
+	}
+
+	public void setGuide(Guide guide) {
+		this.guide = guide;
+	}
+
+	public void setWaterGauge(WaterGauge waterGauge) {
+		this.waterGauge = waterGauge;
+	}
+
+	public void setTimeGauge(TimeGauge timeGauge) {
+		this.timeGauge = timeGauge;
+	}
+
+	public void setPlayerWay(PlayerWay playerWay) {
+		this.playerWay = playerWay;
+	}
+
+	public void setPlayerStand(ImageIcon playerStand) {
+		this.playerStand = playerStand;
 	}
 }

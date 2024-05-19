@@ -261,8 +261,10 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_SPACE:
 					if (player.isCreate()) {
-						farm.sprinkling(choice);
-						player.amountWater();
+						if(farm.vegetables[choice-1] != null) {
+							farm.sprinkling(choice);
+							player.amountWater();
+						}
 					}
 					break;
 				case KeyEvent.VK_A:
@@ -344,6 +346,22 @@ public class StardewValleyFrame extends JFrame {
 
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
 	public static void main(String[] args) {
 		new StardewValleyFrame();
 	}

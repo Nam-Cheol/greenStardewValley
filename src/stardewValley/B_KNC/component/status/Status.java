@@ -155,30 +155,6 @@ public class Status extends JLabel {
 		this.wallet = wallet;
 	}
 
-	public JLabel getParsnip() {
-		return parsnip;
-	}
-
-	public void setParsnip(JLabel parsnip) {
-		this.parsnip = parsnip;
-	}
-
-	public JLabel getCarrot() {
-		return carrot;
-	}
-
-	public void setCarrot(JLabel carrot) {
-		this.carrot = carrot;
-	}
-
-	public JLabel getBerry() {
-		return berry;
-	}
-
-	public void setBerry(JLabel berry) {
-		this.berry = berry;
-	}
-
 	public JLabel getParsnipPrice() {
 		return parsnipPrice;
 	}

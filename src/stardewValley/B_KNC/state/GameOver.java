@@ -33,38 +33,6 @@ public class GameOver extends JLabel {
 		this.setSize(1980, 980);
 	}
 
-	public StardewValleyFrame getmContext() {
-		return mContext;
-	}
-
-	public void setmContext(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-	}
-
-	public ImageIcon getGameOver() {
-		return gameOver;
-	}
-
-	public void setGameOver(ImageIcon gameOver) {
-		this.gameOver = gameOver;
-	}
-
-	public int getGameOverX() {
-		return gameOverX;
-	}
-
-	public void setGameOverX(int gameOverX) {
-		this.gameOverX = gameOverX;
-	}
-
-	public int getGameOvery() {
-		return gameOverY;
-	}
-
-	public void setGameOvery(int gameOvery) {
-		this.gameOverY = gameOvery;
-	}
-	
 	public void gameOver() {
 		setIcon(gameOver);
 		setSize(1930, 930);

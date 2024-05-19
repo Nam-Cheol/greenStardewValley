@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
 
+
 public class GameClear extends JLabel {
 	StardewValleyFrame mContext;
 
@@ -34,37 +35,37 @@ public class GameClear extends JLabel {
 		this.setSize(1980, 980);
 	}
 
-	public StardewValleyFrame getmContext() {
-		return mContext;
-	}
+//	public StardewValleyFrame getmContext() {
+//		return mContext;
+//	}
 
-	public void setmContext(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-	}
+//	public void setmContext(StardewValleyFrame mContext) {
+//		this.mContext = mContext;
+//	}
 
-	public ImageIcon getGameClear() {
-		return gameClear;
-	}
+//	public ImageIcon getGameClear() {
+//		return gameClear;
+//	}
 
-	public void setGameClear(ImageIcon gameClear) {
-		this.gameClear = gameClear;
-	}
+//	public void setGameClear(ImageIcon gameClear) {
+//		this.gameClear = gameClear;
+//	}
 
-	public int getGameClearX() {
-		return gameClearX;
-	}
+//	public int getGameClearX() {
+//		return gameClearX;
+//	}
 
-	public void setGameClearX(int gameClearX) {
-		this.gameClearX = gameClearX;
-	}
+//	public void setGameClearX(int gameClearX) {
+//		this.gameClearX = gameClearX;
+//	}
 
-	public int getGameClearY() {
-		return gameClearY;
-	}
+//	public int getGameClearY() {
+//		return gameClearY;
+//	}
 
-	public void setGameClearY(int gameCleary) {
-		this.gameClearY = gameCleary;
-	}
+//	public void setGameClearY(int gameCleary) {
+//		this.gameClearY = gameCleary;
+//	}
 	
 	public void gameClear() {
 		setIcon(gameClear);

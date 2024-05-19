@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
 
+
 public class Water extends JLabel {
 
 	StardewValleyFrame mContext;
@@ -35,7 +36,7 @@ public class Water extends JLabel {
 	private ImageIcon waterGaugeEmpty;
 
 	// 우물에 물 전체 양
-	private int pondGage;
+	private int pondGage = 10_000;
 
 	public Water(StardewValleyFrame mContext) {
 		this.mContext = mContext;
@@ -60,8 +61,7 @@ public class Water extends JLabel {
 		waterGaugeMax = new ImageIcon("img/vege/Water_gauge_5.png");
 
 		seeNPC = false;
-
-		pondGage = 50_000;
+		
 	}
 
 	private void setInitLayout() {
@@ -75,87 +75,87 @@ public class Water extends JLabel {
 		waterGauge.setIcon(waterGaugeMax);
 	}
 
-	public StardewValleyFrame getmContext() {
-		return mContext;
-	}
+//	public StardewValleyFrame getmContext() {
+//		return mContext;
+//	}
 
 	// getter, setter
 
-	public void setmContext(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-	}
+//	public void setmContext(StardewValleyFrame mContext) {
+//		this.mContext = mContext;
+//	}
 
-	public int getX() {
-		return x;
-	}
+//	public int getX() {
+//		return x;
+//	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
+//	public void setX(int x) {
+//		this.x = x;
+//	}
 
-	public int getY() {
-		return y;
-	}
+//	public int getY() {
+//		return y;
+//	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
+//	public void setY(int y) {
+//		this.y = y;
+//	}
 
-	public int getParsnipPrice() {
-		return parsnipPrice;
-	}
+//	public int getParsnipPrice() {
+//		return parsnipPrice;
+//	}
 
-	public void setParsnipPrice(int parsnipPrice) {
-		this.parsnipPrice = parsnipPrice;
-	}
+//	public void setParsnipPrice(int parsnipPrice) {
+//		this.parsnipPrice = parsnipPrice;
+//	}
 
-	public int getCarrotPrice() {
-		return carrotPrice;
-	}
+//	public int getCarrotPrice() {
+//		return carrotPrice;
+//	}
 
-	public void setCarrotPrice(int carrotPrice) {
-		this.carrotPrice = carrotPrice;
-	}
+//	public void setCarrotPrice(int carrotPrice) {
+//		this.carrotPrice = carrotPrice;
+//	}
 
-	public int getBerryPrice() {
-		return berryPrice;
-	}
+//	public int getBerryPrice() {
+//		return berryPrice;
+//	}
 
-	public void setBerryPrice(int berryPrice) {
-		this.berryPrice = berryPrice;
-	}
+//	public void setBerryPrice(int berryPrice) {
+//		this.berryPrice = berryPrice;
+//	}
 
-	public int getParsnipEach() {
-		return parsnipEach;
-	}
+//	public int getParsnipEach() {
+//		return parsnipEach;
+//	}
 
-	public void setParsnipEach(int parsnipEach) {
-		this.parsnipEach = parsnipEach;
-	}
+//	public void setParsnipEach(int parsnipEach) {
+//		this.parsnipEach = parsnipEach;
+//	}
 
-	public int getCarrotEach() {
-		return carrotEach;
-	}
+//	public int getCarrotEach() {
+//		return carrotEach;
+//	}
 
-	public void setCarrotEach(int carrotEach) {
-		this.carrotEach = carrotEach;
-	}
+//	public void setCarrotEach(int carrotEach) {
+//		this.carrotEach = carrotEach;
+//	}
 
-	public int getBerryEach() {
-		return berryEach;
-	}
+//	public int getBerryEach() {
+//		return berryEach;
+//	}
 
-	public void setBerryEach(int berryEach) {
-		this.berryEach = berryEach;
-	}
+//	public void setBerryEach(int berryEach) {
+//		this.berryEach = berryEach;
+//	}
 
 	public ImageIcon getWater() {
 		return water;
 	}
 
-	public void setWater(ImageIcon water) {
-		this.water = water;
-	}
+//	public void setWater(ImageIcon water) {
+//		this.water = water;
+//	}
 
 	public ImageIcon getWaterOn() {
 		return waterOn;
@@ -183,18 +183,18 @@ public class Water extends JLabel {
 			return;
 		}
 		if(pondGage != 0) {
-			pondGage -= 100;
+			pondGage -= 150;
 		}
 	}
 	
 	public void decreaseWaterImage() {
-		if(pondGage >= 50_000) {
+		if(pondGage >= 80_000) {
 			waterGauge.setIcon(waterGaugeMax);
-		} else if (pondGage >= 40_000 && pondGage < 50_000) {
+		} else if (pondGage >= 60_000 && pondGage < 80_000) {
 			waterGauge.setIcon(waterGauge4);
-		} else if (pondGage >= 30_000 && pondGage < 40_000) {
+		} else if (pondGage >= 40_000 && pondGage < 60_000) {
 			waterGauge.setIcon(waterGauge3);
-		} else if (pondGage >= 20_000 && pondGage < 30_000) {
+		} else if (pondGage >= 20_000 && pondGage < 40_000) {
 			waterGauge.setIcon(waterGauge2);
 		} else if (pondGage > 0  && pondGage < 20_000) {
 			waterGauge.setIcon(waterGauge1);

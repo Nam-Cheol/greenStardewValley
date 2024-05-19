@@ -43,37 +43,37 @@ public class SeedZone extends JLabel {
 		this.setSize(120, 200);
 	}
 
-	public StardewValleyFrame getmContext() {
-		return mContext;
-	}
+//	public StardewValleyFrame getmContext() {
+//		return mContext;
+//	}
 
-	public void setmContext(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-	}
+//	public void setmContext(StardewValleyFrame mContext) {
+//		this.mContext = mContext;
+//	}
 
-	public int getX() {
-		return x;
-	}
+//	public int getX() {
+//		return x;
+//	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
+//	public void setX(int x) {
+//		this.x = x;
+//	}
 
-	public int getY() {
-		return y;
-	}
+//	public int getY() {
+//		return y;
+//	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
+//	public void setY(int y) {
+//		this.y = y;
+//	}
 
 	public ImageIcon getSeedZone() {
 		return seedZone;
 	}
 
-	public void setSeedZone(ImageIcon seedZone) {
-		this.seedZone = seedZone;
-	}
+//	public void setSeedZone(ImageIcon seedZone) {
+//		this.seedZone = seedZone;
+//	}
 
 	public ImageIcon getSeedZoneOn() {
 		return seedZoneOn;
@@ -87,9 +87,9 @@ public class SeedZone extends JLabel {
 		return seeNpc;
 	}
 
-	public void setSeeNpc(boolean seeNpc) {
-		this.seeNpc = seeNpc;
-	}
+//	public void setSeeNpc(boolean seeNpc) {
+//		this.seeNpc = seeNpc;
+//	}
 
 	public boolean isSeedOn() {
 		return seedOn;

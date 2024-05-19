@@ -67,9 +67,6 @@ public class Player extends JLabel implements Moveable {
 	// 작물을 심을 수 있는 상태
 	private boolean create;
 
-	// 작물을 팔 수 있는 상태
-	private boolean sellParsnip;
-	
 	// 플레이어의 소지 금액
 	private int money;
 
@@ -85,13 +82,16 @@ public class Player extends JLabel implements Moveable {
 
 	// 플레이어의 턴
 	private int turn;
+	private int firstTurn = 1;
+	private int middleTurn = 2;
+	private int lastTurn = 3;
 	
 	// TODO 생성자 및 데이터 구축
 	public Player(StardewValleyFrame mContext) {
 		this.mContext = mContext;
 		initData();
 		setInitLayout();
-		new Thread(new backgroundPlayerMapService(this.mContext, this)).start();
+		new Thread(new backgroundPlayerMapService(this.mContext , this)).start();
 	}
 
 	private void initData() {
@@ -333,13 +333,13 @@ public class Player extends JLabel implements Moveable {
 
 	// getter, setter
 
-	public int getX() {
-		return x;
-	}
+//	public int getX() {
+//		return x;
+//	}
 
-	public int getY() {
-		return y;
-	}
+//	public int getY() {
+//		return y;
+//	}
 
 	public boolean isLeft() {
 		return left;
@@ -373,33 +373,33 @@ public class Player extends JLabel implements Moveable {
 		this.down = down;
 	}
 
-	public boolean isLeftWallCrash() {
-		return leftWallCrash;
-	}
+//	public boolean isLeftWallCrash() {
+//		return leftWallCrash;
+//	}
 
 	public void setLeftWallCrash(boolean leftWallCrash) {
 		this.leftWallCrash = leftWallCrash;
 	}
 
-	public boolean isRightWallCrash() {
-		return rightWallCrash;
-	}
+//	public boolean isRightWallCrash() {
+//		return rightWallCrash;
+//	}
 
 	public void setRightWallCrash(boolean rightWallCrash) {
 		this.rightWallCrash = rightWallCrash;
 	}
 
-	public boolean isUpWallCrash() {
-		return upWallCrash;
-	}
+//	public boolean isUpWallCrash() {
+//		return upWallCrash;
+//	}
 
 	public void setUpWallCrash(boolean upWallCrash) {
 		this.upWallCrash = upWallCrash;
 	}
 
-	public boolean isDownWallCrash() {
-		return downWallCrash;
-	}
+//	public boolean isDownWallCrash() {
+//		return downWallCrash;
+//	}
 
 	public void setDownWallCrash(boolean downWallCrash) {
 		this.downWallCrash = downWallCrash;
@@ -424,10 +424,6 @@ public class Player extends JLabel implements Moveable {
 	public ImageIcon getPlayerWater() {
 		return playerWater;
 	}
-
-//	public Parsnip plantParsnip() {
-//		return new Parsnip(this, mContext, mContext.farm);
-//	}
 
 	public boolean isCreate() {
 		return create;
@@ -465,9 +461,9 @@ public class Player extends JLabel implements Moveable {
 		return money;
 	}
 
-	public void setMoney(int money) {
-		this.money = money;
-	}
+//	public void setMoney(int money) {
+//		this.money = money;
+//	}
 
 	public boolean isScoopWater() {
 		return scoopWater;
@@ -493,36 +489,36 @@ public class Player extends JLabel implements Moveable {
 		return waterGauge;
 	}
 
-	public void setWaterGauge(WaterGauge waterGauge) {
-		this.waterGauge = waterGauge;
-	}
+//	public void setWaterGauge(WaterGauge waterGauge) {
+//		this.waterGauge = waterGauge;
+//	}
 	
-	public int getTurn() {
-		return turn;
-	}
+//	public int getTurn() {
+//		return turn;
+//	}
 
-	public void setTurn(int turn) {
-		this.turn = turn;
-	}
+//	public void setTurn(int turn) {
+//		this.turn = turn;
+//	}
 	
 	public void plusSeed() {
-		if (Vegetable.getMAX_PLANT() == 0) {
-			if (turn == 1) {
-				if (Vegetable.getMAX_PLANT() == 0) {
-					Vegetable.setMAX_PLANT(30);
+		if (Vegetable.getSeed() == 0) {
+			if (turn == firstTurn) {
+				if (Vegetable.getSeed() == 0) {
+					Vegetable.setSeed(Vegetable.getMAX_PLANT());
 				}
 				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge1());
 				turn++;
-			} else if (turn == 2) {
-				if (Vegetable.getMAX_PLANT() == 0) {
-					Vegetable.setMAX_PLANT(30);
+			} else if (turn == middleTurn) {
+				if (Vegetable.getSeed() == 0) {
+					Vegetable.setSeed(Vegetable.getMAX_PLANT());
 				}
 				mContext.timeGauge.setIcon(mContext.timeGauge.getTimeGauge2());
 				turn++;
-			} else if (turn == 3 && money <= 300) {
+			} else if (turn == lastTurn && money <= mContext.victoryMoney) {
 				mContext.gameOver.gameOver();
 
-			} else if (turn == 3 && money >= 300) {
+			} else if (turn == lastTurn && money >= mContext.victoryMoney) {
 				mContext.gameClear.gameClear();
 			}
 		}
@@ -566,7 +562,7 @@ public class Player extends JLabel implements Moveable {
 	}
 	
 	public void stopPlant() {
-		if (Vegetable.getMAX_PLANT() == 0) {
+		if (Vegetable.getSeed() == 0) {
 			create = false;
 			return;
 		}

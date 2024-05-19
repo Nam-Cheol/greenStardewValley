@@ -7,7 +7,6 @@ import stardewValley.A_CYJ.component.player.Player;
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
 
-
 // TODO 각 야채의 특성 및 차이점 구현
 public class Parsnip extends Vegetable {
 
@@ -52,7 +51,7 @@ public class Parsnip extends Vegetable {
 
 			@Override
 			public void run() {
-				MAX_PLANT--;
+				seed--;
 				setIcon(growing1);
 				while (true) {
 					mContext.farm.vegetableWaterGauge(waterGauge, temp);
@@ -103,17 +102,17 @@ public class Parsnip extends Vegetable {
 		}).start();
 	}
 
-	@Override
-	public void harvest() {
-	}
-
-	@Override
-	public void sprinkling() {
-	}
-
-	@Override
-	public int getPrice() {
-		return price;
-	}
+//	@Override
+//	public void harvest() {
+//	}
+//
+//	@Override
+//	public void sprinkling() {
+//	}
+//
+//	@Override
+//	public int getPrice() {
+//		return price;
+//	}
 	
 } // end of class

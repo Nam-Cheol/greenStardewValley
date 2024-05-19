@@ -5,7 +5,6 @@ import javax.swing.JLabel;
 
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
-
 public class TimeGauge extends JLabel {
 
 	StardewValleyFrame mContext;
@@ -40,9 +39,9 @@ public class TimeGauge extends JLabel {
 		this.setSize(250, 180);
 	}
 
-	public ImageIcon getTimeGauge() {
-		return timeGauge;
-	}
+//	public ImageIcon getTimeGauge() {
+//		return timeGauge;
+//	}
 
 	public ImageIcon getTimeGauge1() {
 		return timeGauge1;

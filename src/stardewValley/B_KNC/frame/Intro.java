@@ -36,7 +36,6 @@ public class Intro extends JFrame implements IImagePack {
 
 	private void setInitLayout() {
 		jPanel.add(intro);
-		jPanel.add(new AudioPlay());
 		add(jPanel);
 
 		setSize(1930, 980);
@@ -77,27 +76,4 @@ public class Intro extends JFrame implements IImagePack {
 		new Intro();
 	}
 
-}
-
-class AudioPlay extends JPanel {
-	Clip clip = null;
-
-	AudioPlay() {
-
-		try {
-			clip = AudioSystem.getClip();
-			File file = new File("audio/Stardew-Valley-OST-Stardew-Valley-Overture.wav");
-
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-			clip.open(audioInputStream);
-			clip.start();
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
 }

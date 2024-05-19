@@ -7,7 +7,6 @@ import stardewValley.A_CYJ.component.player.Player;
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
 
-
 // TODO 각 야채의 특성 및 차이점 구현
 public class Carrot extends Vegetable {
 
@@ -52,7 +51,7 @@ public class Carrot extends Vegetable {
 			
 			@Override
 			public void run() {
-				MAX_PLANT--;
+				seed--;
 				setIcon(growing1);
 				while (true) {
 					mContext.farm.vegetableWaterGauge(waterGauge, temp);
@@ -99,46 +98,46 @@ public class Carrot extends Vegetable {
 		}).start();
 	}
 
-	@Override
-	public void harvest() {
-	}
+//	@Override
+//	public void harvest() {
+//	}
 
-	@Override
-	public void sprinkling() {
-	}
+//	@Override
+//	public void sprinkling() {
+//	}
 
 	// getter, setter
-	public String getName() {
-		return name;
-	}
+//	public String getName() {
+//		return name;
+//	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+//	public void setName(String name) {
+//		this.name = name;
+//	}
 
-	public Player getPlayer() {
-		return player;
-	}
+//	public Player getPlayer() {
+//		return player;
+//	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+//	public void setPlayer(Player player) {
+//		this.player = player;
+//	}
 	
-	@Override
-	public int getPrice() {
-		return price;
-	}
+//	@Override
+//	public int getPrice() {
+//		return price;
+//	}
 	
-	public boolean isCreate() {
-		return create;
-	}
+//	public boolean isCreate() {
+//		return create;
+//	}
 
-	public void setCreate(boolean create) {
-		this.create = create;
-	}
+//	public void setCreate(boolean create) {
+//		this.create = create;
+//	}
 	
-	public ImageIcon getLastGrowing() {
-		return lastGrowing;
-	}
+//	public ImageIcon getLastGrowing() {
+//		return lastGrowing;
+//	}
 
 } // end of class

@@ -11,7 +11,6 @@ import stardewValley.B_KNC.frame.StardewValleyFrame;
 public class Parsnip extends Vegetable {
 
 	// 멤버 변수
-	private String name = "파스닙";
 	private int growSpeed = 5000;
 	private int temp;
 
@@ -30,7 +29,6 @@ public class Parsnip extends Vegetable {
 	public void initData() {
 		waterGauge = 3;
 		growing = true;
-		create = false;
 		temp = mContext.choice;
 		growing1 = new ImageIcon("img/vege/Parsnip_Stage_1.png");
 		growing2 = new ImageIcon("img/vege/Parsnip_Stage_2.png");
@@ -102,17 +100,4 @@ public class Parsnip extends Vegetable {
 		}).start();
 	}
 
-	@Override
-	public void harvest() {
-	}
-
-	@Override
-	public void sprinkling() {
-	}
-
-	@Override
-	public int getPrice() {
-		return price;
-	}
-	
 } // end of class

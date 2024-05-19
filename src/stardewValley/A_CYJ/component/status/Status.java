@@ -8,6 +8,7 @@ import stardewValley.A_CYJ.component.vegetable.Vegetable;
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
 
+
 public class Status extends JLabel {
 
 	StardewValleyFrame mContext;
@@ -135,7 +136,7 @@ public class Status extends JLabel {
 		seed.setLocation(1820, 495);
 		seed.setSize(100, 100);
 		seed.setFont(f);
-		seed.setText(Integer.toString(Vegetable.getMAX_PLANT()));
+		seed.setText(Integer.toString(Vegetable.getSeed()));
 		
 		mContext.add(nameField);
 		nameField.setLocation(1420, 200);
@@ -156,37 +157,37 @@ public class Status extends JLabel {
 		return parsnip;
 	}
 
-	public void setParsnip(JLabel parsnip) {
-		this.parsnip = parsnip;
-	}
+//	public void setParsnip(JLabel parsnip) {
+//		this.parsnip = parsnip;
+//	}
 
-	public JLabel getCarrot() {
-		return carrot;
-	}
+//	public JLabel getCarrot() {
+//		return carrot;
+//	}
 
-	public void setCarrot(JLabel carrot) {
-		this.carrot = carrot;
-	}
+//	public void setCarrot(JLabel carrot) {
+//		this.carrot = carrot;
+//	}
 
-	public JLabel getBerry() {
-		return berry;
-	}
+//	public JLabel getBerry() {
+//		return berry;
+//	}
 
-	public void setBerry(JLabel berry) {
-		this.berry = berry;
-	}
+//	public void setBerry(JLabel berry) {
+//		this.berry = berry;
+//	}
 
-	public JLabel getParsnipPrice() {
-		return parsnipPrice;
-	}
+//	public JLabel getParsnipPrice() {
+//		return parsnipPrice;
+//	}
 
-	public JLabel getCarrotPrice() {
-		return carrotPrice;
-	}
+//	public JLabel getCarrotPrice() {
+//		return carrotPrice;
+//	}
 
-	public JLabel getBerryPrice() {
-		return berryPrice;
-	}
+//	public JLabel getBerryPrice() {
+//		return berryPrice;
+//	}
 	
 	public JLabel getNameField() {
 		return nameField;
@@ -207,7 +208,7 @@ public class Status extends JLabel {
 		haveParsnip.setText(Integer.toString(mContext.player.getHaveParsnip()));
 		haveBerry.setText(Integer.toString(mContext.player.getHaveBerry()));
 		
-		seed.setText(Integer.toString(Vegetable.getMAX_PLANT()));
+		seed.setText(Integer.toString(Vegetable.getSeed()));
 	}
 	
 	public void removeText() {

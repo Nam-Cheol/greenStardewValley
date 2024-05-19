@@ -504,6 +504,58 @@ public class Player extends JLabel implements Moveable {
 		this.turn = turn;
 	}
 	
+	public void setPlayerL(ImageIcon playerL) {
+		this.playerL = playerL;
+	}
+
+	public void setPlayerL1(ImageIcon playerL1) {
+		this.playerL1 = playerL1;
+	}
+
+	public void setPlayerL2(ImageIcon playerL2) {
+		this.playerL2 = playerL2;
+	}
+
+	public void setPlayerR(ImageIcon playerR) {
+		this.playerR = playerR;
+	}
+
+	public void setPlayerR1(ImageIcon playerR1) {
+		this.playerR1 = playerR1;
+	}
+
+	public void setPlayerR2(ImageIcon playerR2) {
+		this.playerR2 = playerR2;
+	}
+
+	public void setPlayerUp(ImageIcon playerUp) {
+		this.playerUp = playerUp;
+	}
+
+	public void setPlayerUp1(ImageIcon playerUp1) {
+		this.playerUp1 = playerUp1;
+	}
+
+	public void setPlayerUp2(ImageIcon playerUp2) {
+		this.playerUp2 = playerUp2;
+	}
+
+	public void setPlayerDown(ImageIcon playerDown) {
+		this.playerDown = playerDown;
+	}
+
+	public void setPlayerDown1(ImageIcon playerDown1) {
+		this.playerDown1 = playerDown1;
+	}
+
+	public void setPlayerDown2(ImageIcon playerDown2) {
+		this.playerDown2 = playerDown2;
+	}
+
+	public void setPlayerWater(ImageIcon playerWater) {
+		this.playerWater = playerWater;
+	}
+
 	public void plusSeed() {
 		if (Vegetable.getSeed() == 0) {
 			if (turn == firstTurn) {
@@ -572,7 +624,6 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	public void saveCrop() {
-		System.out.println("작물 저장");
 		mContext.keeper.setParsnipEach(mContext.keeper.getParsnipEach() + haveParsnip);
 		haveParsnip = 0;
 		
