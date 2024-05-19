@@ -10,7 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import stardewValley.B_KNC.interfaces.IImagePack;
+import stardewValley.A_CYJ.interfaces.IImagePack;
+
+
 
 public class IntroGuide extends JFrame implements IImagePack {
 

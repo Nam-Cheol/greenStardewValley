@@ -46,6 +46,8 @@ public class StardewValleyFrame extends JFrame {
 
 	public GameOver gameOver;
 	public GameClear gameClear;
+	
+	public int victoryMoney = 100_000;
 
 	public StardewValleyFrame() {
 		initData();
@@ -240,12 +242,12 @@ public class StardewValleyFrame extends JFrame {
 					if (choice <= 0) {
 						return;
 					}
-					if (farm.vegetables[choice - 1] != null) {
-						if (farm.vegetables[choice - 1].getIcon() == farm.vegetables[choice - 1].rotten) {
-							farm.remove(choice);
+						if (farm.vegetables[choice - 1] != null) {
+							if (farm.vegetables[choice - 1].getIcon() == farm.vegetables[choice - 1].rotten) {
+								farm.remove(choice);
+							}
+							farm.harvest(choice);
 						}
-						farm.harvest(choice);
-					}
 					status.statusRepaint();
 					break;
 				case KeyEvent.VK_D:
@@ -279,9 +281,11 @@ public class StardewValleyFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_M:
+					if(waterMan.getPondGage() <= 0) {
+						gameOver.gameOver();
+					}
 					if (seedZone.isSeedOn()) {
 						player.plusSeed();
-						System.out.println("확인");
 						status.statusRepaint();
 					}
 					break;
@@ -322,15 +326,15 @@ public class StardewValleyFrame extends JFrame {
 					guide.setGuideOn(new ImageIcon("img/npc/scarecrowOn_9.png"));
 					break;
 				case KeyEvent.VK_F1:
-					info.setIcon(info.getHelpInfo());
+					info.setIcon(info.helpInfo);
 					info.setVisibleFalse();
 					break;
 				case KeyEvent.VK_F2:
-					info.setIcon(info.getKeyCommand());
+					info.setIcon(info.keyCommand);
 					info.setVisibleFalse();
 					break;
 				case KeyEvent.VK_F3:
-					info.setIcon(info.getKeepInfo());
+					info.setIcon(info.keepInfo);
 					info.setVisibleFalse();
 					break;
 				default:
@@ -342,4 +346,8 @@ public class StardewValleyFrame extends JFrame {
 
 	}
 
+	public static void main(String[] args) {
+		new StardewValleyFrame();
+	}
+	
 }

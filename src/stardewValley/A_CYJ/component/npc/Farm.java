@@ -9,8 +9,6 @@ import stardewValley.A_CYJ.component.vegetable.Strawberry;
 import stardewValley.A_CYJ.component.vegetable.Vegetable;
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
-
-
 public class Farm extends JLabel {
 
 	StardewValleyFrame mContext;
@@ -62,21 +60,21 @@ public class Farm extends JLabel {
 		this.setSize(300, 300);
 	}
 
-	public int getX() {
-		return x;
-	}
+//	public int getX() {
+//		return x;
+//	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
+//	public void setX(int x) {
+//		this.x = x;
+//	}
 
-	public int getY() {
-		return y;
-	}
+//	public int getY() {
+//		return y;
+//	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
+//	public void setY(int y) {
+//		this.y = y;
+//	}
 
 	public void VLocation(int choice) {
 		int temp = 110;

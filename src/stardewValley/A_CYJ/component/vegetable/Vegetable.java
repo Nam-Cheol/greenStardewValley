@@ -41,7 +41,8 @@ public class Vegetable extends JLabel implements IVegetable {
 	// 작물 가격
 	protected int price;
 
-	protected static int MAX_PLANT = 1;
+	protected static int MAX_PLANT = 4;
+	protected static int seed = 3;
 
 	@Override
 	public void initData() {
@@ -63,17 +64,17 @@ public class Vegetable extends JLabel implements IVegetable {
 	public void sprinkling() {
 	}
 
-	public int getPrice() {
-		return price;
-	}
+//	public int getPrice() {
+//		return price;
+//	}
 
 	public boolean isCanHarvest() {
 		return canHarvest;
 	}
 
-	public void setCanHarvest(boolean canHarvest) {
-		this.canHarvest = canHarvest;
-	}
+//	public void setCanHarvest(boolean canHarvest) {
+//		this.canHarvest = canHarvest;
+//	}
 
 	public int getWaterGage() {
 		return waterGauge;
@@ -83,12 +84,21 @@ public class Vegetable extends JLabel implements IVegetable {
 		this.waterGauge = waterGage;
 	}
 
+	public static int getSeed() {
+		return seed;
+	}
+
+	public static void setSeed(int seed) {
+		Vegetable.seed = seed;
+	}
+
 	public static int getMAX_PLANT() {
 		return MAX_PLANT;
 	}
 
-	public static void setMAX_PLANT(int mAX_PLANT) {
-		MAX_PLANT = mAX_PLANT;
-	}
+//	public static void setMAX_PLANT(int mAX_PLANT) {
+//		MAX_PLANT = mAX_PLANT;
+//	}
+
 	
 }

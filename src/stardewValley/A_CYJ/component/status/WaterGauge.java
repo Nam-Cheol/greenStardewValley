@@ -5,8 +5,6 @@ import javax.swing.JLabel;
 
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
-
-
 public class WaterGauge extends JLabel{
 
 	StardewValleyFrame mContext;

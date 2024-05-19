@@ -53,7 +53,7 @@ public class Strawberry extends Vegetable {
 			
 			@Override
 			public void run() {
-				MAX_PLANT--;
+				seed--;
 				setIcon(growing1);
 				while (true) {
 					mContext.farm.vegetableWaterGauge(waterGauge, temp);
@@ -108,46 +108,46 @@ public class Strawberry extends Vegetable {
 		}).start();
 	}
 
-	@Override
-	public void harvest() {
-	}
-
-	@Override
-	public void sprinkling() {
-	}
-
-	// getter, setter
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-	
-	@Override
-	public int getPrice() {
-		return price;
-	}
-	
-	public boolean isCreate() {
-		return create;
-	}
-
-	public void setCreate(boolean create) {
-		this.create = create;
-	}
-	
-	public ImageIcon getLastGrowing() {
-		return lastGrowing;
-	}
+//	@Override
+//	public void harvest() {
+//	}
+//
+//	@Override
+//	public void sprinkling() {
+//	}
+//
+//	// getter, setter
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//
+//	public Player getPlayer() {
+//		return player;
+//	}
+//
+//	public void setPlayer(Player player) {
+//		this.player = player;
+//	}
+//	
+//	@Override
+//	public int getPrice() {
+//		return price;
+//	}
+//	
+//	public boolean isCreate() {
+//		return create;
+//	}
+//
+//	public void setCreate(boolean create) {
+//		this.create = create;
+//	}
+//	
+//	public ImageIcon getLastGrowing() {
+//		return lastGrowing;
+//	}
 
 } // end of class

@@ -62,49 +62,49 @@ public class Keeper extends JLabel{
 
 	// getter, setter
 	
-	public void setmContext(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-	}
+//	public void setmContext(StardewValleyFrame mContext) {
+//		this.mContext = mContext;
+//	}
 
-	public int getX() {
-		return x;
-	}
+//	public int getX() {
+//		return x;
+//	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
+//	public void setX(int x) {
+//		this.x = x;
+//	}
 
-	public int getY() {
-		return y;
-	}
+//	public int getY() {
+//		return y;
+//	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
+//	public void setY(int y) {
+//		this.y = y;
+//	}
 
-	public int getParsnipPrice() {
-		return parsnipPrice;
-	}
+//	public int getParsnipPrice() {
+//		return parsnipPrice;
+//	}
 
-	public void setParsnipPrice(int parsnipPrice) {
-		this.parsnipPrice = parsnipPrice;
-	}
+//	public void setParsnipPrice(int parsnipPrice) {
+//		this.parsnipPrice = parsnipPrice;
+//	}
 
-	public int getCarrotPrice() {
-		return carrotPrice;
-	}
+//	public int getCarrotPrice() {
+//		return carrotPrice;
+//	}
 
-	public void setCarrotPrice(int carrotPrice) {
-		this.carrotPrice = carrotPrice;
-	}
+//	public void setCarrotPrice(int carrotPrice) {
+//		this.carrotPrice = carrotPrice;
+//	}
 
-	public int getBerryPrice() {
-		return berryPrice;
-	}
+//	public int getBerryPrice() {
+//		return berryPrice;
+//	}
 
-	public void setBerryPrice(int berryPrice) {
-		this.berryPrice = berryPrice;
-	}
+//	public void setBerryPrice(int berryPrice) {
+//		this.berryPrice = berryPrice;
+//	}
 
 	public int getParsnipEach() {
 		return parsnipEach;

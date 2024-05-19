@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import stardewValley.A_CYJ.frame.StardewValleyFrame;
 
 
+
 public class Store extends JLabel{
 
 	StardewValleyFrame mContext;
@@ -30,6 +31,8 @@ public class Store extends JLabel{
 	
 	private boolean seeNPC;
 	private boolean sellOn;
+	
+	private int priceTime = 10000;
 	
 	private Random random = new Random();
 	
@@ -74,82 +77,83 @@ public class Store extends JLabel{
 				
 			}
 		};
-		timer.scheduleAtFixedRate(task, 0, 10000);
-	}
-
-	public StardewValleyFrame getmContext() {
-		return mContext;
+		timer.scheduleAtFixedRate(task, 0, priceTime);
 	}
 
 	// getter, setter
 	
-	public void setmContext(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-	}
+//	public StardewValleyFrame getmContext() {
+//		return mContext;
+//	}
 
-	public int getX() {
-		return x;
-	}
+	
+//	public void setmContext(StardewValleyFrame mContext) {
+//		this.mContext = mContext;
+//	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
+//	public int getX() {
+//		return x;
+//	}
 
-	public int getY() {
-		return y;
-	}
+//	public void setX(int x) {
+//		this.x = x;
+//	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
+//	public int getY() {
+//		return y;
+//	}
+
+//	public void setY(int y) {
+//		this.y = y;
+//	}
 
 	public int getParsnipPrice() {
 		return parsnipPrice;
 	}
 
-	public void setParsnipPrice(int parsnipPrice) {
-		this.parsnipPrice = parsnipPrice;
-	}
+//	public void setParsnipPrice(int parsnipPrice) {
+//		this.parsnipPrice = parsnipPrice;
+//	}
 
 	public int getCarrotPrice() {
 		return carrotPrice;
 	}
 
-	public void setCarrotPrice(int carrotPrice) {
-		this.carrotPrice = carrotPrice;
-	}
+//	public void setCarrotPrice(int carrotPrice) {
+//		this.carrotPrice = carrotPrice;
+//	}
 
 	public int getBerryPrice() {
 		return berryPrice;
 	}
 
-	public void setBerryPrice(int berryPrice) {
-		this.berryPrice = berryPrice;
-	}
+//	public void setBerryPrice(int berryPrice) {
+//		this.berryPrice = berryPrice;
+//	}
 
-	public int getParsnipEach() {
-		return parsnipEach;
-	}
+//	public int getParsnipEach() {
+//		return parsnipEach;
+//	}
 
-	public void setParsnipEach(int parsnipEach) {
-		this.parsnipEach = parsnipEach;
-	}
+//	public void setParsnipEach(int parsnipEach) {
+//		this.parsnipEach = parsnipEach;
+//	}
 
-	public int getCarrotEach() {
-		return carrotEach;
-	}
+//	public int getCarrotEach() {
+//		return carrotEach;
+//	}
 
-	public void setCarrotEach(int carrotEach) {
-		this.carrotEach = carrotEach;
-	}
+//	public void setCarrotEach(int carrotEach) {
+//		this.carrotEach = carrotEach;
+//	}
 
-	public int getBerryEach() {
-		return berryEach;
-	}
+//	public int getBerryEach() {
+//		return berryEach;
+//	}
 
-	public void setBerryEach(int berryEach) {
-		this.berryEach = berryEach;
-	}
+//	public void setBerryEach(int berryEach) {
+//		this.berryEach = berryEach;
+//	}
 	
 	public ImageIcon getSeller() {
 		return seller;
