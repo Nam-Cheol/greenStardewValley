@@ -11,7 +11,6 @@ import stardewValley.B_KNC.frame.StardewValleyFrame;
 public class Strawberry extends Vegetable {
 
 	// 멤버 변수
-	private String name = "딸기";
 	private int growSpeed = 5000;
 	private int temp;
 
@@ -30,7 +29,6 @@ public class Strawberry extends Vegetable {
 	public void initData() {
 		waterGauge = 3;
 		growing = true;
-		create = false;
 		temp = mContext.choice;
 		growing1 = new ImageIcon("img/vege/Strawberry_Stage_1.png");
 		growing2 = new ImageIcon("img/vege/Strawberry_Stage_2.png");
@@ -105,48 +103,6 @@ public class Strawberry extends Vegetable {
 				}
 			}
 		}).start();
-	}
-
-	@Override
-	public void harvest() {
-	}
-
-	@Override
-	public void sprinkling() {
-	}
-
-	// getter, setter
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-	
-	@Override
-	public int getPrice() {
-		return price;
-	}
-	
-	public boolean isCreate() {
-		return create;
-	}
-
-	public void setCreate(boolean create) {
-		this.create = create;
-	}
-	
-	public ImageIcon getLastGrowing() {
-		return lastGrowing;
 	}
 
 } // end of class

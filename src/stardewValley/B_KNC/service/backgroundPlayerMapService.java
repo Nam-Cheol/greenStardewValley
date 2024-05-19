@@ -79,7 +79,6 @@ public class backgroundPlayerMapService implements Runnable {
 			} else if (down == BLOCK) {
 				stopDown();
 			} else if (left == BLOCK) {
-				System.out.println("나야 나");
 				stopLeft();
 			} else if (right == BLOCK) {
 				stopRight();

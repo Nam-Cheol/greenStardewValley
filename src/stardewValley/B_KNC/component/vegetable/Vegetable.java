@@ -6,19 +6,13 @@ import javax.swing.JLabel;
 import stardewValley.B_KNC.component.npc.Farm;
 import stardewValley.B_KNC.component.player.Player;
 import stardewValley.B_KNC.frame.StardewValleyFrame;
-import stardewValley.B_KNC.interfaces.IVegetable;
 
-public class Vegetable extends JLabel implements IVegetable {
+public abstract class Vegetable extends JLabel {
 
-	// 멤버 변수
-	protected String name;
 	// 포함관계 - 프레임, 플레이어
 	StardewValleyFrame mContext;
 	protected Player player;
 	protected Farm farm;
-	protected int x;
-	protected int y;
-	protected int plantLocation = 130;
 	// 성장
 	protected boolean growing;
 	protected ImageIcon growing1;
@@ -29,49 +23,21 @@ public class Vegetable extends JLabel implements IVegetable {
 	protected ImageIcon lastGrowing;
 	public ImageIcon rotten = new ImageIcon("img/vege/Rotten_Plant.png");
 	// 물
-	protected final int MAX_WATERGAGE = 4;
 	protected int waterGauge;
-	protected boolean vegeGetWater;
 	// 수확
 	protected boolean canHarvest;
-	// 밭에 접근
-	protected boolean create;
-	// 작물 가격
-	protected int price;
 
 	protected static int MAX_PLANT = 30;
 	protected static int seed = 30;
 
-	@Override
-	public void initData() {
-	}
+	public abstract void initData();
 
-	@Override
-	public void setInitLayout() {
-	}
+	public abstract void setInitLayout();
 
-	@Override
-	public void grow() {
-	}
-
-	@Override
-	public void harvest() {
-	}
-
-	@Override
-	public void sprinkling() {
-	}
-
-	public int getPrice() {
-		return price;
-	}
+	public abstract void grow();
 
 	public boolean isCanHarvest() {
 		return canHarvest;
-	}
-
-	public void setCanHarvest(boolean canHarvest) {
-		this.canHarvest = canHarvest;
 	}
 
 	public int getWaterGage() {
@@ -94,9 +60,4 @@ public class Vegetable extends JLabel implements IVegetable {
 		return MAX_PLANT;
 	}
 
-	public static void setMAX_PLANT(int mAX_PLANT) {
-		MAX_PLANT = mAX_PLANT;
-	}
-
-	
 }

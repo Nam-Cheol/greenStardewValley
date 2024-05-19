@@ -51,7 +51,6 @@ public class Farm extends JLabel {
 		vegetableWaterStatus5 = new ImageIcon("img/vege/Water_gauge_4.png");
 		vegetableWaterStatus6 = new ImageIcon("img/vege/Water_gauge_5.png");
 		vegetableWaterStatus7 = new ImageIcon("img/vege/Water_gauge_6.png");
-
 		vegetableWaters = new JLabel[PLANT_MAX];
 
 	}
@@ -60,22 +59,6 @@ public class Farm extends JLabel {
 		this.setIcon(farm);
 		this.setLocation(x, y);
 		this.setSize(300, 300);
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	public void VLocation(int choice) {

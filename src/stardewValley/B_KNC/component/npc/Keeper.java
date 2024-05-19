@@ -12,10 +12,6 @@ public class Keeper extends JLabel{
 	private int x;
 	private int y;
 	
-	private int parsnipPrice;
-	private int carrotPrice;
-	private int berryPrice;
-	
 	private int parsnipEach;
 	private int carrotEach;
 	private int berryEach;
@@ -54,54 +50,14 @@ public class Keeper extends JLabel{
 		this.setSize(130, 200);
 	}
 
-	public StardewValleyFrame getmContext() {
-		return mContext;
-	}
-
 	// getter, setter
 	
-	public void setmContext(StardewValleyFrame mContext) {
-		this.mContext = mContext;
-	}
-
 	public int getX() {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getParsnipPrice() {
-		return parsnipPrice;
-	}
-
-	public void setParsnipPrice(int parsnipPrice) {
-		this.parsnipPrice = parsnipPrice;
-	}
-
-	public int getCarrotPrice() {
-		return carrotPrice;
-	}
-
-	public void setCarrotPrice(int carrotPrice) {
-		this.carrotPrice = carrotPrice;
-	}
-
-	public int getBerryPrice() {
-		return berryPrice;
-	}
-
-	public void setBerryPrice(int berryPrice) {
-		this.berryPrice = berryPrice;
 	}
 
 	public int getParsnipEach() {
