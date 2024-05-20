@@ -51,7 +51,7 @@ public class GameClear extends JLabel {
         mContext.store.setSeeNPC(true);
         mContext.info.setIcon(null);
         mContext.timeGauge.setIcon(null);
-        mContext.waterMan.removeWaterGage();
+        mContext.waterMan.removeWaterGauge();
         mContext.status.removeText();
         mContext.store = null;
         mContext.keeper = null;

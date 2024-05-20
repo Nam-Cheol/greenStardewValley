@@ -26,7 +26,7 @@ public class Store extends JLabel{
 	private boolean seeNPC;
 	private boolean sellOn;
 	
-	private int priceTime = 10000;
+	private int priceTime = 100;
 	
 	private Random random = new Random();
 	
@@ -64,9 +64,9 @@ public class Store extends JLabel{
 			
 			@Override
 			public void run() {
-				carrotPrice = (int) (random.nextInt(1500)) + 500;
-				parsnipPrice = (int) (random.nextInt(1000)) + 800;
-				berryPrice = (int) (random.nextInt(500)) + 1000;
+				carrotPrice = (int) (random.nextInt(100)) + 800;
+				parsnipPrice = (int) (random.nextInt(800)) + 800;
+				berryPrice = (int) (random.nextInt(1500)) + 500;
 				
 			}
 		};

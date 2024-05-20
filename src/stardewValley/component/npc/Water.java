@@ -91,20 +91,20 @@ public class Water extends JLabel {
 	}
 
 	// 시도
-	public int getPondGage() {
+	public int getPondGauge() {
 		return pondGage;
 	}
 	
-	public void setPondGage(int pondGage) {
+	public void setPondGauge(int pondGage) {
 		this.pondGage = pondGage;
 	}
 
-	public void minusPondGage() {
+	public void minusPondGauge() {
 		if(pondGage < 0 ) {
 			return;
 		}
 		if(pondGage != 0) {
-			pondGage -= 150;
+			pondGage -= 1000;
 		}
 	}
 	
@@ -125,7 +125,7 @@ public class Water extends JLabel {
 		
 	}
 	
-	public void removeWaterGage() {
+	public void removeWaterGauge() {
 		waterGauge.setIcon(null);
 	
 }

@@ -152,7 +152,7 @@ public class StardewValleyFrame extends JFrame {
 						status.rePrice();
 						player.left();
 						waterMan.decreaseWaterImage();
-						waterMan.minusPondGage();
+						waterMan.minusPondGauge();
 						waterMan.decreaseWaterImage();
 					}
 					break;
@@ -161,7 +161,7 @@ public class StardewValleyFrame extends JFrame {
 						status.rePrice();
 						player.right();
 						waterMan.decreaseWaterImage();
-						waterMan.minusPondGage();
+						waterMan.minusPondGauge();
 						waterMan.decreaseWaterImage();
 					}
 					break;
@@ -170,7 +170,7 @@ public class StardewValleyFrame extends JFrame {
 						status.rePrice();
 						player.up();
 						waterMan.decreaseWaterImage();
-						waterMan.minusPondGage();
+						waterMan.minusPondGauge();
 						waterMan.decreaseWaterImage();
 					}
 					break;
@@ -179,7 +179,7 @@ public class StardewValleyFrame extends JFrame {
 						status.rePrice();
 						player.down();
 						waterMan.decreaseWaterImage();
-						waterMan.minusPondGage();
+						waterMan.minusPondGauge();
 						waterMan.decreaseWaterImage();
 					}
 					break;
@@ -267,20 +267,24 @@ public class StardewValleyFrame extends JFrame {
 					break;
 				case KeyEvent.VK_A:
 					if (player.isScoopWater() == true) {
-						if (waterMan.getPondGage() < 5) {
+						if (waterMan.getPondGauge() < 5) {
 							return;
 						}
 						player.setIcon(player.getPlayerWater());
 						if (player.getSprinklingCanGage() < player.getMAX_CANGAGE()) {
 							player.setSprinklingCanGage(player.getMAX_CANGAGE());
-							waterMan.setPondGage(waterMan.getPondGage() - 5);
+							waterMan.setPondGauge(waterMan.getPondGauge() - 5);
 						}
 						player.amountWater();
 					}
 					break;
 				case KeyEvent.VK_M:
-					if(waterMan.getPondGage() <= 0) {
-						gameOver.gameOver();
+					if(waterMan.getPondGauge() <= 0) {
+						if(player.getMoney() >= victoryMoney) {
+							gameClear.gameClear();
+						} else {
+							gameOver.gameOver();
+						}
 					}
 					if (seedZone.isSeedOn()) {
 						player.plusSeed();
@@ -358,10 +362,6 @@ public class StardewValleyFrame extends JFrame {
 
 	public void setPlayer(Player player) {
 		this.player = player;
-	}
-	
-	public static void main(String[] args) {
-		new StardewValleyFrame();
 	}
 	
 }
