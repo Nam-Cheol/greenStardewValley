@@ -9,7 +9,6 @@ import stardewValley.B_KNC.component.vegetable.Parsnip;
 import stardewValley.B_KNC.component.vegetable.Strawberry;
 import stardewValley.B_KNC.component.vegetable.Vegetable;
 import stardewValley.B_KNC.frame.StardewValleyFrame;
-import stardewValley.vegetable.vegetable;
 
 public class Farm extends JLabel {
 

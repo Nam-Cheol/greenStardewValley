@@ -1,7 +1,13 @@
-package stardewValley.A_OHJ;
+package stardewValley.component.npc;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import stardewValley.component.vegetable.Carrot;
+import stardewValley.component.vegetable.Parsnip;
+import stardewValley.component.vegetable.Strawberry;
+import stardewValley.component.vegetable.Vegetable;
+import stardewValley.frame.StardewValleyFrame;
 
 public class Farm extends JLabel {
 
@@ -21,14 +27,12 @@ public class Farm extends JLabel {
 	private ImageIcon vegetableWaterStatus4;
 	private ImageIcon vegetableWaterStatus5;
 	private ImageIcon vegetableWaterStatus6;
+	private ImageIcon vegetableWaterStatus7;
 
 	private ImageIcon farm;
 
-	private Player player;
-
-	public Farm(StardewValleyFrame mContext, Player player) {
+	public Farm(StardewValleyFrame mContext) {
 		this.mContext = mContext;
-		this.player = player;
 		initData();
 		setInitLayout();
 	}
@@ -44,8 +48,8 @@ public class Farm extends JLabel {
 		vegetableWaterStatus4 = new ImageIcon("img/vege/Water_gauge_3.png");
 		vegetableWaterStatus5 = new ImageIcon("img/vege/Water_gauge_4.png");
 		vegetableWaterStatus6 = new ImageIcon("img/vege/Water_gauge_5.png");
-
-		vegetableWaters = new JLabel[9];
+		vegetableWaterStatus7 = new ImageIcon("img/vege/Water_gauge_6.png");
+		vegetableWaters = new JLabel[PLANT_MAX];
 
 	}
 
@@ -53,22 +57,6 @@ public class Farm extends JLabel {
 		this.setIcon(farm);
 		this.setLocation(x, y);
 		this.setSize(300, 300);
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	public void VLocation(int choice) {
@@ -89,29 +77,27 @@ public class Farm extends JLabel {
 			if (vegetables[choice - 1].isCanHarvest()) {
 
 				if (vegetables[choice - 1] instanceof Parsnip) {
-					player.setHaveParsnip(player.getHaveParsnip() + 1);
+					mContext.player.setHaveParsnip(mContext.player.getHaveParsnip() + 1);
 				} else if (vegetables[choice - 1] instanceof Carrot) {
-					player.setHaveCarrot(player.getHaveCarrot() + 1);
+					mContext.player.setHaveCarrot(mContext.player.getHaveCarrot() + 1);
 				} else if (vegetables[choice - 1] instanceof Strawberry) {
-					player.setHaveBerry(player.getHaveBerry() + 1);
+					mContext.player.setHaveBerry(mContext.player.getHaveBerry() + 1);
 				}
 				vegetables[choice - 1].setIcon(null);
 				vegetables[choice - 1] = null;
-			} else {
-				System.out.println(vegetables[choice - 1].getName() + "은 지금은 자라는 중이다.");
 			}
 		}
 	}
 
 	public void remove(int choice) {
-			vegetables[choice-1].setIcon(null);
-			vegetables[choice-1] = null;
+		vegetables[choice - 1].setIcon(null);
+		vegetables[choice - 1] = null;
 	}
 
 	public void sprinkling(int choice) {
-		if (0 < player.getSprinklingCanGage()) {
-			player.setIcon(player.getPlayerWater());
-			player.setSprinklingCanGage(player.getSprinklingCanGage() - 1);
+		if (0 < mContext.player.getSprinklingCanGage()) {
+			mContext.player.setIcon(mContext.player.getPlayerWater());
+			mContext.player.setSprinklingCanGage(mContext.player.getSprinklingCanGage() - 1);
 			vegetables[choice - 1].setWaterGage(vegetables[choice - 1].getWaterGage() + 1);
 		}
 	}
@@ -147,7 +133,7 @@ public class Farm extends JLabel {
 	}
 
 	public void vegetableWaterGauge(int waterGage, int choice) {
-		if(vegetableWaters[choice - 1] != null) {
+		if (vegetableWaters[choice - 1] != null) {
 			if (waterGage == 0) {
 				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus1);
 			} else if (waterGage == 1) {
@@ -160,40 +146,10 @@ public class Farm extends JLabel {
 				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus5);
 			} else if (waterGage == 5) {
 				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus6);
+			} else if (waterGage <= 7) {
+				vegetableWaters[choice - 1].setIcon(vegetableWaterStatus7);
 			}
 		}
-//		if (waterGage == 0) {
-//			vegetableWaters[choice-1].setIcon(vegetableWaterStatus1);
-//		} else if (waterGage == 1) {
-//			for(int i = 0; i < 9; i++) {
-//				if(vegetableWaters[i] != null) {
-//					vegetableWaters[i].setIcon(vegetableWaterStatus2);
-//				}
-//			}
-//		} else if (waterGage == 2) {
-//			for(int i = 0; i < 9; i++) {
-//				if(vegetableWaters[i] != null) {
-//					vegetableWaters[i].setIcon(vegetableWaterStatus3);
-//				}
-//			}
-//		} else if (waterGage == 3) {
-//			for(int i = 0; i < 9; i++) {
-//				if(vegetableWaters[i] != null) {
-//					vegetableWaters[i].setIcon(vegetableWaterStatus4);
-//				}
-//			}
-//		} else if (waterGage == 4) {
-//			for(int i = 0; i < 9; i++) {
-//				if(vegetableWaters[i] != null) {
-//					vegetableWaters[i].setIcon(vegetableWaterStatus5);
-//				}
-//			}
-//		} else if (waterGage == 5) {
-//			for(int i = 0; i < 9; i++) {
-//				if(vegetableWaters[i] != null) {
-//					vegetableWaters[i].setIcon(vegetableWaterStatus6);
-//				}
-//			}
-//		}
 	}
+
 }

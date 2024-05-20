@@ -1,4 +1,4 @@
-package stardewValley.player;
+package stardewValley.interfaces;
 
 public interface Moveable {
 
